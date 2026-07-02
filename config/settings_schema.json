@@ -1,0 +1,52 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Root & Route",
+    "theme_version": "1.0.0",
+    "theme_author": "Root & Route",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Brand Green",
+        "default": "#2F5E3A"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background",
+        "default": "#FAFAF8"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Heading font",
+        "default": "cormorant_garamond_n3"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body font",
+        "default": "jost_n4"
+      }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      { "type": "url", "id": "social_instagram_link", "label": "Instagram" },
+      { "type": "url", "id": "social_pinterest_link", "label": "Pinterest" },
+      { "type": "url", "id": "social_facebook_link", "label": "Facebook" }
+    ]
+  }
+]

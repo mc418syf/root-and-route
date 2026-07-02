@@ -1,0 +1,102 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "tagline": "Uncovering the roots. Creating the routes.",
+        "subtext": "Premium, FSC-certified paper artistry for the moments that matter — gift boxes, advent calendars, ribbons, and more.",
+        "cta_primary_label": "Shop Now",
+        "cta_primary_url": "/collections/all",
+        "cta_secondary_label": "Our Story",
+        "cta_secondary_url": "/pages/our-story"
+      }
+    },
+    "collections": {
+      "type": "featured-collections",
+      "block_order": ["gift-sets", "advent", "ribbons", "cards"],
+      "blocks": {
+        "gift-sets": {
+          "type": "collection_card",
+          "settings": { "label": "Gift Sets", "sub": "Coordinated bundles, beautifully presented" }
+        },
+        "advent": {
+          "type": "collection_card",
+          "settings": { "label": "Advent Calendars", "sub": "24 days of seasonal delight" }
+        },
+        "ribbons": {
+          "type": "collection_card",
+          "settings": { "label": "Ribbons & Accents", "sub": "The finishing touch" }
+        },
+        "cards": {
+          "type": "collection_card",
+          "settings": { "label": "Cards & Stationery", "sub": "Thoughtfully crafted paper artistry" }
+        }
+      },
+      "settings": {
+        "eyebrow": "Curated for you",
+        "title": "Shop by Collection"
+      }
+    },
+    "brand-story": {
+      "type": "brand-story",
+      "settings": {
+        "eyebrow": "Our philosophy",
+        "title": "We uncover the root of every brand and create the route that leads it to consumers.",
+        "body": "Root & Route Creations Inc. partners with Guangzhou Shinelee — an 18-year, Disney-certified, FSC-sustainable paper manufacturer — to bring premium, eco-conscious gift packaging directly to North American consumers.",
+        "cta_label": "Read Our Story",
+        "cta_url": "/pages/our-story"
+      }
+    },
+    "seasonal": {
+      "type": "seasonal-spotlight",
+      "block_order": ["holiday", "wedding", "corporate"],
+      "blocks": {
+        "holiday": {
+          "type": "season",
+          "settings": {
+            "eyebrow": "Holiday",
+            "title": "Holiday Gift Sets",
+            "text": "Advent calendars and curated bundles for the gifting season.",
+            "cta_label": "Shop Holiday",
+            "cta_url": "/collections/seasonal"
+          }
+        },
+        "wedding": {
+          "type": "season",
+          "settings": {
+            "eyebrow": "Wedding & Events",
+            "title": "Wedding Favour Packaging",
+            "text": "Elegant ribbon sets, favour boxes, and custom presentation for your big day.",
+            "cta_label": "Shop Wedding",
+            "cta_url": "/collections/gift-sets"
+          }
+        },
+        "corporate": {
+          "type": "season",
+          "settings": {
+            "eyebrow": "Corporate Gifting",
+            "title": "Branded Gift Experiences",
+            "text": "Elevate your corporate gifts with premium, FSC-certified packaging bundles.",
+            "cta_label": "Shop Corporate",
+            "cta_url": "/collections/gift-sets"
+          }
+        }
+      },
+      "settings": {
+        "eyebrow": "Seasonal Collections",
+        "title": "Made for the Moment",
+        "subtitle": "Curated gifting sets for every season, celebration, and occasion."
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Stay in the loop",
+        "title": "Seasonal Drops & Gifting Guides",
+        "subtitle": "Be first to know about new collections, seasonal campaigns, and exclusive bundle offers.",
+        "button_label": "Subscribe"
+      }
+    }
+  },
+  "order": ["hero", "collections", "brand-story", "seasonal", "newsletter"]
+}

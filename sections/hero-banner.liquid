@@ -1,0 +1,97 @@
+<section class="hero {% if section.settings.image %}hero--has-image{% else %}hero--no-image{% endif %}">
+  {%- if section.settings.image -%}
+    <div class="hero__media">
+      {{ section.settings.image | image_url: width: 1600 | image_tag: loading: 'eager', alt: section.settings.image.alt | escape }}
+      <div class="hero__overlay"></div>
+    </div>
+  {%- endif -%}
+
+  <div class="hero__content wrap">
+    <div class="hero__lockup">
+      {% render 'icon-leaf', width: 48, height: 60 %}
+      <h1 class="hero__wordmark">
+        Root <em>&amp;</em> Route
+      </h1>
+    </div>
+
+    <p class="hero__creations">Creations&nbsp;&nbsp;Inc.</p>
+    <div class="hero__rule"></div>
+    <p class="hero__tagline">{{ section.settings.tagline | default: 'Uncovering the roots. Creating the routes.' }}</p>
+
+    {%- if section.settings.subtext != blank -%}
+      <p class="hero__subtext">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+
+    <div class="hero__actions">
+      {%- if section.settings.cta_primary_label != blank -%}
+        <a href="{{ section.settings.cta_primary_url | default: '/collections/all' }}" class="btn btn--primary">
+          {{ section.settings.cta_primary_label }}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.cta_secondary_label != blank -%}
+        <a href="{{ section.settings.cta_secondary_url | default: '/pages/our-story' }}" class="btn btn--secondary">
+          {{ section.settings.cta_secondary_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="hero__badges">
+      <span class="hero__badge">🌿 FSC Certified</span>
+      <span class="hero__badge">✦ Disney-Certified Supplier</span>
+      <span class="hero__badge">18+ Years Manufacturing</span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Uncovering the roots. Creating the routes."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Premium, FSC-certified paper artistry for the moments that matter — gift boxes, advent calendars, ribbons, and more."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_label",
+      "label": "Primary button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_url",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "Secondary button label",
+      "default": "Our Story"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_url",
+      "label": "Secondary button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

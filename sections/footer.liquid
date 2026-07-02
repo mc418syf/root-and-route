@@ -1,0 +1,61 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="wrap site-footer__inner">
+
+    <div class="site-footer__brand">
+      <a href="{{ routes.root_url }}" class="site-footer__logo" aria-label="{{ shop.name }}">
+        {% render 'icon-leaf', width: 24, height: 30 %}
+        <span class="site-footer__wordmark">Root <em>&amp;</em> Route</span>
+      </a>
+      <p class="site-footer__tagline">Uncovering the roots.<br>Creating the routes.</p>
+      <div class="site-footer__badges">
+        <span class="badge badge--fsc">🌿 FSC Certified</span>
+        <span class="badge badge--disney">✦ Disney-Certified Supplier</span>
+      </div>
+    </div>
+
+    <div class="site-footer__nav">
+      <div class="site-footer__col">
+        <h4 class="site-footer__col-title">Shop</h4>
+        <ul>
+          <li><a href="/collections/all">All Products</a></li>
+          <li><a href="/collections/gift-sets">Gift Sets</a></li>
+          <li><a href="/collections/advent-calendars">Advent Calendars</a></li>
+          <li><a href="/collections/ribbons-accents">Ribbons &amp; Accents</a></li>
+          <li><a href="/collections/cards-stationery">Cards &amp; Stationery</a></li>
+          <li><a href="/collections/seasonal">Seasonal</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h4 class="site-footer__col-title">Brand</h4>
+        <ul>
+          <li><a href="/pages/our-story">Our Story</a></li>
+          <li><a href="/pages/gifting-guide">Gifting Guide</a></li>
+          <li><a href="/pages/sustainability">Sustainability &amp; FSC</a></li>
+          <li><a href="/pages/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h4 class="site-footer__col-title">Help</h4>
+        <ul>
+          <li><a href="/policies/shipping-policy">Shipping</a></li>
+          <li><a href="/policies/refund-policy">Returns &amp; Refunds</a></li>
+          <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/policies/terms-of-service">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="site-footer__bottom wrap">
+    <p class="site-footer__copy">&copy; {{ 'now' | date: '%Y' }} Root &amp; Route Creations Inc. All rights reserved.</p>
+    <p class="site-footer__location">Vancouver, BC, Canada</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}
