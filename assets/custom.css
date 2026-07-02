@@ -18,6 +18,8 @@
   --rr-sans: "Jost", system-ui, sans-serif;
   --rr-motif-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M24 9 C16 14 16 26 24 31 C32 26 32 14 24 9 Z' fill='none' stroke='%232F5E3A' stroke-opacity='0.16' stroke-width='1.1'/%3E%3C/svg%3E");
   --rr-motif-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M24 9 C16 14 16 26 24 31 C32 26 32 14 24 9 Z' fill='none' stroke='%23F4ECD8' stroke-opacity='0.2' stroke-width='1.2'/%3E%3C/svg%3E");
+  --rr-ease-out: cubic-bezier(.16, 1, .3, 1);
+  --rr-ease-spring: cubic-bezier(.2, .9, .2, 1);
 }
 
 body {
@@ -117,11 +119,28 @@ em {
   min-height: 46px;
   padding: 12px 20px;
   text-transform: uppercase;
+  transition: background-color .24s var(--rr-ease-out), border-color .24s var(--rr-ease-out), color .24s var(--rr-ease-out), transform .24s var(--rr-ease-out), box-shadow .24s var(--rr-ease-out);
+  will-change: transform;
+}
+
+.rr-button:hover {
+  background: #244f30;
+  border-color: #244f30;
+  box-shadow: 0 16px 36px rgba(47, 94, 58, .14);
+  transform: translateY(-2px);
+}
+
+.rr-button:active {
+  transform: translateY(0) scale(.985);
 }
 
 .rr-button--secondary {
   background: transparent;
   color: var(--rr-forest);
+}
+
+.rr-button--secondary:hover {
+  color: var(--rr-paper);
 }
 
 .rr-brand-hero {
@@ -168,6 +187,20 @@ em {
   display: flex;
   justify-content: center;
   padding: 36px;
+  overflow: hidden;
+  transform: translate3d(var(--rr-pointer-x, 0), var(--rr-pointer-y, 0), 0);
+  transition: transform .7s var(--rr-ease-out), box-shadow .7s var(--rr-ease-out), border-color .7s var(--rr-ease-out);
+  will-change: transform;
+}
+
+.rr-brand-hero__mark svg {
+  transform: translate3d(calc(var(--rr-pointer-x, 0) * -0.5), calc(var(--rr-pointer-y, 0) * -0.5), 0) scale(1);
+  transition: transform .7s var(--rr-ease-out);
+}
+
+.rr-brand-hero__mark:hover {
+  border-color: rgba(47, 94, 58, .32);
+  box-shadow: 0 28px 90px rgba(47, 94, 58, .12);
 }
 
 .rr-collection-grid,
@@ -184,6 +217,16 @@ em {
   border-radius: 4px;
   min-height: 280px;
   padding: 28px;
+  transition: transform .42s var(--rr-ease-out), box-shadow .42s var(--rr-ease-out), border-color .42s var(--rr-ease-out);
+  will-change: transform;
+}
+
+.rr-collection-card:hover,
+.rr-service-card:hover,
+.rr-portfolio-card:hover {
+  border-color: rgba(47, 94, 58, .28);
+  box-shadow: 0 28px 70px rgba(20, 20, 20, .08);
+  transform: translateY(-8px);
 }
 
 .rr-collection-card {
@@ -211,6 +254,8 @@ em {
   border-radius: 4px;
   min-height: 340px;
   padding: 20px;
+  transition: transform .42s var(--rr-ease-out), box-shadow .42s var(--rr-ease-out), border-color .42s var(--rr-ease-out);
+  will-change: transform;
 }
 
 .rr-portfolio-card__surface {
@@ -222,6 +267,16 @@ em {
   display: flex;
   justify-content: center;
   margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.rr-portfolio-card__surface svg {
+  transition: transform .55s var(--rr-ease-out), opacity .55s var(--rr-ease-out);
+}
+
+.rr-portfolio-card:hover .rr-portfolio-card__surface svg {
+  opacity: .75;
+  transform: scale(1.08) rotate(-2deg);
 }
 
 .rr-timeline {
@@ -249,6 +304,12 @@ em {
   position: absolute;
   top: 0;
   width: 22px;
+  transition: background-color .35s var(--rr-ease-out), transform .35s var(--rr-ease-out), box-shadow .35s var(--rr-ease-out);
+}
+
+.rr-timeline__item.is-visible::before {
+  box-shadow: 0 0 0 8px rgba(47, 94, 58, .1);
+  transform: scale(1.08);
 }
 
 .rr-timeline__num {
@@ -335,6 +396,117 @@ em {
   gap: 10px;
   min-height: 46px;
   padding: 10px 12px;
+  transition: border-color .24s var(--rr-ease-out), background-color .24s var(--rr-ease-out), transform .24s var(--rr-ease-out);
+}
+
+.rr-choice:hover,
+.rr-field input:focus,
+.rr-field select:focus,
+.rr-field textarea:focus {
+  border-color: var(--rr-forest);
+}
+
+.rr-choice:hover {
+  background: rgba(47, 94, 58, .05);
+  transform: translateY(-2px);
+}
+
+.rr-motion-ready .rr-section,
+.rr-motion-ready .rr-brand-hero__mark,
+.rr-motion-ready .rr-collection-card,
+.rr-motion-ready .rr-service-card,
+.rr-motion-ready .rr-portfolio-card,
+.rr-motion-ready .rr-timeline__item,
+.rr-motion-ready .rr-client,
+.rr-motion-ready .rr-inquiry-form,
+.rr-motion-ready .rr-h1,
+.rr-motion-ready .rr-h2,
+.rr-motion-ready .rr-intro,
+.rr-motion-ready .rr-button {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.rr-motion-ready .rr-button {
+  transform: translate3d(0, 18px, 0);
+}
+
+.rr-motion-ready .rr-brand-hero__mark {
+  transform: translate3d(0, 34px, 0) scale(.97);
+}
+
+.rr-motion-ready .rr-is-visible {
+  opacity: 1;
+  transform: translate3d(var(--rr-pointer-x, 0), var(--rr-pointer-y, 0), 0) scale(1);
+  transition:
+    opacity .78s var(--rr-ease-out) var(--rr-delay, 0ms),
+    transform .78s var(--rr-ease-out) var(--rr-delay, 0ms),
+    box-shadow .42s var(--rr-ease-out),
+    border-color .42s var(--rr-ease-out),
+    background-color .24s var(--rr-ease-out),
+    color .24s var(--rr-ease-out);
+}
+
+.rr-motion-ready .rr-collection-card.rr-is-visible:hover,
+.rr-motion-ready .rr-service-card.rr-is-visible:hover,
+.rr-motion-ready .rr-portfolio-card.rr-is-visible:hover {
+  transform: translateY(-8px);
+}
+
+.rr-section::after {
+  background: linear-gradient(90deg, transparent, rgba(47, 94, 58, .24), transparent);
+  content: "";
+  display: block;
+  height: 1px;
+  margin: 56px auto -56px;
+  opacity: 0;
+  transform: scaleX(.2);
+  transform-origin: center;
+  transition: opacity .9s var(--rr-ease-out), transform .9s var(--rr-ease-out);
+  width: min(420px, 70vw);
+}
+
+.rr-section.rr-is-visible::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.rr-client {
+  transition: color .42s var(--rr-ease-out), transform .42s var(--rr-ease-out);
+}
+
+.rr-client:hover {
+  color: var(--rr-forest);
+  transform: translateX(12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+  }
+
+  .rr-motion-ready .rr-section,
+  .rr-motion-ready .rr-brand-hero__mark,
+  .rr-motion-ready .rr-collection-card,
+  .rr-motion-ready .rr-service-card,
+  .rr-motion-ready .rr-portfolio-card,
+  .rr-motion-ready .rr-timeline__item,
+  .rr-motion-ready .rr-client,
+  .rr-motion-ready .rr-inquiry-form,
+  .rr-motion-ready .rr-h1,
+  .rr-motion-ready .rr-h2,
+  .rr-motion-ready .rr-intro,
+  .rr-motion-ready .rr-button {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .shopify-section-group-header-group,
