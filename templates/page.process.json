@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "process": {
+      "type": "process-timeline",
+      "settings": {
+        "eyebrow": "How We Work",
+        "title": "The Collaborative Journey",
+        "subtitle": "From first brief to final delivery — a process built on craft, clarity, and care.",
+        "cta_label": "Begin Your Journey",
+        "cta_url": "/pages/contact"
+      },
+      "blocks": {
+        "s1": { "type": "step", "settings": { "phase": "01 / Discovery", "title": "Discovery & Briefing", "body": "We begin by listening. Through a structured brief, we explore your brand's root — its values, its audience, and the story it needs to tell. This is where the journey begins." } },
+        "s2": { "type": "step", "settings": { "phase": "02 / Concept", "title": "Tactile Concepts & Structural Design", "body": "Our team translates your brief into tangible material concepts. We explore finishes, structures, and opening mechanics — presenting mood boards and CAD drawings for your review." } },
+        "s3": { "type": "step", "settings": { "phase": "03 / Prototype", "title": "Prototyping & Material Selection", "body": "You receive physical prototypes. Touch them. Feel the damping of the lid, the weight of the board. Refinements happen here — before a single production unit is committed." } },
+        "s4": { "type": "step", "settings": { "phase": "04 / Production", "title": "Artisan Production & Global Delivery", "body": "Our Guangzhou facility brings the approved design to life at scale, with full quality oversight. FSC-certified materials, Disney-audited processes, and delivery to your door worldwide." } }
+      },
+      "blocks_order": ["s1", "s2", "s3", "s4"]
+    }
+  },
+  "order": ["process"]
+}

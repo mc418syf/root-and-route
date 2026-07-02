@@ -1,0 +1,72 @@
+<section class="client-wall section" style="background:var(--rr-paper);border-top:1px solid var(--rr-border);border-bottom:1px solid var(--rr-border);">
+  <div class="wrap" style="text-align:center;">
+    <p class="eyebrow" style="margin-bottom:12px;">{{ section.settings.eyebrow | default: 'Trusted By' }}</p>
+    <p style="font-family:var(--rr-sans);font-size:13px;color:var(--rr-muted);margin-bottom:48px;letter-spacing:.04em;">{{ section.settings.subtitle | default: 'Trusted by visionary brands across beauty, fragrance, and lifestyle.' }}</p>
+
+    <div class="client-wall__names">
+      {% for block in section.blocks %}
+        <span class="client-wall__name" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+.client-wall__names {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  row-gap: 0;
+}
+.client-wall__name {
+  font-family: var(--rr-sans);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 300;
+  color: var(--rr-stone);
+  letter-spacing: .02em;
+  transition: color .2s;
+  padding: 10px 28px;
+  cursor: default;
+  white-space: nowrap;
+}
+.client-wall__name:hover { color: var(--rr-ink); }
+.client-wall__name::after {
+  content: '·';
+  margin-left: 28px;
+  color: var(--rr-border);
+  font-weight: 300;
+}
+.client-wall__name:last-child::after { content: ''; }
+</style>
+
+{% schema %}
+{
+  "name": "Client Wall",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Trusted By" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Trusted by visionary brands across beauty, fragrance, and lifestyle." }
+  ],
+  "blocks": [
+    {
+      "type": "client",
+      "name": "Client",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Client name" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Client Wall",
+    "blocks": [
+      { "type": "client", "settings": { "name": "Disney" } },
+      { "type": "client", "settings": { "name": "Harrods" } },
+      { "type": "client", "settings": { "name": "Mentholatum" } },
+      { "type": "client", "settings": { "name": "UEFA" } },
+      { "type": "client", "settings": { "name": "Lido" } },
+      { "type": "client", "settings": { "name": "Glo" } }
+    ]
+  }]
+}
+{% endschema %}

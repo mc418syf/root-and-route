@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "services": {
+      "type": "services",
+      "settings": {
+        "eyebrow": "What We Offer",
+        "title": "Craft Meets Commerce",
+        "subtitle": "Three disciplines. One seamless result.",
+        "certifications": "FSC Chain of Custody Certification · Disney Qualified Packaging Supplier · BSCI Social Audit · ISO 9001 Quality Management"
+      },
+      "blocks": {
+        "s1": { "type": "service", "settings": { "title": "Material Innovation", "subtitle": "Material Aesthetics", "body": "We source sustainably certified specialty papers and unique tactile materials with the precision of a gallery curator — because the surface of your packaging is the first thing your customer touches." } },
+        "s2": { "type": "service", "settings": { "title": "Structural Engineering", "subtitle": "The Unboxing Experience", "body": "The soft resistance of a magnetic close. The clean snap of a drawer lid. Every structural decision is choreographed to create the unboxing moment your brand deserves." } },
+        "s3": { "type": "service", "settings": { "title": "Global Supply Alignment", "subtitle": "Seamless International Delivery", "body": "From our Guangzhou facility to your warehouse — seamless international communication, rigorous quality control, and delivery standards that never compromise on craft." } }
+      },
+      "blocks_order": ["s1", "s2", "s3"]
+    }
+  },
+  "order": ["services"]
+}

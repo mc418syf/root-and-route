@@ -1,0 +1,108 @@
+<section class="services section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">{{ section.settings.eyebrow | default: 'What We Offer' }}</p>
+      <h2 class="section-head__title">{{ section.settings.title | default: 'Craft Meets Commerce' }}</h2>
+      <p class="section-head__sub">{{ section.settings.subtitle | default: 'Three disciplines. One seamless result.' }}</p>
+    </div>
+
+    <div class="services__grid">
+      {% for block in section.blocks %}
+        <div class="service-card" {{ block.shopify_attributes }}>
+          <div class="service-card__icon" style="color:var(--rr-forest);">
+            {% render 'icon-leaf', width: 28, height: 36 %}
+          </div>
+          <h3 class="service-card__title">{{ block.settings.title }}</h3>
+          <p class="service-card__sub">{{ block.settings.subtitle }}</p>
+          <p class="service-card__body">{{ block.settings.body }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.certifications != blank %}
+      <div class="services__certs">
+        <p class="eyebrow" style="margin-bottom:20px;">Certifications</p>
+        <p style="font-family:var(--rr-sans);font-size:14px;color:rgba(20,20,20,.65);line-height:1.7;">{{ section.settings.certifications }}</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 64px;
+}
+.service-card {
+  border: 1px solid var(--rr-border);
+  border-radius: 4px;
+  padding: 36px 32px 40px;
+  background: var(--rr-paper);
+  transition: box-shadow .2s, border-color .2s;
+}
+.service-card:hover { border-color: var(--rr-sage); box-shadow: 0 8px 32px rgba(47,94,58,.06); }
+.service-card__icon { margin-bottom: 24px; }
+.service-card__title {
+  font-family: var(--rr-serif);
+  font-weight: 300;
+  font-size: 1.35rem;
+  color: var(--rr-ink);
+  margin-bottom: 6px;
+}
+.service-card__sub {
+  font-family: var(--rr-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--rr-forest);
+  margin-bottom: 16px;
+}
+.service-card__body {
+  font-family: var(--rr-sans);
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(20,20,20,.65);
+}
+.services__certs {
+  border-top: 1px solid var(--rr-border);
+  padding-top: 48px;
+  max-width: 720px;
+}
+@media (max-width: 768px) {
+  .services__grid { grid-template-columns: 1fr; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Services",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What We Offer" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Craft Meets Commerce" },
+    { "type": "text", "id": "subtitle", "label": "Subheading" },
+    { "type": "textarea", "id": "certifications", "label": "Certifications text" }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Service name" },
+        { "type": "text", "id": "subtitle", "label": "Short descriptor" },
+        { "type": "textarea", "id": "body", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Services",
+    "blocks": [
+      { "type": "service", "settings": { "title": "Material Innovation", "subtitle": "Material Aesthetics", "body": "We source sustainably certified specialty papers and unique tactile materials with the precision of a gallery curator — because the surface of your packaging is the first thing your customer touches." } },
+      { "type": "service", "settings": { "title": "Structural Engineering", "subtitle": "The Unboxing Experience", "body": "The soft resistance of a magnetic close. The clean snap of a drawer lid. Every structural decision is choreographed to create the unboxing moment your brand deserves." } },
+      { "type": "service", "settings": { "title": "Global Supply Alignment", "subtitle": "Seamless International Delivery", "body": "From our Guangzhou facility to your warehouse or retail floor — seamless international communication, rigorous quality control, and delivery standards that never compromise on craft." } }
+    ]
+  }]
+}
+{% endschema %}

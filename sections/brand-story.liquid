@@ -1,34 +1,22 @@
 <section class="brand-story section section--dark">
   <div class="wrap brand-story__inner">
     <div class="brand-story__content">
-      <p class="eyebrow eyebrow--light">{{ section.settings.eyebrow | default: 'Our philosophy' }}</p>
-      <h2 class="brand-story__title">{{ section.settings.title | default: 'We uncover the root of every brand and create the route that leads it to consumers.' }}</h2>
-      <p class="brand-story__body">{{ section.settings.body | default: 'Root & Route Creations Inc. partners with Guangzhou Shinelee — an 18-year, Disney-certified, FSC-sustainable paper manufacturer — to bring premium, eco-conscious gift packaging directly to North American consumers.' }}</p>
-      <a href="{{ section.settings.cta_url | default: '/pages/our-story' }}" class="btn btn--outline-light">
-        {{ section.settings.cta_label | default: 'Read Our Story' }}
-      </a>
+      <p class="eyebrow eyebrow--light">{{ section.settings.eyebrow | default: 'Our Manifesto' }}</p>
+      <h2 class="brand-story__title">{{ section.settings.title | default: 'Every product begins with an idea. Every idea begins with a story.' }}</h2>
+      <p class="brand-story__body">{{ section.settings.body | default: 'Somewhere beneath every logo, every recipe, every founder, every business — there is a root. Our job isn\'t to invent it. It\'s to uncover it. Then we design the route. The route that leads your story onto shelves, into homes, and into people\'s hearts. Because packaging isn\'t the final step. It\'s the beginning of every customer\'s first impression.' }}</p>
+      <a href="{{ section.settings.cta_url | default: '/pages/about' }}" class="btn btn--outline-light">{{ section.settings.cta_label | default: 'Our Philosophy' }}</a>
     </div>
 
     <div class="brand-story__pillars">
-      <div class="pillar">
-        <div class="pillar__icon">{% render 'icon-leaf', width: 32, height: 40 %}</div>
-        <h3 class="pillar__title">FSC Certified</h3>
-        <p class="pillar__body">Every material sourced from certified sustainable paper mills — because the earth is part of the gift.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar__icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="13"/><path d="M16 8v8l5 3"/></svg>
+      {% for block in section.blocks %}
+        <div class="pillar" {{ block.shopify_attributes }}>
+          <div class="pillar__icon">{% render 'icon-leaf', width: 20, height: 26 %}</div>
+          <div>
+            <p class="pillar__title">{{ block.settings.title }}</p>
+            <p class="pillar__body">{{ block.settings.body }}</p>
+          </div>
         </div>
-        <h3 class="pillar__title">18+ Years of Craft</h3>
-        <p class="pillar__body">Our manufacturing partner has supplied Disney and global brands for over 18 years. Quality is not a promise — it's a record.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar__icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16"/><path d="M14 21v4"/><path d="M8 25h12"/><rect x="14" y="3" width="16" height="18" rx="2"/></svg>
-        </div>
-        <h3 class="pillar__title">The Unboxing Economy</h3>
-        <p class="pillar__body">For Gen-Z and Millennials, packaging is the product. We design bundles that drive organic sharing and repeat purchases.</p>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -36,40 +24,30 @@
 {% schema %}
 {
   "name": "Brand Story",
-  "tag": "section",
   "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Manifesto" },
+    { "type": "textarea", "id": "title", "label": "Headline" },
+    { "type": "textarea", "id": "body", "label": "Body copy" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Our Philosophy" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "blocks": [
     {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "Our philosophy"
-    },
-    {
-      "type": "textarea",
-      "id": "title",
-      "label": "Headline",
-      "default": "We uncover the root of every brand and create the route that leads it to consumers."
-    },
-    {
-      "type": "textarea",
-      "id": "body",
-      "label": "Body text",
-      "default": "Root & Route Creations Inc. partners with Guangzhou Shinelee — an 18-year, Disney-certified, FSC-sustainable paper manufacturer — to bring premium, eco-conscious gift packaging directly to North American consumers."
-    },
-    {
-      "type": "text",
-      "id": "cta_label",
-      "label": "Button label",
-      "default": "Read Our Story"
-    },
-    {
-      "type": "url",
-      "id": "cta_url",
-      "label": "Button link"
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
     }
   ],
-  "presets": [
-    { "name": "Brand Story" }
-  ]
+  "presets": [{
+    "name": "Brand Story",
+    "blocks": [
+      { "type": "pillar", "settings": { "title": "Material Innovation", "body": "Sustainably sourced specialty papers with exceptional tactile quality. We curate materials the way a gallery curates art." } },
+      { "type": "pillar", "settings": { "title": "Structural Engineering", "body": "The soft resistance of a magnetic close. The clean snap of a perfect lid. Every opening is choreographed." } },
+      { "type": "pillar", "settings": { "title": "Global Supply Alignment", "body": "Seamless international communication and delivery standards from our Guangzhou facility to your door." } }
+    ]
+  }]
 }
 {% endschema %}

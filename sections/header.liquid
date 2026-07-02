@@ -1,84 +1,39 @@
 <header class="site-header" role="banner">
   <div class="site-header__inner wrap">
 
-    <!-- Logo -->
     <a href="{{ routes.root_url }}" class="site-header__logo" aria-label="{{ shop.name }}">
-      {% render 'icon-leaf', width: 28, height: 35 %}
-      <span class="site-header__wordmark">
-        Root <em>&amp;</em> Route
-      </span>
+      <span style="color:var(--rr-forest);">{% render 'icon-leaf', width: 20, height: 26 %}</span>
+      <span class="site-header__wordmark">Root <em>&</em> Route</span>
     </a>
 
-    <!-- Desktop Nav -->
-    <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <nav class="site-nav" role="navigation">
       <ul class="site-nav__list">
-        <li><a href="/collections/all" class="site-nav__link">Shop</a></li>
-        <li class="site-nav__item--has-dropdown">
-          <a href="/collections" class="site-nav__link">Collections</a>
-          <ul class="site-nav__dropdown">
-            <li><a href="/collections/gift-sets">Gift Sets</a></li>
-            <li><a href="/collections/advent-calendars">Advent Calendars</a></li>
-            <li><a href="/collections/ribbons-accents">Ribbons &amp; Accents</a></li>
-            <li><a href="/collections/cards-stationery">Cards &amp; Stationery</a></li>
-            <li><a href="/collections/seasonal">Seasonal</a></li>
-          </ul>
+        <li><a href="/collections/all" class="site-nav__link">Collections</a></li>
+        <li><a href="/pages/about" class="site-nav__link">About</a></li>
+        <li><a href="/pages/services" class="site-nav__link">Services</a></li>
+        <li><a href="/pages/process" class="site-nav__link">Process</a></li>
+        <li>
+          <a href="/pages/contact" class="btn btn--primary" style="padding:10px 24px;font-size:12px;margin-left:8px;">Start a Project</a>
         </li>
-        <li><a href="/pages/our-story" class="site-nav__link">Our Story</a></li>
-        <li><a href="/pages/gifting-guide" class="site-nav__link">Gifting Guide</a></li>
-        <li><a href="/pages/contact" class="site-nav__link">Contact</a></li>
       </ul>
     </nav>
 
-    <!-- Header Actions -->
-    <div class="site-header__actions">
-      <a href="/pages/contact" class="site-header__action" aria-label="Contact">
-        <span class="sr-only">Contact</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        </svg>
-      </a>
-      <a href="{{ routes.search_url }}" class="site-header__action" aria-label="Search">
-        <span class="sr-only">Search</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-      </a>
-      <a href="{{ routes.cart_url }}" class="site-header__action site-header__cart" aria-label="Cart ({{ cart.item_count }} items)">
-        <span class="sr-only">Cart</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <path d="M16 10a4 4 0 0 1-8 0"/>
-        </svg>
-        {%- if cart.item_count > 0 -%}
-          <span class="cart-count">{{ cart.item_count }}</span>
-        {%- endif -%}
-      </a>
-      <button class="site-header__menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <button class="site-header__menu-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 
-  <!-- Mobile Nav -->
-  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden>
+  <nav class="mobile-nav" style="display:none;" aria-label="Mobile navigation">
     <ul class="mobile-nav__list">
-      <li><a href="/collections/all">Shop All</a></li>
-      <li><a href="/collections/gift-sets">Gift Sets</a></li>
-      <li><a href="/collections/advent-calendars">Advent Calendars</a></li>
-      <li><a href="/collections/ribbons-accents">Ribbons &amp; Accents</a></li>
-      <li><a href="/collections/cards-stationery">Cards &amp; Stationery</a></li>
-      <li><a href="/collections/seasonal">Seasonal</a></li>
-      <li><a href="/pages/our-story">Our Story</a></li>
-      <li><a href="/pages/gifting-guide">Gifting Guide</a></li>
+      <li><a href="/collections/all">Collections</a></li>
+      <li><a href="/pages/about">About</a></li>
+      <li><a href="/pages/services">Services</a></li>
+      <li><a href="/pages/process">Process</a></li>
       <li><a href="/pages/contact">Contact</a></li>
     </ul>
   </nav>
 </header>
 
 {% schema %}
-{
-  "name": "Header",
-  "settings": []
-}
+{ "name": "Header", "settings": [] }
 {% endschema %}

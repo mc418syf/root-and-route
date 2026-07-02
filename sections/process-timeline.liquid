@@ -1,0 +1,142 @@
+<section class="process section" style="background:var(--rr-paper);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">{{ section.settings.eyebrow | default: 'How We Work' }}</p>
+      <h2 class="section-head__title">{{ section.settings.title | default: 'The Collaborative Journey' }}</h2>
+      <p class="section-head__sub">{{ section.settings.subtitle | default: 'From first brief to final delivery — a process built on craft, clarity, and care.' }}</p>
+    </div>
+
+    <div class="process__timeline">
+      {% for block in section.blocks %}
+        <div class="process__step js-fade-in" {{ block.shopify_attributes }}>
+          <div class="process__step-number">
+            <span>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          </div>
+          <div class="process__step-line"></div>
+          <div class="process__step-content">
+            <p class="eyebrow" style="margin-bottom:10px;">{{ block.settings.phase }}</p>
+            <h3 class="process__step-title">{{ block.settings.title }}</h3>
+            <p class="process__step-body">{{ block.settings.body }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div style="text-align:center;margin-top:64px;">
+      <a href="{{ section.settings.cta_url | default: '/pages/contact' }}" class="btn btn--primary">{{ section.settings.cta_label | default: 'Begin Your Journey' }}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.process__timeline {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.process__timeline::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--rr-border);
+}
+.process__step {
+  display: grid;
+  grid-template-columns: 56px 1px 1fr;
+  gap: 0 32px;
+  padding-bottom: 56px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.process__step.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.process__step-number {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--rr-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.process__step-number span {
+  font-family: var(--rr-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  color: var(--rr-forest);
+}
+.process__step-line { background: transparent; }
+.process__step-content { padding-top: 12px; }
+.process__step-title {
+  font-family: var(--rr-serif);
+  font-weight: 300;
+  font-size: 1.5rem;
+  color: var(--rr-ink);
+  margin-bottom: 12px;
+}
+.process__step-body {
+  font-family: var(--rr-sans);
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(20,20,20,.65);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var steps = document.querySelectorAll('.js-fade-in');
+  if (!steps.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  steps.forEach(function(el) { observer.observe(el); });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Process Timeline",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How We Work" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "The Collaborative Journey" },
+    { "type": "text", "id": "subtitle", "label": "Subheading" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Begin Your Journey" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "phase", "label": "Phase label" },
+        { "type": "text", "id": "title", "label": "Step title" },
+        { "type": "textarea", "id": "body", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Process Timeline",
+    "blocks": [
+      { "type": "step", "settings": { "phase": "01 / Discovery", "title": "Discovery & Briefing", "body": "We begin by listening. Through a structured brief, we explore your brand's root — its values, its audience, and the story it needs to tell. This is where the journey begins." } },
+      { "type": "step", "settings": { "phase": "02 / Concept", "title": "Tactile Concepts & Structural Design", "body": "Our team translates your brief into tangible material concepts. We explore finishes, structures, and opening mechanics — presenting mood boards and CAD drawings for your review." } },
+      { "type": "step", "settings": { "phase": "03 / Prototype", "title": "Prototyping & Material Selection", "body": "You receive physical prototypes. Touch them. Feel the damping of the lid, the weight of the board. Refinements happen here — before a single production unit is committed." } },
+      { "type": "step", "settings": { "phase": "04 / Production", "title": "Artisan Production & Global Delivery", "body": "Our Guangzhou facility brings the approved design to life at scale, with full quality oversight. FSC-certified materials, Disney-audited processes, and delivery to your door worldwide." } }
+    ]
+  }]
+}
+{% endschema %}

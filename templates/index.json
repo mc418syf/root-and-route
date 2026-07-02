@@ -1,102 +1,86 @@
 {
   "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "FSC-Certified · Disney Audited · 18+ Years of Craft · B2B Luxury Packaging"
+      }
+    },
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "tagline": "Uncovering the roots. Creating the routes.",
-        "subtext": "Premium, FSC-certified paper artistry for the moments that matter — gift boxes, advent calendars, ribbons, and more.",
-        "cta_primary_label": "Shop Now",
-        "cta_primary_url": "/collections/all",
-        "cta_secondary_label": "Our Story",
-        "cta_secondary_url": "/pages/our-story"
+        "eyebrow": "B2B Luxury Packaging",
+        "sub_eyebrow": "CREATIONS INC.",
+        "tagline": "Every package is a conversation between a brand and its audience.",
+        "body": "We uncover the root of every brand. Then we design the route — the one that leads your story onto shelves, into homes, and into people's hearts.",
+        "cta_label": "Explore Collections",
+        "cta2_label": "Start a Project"
       }
     },
     "collections": {
       "type": "featured-collections",
-      "block_order": ["gift-sets", "advent", "ribbons", "cards"],
-      "blocks": {
-        "gift-sets": {
-          "type": "collection_card",
-          "settings": { "label": "Gift Sets", "sub": "Coordinated bundles, beautifully presented" }
-        },
-        "advent": {
-          "type": "collection_card",
-          "settings": { "label": "Advent Calendars", "sub": "24 days of seasonal delight" }
-        },
-        "ribbons": {
-          "type": "collection_card",
-          "settings": { "label": "Ribbons & Accents", "sub": "The finishing touch" }
-        },
-        "cards": {
-          "type": "collection_card",
-          "settings": { "label": "Cards & Stationery", "sub": "Thoughtfully crafted paper artistry" }
-        }
-      },
       "settings": {
-        "eyebrow": "Curated for you",
-        "title": "Shop by Collection"
-      }
+        "eyebrow": "Packaging Series",
+        "title": "Curated Collections",
+        "subtitle": "Named by material, structure, and aesthetic — each series is a distinct design language."
+      },
+      "blocks": {
+        "frost": { "type": "collection", "settings": { "label": "The Frost Collection", "subtitle": "White matte, frosted tactile finish", "material_tag": "Specialty Paper", "series": "Collection No. 01", "link": "/collections/frost" } },
+        "linear": { "type": "collection", "settings": { "label": "The Linear Collection", "subtitle": "Minimalist modern lines, structural precision", "material_tag": "Rigid Board", "series": "Collection No. 02", "link": "/collections/linear" } },
+        "monolith": { "type": "collection", "settings": { "label": "The Monolith Collection", "subtitle": "Heavy-weight book-style gift boxes", "material_tag": "FSC Board", "series": "Collection No. 03", "link": "/collections/monolith" } },
+        "atelier": { "type": "collection", "settings": { "label": "The Atelier Collection", "subtitle": "Bespoke handcrafted finishing", "material_tag": "Custom", "series": "Collection No. 04", "link": "/collections/atelier" } }
+      },
+      "blocks_order": ["frost", "linear", "monolith", "atelier"]
     },
-    "brand-story": {
+    "manifesto": {
       "type": "brand-story",
       "settings": {
-        "eyebrow": "Our philosophy",
-        "title": "We uncover the root of every brand and create the route that leads it to consumers.",
-        "body": "Root & Route Creations Inc. partners with Guangzhou Shinelee — an 18-year, Disney-certified, FSC-sustainable paper manufacturer — to bring premium, eco-conscious gift packaging directly to North American consumers.",
-        "cta_label": "Read Our Story",
-        "cta_url": "/pages/our-story"
-      }
-    },
-    "seasonal": {
-      "type": "seasonal-spotlight",
-      "block_order": ["holiday", "wedding", "corporate"],
-      "blocks": {
-        "holiday": {
-          "type": "season",
-          "settings": {
-            "eyebrow": "Holiday",
-            "title": "Holiday Gift Sets",
-            "text": "Advent calendars and curated bundles for the gifting season.",
-            "cta_label": "Shop Holiday",
-            "cta_url": "/collections/seasonal"
-          }
-        },
-        "wedding": {
-          "type": "season",
-          "settings": {
-            "eyebrow": "Wedding & Events",
-            "title": "Wedding Favour Packaging",
-            "text": "Elegant ribbon sets, favour boxes, and custom presentation for your big day.",
-            "cta_label": "Shop Wedding",
-            "cta_url": "/collections/gift-sets"
-          }
-        },
-        "corporate": {
-          "type": "season",
-          "settings": {
-            "eyebrow": "Corporate Gifting",
-            "title": "Branded Gift Experiences",
-            "text": "Elevate your corporate gifts with premium, FSC-certified packaging bundles.",
-            "cta_label": "Shop Corporate",
-            "cta_url": "/collections/gift-sets"
-          }
-        }
+        "eyebrow": "Our Manifesto",
+        "title": "Every product begins with an idea. Every idea begins with a story.",
+        "body": "Somewhere beneath every logo, every recipe, every founder, every business — there is a root. Our job isn't to invent it. It's to uncover it. Then we design the route. The route that leads your story onto shelves, into homes, and into people's hearts. Because packaging isn't the final step. It's the beginning of every customer's first impression.",
+        "cta_label": "Our Philosophy",
+        "cta_url": "/pages/about"
       },
-      "settings": {
-        "eyebrow": "Seasonal Collections",
-        "title": "Made for the Moment",
-        "subtitle": "Curated gifting sets for every season, celebration, and occasion."
-      }
+      "blocks": {
+        "p1": { "type": "pillar", "settings": { "title": "Material Innovation", "body": "Sustainably sourced specialty papers with exceptional tactile quality." } },
+        "p2": { "type": "pillar", "settings": { "title": "Structural Engineering", "body": "The soft resistance of a magnetic close. Every opening choreographed." } },
+        "p3": { "type": "pillar", "settings": { "title": "Global Supply Alignment", "body": "Seamless delivery from Guangzhou to your door worldwide." } }
+      },
+      "blocks_order": ["p1", "p2", "p3"]
     },
-    "newsletter": {
-      "type": "newsletter",
+    "process": {
+      "type": "process-timeline",
       "settings": {
-        "eyebrow": "Stay in the loop",
-        "title": "Seasonal Drops & Gifting Guides",
-        "subtitle": "Be first to know about new collections, seasonal campaigns, and exclusive bundle offers.",
-        "button_label": "Subscribe"
-      }
+        "eyebrow": "How We Work",
+        "title": "The Collaborative Journey",
+        "subtitle": "From first brief to final delivery — a process built on craft, clarity, and care.",
+        "cta_label": "Begin Your Journey",
+        "cta_url": "/pages/contact"
+      },
+      "blocks": {
+        "s1": { "type": "step", "settings": { "phase": "01 / Discovery", "title": "Discovery & Briefing", "body": "We begin by listening. We explore your brand's root — its values, its audience, and the story it needs to tell." } },
+        "s2": { "type": "step", "settings": { "phase": "02 / Concept", "title": "Tactile Concepts & Structural Design", "body": "Our team translates your brief into tangible material concepts. Mood boards, finish samples, and CAD structural drawings for your review." } },
+        "s3": { "type": "step", "settings": { "phase": "03 / Prototype", "title": "Prototyping & Material Selection", "body": "You receive physical prototypes. Touch them. Feel the damping of the lid, the weight of the board. Refinements happen here." } },
+        "s4": { "type": "step", "settings": { "phase": "04 / Production", "title": "Artisan Production & Global Delivery", "body": "Our Guangzhou facility brings the approved design to life at scale. FSC-certified materials, Disney-audited processes, global delivery." } }
+      },
+      "blocks_order": ["s1", "s2", "s3", "s4"]
+    },
+    "clients": {
+      "type": "client-wall",
+      "settings": {
+        "eyebrow": "Trusted By",
+        "subtitle": "Trusted by visionary brands across beauty, fragrance, and lifestyle."
+      },
+      "blocks": {
+        "c1": { "type": "client", "settings": { "name": "Disney" } },
+        "c2": { "type": "client", "settings": { "name": "Harrods" } },
+        "c3": { "type": "client", "settings": { "name": "Mentholatum" } },
+        "c4": { "type": "client", "settings": { "name": "UEFA" } },
+        "c5": { "type": "client", "settings": { "name": "Lido" } },
+        "c6": { "type": "client", "settings": { "name": "Glo" } }
+      },
+      "blocks_order": ["c1", "c2", "c3", "c4", "c5", "c6"]
     }
   },
-  "order": ["hero", "collections", "brand-story", "seasonal", "newsletter"]
+  "order": ["announcement-bar", "hero", "collections", "manifesto", "process", "clients"]
 }

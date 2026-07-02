@@ -1,95 +1,69 @@
 <section class="featured-collections section">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">{{ section.settings.eyebrow | default: 'Curated for you' }}</p>
-      <h2 class="section-head__title">{{ section.settings.title | default: 'Shop by Collection' }}</h2>
+      <p class="eyebrow">{{ section.settings.eyebrow | default: 'Packaging Series' }}</p>
+      <h2 class="section-head__title">{{ section.settings.title | default: 'Curated Collections' }}</h2>
+      <p class="section-head__sub">{{ section.settings.subtitle | default: 'Named by material, structure, and aesthetic — each series is a distinct design language.' }}</p>
     </div>
 
     <div class="collection-grid">
-      {%- for block in section.blocks -%}
-        {%- assign collection = block.settings.collection -%}
-        <a href="{{ collection.url | default: '#' }}" class="collection-card" {{ block.shopify_attributes }}>
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.link | default: '/collections/all' }}" class="collection-card" {{ block.shopify_attributes }}>
           <div class="collection-card__media">
-            {%- if block.settings.image -%}
+            {% if block.settings.image %}
               {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.label }}
-            {%- elsif collection.featured_image -%}
-              {{ collection.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: collection.title }}
-            {%- else -%}
-              <div class="collection-card__placeholder">
-                {% render 'icon-leaf', width: 48, height: 60 %}
+            {% else %}
+              <div class="collection-card__placeholder" style="background:var(--rr-paper);">
+                {% render 'icon-leaf', width: 40, height: 50 %}
               </div>
-            {%- endif -%}
+            {% endif %}
             <div class="collection-card__overlay"></div>
+            {% if block.settings.material_tag != blank %}
+              <span style="position:absolute;top:16px;left:16px;font-family:var(--rr-sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,249,248,.85);background:rgba(20,20,20,.35);padding:4px 10px;border-radius:20px;backdrop-filter:blur(4px);">{{ block.settings.material_tag }}</span>
+            {% endif %}
           </div>
           <div class="collection-card__body">
-            <p class="collection-card__label">{{ block.settings.label | default: collection.title }}</p>
-            <p class="collection-card__sub">{{ block.settings.sub }}</p>
-            <span class="collection-card__cta">Explore →</span>
+            <p class="eyebrow" style="font-size:10px;margin-bottom:6px;">{{ block.settings.series | default: 'Collection' }}</p>
+            <h3 class="collection-card__label">{{ block.settings.label }}</h3>
+            <p class="collection-card__sub">{{ block.settings.subtitle }}</p>
+            <span class="collection-card__cta">View Series →</span>
           </div>
         </a>
-      {%- endfor -%}
+      {% endfor %}
     </div>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Featured Collections",
-  "tag": "section",
+  "name": "Curated Collections",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Packaging Series" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Curated Collections" },
+    { "type": "text", "id": "subtitle", "label": "Subheading" }
+  ],
   "blocks": [
     {
-      "type": "collection_card",
-      "name": "Collection Card",
+      "type": "collection",
+      "name": "Collection",
       "settings": [
-        {
-          "type": "collection",
-          "id": "collection",
-          "label": "Collection"
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Override image"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Card label",
-          "default": "Gift Sets"
-        },
-        {
-          "type": "text",
-          "id": "sub",
-          "label": "Card subtitle",
-          "default": "Curated bundles for every occasion"
-        }
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "series", "label": "Series label", "default": "Collection" },
+        { "type": "text", "id": "label", "label": "Collection name", "default": "The Frost Collection" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "White matte, frosted tactile finish" },
+        { "type": "text", "id": "material_tag", "label": "Material tag", "default": "Specialty Paper" },
+        { "type": "url", "id": "link", "label": "Link" }
       ]
     }
   ],
-  "settings": [
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow text",
-      "default": "Curated for you"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Section title",
-      "default": "Shop by Collection"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Featured Collections",
-      "blocks": [
-        { "type": "collection_card", "settings": { "label": "Gift Sets", "sub": "Coordinated bundles, beautifully presented" } },
-        { "type": "collection_card", "settings": { "label": "Advent Calendars", "sub": "24 days of seasonal delight" } },
-        { "type": "collection_card", "settings": { "label": "Ribbons & Accents", "sub": "The finishing touch that makes it memorable" } },
-        { "type": "collection_card", "settings": { "label": "Cards & Stationery", "sub": "Thoughtfully crafted paper artistry" } }
-      ]
-    }
-  ]
+  "presets": [{
+    "name": "Curated Collections",
+    "blocks": [
+      { "type": "collection", "settings": { "label": "The Frost Collection", "subtitle": "White matte, frosted tactile surface", "material_tag": "Specialty Paper", "series": "Collection No. 01" } },
+      { "type": "collection", "settings": { "label": "The Linear Collection", "subtitle": "Minimalist modern lines, structural precision", "material_tag": "Rigid Board", "series": "Collection No. 02" } },
+      { "type": "collection", "settings": { "label": "The Monolith Collection", "subtitle": "Heavy-weight book-style gift boxes", "material_tag": "FSC Board", "series": "Collection No. 03" } },
+      { "type": "collection", "settings": { "label": "The Atelier Collection", "subtitle": "Bespoke handcrafted finishing", "material_tag": "Custom", "series": "Collection No. 04" } }
+    ]
+  }]
 }
 {% endschema %}
