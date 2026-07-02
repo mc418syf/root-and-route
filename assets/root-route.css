@@ -10,6 +10,18 @@
   --rr-serif: "Cormorant Garamond", Georgia, serif;
   --rr-sans: "Jost", system-ui, sans-serif;
   --rr-max: 1180px;
+  --rr-section-space: 86px;
+  --rr-base-font-size: 16px;
+  --rr-base-line-height: 1.6;
+  --rr-button-radius: 2px;
+  --rr-button-transform: uppercase;
+  --rr-card-radius: 4px;
+  --rr-media-radius: 0px;
+  --rr-product-ratio: 4 / 5;
+  --rr-eyebrow-spacing: .28em;
+  --rr-animation-duration: 700ms;
+  --rr-h1-max: 6.8rem;
+  --rr-h2-max: 4.3rem;
 }
 
 * { box-sizing: border-box; }
@@ -19,8 +31,8 @@ body {
   background: #fff;
   color: var(--rr-ink);
   font-family: var(--rr-sans);
-  font-size: 16px;
-  line-height: 1.55;
+  font-size: var(--rr-base-font-size);
+  line-height: var(--rr-base-line-height);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -46,7 +58,7 @@ button, input, select, textarea { font: inherit; }
 }
 
 .rr-section {
-  padding: 86px 0;
+  padding: var(--rr-section-space) 0;
   border-bottom: 1px solid var(--rr-border);
 }
 
@@ -61,7 +73,7 @@ button, input, select, textarea { font: inherit; }
   color: var(--rr-forest);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: .28em;
+  letter-spacing: var(--rr-eyebrow-spacing);
   line-height: 1.2;
   text-transform: uppercase;
 }
@@ -74,8 +86,8 @@ button, input, select, textarea { font: inherit; }
   line-height: 1;
   margin: 0;
 }
-.rr-h1 { font-size: clamp(3rem, 7vw, 6.8rem); }
-.rr-h2 { font-size: clamp(2.3rem, 4.2vw, 4.3rem); }
+.rr-h1 { font-size: clamp(3rem, 7vw, var(--rr-h1-max)); }
+.rr-h2 { font-size: clamp(2.3rem, 4.2vw, var(--rr-h2-max)); }
 .rr-h3 { font-size: clamp(1.65rem, 2.4vw, 2.4rem); }
 
 .rr-intro {
@@ -98,14 +110,14 @@ button, input, select, textarea { font: inherit; }
   align-items: center;
   background: var(--rr-forest);
   border: 1px solid var(--rr-forest);
-  border-radius: 2px;
+  border-radius: var(--rr-button-radius);
   color: var(--rr-paper);
   display: inline-flex;
   gap: 10px;
   min-height: 46px;
   justify-content: center;
   padding: 12px 18px;
-  text-transform: uppercase;
+  text-transform: var(--rr-button-transform);
   font-size: 12px;
   letter-spacing: .12em;
 }
@@ -121,7 +133,7 @@ button, input, select, textarea { font: inherit; }
 .rr-card {
   background: #fff;
   border: 1px solid var(--rr-border);
-  border-radius: 4px;
+  border-radius: var(--rr-card-radius);
 }
 
 .rr-header {
@@ -201,8 +213,10 @@ button, input, select, textarea { font: inherit; }
 .rr-hero__visual {
   aspect-ratio: 4 / 5;
   border: 1px solid var(--rr-border);
+  border-radius: var(--rr-media-radius);
   padding: 16px;
   background: rgba(255,255,255,.5);
+  overflow: hidden;
 }
 .rr-hero__visual img,
 .rr-portfolio-card img,
@@ -248,8 +262,9 @@ button, input, select, textarea { font: inherit; }
   gap: 18px;
 }
 .rr-collection-card__media {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: var(--rr-product-ratio);
   background: var(--rr-paper);
+  border-radius: var(--rr-media-radius);
   overflow: hidden;
 }
 .rr-collection-card__body {
@@ -274,6 +289,7 @@ button, input, select, textarea { font: inherit; }
 .rr-portfolio-card__media {
   aspect-ratio: 3 / 4;
   background: var(--rr-paper);
+  border-radius: var(--rr-media-radius);
   overflow: hidden;
 }
 
@@ -312,7 +328,7 @@ button, input, select, textarea { font: inherit; }
 .rr-reveal {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity .75s ease, transform .75s ease;
+  transition: opacity var(--rr-animation-duration) ease, transform var(--rr-animation-duration) ease;
 }
 .rr-reveal.is-visible {
   opacity: 1;
@@ -359,7 +375,7 @@ button, input, select, textarea { font: inherit; }
 .rr-form {
   background: #fff;
   border: 1px solid var(--rr-border);
-  border-radius: 4px;
+  border-radius: var(--rr-card-radius);
   padding: 28px;
 }
 .rr-form__step {
