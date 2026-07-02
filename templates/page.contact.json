@@ -1,10 +1,18 @@
 {
   "sections": {
-    "inquiry": {
-      "type": "rr-inquiry-form"
+    "rr_inquiry": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<section class=\"rr-section rr-section--paper\"><div class=\"rr-wrap rr-inquiry\"><div><div class=\"rr-eyebrow\">Inquiry / Contact</div><h1 class=\"rr-h2\">Tell us what your package needs to say before it is opened.</h1><p class=\"rr-intro\">A guided B2B inquiry form for quantity, material tone, structure needs, and design direction.</p></div>{% form 'contact', class: 'rr-inquiry-form' %}{% if form.posted_successfully? %}<p class=\"rr-subline\">Thank you. Your inquiry has been received.</p>{% endif %}{{ form.errors | default_errors }}<div class=\"rr-form-step\"><div class=\"rr-meta\">01 / Contact</div><div class=\"rr-field\"><label for=\"ContactName\">Name</label><input id=\"ContactName\" name=\"contact[name]\" type=\"text\" autocomplete=\"name\" required></div><div class=\"rr-field\"><label for=\"ContactEmail\">Email</label><input id=\"ContactEmail\" name=\"contact[email]\" type=\"email\" autocomplete=\"email\" required></div><div class=\"rr-field\"><label for=\"ContactCompany\">Company / Brand</label><input id=\"ContactCompany\" name=\"contact[company]\" type=\"text\"></div></div><div class=\"rr-form-step\"><div class=\"rr-meta\">02 / Project scale</div><div class=\"rr-field\"><label for=\"Quantity\">Approximate quantity</label><select id=\"Quantity\" name=\"contact[approximate_quantity]\"><option>500 - 1,000 units</option><option>1,000 - 5,000 units</option><option>5,000 - 20,000 units</option><option>20,000+ units</option><option>Not sure yet</option></select></div><div class=\"rr-field\"><label for=\"Timeline\">Target timeline</label><select id=\"Timeline\" name=\"contact[target_timeline]\"><option>Exploring only</option><option>Within 1 month</option><option>1 - 3 months</option><option>3 - 6 months</option><option>Seasonal launch</option></select></div></div><div class=\"rr-form-step\"><div class=\"rr-meta\">03 / Material tone</div><div class=\"rr-choice-title\">Select all that apply</div><div class=\"rr-choices\"><label class=\"rr-choice\"><input type=\"checkbox\" name=\"contact[material_tone][]\" value=\"Frosted / matte\"> Frosted / matte</label><label class=\"rr-choice\"><input type=\"checkbox\" name=\"contact[material_tone][]\" value=\"Textured art paper\"> Textured art paper</label><label class=\"rr-choice\"><input type=\"checkbox\" name=\"contact[material_tone][]\" value=\"Sustainable / FSC\"> Sustainable / FSC</label><label class=\"rr-choice\"><input type=\"checkbox\" name=\"contact[material_tone][]\" value=\"Premium rigid board\"> Premium rigid board</label></div></div><div class=\"rr-form-step\"><div class=\"rr-meta\">04 / Custom structure</div><div class=\"rr-choices\"><label class=\"rr-choice\"><input type=\"radio\" name=\"contact[custom_structure]\" value=\"Yes\" checked> Yes, custom structure</label><label class=\"rr-choice\"><input type=\"radio\" name=\"contact[custom_structure]\" value=\"No\"> Existing format</label></div><div class=\"rr-field\"><label for=\"Message\">Project notes / upload link</label><textarea id=\"Message\" name=\"contact[body]\" rows=\"6\" placeholder=\"Paste a design-file link, moodboard link, or describe what you want to create.\"></textarea></div></div><button class=\"rr-button\" type=\"submit\">Submit inquiry</button>{% endform %}</div></section>",
+        "color_scheme": "primary",
+        "disable_color_transition": true,
+        "remove_top_padding": true,
+        "remove_bottom_padding": true,
+        "suppress_section_wrapper": true
+      }
     }
   },
   "order": [
-    "inquiry"
+    "rr_inquiry"
   ]
 }

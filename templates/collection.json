@@ -1,10 +1,1 @@
-{
-  "sections": {
-    "main": {
-      "type": "main-collection"
-    }
-  },
-  "order": [
-    "main"
-  ]
-}
+{"sections":{"banner":{"type":"main-collection-banner","settings":{"show_collection_title":true,"show_collection_description":true,"show_collection_image":false,"collection_image_style":"full","collection_image_crop":"aspect-w-16 aspect-h-9"}},"main":{"type":"main-collection","settings":{"max_products":12,"enable_filtering":true,"desktop_filter_layout":"drawer","expand_filters":true,"show_filter_count":true,"enable_color_swatch_filters":false,"enable_sorting":true,"linklist":"","desktop_menu_layout":"sidebar","feature_full_width_products":false,"desktop_layout":"two_columns","first_product_position":"left","enable_cascade_on_mobile":true,"spacing":"global","variance":"global","sequence":1,"color_scheme":"primary"}}},"order":["banner","main"]}

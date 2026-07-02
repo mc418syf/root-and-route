@@ -1,19 +1,30 @@
 {
   "sections": {
-    "manifesto": {
-      "type": "rr-manifesto"
-    },
-    "services": {
-      "type": "rr-services",
+    "rr_manifesto": {
+      "type": "custom-liquid",
       "settings": {
-        "eyebrow": "Material selection",
-        "heading": "Materials curated like an exhibition.",
-        "text": "We source specialty papers and conscious materials globally, balancing tactile beauty with environmental responsibility."
+        "custom_liquid": "<section class=\"rr-section rr-section--dark\"><div class=\"rr-wrap\" style=\"display:grid;gap:38px;grid-template-columns:minmax(0,.72fr) minmax(0,1fr);\"><div><div class=\"rr-eyebrow\">The manifesto</div><h2 class=\"rr-h2\">Our philosophy</h2></div><div><div class=\"rr-h2\">Every package is a conversation between a brand and its audience.</div><p class=\"rr-intro\">Every product begins with an idea. Every idea begins with a story. Somewhere beneath every logo, every recipe, every founder, every business, there is a root. Our job is not to invent it, but to uncover it. Then we design the route.</p></div></div></section>",
+        "color_scheme": "primary",
+        "disable_color_transition": true,
+        "remove_top_padding": true,
+        "remove_bottom_padding": true,
+        "suppress_section_wrapper": true
+      }
+    },
+    "rr_services": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<section class=\"rr-section\"><div class=\"rr-wrap\"><div style=\"margin-bottom:42px;\"><div class=\"rr-eyebrow\">What we offer</div><h2 class=\"rr-h2\">Material aesthetics, structural engineering, and aligned global supply.</h2><p class=\"rr-intro\">Root &amp; Route combines the feeling of an atelier with the discipline of a production partner.</p></div><div class=\"rr-service-grid\"><article class=\"rr-service-card\"><div class=\"rr-meta\">01</div><h3 class=\"rr-h3\">Material Innovation</h3><p>Selected sustainable art papers, specialty finishes, and tactile materials curated for brand expression.</p></article><article class=\"rr-service-card\"><div class=\"rr-meta\">02</div><h3 class=\"rr-h3\">Structural Engineering</h3><p>Opening resistance, magnetic snap, drawer movement, and full unboxing experience design.</p></article><article class=\"rr-service-card\"><div class=\"rr-meta\">03</div><h3 class=\"rr-h3\">Global Supply Alignment</h3><p>B2B communication, production standards, conscious sourcing, certification support, and delivery coordination.</p></article></div></div></section>",
+        "color_scheme": "primary",
+        "disable_color_transition": true,
+        "remove_top_padding": true,
+        "remove_bottom_padding": true,
+        "suppress_section_wrapper": true
       }
     }
   },
   "order": [
-    "manifesto",
-    "services"
+    "rr_manifesto",
+    "rr_services"
   ]
 }

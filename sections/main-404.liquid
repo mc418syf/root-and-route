@@ -1,17 +1,14 @@
-<section class="rr-section rr-section--paper">
-  <div class="rr-container rr-section-head rr-section-head--center">
-    <div class="rr-eyebrow">404</div>
-    <h1 class="rr-h1">This route does not exist yet.</h1>
-    <p class="rr-intro">Return home or begin a custom packaging inquiry.</p>
-    <div class="rr-hero__actions" style="justify-content:center;">
-      <a class="rr-button" href="{{ routes.root_url }}">Home</a>
-      <a class="rr-button rr-button--secondary" href="/pages/contact">Inquiry</a>
+{% assign section_color = 'primary' %}
+
+<section class="py-section bg-scheme-background text-scheme-text" data-color-scheme="{{ section_color }}">
+  <div class="max-w-site mx-auto my-10 px-5 md:px-10 text-center flex min-h-[55vh]">
+    <div class="m-auto">
+      <h1 class="font-heading text-2xl mb-5">
+        {{ 'general.404.title' | t }}
+      </h1>
+      <p>
+        {{ 'general.404.subtext_html' | t: link_url: routes.all_products_collection_url }}
+      </p>
     </div>
   </div>
 </section>
-
-{% schema %}
-{
-  "name": "404"
-}
-{% endschema %}
