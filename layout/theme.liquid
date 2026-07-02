@@ -16,6 +16,10 @@
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
 
+    {% if settings.favicon != blank %}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {% endif %}
+
     {{ content_for_header }}
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +35,56 @@
         --rr-forest: {{ settings.color_forest }};
         --rr-sage: {{ settings.color_sage }};
         --rr-stone: {{ settings.color_stone }};
+        --rr-border: {{ settings.color_border }};
+        --rr-butter: {{ settings.color_butter }};
+        --rr-muted: {{ settings.color_muted }};
+        --rr-base-font-size: {{ settings.base_font_size }}px;
+        --rr-base-line-height: {{ settings.base_line_height }};
+        --rr-max: {{ settings.page_width }};
+        --rr-section-space: {{ settings.vertical_spacing_between_sections }};
+        --rr-button-radius: {{ settings.button_border_radius }};
+        --rr-button-transform: {{ settings.button_text_transform }};
+        --rr-card-radius: {{ settings.card_border_radius }};
+        --rr-media-radius: {{ settings.media_border_radius }};
+        --rr-product-ratio: {{ settings.product_tiles_aspect_ratio }};
+        --rr-eyebrow-spacing: {{ settings.eyebrow_letter_spacing }}em;
+        --rr-animation-duration: {{ settings.animation_duration }}ms;
       }
+
+      {% if settings.enable_smooth_scroll == false %}
+        html { scroll-behavior: auto; }
+      {% endif %}
+
+      {% if settings.show_leaf_motif == false %}
+        .rr-hero,
+        .rr-section--dark {
+          background-image: none !important;
+        }
+      {% endif %}
+
+      {% if settings.cascade_fade_in_items == false %}
+        .rr-reveal {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      {% endif %}
+
+      {% case settings.heading_scale %}
+        {% when 'quiet' %}
+          :root { --rr-h1-max: 5.4rem; --rr-h2-max: 3.4rem; }
+        {% when 'large' %}
+          :root { --rr-h1-max: 7.6rem; --rr-h2-max: 5rem; }
+        {% else %}
+          :root { --rr-h1-max: 6.8rem; --rr-h2-max: 4.3rem; }
+      {% endcase %}
+
+      {% if settings.heading_text_transform != 'none' %}
+        .rr-h1,
+        .rr-h2,
+        .rr-h3 {
+          text-transform: {{ settings.heading_text_transform }};
+        }
+      {% endif %}
     </style>
   </head>
 

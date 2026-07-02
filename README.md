@@ -40,6 +40,17 @@ The visual system comes from `Rooted Brand Sheet (standalone).html`:
    - `contact` -> `page.contact`
 6. Upload real packaging photography through each section's image picker.
 
+## Theme Settings
+
+The global theme settings are modeled after Cascade's editor structure, but tuned for Root & Route:
+
+- Colors: Root & Route paper, ink, forest, sage, stone, borders, muted text, and reverse text
+- Typography: base sizing, line height, heading scale, heading transform, and eyebrow spacing
+- Layout: page width, vertical section spacing, and default heading alignment preference
+- Animations: timeline/portfolio fade-in, smooth scroll, and animation duration
+- Buttons and media: border radius, button casing, media radius, card radius, product tile ratio
+- Commerce-ready controls: product tile display, search preferences, cart style, social links, favicon
+
 ## Notes
 
 The theme is intentionally section-first rather than Webflow-derived. The old Webflow export can remain as reference, but the live Shopify build should use the Liquid, JSON, CSS, and JS files in this framework.
