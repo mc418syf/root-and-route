@@ -1,78 +1,11 @@
 {
   "sections": {
-    "rr2_hero": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<section class=\"rr2-section rr2-hero\" data-rr-theme=\"warm\"><div class=\"rr2-hero__inner\"><div class=\"rr2-eyebrow\">Root &amp; Route Creations Inc.</div><div class=\"rr2-hero__mark\" data-rr-parallax=\"0.035\"><svg class=\"rr2-leaf-svg\" viewBox=\"0 0 80 100\" fill=\"none\" aria-hidden=\"true\"><path d=\"M40 8C18 24 18 56 40 70C62 56 62 24 40 8Z\" fill=\"currentColor\"/><path d=\"M40 38V94\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\"/></svg></div><h1 class=\"rr2-display\"><span>Seasonal packaging</span><span>made to be kept.</span></h1><p class=\"rr2-sub\">Eco-luxury paper packaging and gift-ready structures for food, holiday, and cosmetic launches.</p><div class=\"rr2-actions\"><a class=\"rr2-button\" href=\"/pages/contact\">Start a project</a><a class=\"rr2-button rr2-button--ghost\" href=\"#collections\">View collections</a></div><div class=\"rr2-cue\" aria-hidden=\"true\">Scroll</div></div></section>",
-        "color_scheme": "primary",
-        "disable_color_transition": true,
-        "remove_top_padding": true,
-        "remove_bottom_padding": true,
-        "suppress_section_wrapper": true
-      }
-    },
-    "rr2_marquee": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<section class=\"rr2-marquee\" aria-label=\"Packaging capabilities\"><div class=\"rr2-marquee__track\"><span>Food Packaging</span><span>Holiday Gift Sets</span><span>Cosmetic Advent</span><span>FSC Materials</span><span>Foil &amp; Emboss</span><span>Custom Dielines</span><span>Food Packaging</span><span>Holiday Gift Sets</span><span>Cosmetic Advent</span><span>FSC Materials</span><span>Foil &amp; Emboss</span><span>Custom Dielines</span></div></section>",
-        "color_scheme": "primary",
-        "disable_color_transition": true,
-        "remove_top_padding": true,
-        "remove_bottom_padding": true,
-        "suppress_section_wrapper": true
-      }
-    },
-    "rr2_collections": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<section id=\"collections\" class=\"rr2-section rr2-collections\"><div class=\"rr2-wrap\"><div class=\"rr2-section-head\"><div class=\"rr2-eyebrow\">Curated collections</div><h2 class=\"rr2-heading\">Packaging families for product stories with a season, a shelf, and a first impression.</h2></div><article class=\"rr2-row\"><div class=\"rr2-media\"><div class=\"rr2-image-placeholder\"><span class=\"rr2-image-mark\">01</span><span>Natural-light food packaging study</span></div></div><div class=\"rr2-copy\"><div class=\"rr2-num\">01</div><div class=\"rr2-label\">Everyday / Food Packaging</div><h3>Food Packaging</h3><p>Rigid cartons, sleeves, and specialty paper structures for products that need to feel considered before they are tasted.</p><a class=\"rr2-link\" href=\"/pages/contact\">Discuss a project</a></div></article><article class=\"rr2-row rr2-row--reverse\"><div class=\"rr2-media\"><div class=\"rr2-image-placeholder\"><span class=\"rr2-image-mark\">02</span><span>Holiday gift-set packaging study</span></div></div><div class=\"rr2-copy\"><div class=\"rr2-num\">02</div><div class=\"rr2-label\">Seasonal / Holiday Gift Sets</div><h3>Holiday Gift Sets</h3><p>Gift-ready packaging systems with tactile papers, foil details, magnetic closure, and a moment of ceremony.</p><a class=\"rr2-link\" href=\"/pages/contact\">Discuss a project</a></div></article><article class=\"rr2-row\"><div class=\"rr2-media\"><div class=\"rr2-image-placeholder\"><span class=\"rr2-image-mark\">03</span><span>Cosmetic advent calendar structure</span></div></div><div class=\"rr2-copy\"><div class=\"rr2-num\">03</div><div class=\"rr2-label\">Countdown / Cosmetic Advent</div><h3>Cosmetic Advent</h3><p>Drawer systems, numbered reveals, and engineered unboxing routes for beauty launches and limited editions.</p><a class=\"rr2-link\" href=\"/pages/contact\">Discuss a project</a></div></article></div></section>",
-        "color_scheme": "primary",
-        "disable_color_transition": true,
-        "remove_top_padding": true,
-        "remove_bottom_padding": true,
-        "suppress_section_wrapper": true
-      }
-    },
-    "rr2_craft": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<section id=\"craft\" class=\"rr2-section rr2-craft\"><div class=\"rr2-wrap rr2-craft__grid\"><div><div class=\"rr2-eyebrow\">The Craft</div><h2 class=\"rr2-heading\">Designed in-house. Produced with our atelier.</h2><p class=\"rr2-copy-lg\">Our partner factory brings full customisation to life at any scale - structure, finish and print, engineered to your product.</p></div><div class=\"rr2-feature-grid\"><article class=\"rr2-feature\"><span>01</span><h3>Custom dielines</h3><p>Structure built to your product.</p></article><article class=\"rr2-feature\"><span>02</span><h3>Foil &amp; emboss</h3><p>Debossing, spot UV, and hot foil.</p></article><article class=\"rr2-feature\"><span>03</span><h3>FSC materials</h3><p>Recycled and recyclable board.</p></article><article class=\"rr2-feature\"><span>04</span><h3>Low MOQ</h3><p>From pilot runs to full launch.</p></article></div></div></section>",
-        "color_scheme": "primary",
-        "disable_color_transition": true,
-        "remove_top_padding": true,
-        "remove_bottom_padding": true,
-        "suppress_section_wrapper": true
-      }
-    },
-    "rr2_eco": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<section id=\"responsibility\" class=\"rr2-section rr2-eco\"><div class=\"rr2-wrap rr2-eco__inner\"><div><div class=\"rr2-eyebrow\">Rooted in Responsibility</div><h2 class=\"rr2-heading\">Luxury should not cost the earth.</h2></div><div class=\"rr2-eco-grid\"><article class=\"rr2-eco-card\"><span>FSC-certified</span><p>Responsible papers selected for traceability, touch, and shelf presence.</p></article><article class=\"rr2-eco-card\"><span>Soy &amp; water inks</span><p>Print approaches that keep finish, color, and conscious sourcing in alignment.</p></article><article class=\"rr2-eco-card\"><span>Made to keep</span><p>Structures designed to extend the life of the package beyond first opening.</p></article></div></div></section>",
-        "color_scheme": "primary",
-        "disable_color_transition": true,
-        "remove_top_padding": true,
-        "remove_bottom_padding": true,
-        "suppress_section_wrapper": true
-      }
-    },
-    "rr2_cta": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<section id=\"contact\" class=\"rr2-section rr2-cta\"><div class=\"rr2-wrap\"><div class=\"rr2-eyebrow\">Start a Project</div><h2 class=\"rr2-display rr2-display--small\">Let's design your season.</h2><p class=\"rr2-sub\">Tell us the product, quantity, material mood, and launch window. We will help shape the route from first sample to final delivery.</p><div class=\"rr2-actions\"><a class=\"rr2-button\" href=\"/pages/contact\">Request a sample</a><a class=\"rr2-button rr2-button--ghost\" href=\"#collections\">View collections</a></div></div></section>",
-        "color_scheme": "primary",
-        "disable_color_transition": true,
-        "remove_top_padding": true,
-        "remove_bottom_padding": true,
-        "suppress_section_wrapper": true
-      }
+    "root_route_webdesign": {
+      "type": "root-route-webdesign",
+      "settings": {}
     }
   },
   "order": [
-    "rr2_hero",
-    "rr2_marquee",
-    "rr2_collections",
-    "rr2_craft",
-    "rr2_eco",
-    "rr2_cta"
+    "root_route_webdesign"
   ]
 }
