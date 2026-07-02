@@ -1,52 +1,46 @@
 [
   {
-    "name": "theme_info",
-    "theme_name": "Root & Route",
-    "theme_version": "1.0.0",
-    "theme_author": "Root & Route",
-    "theme_documentation_url": "",
-    "theme_support_url": ""
+    "name": "Theme info",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Root & Route Creations Inc. Shopify framework. Built for eco-luxury packaging, portfolio-led product display, and guided B2B inquiry."
+      }
+    ]
   },
   {
-    "name": "Colors",
+    "name": "Brand colors",
     "settings": [
       {
         "type": "color",
-        "id": "color_primary",
-        "label": "Brand Green",
+        "id": "color_paper",
+        "label": "Paper",
+        "default": "#FAFAF8"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink",
+        "default": "#141414"
+      },
+      {
+        "type": "color",
+        "id": "color_forest",
+        "label": "Forest",
         "default": "#2F5E3A"
       },
       {
         "type": "color",
-        "id": "color_background",
-        "label": "Background",
-        "default": "#FAFAF8"
-      }
-    ]
-  },
-  {
-    "name": "Typography",
-    "settings": [
-      {
-        "type": "font_picker",
-        "id": "type_header_font",
-        "label": "Heading font",
-        "default": "cormorant_garamond_n3"
+        "id": "color_sage",
+        "label": "Sage",
+        "default": "#93A487"
       },
       {
-        "type": "font_picker",
-        "id": "type_body_font",
-        "label": "Body font",
-        "default": "jost_n4"
+        "type": "color",
+        "id": "color_stone",
+        "label": "Stone",
+        "default": "#DAD9D3"
       }
-    ]
-  },
-  {
-    "name": "Social",
-    "settings": [
-      { "type": "url", "id": "social_instagram_link", "label": "Instagram" },
-      { "type": "url", "id": "social_pinterest_link", "label": "Pinterest" },
-      { "type": "url", "id": "social_facebook_link", "label": "Facebook" }
     ]
   }
 ]

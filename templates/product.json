@@ -1,19 +1,14 @@
 {
   "sections": {
-    "product-main": {
-      "type": "product-main",
-      "settings": {
-        "show_vendor": false,
-        "show_sku": true
-      }
+    "main": {
+      "type": "main-product"
     },
-    "product-recommendations": {
-      "type": "product-recommendations",
-      "settings": {
-        "title": "You May Also Love",
-        "products_to_show": 4
-      }
+    "portfolio": {
+      "type": "rr-portfolio"
     }
   },
-  "order": ["product-main", "product-recommendations"]
+  "order": [
+    "main",
+    "portfolio"
+  ]
 }

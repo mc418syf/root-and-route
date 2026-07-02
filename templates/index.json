@@ -1,77 +1,26 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-banner",
-      "settings": {
-        "eyebrow": "B2B Luxury Packaging",
-        "sub_eyebrow": "CREATIONS INC.",
-        "tagline": "Every package is a conversation between a brand and its audience.",
-        "cta_label": "Explore Collections",
-        "cta2_label": "Start a Project"
-      }
+      "type": "rr-hero"
     },
     "collections": {
-      "type": "featured-collections",
-      "settings": {
-        "eyebrow": "Packaging Series",
-        "title": "Curated Collections",
-        "subtitle": "Named by material, structure, and aesthetic."
-      },
-      "blocks": {
-        "frost": { "type": "collection", "settings": { "label": "The Frost Collection", "subtitle": "White matte, frosted tactile finish", "material_tag": "Specialty Paper", "series": "Collection No. 01" } },
-        "linear": { "type": "collection", "settings": { "label": "The Linear Collection", "subtitle": "Minimalist modern lines, structural precision", "material_tag": "Rigid Board", "series": "Collection No. 02" } },
-        "monolith": { "type": "collection", "settings": { "label": "The Monolith Collection", "subtitle": "Heavy-weight book-style gift boxes", "material_tag": "FSC Board", "series": "Collection No. 03" } },
-        "atelier": { "type": "collection", "settings": { "label": "The Atelier Collection", "subtitle": "Bespoke handcrafted finishing", "material_tag": "Custom", "series": "Collection No. 04" } }
-      },
-      "blocks_order": ["frost", "linear", "monolith", "atelier"]
+      "type": "rr-curated-collections"
     },
-    "manifesto": {
-      "type": "brand-story",
-      "settings": {
-        "eyebrow": "Our Manifesto",
-        "title": "Every product begins with an idea. Every idea begins with a story.",
-        "cta_label": "Our Philosophy",
-        "cta_url": "/pages/about"
-      },
-      "blocks": {
-        "p1": { "type": "pillar", "settings": { "title": "Material Innovation", "body": "Sustainably sourced specialty papers with exceptional tactile quality." } },
-        "p2": { "type": "pillar", "settings": { "title": "Structural Engineering", "body": "The soft resistance of a magnetic close. Every opening choreographed." } },
-        "p3": { "type": "pillar", "settings": { "title": "Global Supply Alignment", "body": "Seamless delivery from Guangzhou to your door worldwide." } }
-      },
-      "blocks_order": ["p1", "p2", "p3"]
+    "portfolio": {
+      "type": "rr-portfolio"
     },
-    "process": {
-      "type": "process-timeline",
-      "settings": {
-        "eyebrow": "How We Work",
-        "title": "The Collaborative Journey",
-        "cta_label": "Begin Your Journey",
-        "cta_url": "/pages/contact"
-      },
-      "blocks": {
-        "s1": { "type": "step", "settings": { "phase": "01 / Discovery", "title": "Discovery & Briefing", "body": "We begin by listening. We explore your brand root, its values, its audience, and the story it needs to tell." } },
-        "s2": { "type": "step", "settings": { "phase": "02 / Concept", "title": "Tactile Concepts & Structural Design", "body": "Our team translates your brief into material concepts. Mood boards, finish samples, and structural drawings for your review." } },
-        "s3": { "type": "step", "settings": { "phase": "03 / Prototype", "title": "Prototyping & Material Selection", "body": "You receive physical prototypes. Touch the damping of the lid, the weight of the board. Refinements happen here." } },
-        "s4": { "type": "step", "settings": { "phase": "04 / Production", "title": "Artisan Production & Global Delivery", "body": "Our Guangzhou facility brings the approved design to life. FSC-certified materials, Disney-audited processes, global delivery." } }
-      },
-      "blocks_order": ["s1", "s2", "s3", "s4"]
+    "journey": {
+      "type": "rr-journey"
     },
     "clients": {
-      "type": "client-wall",
-      "settings": {
-        "eyebrow": "Trusted By",
-        "subtitle": "Trusted by visionary brands across beauty, fragrance, and lifestyle."
-      },
-      "blocks": {
-        "c1": { "type": "client", "settings": { "name": "Disney" } },
-        "c2": { "type": "client", "settings": { "name": "Harrods" } },
-        "c3": { "type": "client", "settings": { "name": "Mentholatum" } },
-        "c4": { "type": "client", "settings": { "name": "UEFA" } },
-        "c5": { "type": "client", "settings": { "name": "Lido" } },
-        "c6": { "type": "client", "settings": { "name": "Glo" } }
-      },
-      "blocks_order": ["c1", "c2", "c3", "c4", "c5", "c6"]
+      "type": "rr-clients"
     }
   },
-  "order": ["hero", "collections", "manifesto", "process", "clients"]
+  "order": [
+    "hero",
+    "collections",
+    "portfolio",
+    "journey",
+    "clients"
+  ]
 }

@@ -1,0 +1,31 @@
+<section class="rr-section rr-section--paper">
+  <div class="rr-container">
+    {% assign collection_intro = collection.description | strip_html %}
+    {% render 'rr-section-heading', eyebrow: 'Collection', heading: collection.title, text: collection_intro, center: true %}
+    <div class="rr-grid-3">
+      {% for product in collection.products %}
+        <a class="rr-collection-card" href="{{ product.url }}">
+          <div class="rr-collection-card__media">
+            {% if product.featured_image %}
+              {{ product.featured_image | image_url: width: 760 | image_tag: loading: 'lazy', alt: product.title }}
+            {% else %}
+              {% render 'rr-placeholder' %}
+            {% endif %}
+          </div>
+          <div class="rr-collection-card__body">
+            <div class="rr-meta">{{ product.type | default: product.vendor }}</div>
+            <h3 class="rr-h3">{{ product.title }}</h3>
+          </div>
+        </a>
+      {% else %}
+        <p>No products yet. Add packaging works or Shopify products to this collection.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection"
+}
+{% endschema %}

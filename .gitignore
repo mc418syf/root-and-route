@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+.shopify/
+*.log
+webflow/
+root-route-final.zip
+PARTNERSHIP PROPOSAL.pdf
+Rooted Brand Sheet (standalone).html
