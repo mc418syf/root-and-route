@@ -2,8 +2,8 @@
   <div class="wrap" style="max-width:840px;">
     <div class="section-head">
       <p class="eyebrow">{{ section.settings.eyebrow | default: 'Start a Project' }}</p>
-      <h2 class="section-head__title">{{ section.settings.title | default: 'Let\'s Build Something Together' }}</h2>
-      <p class="section-head__sub">{{ section.settings.subtitle | default: 'Tell us about your project. We\'ll respond within 2 business days.' }}</p>
+      <h2 class="section-head__title">{{ section.settings.title | default: "Let's Build Something Together" }}</h2>
+      <p class="section-head__sub">{{ section.settings.subtitle | default: "Tell us about your project. We'll respond within 2 business days." }}</p>
     </div>
 
     {%- form 'contact', id: 'inquiry-form' -%}

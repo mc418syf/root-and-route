@@ -3,7 +3,8 @@
     <div class="brand-story__content">
       <p class="eyebrow eyebrow--light">{{ section.settings.eyebrow | default: 'Our Manifesto' }}</p>
       <h2 class="brand-story__title">{{ section.settings.title | default: 'Every product begins with an idea. Every idea begins with a story.' }}</h2>
-      <p class="brand-story__body">{{ section.settings.body | default: 'Somewhere beneath every logo, every recipe, every founder, every business — there is a root. Our job isn\'t to invent it. It\'s to uncover it. Then we design the route. The route that leads your story onto shelves, into homes, and into people\'s hearts. Because packaging isn\'t the final step. It\'s the beginning of every customer\'s first impression.' }}</p>
+      {%- assign manifesto_default = "Somewhere beneath every logo, every recipe, every founder, every business there is a root. Our job is not to invent it. It is to uncover it. Then we design the route. The route that leads your story onto shelves, into homes, and into people's hearts. Because packaging is not the final step. It is the beginning of every customer's first impression." -%}
+      <p class="brand-story__body">{{ section.settings.body | default: manifesto_default }}</p>
       <a href="{{ section.settings.cta_url | default: '/pages/about' }}" class="btn btn--outline-light">{{ section.settings.cta_label | default: 'Our Philosophy' }}</a>
     </div>
 
