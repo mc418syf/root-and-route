@@ -13,32 +13,49 @@
     '.rr-h1',
     '.rr-h2',
     '.rr-intro',
-    '.rr-button'
+    '.rr-button',
+    '.rr2-section',
+    '.rr2-display',
+    '.rr2-heading',
+    '.rr2-hero__mark',
+    '.rr2-row',
+    '.rr2-media',
+    '.rr2-copy',
+    '.rr2-feature',
+    '.rr2-eco-card',
+    '.rr2-button'
   ].join(',');
 
   function prepareMotion() {
     const items = Array.from(document.querySelectorAll(selectable));
 
     if (reduceMotion.matches) {
-      items.forEach((item) => item.classList.add('rr-is-visible'));
+      items.forEach((item) => {
+        item.classList.add('rr-is-visible');
+        item.classList.add('rr2-is-visible');
+      });
       return;
     }
 
     document.documentElement.classList.add('rr-motion-ready');
 
     items.forEach((item, index) => {
-      const group = item.closest('.rr-section') || item.parentElement;
+      const group = item.closest('.rr-section, .rr2-section') || item.parentElement;
       const siblings = group ? Array.from(group.querySelectorAll(selectable)) : items;
       const localIndex = Math.max(0, siblings.indexOf(item));
       item.style.setProperty('--rr-delay', `${Math.min(localIndex * 70, 420)}ms`);
 
       if (index < 4) {
         item.classList.add('rr-is-visible');
+        item.classList.add('rr2-is-visible');
       }
     });
 
     if (!('IntersectionObserver' in window)) {
-      items.forEach((item) => item.classList.add('rr-is-visible'));
+      items.forEach((item) => {
+        item.classList.add('rr-is-visible');
+        item.classList.add('rr2-is-visible');
+      });
       return;
     }
 
@@ -46,6 +63,7 @@
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('rr-is-visible');
+          entry.target.classList.add('rr2-is-visible');
           observer.unobserve(entry.target);
         }
       });
@@ -76,13 +94,43 @@
     });
   }
 
+  function prepareParallaxMotion() {
+    const items = Array.from(document.querySelectorAll('[data-rr-parallax]'));
+    if (!items.length || reduceMotion.matches) return;
+
+    let ticking = false;
+
+    function update() {
+      const viewport = window.innerHeight || 1;
+      items.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const strength = Number(item.dataset.rrParallax || 0.025);
+        const offset = (rect.top + rect.height / 2 - viewport / 2) * strength;
+        item.style.setProperty('--rr-parallax-y', `${offset.toFixed(2)}px`);
+      });
+      ticking = false;
+    }
+
+    function requestUpdate() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       prepareMotion();
       preparePointerMotion();
+      prepareParallaxMotion();
     });
   } else {
     prepareMotion();
     preparePointerMotion();
+    prepareParallaxMotion();
   }
 })();

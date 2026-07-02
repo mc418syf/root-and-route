@@ -1,9 +1,9 @@
 {
   "sections": {
-    "rr_hero": {
+    "rr2_hero": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<section class=\"rr-section rr-section--paper rr-brand-hero\"><div class=\"rr-wrap rr-brand-hero__grid\"><div><div class=\"rr-eyebrow\">Root &amp; Route Creations Inc.</div><h1 class=\"rr-h1\">Uncovering the roots. Creating the routes.</h1><div class=\"rr-brand-hero__rule\"></div><div class=\"rr-subline\">Eco-luxury packaging for beauty, fragrance, and lifestyle brands.</div><p class=\"rr-intro\">Every product begins with an idea. Every idea begins with a story. We uncover the root beneath the brand, then design the route that carries it onto shelves, into homes, and into people's hearts.</p><div class=\"rr-brand-hero__actions\"><a class=\"rr-button\" href=\"/pages/contact\">Start an inquiry</a><a class=\"rr-button rr-button--secondary\" href=\"/pages/portfolio\">Explore portfolio</a></div></div><div class=\"rr-brand-hero__mark\"><svg width=\"112\" height=\"140\" viewBox=\"0 0 40 50\" fill=\"none\" aria-hidden=\"true\"><path d=\"M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z\" fill=\"currentColor\"/><path d=\"M20 20 V47\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\"/></svg></div></div></section>",
+        "custom_liquid": "<section class=\"rr2-section rr2-hero\" data-rr-theme=\"warm\"><div class=\"rr2-hero__inner\"><div class=\"rr2-eyebrow\">Root &amp; Route Creations Inc.</div><div class=\"rr2-hero__mark\" data-rr-parallax=\"0.035\"><svg class=\"rr2-leaf-svg\" viewBox=\"0 0 80 100\" fill=\"none\" aria-hidden=\"true\"><path d=\"M40 8C18 24 18 56 40 70C62 56 62 24 40 8Z\" fill=\"currentColor\"/><path d=\"M40 38V94\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\"/></svg></div><h1 class=\"rr2-display\"><span>Seasonal packaging</span><span>made to be kept.</span></h1><p class=\"rr2-sub\">Eco-luxury paper packaging and gift-ready structures for food, holiday, and cosmetic launches.</p><div class=\"rr2-actions\"><a class=\"rr2-button\" href=\"/pages/contact\">Start a project</a><a class=\"rr2-button rr2-button--ghost\" href=\"#collections\">View collections</a></div><div class=\"rr2-cue\" aria-hidden=\"true\">Scroll</div></div></section>",
         "color_scheme": "primary",
         "disable_color_transition": true,
         "remove_top_padding": true,
@@ -11,10 +11,10 @@
         "suppress_section_wrapper": true
       }
     },
-    "rr_collections": {
+    "rr2_marquee": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<section class=\"rr-section\"><div class=\"rr-wrap\"><div style=\"max-width:760px;margin:0 auto 42px;text-align:center;\"><div class=\"rr-eyebrow\">Curated collections</div><h2 class=\"rr-h2\">Named by material, structure, and aesthetic language.</h2><p class=\"rr-intro\" style=\"margin-left:auto;margin-right:auto;\">Guide buyers into tactile product families that feel designed, not merely manufactured.</p></div><div class=\"rr-collection-grid\"><article class=\"rr-collection-card\"><div class=\"rr-meta\">White frost tactility</div><h3 class=\"rr-h3\">The Frost Collection</h3><p>Soft white texture, diffused reflection, and a clean natural-light finish.</p></article><article class=\"rr-collection-card\"><div class=\"rr-meta\">Minimal modern lines</div><h3 class=\"rr-h3\">The Linear Collection</h3><p>Precise folds, quiet surfaces, and restrained geometry for contemporary brands.</p></article><article class=\"rr-collection-card\"><div class=\"rr-meta\">Rigid book-style boxes</div><h3 class=\"rr-h3\">The Monolith Collection</h3><p>Substantial block forms, magnetic closure, and the pleasure of a weighted reveal.</p></article></div></div></section>",
+        "custom_liquid": "<section class=\"rr2-marquee\" aria-label=\"Packaging capabilities\"><div class=\"rr2-marquee__track\"><span>Food Packaging</span><span>Holiday Gift Sets</span><span>Cosmetic Advent</span><span>FSC Materials</span><span>Foil &amp; Emboss</span><span>Custom Dielines</span><span>Food Packaging</span><span>Holiday Gift Sets</span><span>Cosmetic Advent</span><span>FSC Materials</span><span>Foil &amp; Emboss</span><span>Custom Dielines</span></div></section>",
         "color_scheme": "primary",
         "disable_color_transition": true,
         "remove_top_padding": true,
@@ -22,10 +22,10 @@
         "suppress_section_wrapper": true
       }
     },
-    "rr_portfolio": {
+    "rr2_collections": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<section class=\"rr-section rr-section--paper\"><div class=\"rr-wrap\"><div style=\"margin-bottom:42px;\"><div class=\"rr-eyebrow\">Portfolio</div><h2 class=\"rr-h2\">Product display with the treatment of art photography.</h2><p class=\"rr-intro\">Clean natural light, close material texture, tactile structure, and the feeling of resistance in every opening moment.</p></div><div class=\"rr-portfolio-grid\"><article class=\"rr-portfolio-card\"><div class=\"rr-portfolio-card__surface\"><svg width=\"112\" height=\"140\" viewBox=\"0 0 40 50\" fill=\"none\" aria-hidden=\"true\"><path d=\"M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z\" fill=\"currentColor\"/><path d=\"M20 20 V47\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\"/></svg></div><div class=\"rr-meta\">Beauty / Rigid box</div><h3 class=\"rr-h3\">Magnetic reveal box</h3></article><article class=\"rr-portfolio-card\"><div class=\"rr-portfolio-card__surface\"><svg width=\"112\" height=\"140\" viewBox=\"0 0 40 50\" fill=\"none\" aria-hidden=\"true\"><path d=\"M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z\" fill=\"currentColor\"/><path d=\"M20 20 V47\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\"/></svg></div><div class=\"rr-meta\">Fragrance / Specialty paper</div><h3 class=\"rr-h3\">Frosted perfume sleeve</h3></article><article class=\"rr-portfolio-card\"><div class=\"rr-portfolio-card__surface\"><svg width=\"112\" height=\"140\" viewBox=\"0 0 40 50\" fill=\"none\" aria-hidden=\"true\"><path d=\"M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z\" fill=\"currentColor\"/><path d=\"M20 20 V47\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\"/></svg></div><div class=\"rr-meta\">Lifestyle / Structure</div><h3 class=\"rr-h3\">Drawer-style gift set</h3></article><article class=\"rr-portfolio-card\"><div class=\"rr-portfolio-card__surface\"><svg width=\"112\" height=\"140\" viewBox=\"0 0 40 50\" fill=\"none\" aria-hidden=\"true\"><path d=\"M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z\" fill=\"currentColor\"/><path d=\"M20 20 V47\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\"/></svg></div><div class=\"rr-meta\">Beauty / Magnetic closure</div><h3 class=\"rr-h3\">Book-form presentation box</h3></article></div></div></section>",
+        "custom_liquid": "<section id=\"collections\" class=\"rr2-section rr2-collections\"><div class=\"rr2-wrap\"><div class=\"rr2-section-head\"><div class=\"rr2-eyebrow\">Curated collections</div><h2 class=\"rr2-heading\">Packaging families for product stories with a season, a shelf, and a first impression.</h2></div><article class=\"rr2-row\"><div class=\"rr2-media\"><div class=\"rr2-image-placeholder\"><span class=\"rr2-image-mark\">01</span><span>Natural-light food packaging study</span></div></div><div class=\"rr2-copy\"><div class=\"rr2-num\">01</div><div class=\"rr2-label\">Everyday / Food Packaging</div><h3>Food Packaging</h3><p>Rigid cartons, sleeves, and specialty paper structures for products that need to feel considered before they are tasted.</p><a class=\"rr2-link\" href=\"/pages/contact\">Discuss a project</a></div></article><article class=\"rr2-row rr2-row--reverse\"><div class=\"rr2-media\"><div class=\"rr2-image-placeholder\"><span class=\"rr2-image-mark\">02</span><span>Holiday gift-set packaging study</span></div></div><div class=\"rr2-copy\"><div class=\"rr2-num\">02</div><div class=\"rr2-label\">Seasonal / Holiday Gift Sets</div><h3>Holiday Gift Sets</h3><p>Gift-ready packaging systems with tactile papers, foil details, magnetic closure, and a moment of ceremony.</p><a class=\"rr2-link\" href=\"/pages/contact\">Discuss a project</a></div></article><article class=\"rr2-row\"><div class=\"rr2-media\"><div class=\"rr2-image-placeholder\"><span class=\"rr2-image-mark\">03</span><span>Cosmetic advent calendar structure</span></div></div><div class=\"rr2-copy\"><div class=\"rr2-num\">03</div><div class=\"rr2-label\">Countdown / Cosmetic Advent</div><h3>Cosmetic Advent</h3><p>Drawer systems, numbered reveals, and engineered unboxing routes for beauty launches and limited editions.</p><a class=\"rr2-link\" href=\"/pages/contact\">Discuss a project</a></div></article></div></section>",
         "color_scheme": "primary",
         "disable_color_transition": true,
         "remove_top_padding": true,
@@ -33,10 +33,10 @@
         "suppress_section_wrapper": true
       }
     },
-    "rr_manifesto": {
+    "rr2_craft": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<section class=\"rr-section rr-section--dark\"><div class=\"rr-wrap\" style=\"display:grid;gap:38px;grid-template-columns:minmax(0,.72fr) minmax(0,1fr);\"><div><div class=\"rr-eyebrow\">The manifesto</div><h2 class=\"rr-h2\">Our philosophy</h2></div><div><div class=\"rr-h2\">Every package is a conversation between a brand and its audience.</div><p class=\"rr-intro\">Every product begins with an idea. Every idea begins with a story. Somewhere beneath every logo, every recipe, every founder, every business, there is a root. Our job is not to invent it, but to uncover it. Then we design the route.</p></div></div></section>",
+        "custom_liquid": "<section id=\"craft\" class=\"rr2-section rr2-craft\"><div class=\"rr2-wrap rr2-craft__grid\"><div><div class=\"rr2-eyebrow\">The Craft</div><h2 class=\"rr2-heading\">Designed in-house. Produced with our atelier.</h2><p class=\"rr2-copy-lg\">Our partner factory brings full customisation to life at any scale - structure, finish and print, engineered to your product.</p></div><div class=\"rr2-feature-grid\"><article class=\"rr2-feature\"><span>01</span><h3>Custom dielines</h3><p>Structure built to your product.</p></article><article class=\"rr2-feature\"><span>02</span><h3>Foil &amp; emboss</h3><p>Debossing, spot UV, and hot foil.</p></article><article class=\"rr2-feature\"><span>03</span><h3>FSC materials</h3><p>Recycled and recyclable board.</p></article><article class=\"rr2-feature\"><span>04</span><h3>Low MOQ</h3><p>From pilot runs to full launch.</p></article></div></div></section>",
         "color_scheme": "primary",
         "disable_color_transition": true,
         "remove_top_padding": true,
@@ -44,10 +44,10 @@
         "suppress_section_wrapper": true
       }
     },
-    "rr_services": {
+    "rr2_eco": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<section class=\"rr-section\"><div class=\"rr-wrap\"><div style=\"margin-bottom:42px;\"><div class=\"rr-eyebrow\">What we offer</div><h2 class=\"rr-h2\">Material aesthetics, structural engineering, and aligned global supply.</h2><p class=\"rr-intro\">Root &amp; Route combines the feeling of an atelier with the discipline of a production partner.</p></div><div class=\"rr-service-grid\"><article class=\"rr-service-card\"><div class=\"rr-meta\">01</div><h3 class=\"rr-h3\">Material Innovation</h3><p>Selected sustainable art papers, specialty finishes, and tactile materials curated for brand expression.</p></article><article class=\"rr-service-card\"><div class=\"rr-meta\">02</div><h3 class=\"rr-h3\">Structural Engineering</h3><p>Opening resistance, magnetic snap, drawer movement, and full unboxing experience design.</p></article><article class=\"rr-service-card\"><div class=\"rr-meta\">03</div><h3 class=\"rr-h3\">Global Supply Alignment</h3><p>B2B communication, production standards, conscious sourcing, certification support, and delivery coordination.</p></article></div></div></section>",
+        "custom_liquid": "<section id=\"responsibility\" class=\"rr2-section rr2-eco\"><div class=\"rr2-wrap rr2-eco__inner\"><div><div class=\"rr2-eyebrow\">Rooted in Responsibility</div><h2 class=\"rr2-heading\">Luxury should not cost the earth.</h2></div><div class=\"rr2-eco-grid\"><article class=\"rr2-eco-card\"><span>FSC-certified</span><p>Responsible papers selected for traceability, touch, and shelf presence.</p></article><article class=\"rr2-eco-card\"><span>Soy &amp; water inks</span><p>Print approaches that keep finish, color, and conscious sourcing in alignment.</p></article><article class=\"rr2-eco-card\"><span>Made to keep</span><p>Structures designed to extend the life of the package beyond first opening.</p></article></div></div></section>",
         "color_scheme": "primary",
         "disable_color_transition": true,
         "remove_top_padding": true,
@@ -55,21 +55,10 @@
         "suppress_section_wrapper": true
       }
     },
-    "rr_journey": {
+    "rr2_cta": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<section class=\"rr-section rr-section--paper\"><div class=\"rr-wrap\"><div style=\"max-width:780px;margin:0 auto 48px;text-align:center;\"><div class=\"rr-eyebrow\">The collaborative journey</div><h2 class=\"rr-h2\">From root story to finished route.</h2><p class=\"rr-intro\" style=\"margin-left:auto;margin-right:auto;\">A clear custom packaging process designed for international B2B communication and grounded production standards.</p></div><div class=\"rr-timeline\"><div class=\"rr-timeline__item\"><div class=\"rr-timeline__num\">01</div><div><h3 class=\"rr-h3\">Discovery &amp; Briefing</h3><p>We define the product, audience, shelf context, quantity, timing, and brand story beneath the brief.</p></div></div><div class=\"rr-timeline__item\"><div class=\"rr-timeline__num\">02</div><div><h3 class=\"rr-h3\">Tactile Concepts &amp; Structural Design</h3><p>We translate your story into material mood, opening behavior, architecture, and unboxing rhythm.</p></div></div><div class=\"rr-timeline__item\"><div class=\"rr-timeline__num\">03</div><div><h3 class=\"rr-h3\">Prototyping &amp; Material Selection</h3><p>Samples refine paper, finish, color, closure, texture, and performance before production.</p></div></div><div class=\"rr-timeline__item\"><div class=\"rr-timeline__num\">04</div><div><h3 class=\"rr-h3\">Artisan Production &amp; Logistics</h3><p>We align factory craft, quality standards, international communication, and global delivery.</p></div></div></div></div></section>",
-        "color_scheme": "primary",
-        "disable_color_transition": true,
-        "remove_top_padding": true,
-        "remove_bottom_padding": true,
-        "suppress_section_wrapper": true
-      }
-    },
-    "rr_clients": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<section class=\"rr-section\"><div class=\"rr-wrap\"><div style=\"max-width:760px;margin:0 auto 42px;text-align:center;\"><div class=\"rr-eyebrow\">Trusted by visionary brands</div><h2 class=\"rr-h2\">Across beauty, fragrance, gifting, and lifestyle.</h2><p class=\"rr-intro\" style=\"margin-left:auto;margin-right:auto;\">Trusted by visionary brands across beauty, fragrance, and lifestyle.</p></div><div class=\"rr-clients\"><div class=\"rr-client\">Mentholatum</div><div class=\"rr-client\">Disney</div><div class=\"rr-client\">UEFA European League</div><div class=\"rr-client\">Lido</div><div class=\"rr-client\">Glo</div><div class=\"rr-client\">Harrods</div></div></div></section>",
+        "custom_liquid": "<section id=\"contact\" class=\"rr2-section rr2-cta\"><div class=\"rr2-wrap\"><div class=\"rr2-eyebrow\">Start a Project</div><h2 class=\"rr2-display rr2-display--small\">Let's design your season.</h2><p class=\"rr2-sub\">Tell us the product, quantity, material mood, and launch window. We will help shape the route from first sample to final delivery.</p><div class=\"rr2-actions\"><a class=\"rr2-button\" href=\"/pages/contact\">Request a sample</a><a class=\"rr2-button rr2-button--ghost\" href=\"#collections\">View collections</a></div></div></section>",
         "color_scheme": "primary",
         "disable_color_transition": true,
         "remove_top_padding": true,
@@ -79,11 +68,11 @@
     }
   },
   "order": [
-    "rr_hero",
-    "rr_collections",
-    "rr_manifesto",
-    "rr_services",
-    "rr_journey",
-    "rr_clients"
+    "rr2_hero",
+    "rr2_marquee",
+    "rr2_collections",
+    "rr2_craft",
+    "rr2_eco",
+    "rr2_cta"
   ]
 }
