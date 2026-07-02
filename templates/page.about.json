@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "manifesto": {
+      "type": "rr-manifesto"
+    },
+    "services": {
+      "type": "rr-services",
+      "settings": {
+        "eyebrow": "Material selection",
+        "heading": "Materials curated like an exhibition.",
+        "text": "We source specialty papers and conscious materials globally, balancing tactile beauty with environmental responsibility."
+      }
+    }
+  },
+  "order": [
+    "manifesto",
+    "services"
+  ]
+}

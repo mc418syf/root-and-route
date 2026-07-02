@@ -1,0 +1,27 @@
+<section class="rr-section rr-section--dark">
+  <div class="rr-container rr-manifesto">
+    <div>
+      <div class="rr-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 class="rr-h2" style="margin-top:14px;">{{ section.settings.heading }}</h2>
+    </div>
+    <div>
+      <div class="rr-manifesto__quote">{{ section.settings.quote }}</div>
+      <p class="rr-intro">{{ section.settings.text }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Manifesto",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The manifesto" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our philosophy" },
+    { "type": "textarea", "id": "quote", "label": "Quote", "default": "Every package is a conversation between a brand and its audience." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Every product begins with an idea. Every idea begins with a story. Somewhere beneath every logo, every recipe, every founder, every business, there is a root. Our job is not to invent it, but to uncover it. Then we design the route." }
+  ],
+  "presets": [
+    { "name": "Manifesto" }
+  ]
+}
+{% endschema %}

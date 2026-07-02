@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "portfolio": {
+      "type": "rr-portfolio"
+    },
+    "collections": {
+      "type": "rr-curated-collections"
+    }
+  },
+  "order": [
+    "portfolio",
+    "collections"
+  ]
+}

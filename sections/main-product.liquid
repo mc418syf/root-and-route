@@ -1,0 +1,49 @@
+<section class="rr-section rr-section--paper">
+  <div class="rr-container rr-grid-2">
+    <div>
+      {% if product.featured_media %}
+        {{ product.featured_media | image_url: width: 1100 | image_tag: loading: 'eager', alt: product.title }}
+      {% else %}
+        {% render 'rr-placeholder' %}
+      {% endif %}
+    </div>
+
+    <div>
+      <div class="rr-eyebrow">{{ product.vendor | default: 'Root & Route' }}</div>
+      <h1 class="rr-h2">{{ product.title }}</h1>
+      <p class="rr-intro">{{ product.description | strip_html | truncatewords: 42 }}</p>
+
+      {% form 'product', product %}
+        {% if product.has_only_default_variant == false %}
+          <div class="rr-field">
+            <label for="ProductSelect-{{ section.id }}">Options</label>
+            <select id="ProductSelect-{{ section.id }}" name="id">
+              {% for variant in product.variants %}
+                <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
+                  {{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        {% else %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% endif %}
+
+        <div class="rr-field">
+          <label for="Quantity-{{ section.id }}">Quantity</label>
+          <input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1">
+        </div>
+
+        <button class="rr-button" type="submit" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+          Add to inquiry cart
+        </button>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product"
+}
+{% endschema %}

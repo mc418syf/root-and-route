@@ -1,13 +1,10 @@
 {
   "sections": {
     "inquiry": {
-      "type": "inquiry-form",
-      "settings": {
-        "eyebrow": "Start a Project",
-        "title": "Let's Build Something Together",
-        "subtitle": "Tell us about your project. We'll respond within 2 business days."
-      }
+      "type": "rr-inquiry-form"
     }
   },
-  "order": ["inquiry"]
+  "order": [
+    "inquiry"
+  ]
 }

@@ -1,56 +1,71 @@
-<footer class="site-footer" role="contentinfo">
-  <div class="wrap site-footer__inner">
-
-    <div class="site-footer__brand">
-      <a href="{{ routes.root_url }}" class="site-footer__logo" aria-label="{{ shop.name }}">
-        <span style="color:var(--rr-sage);">{% render 'icon-leaf', width: 20, height: 26 %}</span>
-        <span class="site-footer__wordmark">Root <em style="color:var(--rr-sage);">&</em> Route</span>
-      </a>
-      <p class="site-footer__tagline">Creations Inc. — Luxury B2B Packaging</p>
-      <div class="site-footer__badges">
-        <span class="badge">FSC Certified</span>
-        <span class="badge">Disney Certified Supplier</span>
-        <span class="badge">18+ Years of Craft</span>
+<footer class="rr-footer">
+  <div class="rr-container">
+    <div class="rr-footer__grid">
+      <div>
+        <div class="rr-eyebrow">{{ section.settings.eyebrow }}</div>
+        <h2 class="rr-h2" style="margin-top:14px;">{{ section.settings.heading }}</h2>
+        <p class="rr-intro">{{ section.settings.text }}</p>
+      </div>
+      <div>
+        <a class="rr-subline" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+        <ul class="rr-menu" style="display:grid; gap:12px; margin-top:28px;">
+          {% for link in section.settings.menu.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
-
-    <nav class="site-footer__nav">
-      <div class="site-footer__col">
-        <p class="site-footer__col-title">Collections</p>
-        <ul>
-          <li><a href="/collections/frost">The Frost Collection</a></li>
-          <li><a href="/collections/linear">The Linear Collection</a></li>
-          <li><a href="/collections/monolith">The Monolith Collection</a></li>
-          <li><a href="/collections/atelier">The Atelier Collection</a></li>
-          <li><a href="/collections/all">View All</a></li>
-        </ul>
-      </div>
-      <div class="site-footer__col">
-        <p class="site-footer__col-title">Company</p>
-        <ul>
-          <li><a href="/pages/about">Our Manifesto</a></li>
-          <li><a href="/pages/services">Services</a></li>
-          <li><a href="/pages/process">The Journey</a></li>
-          <li><a href="/pages/certifications">Certifications</a></li>
-        </ul>
-      </div>
-      <div class="site-footer__col">
-        <p class="site-footer__col-title">Work With Us</p>
-        <ul>
-          <li><a href="/pages/contact">Start a Project</a></li>
-          <li><a href="mailto:hello@rootandroute.com">hello@rootandroute.com</a></li>
-          <li><a href="/pages/contact">Request a Sample</a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-
-  <div class="site-footer__bottom">
-    <p class="site-footer__copy">&copy; {{ 'now' | date: '%Y' }} Root &amp; Route Creations Inc. All rights reserved.</p>
-    <p class="site-footer__location">Guangzhou, China · Serving brands worldwide</p>
+    <div class="rr-footer__bottom">
+      {{ section.settings.bottom_text }}
+    </div>
   </div>
 </footer>
 
 {% schema %}
-{ "name": "Footer", "settings": [] }
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Begin the route"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Every package is a conversation between a brand and its audience."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "For beauty, fragrance, lifestyle, and gifting brands seeking tactile, sustainable packaging with a clear path to production."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "hello@rootandroute.com"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Footer menu",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom text",
+      "default": "Root & Route Creations Inc. - Eco-luxury paper artistry and conscious packaging."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
 {% endschema %}
