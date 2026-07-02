@@ -1,18 +1,11 @@
 {
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "settings": {
-        "text": "FSC-Certified · Disney Audited · 18+ Years of Craft · B2B Luxury Packaging"
-      }
-    },
     "hero": {
       "type": "hero-banner",
       "settings": {
         "eyebrow": "B2B Luxury Packaging",
         "sub_eyebrow": "CREATIONS INC.",
         "tagline": "Every package is a conversation between a brand and its audience.",
-        "body": "We uncover the root of every brand. Then we design the route — the one that leads your story onto shelves, into homes, and into people's hearts.",
         "cta_label": "Explore Collections",
         "cta2_label": "Start a Project"
       }
@@ -22,13 +15,13 @@
       "settings": {
         "eyebrow": "Packaging Series",
         "title": "Curated Collections",
-        "subtitle": "Named by material, structure, and aesthetic — each series is a distinct design language."
+        "subtitle": "Named by material, structure, and aesthetic."
       },
       "blocks": {
-        "frost": { "type": "collection", "settings": { "label": "The Frost Collection", "subtitle": "White matte, frosted tactile finish", "material_tag": "Specialty Paper", "series": "Collection No. 01", "link": "/collections/frost" } },
-        "linear": { "type": "collection", "settings": { "label": "The Linear Collection", "subtitle": "Minimalist modern lines, structural precision", "material_tag": "Rigid Board", "series": "Collection No. 02", "link": "/collections/linear" } },
-        "monolith": { "type": "collection", "settings": { "label": "The Monolith Collection", "subtitle": "Heavy-weight book-style gift boxes", "material_tag": "FSC Board", "series": "Collection No. 03", "link": "/collections/monolith" } },
-        "atelier": { "type": "collection", "settings": { "label": "The Atelier Collection", "subtitle": "Bespoke handcrafted finishing", "material_tag": "Custom", "series": "Collection No. 04", "link": "/collections/atelier" } }
+        "frost": { "type": "collection", "settings": { "label": "The Frost Collection", "subtitle": "White matte, frosted tactile finish", "material_tag": "Specialty Paper", "series": "Collection No. 01" } },
+        "linear": { "type": "collection", "settings": { "label": "The Linear Collection", "subtitle": "Minimalist modern lines, structural precision", "material_tag": "Rigid Board", "series": "Collection No. 02" } },
+        "monolith": { "type": "collection", "settings": { "label": "The Monolith Collection", "subtitle": "Heavy-weight book-style gift boxes", "material_tag": "FSC Board", "series": "Collection No. 03" } },
+        "atelier": { "type": "collection", "settings": { "label": "The Atelier Collection", "subtitle": "Bespoke handcrafted finishing", "material_tag": "Custom", "series": "Collection No. 04" } }
       },
       "blocks_order": ["frost", "linear", "monolith", "atelier"]
     },
@@ -37,7 +30,6 @@
       "settings": {
         "eyebrow": "Our Manifesto",
         "title": "Every product begins with an idea. Every idea begins with a story.",
-        "body": "Somewhere beneath every logo, every recipe, every founder, every business — there is a root. Our job isn't to invent it. It's to uncover it. Then we design the route. The route that leads your story onto shelves, into homes, and into people's hearts. Because packaging isn't the final step. It's the beginning of every customer's first impression.",
         "cta_label": "Our Philosophy",
         "cta_url": "/pages/about"
       },
@@ -53,15 +45,14 @@
       "settings": {
         "eyebrow": "How We Work",
         "title": "The Collaborative Journey",
-        "subtitle": "From first brief to final delivery — a process built on craft, clarity, and care.",
         "cta_label": "Begin Your Journey",
         "cta_url": "/pages/contact"
       },
       "blocks": {
-        "s1": { "type": "step", "settings": { "phase": "01 / Discovery", "title": "Discovery & Briefing", "body": "We begin by listening. We explore your brand's root — its values, its audience, and the story it needs to tell." } },
-        "s2": { "type": "step", "settings": { "phase": "02 / Concept", "title": "Tactile Concepts & Structural Design", "body": "Our team translates your brief into tangible material concepts. Mood boards, finish samples, and CAD structural drawings for your review." } },
-        "s3": { "type": "step", "settings": { "phase": "03 / Prototype", "title": "Prototyping & Material Selection", "body": "You receive physical prototypes. Touch them. Feel the damping of the lid, the weight of the board. Refinements happen here." } },
-        "s4": { "type": "step", "settings": { "phase": "04 / Production", "title": "Artisan Production & Global Delivery", "body": "Our Guangzhou facility brings the approved design to life at scale. FSC-certified materials, Disney-audited processes, global delivery." } }
+        "s1": { "type": "step", "settings": { "phase": "01 / Discovery", "title": "Discovery & Briefing", "body": "We begin by listening. We explore your brand root, its values, its audience, and the story it needs to tell." } },
+        "s2": { "type": "step", "settings": { "phase": "02 / Concept", "title": "Tactile Concepts & Structural Design", "body": "Our team translates your brief into material concepts. Mood boards, finish samples, and structural drawings for your review." } },
+        "s3": { "type": "step", "settings": { "phase": "03 / Prototype", "title": "Prototyping & Material Selection", "body": "You receive physical prototypes. Touch the damping of the lid, the weight of the board. Refinements happen here." } },
+        "s4": { "type": "step", "settings": { "phase": "04 / Production", "title": "Artisan Production & Global Delivery", "body": "Our Guangzhou facility brings the approved design to life. FSC-certified materials, Disney-audited processes, global delivery." } }
       },
       "blocks_order": ["s1", "s2", "s3", "s4"]
     },
@@ -82,5 +73,5 @@
       "blocks_order": ["c1", "c2", "c3", "c4", "c5", "c6"]
     }
   },
-  "order": ["announcement-bar", "hero", "collections", "manifesto", "process", "clients"]
+  "order": ["hero", "collections", "manifesto", "process", "clients"]
 }
