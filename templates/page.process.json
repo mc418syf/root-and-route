@@ -1,10 +1,18 @@
 {
   "sections": {
-    "journey": {
-      "type": "rr-journey"
+    "rr_journey": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<section class=\"rr-section rr-section--paper\"><div class=\"rr-wrap\"><div style=\"max-width:780px;margin:0 auto 48px;text-align:center;\"><div class=\"rr-eyebrow\">The collaborative journey</div><h2 class=\"rr-h2\">From root story to finished route.</h2><p class=\"rr-intro\" style=\"margin-left:auto;margin-right:auto;\">A clear custom packaging process designed for international B2B communication and grounded production standards.</p></div><div class=\"rr-timeline\"><div class=\"rr-timeline__item\"><div class=\"rr-timeline__num\">01</div><div><h3 class=\"rr-h3\">Discovery &amp; Briefing</h3><p>We define the product, audience, shelf context, quantity, timing, and brand story beneath the brief.</p></div></div><div class=\"rr-timeline__item\"><div class=\"rr-timeline__num\">02</div><div><h3 class=\"rr-h3\">Tactile Concepts &amp; Structural Design</h3><p>We translate your story into material mood, opening behavior, architecture, and unboxing rhythm.</p></div></div><div class=\"rr-timeline__item\"><div class=\"rr-timeline__num\">03</div><div><h3 class=\"rr-h3\">Prototyping &amp; Material Selection</h3><p>Samples refine paper, finish, color, closure, texture, and performance before production.</p></div></div><div class=\"rr-timeline__item\"><div class=\"rr-timeline__num\">04</div><div><h3 class=\"rr-h3\">Artisan Production &amp; Logistics</h3><p>We align factory craft, quality standards, international communication, and global delivery.</p></div></div></div></div></section>",
+        "color_scheme": "primary",
+        "disable_color_transition": true,
+        "remove_top_padding": true,
+        "remove_bottom_padding": true,
+        "suppress_section_wrapper": true
+      }
     }
   },
   "order": [
-    "journey"
+    "rr_journey"
   ]
 }

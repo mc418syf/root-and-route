@@ -1,101 +1,147 @@
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}">
+<html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="{{ settings.color_forest }}">
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
 
-    <title>
-      {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-    </title>
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
+
+    <title>{{ page_title }}</title>
 
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
 
-    {% if settings.favicon != blank %}
-      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
-    {% endif %}
-
     {{ content_for_header }}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-    {{ 'root-route.css' | asset_url | stylesheet_tag }}
-    <script src="{{ 'root-route.js' | asset_url }}" defer></script>
+    {% liquid
+      render 'meta-tags'
+      render 'js-bridge'
+    %}
 
-    <style>
-      :root {
-        --rr-paper: {{ settings.color_paper }};
-        --rr-ink: {{ settings.color_ink }};
-        --rr-forest: {{ settings.color_forest }};
-        --rr-sage: {{ settings.color_sage }};
-        --rr-stone: {{ settings.color_stone }};
-        --rr-border: {{ settings.color_border }};
-        --rr-butter: {{ settings.color_butter }};
-        --rr-muted: {{ settings.color_muted }};
-        --rr-base-font-size: {{ settings.base_font_size }}px;
-        --rr-base-line-height: {{ settings.base_line_height }};
-        --rr-max: {{ settings.page_width }};
-        --rr-section-space: {{ settings.vertical_spacing_between_sections }};
-        --rr-button-radius: {{ settings.button_border_radius }};
-        --rr-button-transform: {{ settings.button_text_transform }};
-        --rr-card-radius: {{ settings.card_border_radius }};
-        --rr-media-radius: {{ settings.media_border_radius }};
-        --rr-product-ratio: {{ settings.product_tiles_aspect_ratio }};
-        --rr-eyebrow-spacing: {{ settings.eyebrow_letter_spacing }}em;
-        --rr-animation-duration: {{ settings.animation_duration }}ms;
-      }
-
-      {% if settings.enable_smooth_scroll == false %}
-        html { scroll-behavior: auto; }
+    <script src="{{ 'utils.js' | asset_url }}" defer></script>
+    <script src="{{ 'polyfills-inert.bundle.min.js' | asset_url }}" type="module"></script>
+    <script src="{{ 'global.bundle.min.js' | asset_url }}" type="module"></script>
+    {% if settings.quantity_style == 'dropdown' %}
+      <script src="{{ 'quantity-dropdown.js' | asset_url }}" type="module"></script>
+    {% else %}
+      <script src="{{ 'quantity-stepper.js' | asset_url }}" type="module"></script>
+    {% endif %}
+    {% if template == 'cart' or settings.cart_type == 'drawer' %}
+      <script src="{{ 'cart-items.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'cart-footer.js' | asset_url }}" type="module"></script>
+      {% if settings.cart_notes_enable %}
+        <script src="{{ 'cart-note.js' | asset_url }}" type="module"></script>
       {% endif %}
+    {% endif %}
+    {% if request.design_mode %}
+      {% comment %} If theme editor, load all modules {% endcomment %}
+      <script src="{{ 'vendor-product.bundle.min.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'product.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'modules-video.bundle.min.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'vendor-store-availability.bundle.min.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'store-availability.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'product-model.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'sections-test-section.js' | asset_url }}" type="module" ></script>
+      <script src="{{ 'modules-background-video.bundle.min.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'modules-slideshow.bundle.min.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'theme-editor-support.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'faq.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'rte.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'sections-age-check.bundle.min.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'sections-promo-popup.bundle.min.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'cookies-banner.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'zoom.js' | asset_url }}" type="module"></script>
+      <script src="{{ 'cascade-animations.js' | asset_url }}"  type="module"></script>
+      <script src="{{ 'logo-list.js' | asset_url }}"  type="module"></script>
 
-      {% if settings.show_leaf_motif == false %}
-        .rr-hero,
-        .rr-section--dark {
-          background-image: none !important;
-        }
+      {% if settings.predictive_search_enabled %}
+        <script src="{{ 'predictive-search.js' | asset_url }}" type="module"></script>
       {% endif %}
+    {% endif %}
+    {% if settings.cart_type == 'drawer' %}
+      <script src="{{ 'vendor-cart.bundle.min.js' | asset_url }}" type="module"></script>
+    {% endif %}
+    <script src="{{ 'nav-store.js' | asset_url }}" type="module"></script>
 
-      {% if settings.cascade_fade_in_items == false %}
-        .rr-reveal {
-          opacity: 1 !important;
-          transform: none !important;
-        }
-      {% endif %}
+    {{ 'base.bundle.css' | asset_url | stylesheet_tag }}
+    {{ 'global.css' | asset_url | stylesheet_tag }}
+    {{ 'modules-rte.bundle.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
 
-      {% case settings.heading_scale %}
-        {% when 'quiet' %}
-          :root { --rr-h1-max: 5.4rem; --rr-h2-max: 3.4rem; }
-        {% when 'large' %}
-          :root { --rr-h1-max: 7.6rem; --rr-h2-max: 5rem; }
-        {% else %}
-          :root { --rr-h1-max: 6.8rem; --rr-h2-max: 4.3rem; }
-      {% endcase %}
+    {% if template contains 'customers' %}
+      {% comment %}theme-check-disable ParserBlockingScriptTag{% endcomment %}
+      {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+      {{ "customer_area.js" | shopify_asset_url | script_tag }}
+      {% comment %}theme-check-enable ParserBlockingScriptTag{% endcomment %}
+    {% endif %}
 
-      {% if settings.heading_text_transform != 'none' %}
-        .rr-h1,
-        .rr-h2,
-        .rr-h3 {
-          text-transform: {{ settings.heading_text_transform }};
-        }
-      {% endif %}
-    </style>
+    {% render 'css-bridge' %}
+
+    <script>
+      function onYouTubeIframeAPIReady() {
+        document.body.dispatchEvent(new CustomEvent('youtubeiframeapiready'));
+      };
+    </script>
+    <script src="{{ 'enhancements.js' | asset_url }}" defer></script>
+
   </head>
 
-  <body class="template-{{ template.name | handle }}">
-    <a class="skip-link" href="#MainContent">Skip to content</a>
-    {% sections 'header-group' %}
+  <body class="theme-ctas-are-{{ settings.cta_style }}s theme-buttons-style-{{ settings.button_style }} {% if settings.show_slideshow_pagination %} show-slideshow-pagination {% endif %}">
+    <a class="skip-link" href="#MainContent">{{ "general.accessibility.skip_to_content" | t }}</a>
 
-    <main id="MainContent" role="main" tabindex="-1">
+    {% liquid
+      section 'sidebar'
+      section 'announcement-bar'
+      section 'header'
+    %}
+
+    <div id="MainContent">
       {{ content_for_layout }}
-    </main>
+    </div>
 
-    {% sections 'footer-group' %}
+    {% liquid
+      section 'footer'
+      section 'popup'
+      section 'age-check'
+      section 'cookies-banner'
+      render 'js-templates'
+    %}
+
+    <div id="screenreader-announce" class="sr-only" aria-live="polite" role="status"></div>
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
+      <li id="a11y-selection-message">{{ 'general.accessibility.selection_help' | t }}</li>
+    </ul>
+
+    {% comment %} Modal containers {% endcomment %}
+    {% liquid
+      render 'left-drawer'
+      render 'right-drawer'
+      render 'modal'
+      render 'promo'
+      render 'popup'
+    %}
+    <script src="{{ 'modals.js' | asset_url }}" type="module"></script>
+
+    {% comment %} Modal contents {% endcomment %}
+    {% if settings.cart_type == 'drawer' %}
+      {% render 'drawer-cart' %}
+    {% endif %}
+    <script src="{{ 'alpine.bundle.min.js' | asset_url }}" type="module"></script>
   </body>
 </html>

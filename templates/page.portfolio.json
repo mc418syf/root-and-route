@@ -1,14 +1,30 @@
 {
   "sections": {
-    "portfolio": {
-      "type": "rr-portfolio"
+    "rr_portfolio": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<section class=\"rr-section rr-section--paper\"><div class=\"rr-wrap\"><div style=\"margin-bottom:42px;\"><div class=\"rr-eyebrow\">Portfolio</div><h2 class=\"rr-h2\">Product display with the treatment of art photography.</h2><p class=\"rr-intro\">Clean natural light, close material texture, tactile structure, and the feeling of resistance in every opening moment.</p></div><div class=\"rr-portfolio-grid\"><article class=\"rr-portfolio-card\"><div class=\"rr-portfolio-card__surface\"><svg width=\"112\" height=\"140\" viewBox=\"0 0 40 50\" fill=\"none\" aria-hidden=\"true\"><path d=\"M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z\" fill=\"currentColor\"/><path d=\"M20 20 V47\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\"/></svg></div><div class=\"rr-meta\">Beauty / Rigid box</div><h3 class=\"rr-h3\">Magnetic reveal box</h3></article><article class=\"rr-portfolio-card\"><div class=\"rr-portfolio-card__surface\"><svg width=\"112\" height=\"140\" viewBox=\"0 0 40 50\" fill=\"none\" aria-hidden=\"true\"><path d=\"M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z\" fill=\"currentColor\"/><path d=\"M20 20 V47\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\"/></svg></div><div class=\"rr-meta\">Fragrance / Specialty paper</div><h3 class=\"rr-h3\">Frosted perfume sleeve</h3></article><article class=\"rr-portfolio-card\"><div class=\"rr-portfolio-card__surface\"><svg width=\"112\" height=\"140\" viewBox=\"0 0 40 50\" fill=\"none\" aria-hidden=\"true\"><path d=\"M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z\" fill=\"currentColor\"/><path d=\"M20 20 V47\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\"/></svg></div><div class=\"rr-meta\">Lifestyle / Structure</div><h3 class=\"rr-h3\">Drawer-style gift set</h3></article><article class=\"rr-portfolio-card\"><div class=\"rr-portfolio-card__surface\"><svg width=\"112\" height=\"140\" viewBox=\"0 0 40 50\" fill=\"none\" aria-hidden=\"true\"><path d=\"M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z\" fill=\"currentColor\"/><path d=\"M20 20 V47\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\"/></svg></div><div class=\"rr-meta\">Beauty / Magnetic closure</div><h3 class=\"rr-h3\">Book-form presentation box</h3></article></div></div></section>",
+        "color_scheme": "primary",
+        "disable_color_transition": true,
+        "remove_top_padding": true,
+        "remove_bottom_padding": true,
+        "suppress_section_wrapper": true
+      }
     },
-    "collections": {
-      "type": "rr-curated-collections"
+    "rr_collections": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<section class=\"rr-section\"><div class=\"rr-wrap\"><div style=\"max-width:760px;margin:0 auto 42px;text-align:center;\"><div class=\"rr-eyebrow\">Curated collections</div><h2 class=\"rr-h2\">Named by material, structure, and aesthetic language.</h2><p class=\"rr-intro\" style=\"margin-left:auto;margin-right:auto;\">Guide buyers into tactile product families that feel designed, not merely manufactured.</p></div><div class=\"rr-collection-grid\"><article class=\"rr-collection-card\"><div class=\"rr-meta\">White frost tactility</div><h3 class=\"rr-h3\">The Frost Collection</h3><p>Soft white texture, diffused reflection, and a clean natural-light finish.</p></article><article class=\"rr-collection-card\"><div class=\"rr-meta\">Minimal modern lines</div><h3 class=\"rr-h3\">The Linear Collection</h3><p>Precise folds, quiet surfaces, and restrained geometry for contemporary brands.</p></article><article class=\"rr-collection-card\"><div class=\"rr-meta\">Rigid book-style boxes</div><h3 class=\"rr-h3\">The Monolith Collection</h3><p>Substantial block forms, magnetic closure, and the pleasure of a weighted reveal.</p></article></div></div></section>",
+        "color_scheme": "primary",
+        "disable_color_transition": true,
+        "remove_top_padding": true,
+        "remove_bottom_padding": true,
+        "suppress_section_wrapper": true
+      }
     }
   },
   "order": [
-    "portfolio",
-    "collections"
+    "rr_portfolio",
+    "rr_collections"
   ]
 }

@@ -1,0 +1,629 @@
+{
+  "current": "Rooted",
+  "presets": {
+    "Modern": {
+      "color_primary_text": "#080808",
+      "color_primary_background": "#ffffff",
+      "color_primary_accent": "#003dff",
+      "color_primary_meta": "#080808",
+      "color_secondary_text": "#181414",
+      "color_secondary_background": "#fffaf2",
+      "color_secondary_accent": "#003dff",
+      "color_secondary_meta": "#080808",
+      "color_tertiary_text": "#fffaf2",
+      "color_tertiary_background": "#242828",
+      "color_tertiary_accent": "#F08080",
+      "color_tertiary_meta": "#fffaf2",
+      "enable_section_color_transitions": false,
+      "base_font_size": 16,
+      "base_line_height": 1.4,
+      "type_heading_font": "zurich_extended_n7",
+      "standard_heading_size": "2xl:2xl",
+      "feature_heading_size": "3xl:7xl",
+      "type_main_font": "swiss_721_n4",
+      "button_border_radius": "9999px",
+      "button_style": "1",
+      "button_color": "text",
+      "cta_style": "theme-button",
+      "icon_thickness": 1.2,
+      "variance": "high",
+      "cascade_item_spacing": "large",
+      "products_show_badges": false,
+      "products_show_second_image_on_hover": true,
+      "quantity_style": "stepper",
+      "enable_sidebar_nav_animation": true,
+      "sections": {
+        "announcement-bar": {
+          "type": "announcement-bar",
+          "settings": {
+            "show_announcement_bar": false,
+            "home_page_only": true,
+            "display": "static",
+            "text": "Root & Route Creations Inc. - eco-luxury packaging and FSC paper artistry",
+            "link": "",
+            "repeat_text": true,
+            "speed": 80,
+            "direction": "",
+            "color_scheme": "tertiary"
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "tagline": {
+              "type": "tagline",
+              "settings": {
+                "show_social_icons": true
+              }
+            },
+            "menus": {
+              "type": "menus",
+              "settings": {
+                "main_linklist": "footer"
+              }
+            },
+            "newsletter": {
+              "type": "newsletter",
+              "settings": {
+                "text": "<p>For beauty, fragrance, lifestyle, and gifting brands seeking tactile, sustainable packaging with a clear path to production.</p>"
+              }
+            }
+          },
+          "block_order": [
+            "tagline",
+            "menus",
+            "newsletter"
+          ],
+          "settings": {
+            "show_payment_icons": false,
+            "show_locale_selector": false,
+            "show_country_selector": false,
+            "color_scheme": "tertiary"
+          }
+        },
+        "sidebar": {
+          "type": "sidebar",
+          "settings": {
+            "linklist": "main-menu",
+            "auto_expand": false,
+            "showcase_second_level_links": "none",
+            "collection_image_crop": "landscape",
+            "show_search": true,
+            "show_social_icons": true
+          }
+        },
+        "header": {
+          "type": "header",
+          "settings": {
+            "logo_max_width": 7,
+            "linklist": "main-menu",
+            "detached_header_color": "primary",
+            "sticky_header": true,
+            "transparent_when_sticky": false,
+            "enable_overlay_on_homepage": false,
+            "enable_overlay_on_collection_template": false,
+            "enable_overlay_on_product_template": false,
+            "enable_overlay_on_classic_product_template": false,
+            "enable_overlay_on_split_product_template": false,
+            "overlay_header_color": "tertiary",
+            "header_layout_mobile": "n_l_m",
+            "header_layout_desktop": "n_l_m",
+            "enable_sidebar_nav_on_desktop": false,
+            "show_search": true,
+            "menu_items_display": "text",
+            "section_padding": "py-4",
+            "showcase_second_level_links": "none",
+            "collection_image_crop": "landscape"
+          }
+        },
+        "popup": {
+          "type": "popup",
+          "settings": {
+            "enable": false,
+            "delay": 4,
+            "frequency": 30,
+            "image_position": "left",
+            "title": "Start a packaging conversation",
+            "text": "<p>Share your material direction, structure needs, and launch timing.</p>",
+            "call_to_action": "link",
+            "cta_url": "/pages/contact",
+            "cta_text": "Start an inquiry"
+          }
+        },
+        "age-check": {
+          "type": "age-check",
+          "settings": {
+            "enable": false,
+            "logo_max_width": 100,
+            "title": "Age verification",
+            "text": "<p>Are you over 21 years of age?</p>",
+            "mode": "buttons",
+            "yes_button_text": "Yes",
+            "no_button_text": "No",
+            "date_format": "mm-dd-yyyy",
+            "minimum_age": 18,
+            "redirect_link": "",
+            "color_scheme": "primary"
+          }
+        },
+        "cookies-banner": {
+          "type": "cookies-banner",
+          "settings": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    "Classic": {
+      "color_primary_text": "#1a2513",
+      "color_primary_background": "#eef5e9",
+      "color_primary_accent": "#57694b",
+      "color_primary_meta": "#1a2513",
+      "color_secondary_text": "#1a2513",
+      "color_secondary_background": "#ffffff",
+      "color_secondary_accent": "#677b59",
+      "color_secondary_meta": "#1a2513",
+      "color_tertiary_text": "#eef5e9",
+      "color_tertiary_background": "#1a2513",
+      "color_tertiary_accent": "#57694b",
+      "color_tertiary_meta": "#eef5e9",
+      "enable_section_color_transitions": false,
+      "base_font_size": 16,
+      "type_heading_font": "claire_news_n3",
+      "standard_heading_size": "2xl:3xl",
+      "feature_heading_size": "3xl:6xl",
+      "type_main_font": "basic_commercial_n4",
+      "cascade_fade_in_items": false,
+      "button_border_radius": "0.5rem",
+      "button_style": "2",
+      "cta_style": "theme-button",
+      "icon_thickness": 1.1,
+      "round_images": true,
+      "products_show_second_image_on_hover": true,
+      "quantity_style": "stepper",
+      "enable_sidebar_nav_animation": true,
+      "sections": {
+        "announcement-bar": {
+          "type": "announcement-bar",
+          "settings": {
+            "show_announcement_bar": false,
+            "home_page_only": true,
+            "display": "scrolling_text",
+            "text": "Free shipping on all orders over $100",
+            "repeat_text": true,
+            "speed": 20,
+            "direction": "",
+            "color_scheme": "primary"
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "3a3a54ca-60b6-402c-a931-787545b06125": {
+              "type": "tagline",
+              "settings": {
+                "show_social_icons": true
+              }
+            },
+            "7227910c-ea4e-4aea-b48f-1a80cd40f57e": {
+              "type": "menus",
+              "settings": {
+                "main_linklist": "footer"
+              }
+            },
+            "66dc248d-1382-4bd4-9e7d-abc0731c339c": {
+              "type": "newsletter",
+              "settings": {
+                "text": "<p>Receive special offers and first look at new products.</p>"
+              }
+            }
+          },
+          "block_order": [
+            "3a3a54ca-60b6-402c-a931-787545b06125",
+            "7227910c-ea4e-4aea-b48f-1a80cd40f57e",
+            "66dc248d-1382-4bd4-9e7d-abc0731c339c"
+          ],
+          "settings": {
+            "show_payment_icons": true,
+            "show_locale_selector": true,
+            "show_country_selector": true,
+            "color_scheme": "primary"
+          }
+        },
+        "sidebar": {
+          "type": "sidebar",
+          "settings": {
+            "linklist": "main-menu",
+            "auto_expand": false,
+            "showcase_second_level_links": "none",
+            "collection_image_crop": "landscape",
+            "secondary_linklist": "search",
+            "show_search": true,
+            "show_social_icons": true
+          }
+        },
+        "header": {
+          "type": "header",
+          "settings": {
+            "logo_max_width": 7,
+            "linklist": "main-menu",
+            "detached_header_color": "primary",
+            "sticky_header": true,
+            "transparent_when_sticky": true,
+            "enable_overlay_on_homepage": true,
+            "enable_overlay_on_collection_template": false,
+            "enable_overlay_on_product_template": false,
+            "enable_overlay_on_classic_product_template": false,
+            "enable_overlay_on_split_product_template": false,
+            "overlay_header_color": "tertiary",
+            "header_layout_mobile": "n_l_m",
+            "header_layout_desktop": "n_l_m",
+            "enable_sidebar_nav_on_desktop": false,
+            "show_search": true,
+            "menu_items_display": "text",
+            "section_padding": "py-4",
+            "showcase_second_level_links": "none",
+            "collection_image_crop": "landscape"
+          }
+        },
+        "popup": {
+          "type": "popup",
+          "settings": {
+            "enable": false,
+            "delay": 4,
+            "frequency": 30,
+            "image_position": "left",
+            "title": "Sign up to our newsletter",
+            "text": "<p>Receive special offers and first look at new products.</p>",
+            "call_to_action": "newsletter",
+            "cta_url": "",
+            "cta_text": "Shop Now"
+          }
+        },
+        "age-check": {
+          "type": "age-check",
+          "settings": {
+            "enable": false,
+            "logo_max_width": 100,
+            "title": "Age verification",
+            "text": "<p>Are you over 21 years of age?</p>",
+            "mode": "buttons",
+            "yes_button_text": "Yes",
+            "no_button_text": "No",
+            "date_format": "mm-dd-yyyy",
+            "minimum_age": 18,
+            "redirect_link": "",
+            "color_scheme": "primary"
+          }
+        },
+        "cookies-banner": {
+          "type": "cookies-banner",
+          "settings": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    "Elegant": {
+      "color_primary_text": "#181519",
+      "color_primary_background": "#ffffff",
+      "color_primary_accent": "#6c637a",
+      "color_primary_meta": "#beb5ab",
+      "color_secondary_text": "#181519",
+      "color_secondary_background": "#ece9e6",
+      "color_secondary_accent": "#6c637a",
+      "color_secondary_meta": "#181519",
+      "color_tertiary_text": "#ece9e6",
+      "color_tertiary_background": "#181519",
+      "color_tertiary_accent": "#6c637a",
+      "color_tertiary_meta": "#181519",
+      "enable_section_color_transitions": false,
+      "base_font_size": 18,
+      "base_line_height": 1.2,
+      "type_heading_font": "itc_caslon_no_224_n4",
+      "standard_heading_size": "2xl:2xl",
+      "feature_heading_size": "3xl:6xl",
+      "type_main_font": "swiss_721_n2",
+      "header_font": "font-main",
+      "header_text_transform": "normal-case",
+      "accent_text_transform": "normal-case",
+      "product_tiles_text_transform": "normal-case",
+      "cascade_parallax_intensity": 72,
+      "button_border_radius": "0",
+      "cta_style": "theme-button",
+      "icon_thickness": 1,
+      "products_show_second_image_on_hover": true,
+      "quantity_style": "stepper",
+      "enable_sidebar_nav_animation": true,
+      "sections": {
+        "announcement-bar": {
+          "type": "announcement-bar",
+          "settings": {
+            "show_announcement_bar": false,
+            "home_page_only": true,
+            "display": "scrolling_text",
+            "text": "Free shipping on all orders over $100",
+            "repeat_text": true,
+            "speed": 20,
+            "direction": "",
+            "color_scheme": "secondary"
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "91ff540a-74b8-4279-b5f8-231aa2407364": {
+              "type": "tagline",
+              "settings": {
+                "show_social_icons": true
+              }
+            },
+            "7227910c-ea4e-4aea-b48f-1a80cd40f57e": {
+              "type": "menus",
+              "settings": {
+                "main_linklist": "footer"
+              }
+            },
+            "66dc248d-1382-4bd4-9e7d-abc0731c339c": {
+              "type": "newsletter",
+              "settings": {
+                "text": "<p>Receive special offers and first look at new products.</p>"
+              }
+            }
+          },
+          "block_order": [
+            "91ff540a-74b8-4279-b5f8-231aa2407364",
+            "7227910c-ea4e-4aea-b48f-1a80cd40f57e",
+            "66dc248d-1382-4bd4-9e7d-abc0731c339c"
+          ],
+          "settings": {
+            "show_payment_icons": true,
+            "show_locale_selector": true,
+            "show_country_selector": true,
+            "color_scheme": "primary",
+            "disable_color_transition": false
+          }
+        },
+        "sidebar": {
+          "type": "sidebar",
+          "settings": {
+            "linklist": "main-menu",
+            "auto_expand": false,
+            "showcase_second_level_links": "none",
+            "collection_image_crop": "landscape",
+            "secondary_linklist": "",
+            "show_search": false,
+            "show_social_icons": false
+          }
+        },
+        "header": {
+          "type": "header",
+          "settings": {
+            "logo_max_width": 7,
+            "linklist": "main-menu",
+            "detached_header_color": "primary",
+            "sticky_header": true,
+            "transparent_when_sticky": true,
+            "enable_overlay_on_homepage": true,
+            "enable_overlay_on_collection_template": false,
+            "enable_overlay_on_product_template": false,
+            "enable_overlay_on_classic_product_template": false,
+            "enable_overlay_on_split_product_template": true,
+            "overlay_header_color": "primary",
+            "header_layout_mobile": "n_l_m",
+            "header_layout_desktop": "n_l_m",
+            "enable_sidebar_nav_on_desktop": false,
+            "show_search": true,
+            "menu_items_display": "text",
+            "section_padding": "py-4",
+            "showcase_second_level_links": "none",
+            "collection_image_crop": "landscape"
+          }
+        },
+        "popup": {
+          "type": "popup",
+          "settings": {
+            "enable": false,
+            "delay": 4,
+            "frequency": 30,
+            "image_position": "left",
+            "title": "Sign up to our newsletter",
+            "text": "<p>Receive special offers and first look at new products.</p>",
+            "call_to_action": "newsletter",
+            "cta_url": "",
+            "cta_text": "Shop Now"
+          }
+        },
+        "age-check": {
+          "type": "age-check",
+          "settings": {
+            "enable": false,
+            "logo_max_width": 100,
+            "title": "Age verification",
+            "text": "<p>Are you over 21 years of age?</p>",
+            "mode": "buttons",
+            "yes_button_text": "Yes",
+            "no_button_text": "No",
+            "date_format": "mm-dd-yyyy",
+            "minimum_age": 18,
+            "redirect_link": "",
+            "color_scheme": "primary"
+          }
+        },
+        "cookies-banner": {
+          "type": "cookies-banner",
+          "settings": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    "Rooted": {
+      "color_primary_text": "#141414",
+      "color_primary_background": "#FAFAF8",
+      "color_primary_accent": "#2F5E3A",
+      "color_primary_meta": "#8F8F88",
+      "color_secondary_text": "#141414",
+      "color_secondary_background": "#FFFFFF",
+      "color_secondary_accent": "#2F5E3A",
+      "color_secondary_meta": "#8F8F88",
+      "color_tertiary_text": "#F4ECD8",
+      "color_tertiary_background": "#141414",
+      "color_tertiary_accent": "#93A487",
+      "color_tertiary_meta": "#DAD9D3",
+      "enable_section_color_transitions": false,
+      "base_font_size": 16,
+      "base_line_height": 1.55,
+      "type_heading_font": "zurich_extended_n7",
+      "standard_heading_size": "2xl:3xl",
+      "feature_heading_size": "3xl:7xl",
+      "type_main_font": "swiss_721_n4",
+      "button_border_radius": "2px",
+      "button_style": "2",
+      "button_color": "accent",
+      "cta_style": "theme-button",
+      "icon_thickness": 1.1,
+      "variance": "high",
+      "cascade_item_spacing": "large",
+      "products_show_badges": false,
+      "products_show_second_image_on_hover": true,
+      "quantity_style": "stepper",
+      "enable_sidebar_nav_animation": true,
+      "sections": {
+        "announcement-bar": {
+          "type": "announcement-bar",
+          "settings": {
+            "show_announcement_bar": false,
+            "home_page_only": true,
+            "display": "static",
+            "text": "Root & Route Creations Inc. - eco-luxury packaging and FSC paper artistry",
+            "link": "",
+            "repeat_text": true,
+            "speed": 80,
+            "direction": "",
+            "color_scheme": "tertiary"
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "tagline": {
+              "type": "tagline",
+              "settings": {
+                "show_social_icons": true
+              }
+            },
+            "menus": {
+              "type": "menus",
+              "settings": {
+                "main_linklist": "footer"
+              }
+            },
+            "newsletter": {
+              "type": "newsletter",
+              "settings": {
+                "text": "<p>For beauty, fragrance, lifestyle, and gifting brands seeking tactile, sustainable packaging with a clear path to production.</p>"
+              }
+            }
+          },
+          "block_order": [
+            "tagline",
+            "menus",
+            "newsletter"
+          ],
+          "settings": {
+            "show_payment_icons": false,
+            "show_locale_selector": false,
+            "show_country_selector": false,
+            "color_scheme": "tertiary"
+          }
+        },
+        "sidebar": {
+          "type": "sidebar",
+          "settings": {
+            "linklist": "main-menu",
+            "auto_expand": false,
+            "showcase_second_level_links": "none",
+            "collection_image_crop": "landscape",
+            "show_search": true,
+            "show_social_icons": true
+          }
+        },
+        "header": {
+          "type": "header",
+          "settings": {
+            "logo_max_width": 7,
+            "linklist": "main-menu",
+            "detached_header_color": "primary",
+            "sticky_header": true,
+            "transparent_when_sticky": false,
+            "enable_overlay_on_homepage": false,
+            "enable_overlay_on_collection_template": false,
+            "enable_overlay_on_product_template": false,
+            "enable_overlay_on_classic_product_template": false,
+            "enable_overlay_on_split_product_template": false,
+            "overlay_header_color": "tertiary",
+            "header_layout_mobile": "n_l_m",
+            "header_layout_desktop": "n_l_m",
+            "enable_sidebar_nav_on_desktop": false,
+            "show_search": true,
+            "menu_items_display": "text",
+            "section_padding": "py-4",
+            "showcase_second_level_links": "none",
+            "collection_image_crop": "landscape"
+          }
+        },
+        "popup": {
+          "type": "popup",
+          "settings": {
+            "enable": false,
+            "delay": 4,
+            "frequency": 30,
+            "image_position": "left",
+            "title": "Start a packaging conversation",
+            "text": "<p>Share your material direction, structure needs, and launch timing.</p>",
+            "call_to_action": "link",
+            "cta_url": "/pages/contact",
+            "cta_text": "Start an inquiry"
+          }
+        },
+        "age-check": {
+          "type": "age-check",
+          "settings": {
+            "enable": false,
+            "logo_max_width": 100,
+            "title": "Age verification",
+            "text": "<p>Are you over 21 years of age?</p>",
+            "mode": "buttons",
+            "yes_button_text": "Yes",
+            "no_button_text": "No",
+            "date_format": "mm-dd-yyyy",
+            "minimum_age": 18,
+            "redirect_link": "",
+            "color_scheme": "primary"
+          }
+        },
+        "cookies-banner": {
+          "type": "cookies-banner",
+          "settings": {
+            "enabled": false
+          }
+        }
+      },
+      "secondary_heading_size": "xl:2xl",
+      "solid_button_text_color": "background",
+      "round_images": false,
+      "products_show_vendor": false,
+      "cart_type": "page",
+      "cart_notes_enable": true,
+      "predictive_search_enabled": true,
+      "search_products": true,
+      "search_collections": true,
+      "search_articles": false,
+      "search_pages": true,
+      "share_facebook": true,
+      "share_twitter": false,
+      "share_pinterest": true
+    }
+  }
+}

@@ -1,56 +1,39 @@
-# Root & Route Shopify Theme Framework
+# Root & Route Shopify Theme
 
-This repository is a Shopify Online Store 2.0 theme framework for Root & Route Creations Inc.
+This branch uses **Cascade V3.1.0** as the Shopify base theme and layers the Root & Route brand direction on top.
 
-## Brand Source
+## Brand Layer
 
-The visual system comes from `Rooted Brand Sheet (standalone).html`:
+The Root & Route styling lives in `assets/custom.css`, loaded from `layout/theme.liquid`.
 
+Brand source:
 - Paper: `#FAFAF8`
 - Ink: `#141414`
 - Forest: `#2F5E3A`
 - Sage: `#93A487`
 - Stone: `#DAD9D3`
-- Headlines: Cormorant Garamond
-- Body and labels: Jost
+- Typography: Cormorant Garamond for editorial headings, Jost for body and labels
 - Motif: Root & Route leaf mark and repeated leaf texture
-- Positioning: "Uncovering the roots. Creating the routes."
 
-## Site Structure
+## Templates Added / Adjusted
 
-- Homepage: brand proposition, curated collections, portfolio, collaborative journey, client proof
-- Portfolio: product display as editorial/art photography
-- About: manifesto and material selection philosophy
-- Services: material innovation, structural engineering, global supply alignment
-- Process: vertical collaborative journey timeline with scroll fade-in
-- Contact: guided B2B inquiry form
-- Collection/Product: basic commerce-ready templates for future Shopify products
+- Homepage: `templates/index.json`
+- About: `templates/page.about.json`
+- Services: `templates/page.services.json`
+- Process: `templates/page.process.json`
+- Portfolio: `templates/page.portfolio.json`
+- Contact / Inquiry: `templates/page.contact.json`
+
+These templates use Cascade's `custom-liquid` section for Root & Route-specific brand storytelling while preserving Cascade's core theme architecture.
 
 ## Shopify Setup
 
-1. Create a GitHub repository for this folder.
-2. Push the theme files to GitHub.
-3. In Shopify, go to **Online Store > Themes > Add theme > Connect from GitHub**.
-4. Select the repository and branch.
-5. In the Shopify theme editor, create pages and assign templates:
-   - `about` -> `page.about`
-   - `services` -> `page.services`
-   - `process` -> `page.process`
-   - `portfolio` -> `page.portfolio`
-   - `contact` -> `page.contact`
-6. Upload real packaging photography through each section's image picker.
+After connecting the theme to Shopify, create pages and assign templates:
 
-## Theme Settings
+- `about` -> `page.about`
+- `services` -> `page.services`
+- `process` -> `page.process`
+- `portfolio` -> `page.portfolio`
+- `contact` -> `page.contact`
 
-The global theme settings are modeled after Cascade's editor structure, but tuned for Root & Route:
-
-- Colors: Root & Route paper, ink, forest, sage, stone, borders, muted text, and reverse text
-- Typography: base sizing, line height, heading scale, heading transform, and eyebrow spacing
-- Layout: page width, vertical section spacing, and default heading alignment preference
-- Animations: timeline/portfolio fade-in, smooth scroll, and animation duration
-- Buttons and media: border radius, button casing, media radius, card radius, product tile ratio
-- Commerce-ready controls: product tile display, search preferences, cart style, social links, favicon
-
-## Notes
-
-The theme is intentionally section-first rather than Webflow-derived. The old Webflow export can remain as reference, but the live Shopify build should use the Liquid, JSON, CSS, and JS files in this framework.
+Upload final product and portfolio photography through Cascade sections or replace the branded placeholder surfaces in the custom-liquid sections.
