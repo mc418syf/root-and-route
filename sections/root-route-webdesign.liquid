@@ -2,13 +2,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+{%- liquid
+  assign collection_blocks = section.blocks | where: 'type', 'collection'
+  assign craft_feature_blocks = section.blocks | where: 'type', 'craft_feature'
+  assign eco_blocks = section.blocks | where: 'type', 'eco_card'
+-%}
+
 <style>
   #shopify-section-sidebar,
   #shopify-section-announcement-bar,
   #shopify-section-header,
   #shopify-section-footer { display: none !important; }
   #MainContent { margin: 0 !important; padding: 0 !important; }
-body{margin:0;background:#FAFAF8}
+  body{margin:0;background:#FAFAF8}
   ::selection{background:#2F5E3A;color:#F4ECD8}
   @keyframes rr-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @keyframes rr-loaderout{0%,64%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
@@ -17,6 +24,13 @@ body{margin:0;background:#FAFAF8}
   @keyframes rr-rise-sm{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
   @keyframes rr-line{from{opacity:0;transform:translateY(105%)}to{opacity:1;transform:none}}
   [data-reveal]{will-change:transform,opacity}
+  .rr2-editable-image{width:100%;display:block;object-fit:cover;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+  .rr2-hero-image{height:100%}
+  .rr2-collection-image{height:520px}
+  .rr2-craft-image{height:600px}
+  .rr2-editable-image:hover{transform:scale(1.06)}
+  .rr2-rte p{margin:0}
+  .rr2-rte em{font-style:italic;color:#2F5E3A}
   @media (prefers-reduced-motion: reduce){
     [data-reveal]{animation:none !important;opacity:1 !important;transform:none !important}
     [data-marquee]{animation:none !important}
@@ -24,209 +38,185 @@ body{margin:0;background:#FAFAF8}
 </style>
 <div style="font-family:'Jost',sans-serif;color:#141414;background:#FAFAF8;overflow-x:hidden">
 
-  <!-- INTRO LOADER (light) -->
-  
-    
-  
-
-  <!-- NAV -->
   <header id="rr2-nav" style="position:fixed;top:0;left:0;right:0;z-index:500;transition:background .5s ease,border-color .5s ease;border-bottom:1px solid transparent">
     <nav style="max-width:1360px;margin:0 auto;padding:22px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <a href="#top" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+      <a href="{{ section.settings.logo_link | default: '#top' }}" style="display:flex;align-items:center;gap:12px;text-decoration:none">
         <svg width="22" height="28" viewBox="0 0 40 50" fill="none"><path d="M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z" fill="#2F5E3A"></path><path d="M20 20 V47" stroke="#2F5E3A" stroke-width="2.6" stroke-linecap="round"></path></svg>
-        <span style="font:300 23px/1 'Cormorant Garamond',serif;color:#141414">Root <span style="font-style:italic;color:#2F5E3A">&amp;</span> Route</span>
+        <span style="font:300 23px/1 'Cormorant Garamond',serif;color:#141414">{{ section.settings.logo_text_prefix | escape }} <span style="font-style:italic;color:#2F5E3A">&amp;</span> {{ section.settings.logo_text_suffix | escape }}</span>
       </a>
       <div style="display:flex;align-items:center;gap:34px">
-        <a href="#collections" style="font:400 12px/1 'Jost',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#3a3a3a;text-decoration:none">Collections</a>
-        <a href="#craft" style="font:400 12px/1 'Jost',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#3a3a3a;text-decoration:none">Craft</a>
-        <a href="#eco" style="font:400 12px/1 'Jost',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#3a3a3a;text-decoration:none">Sustainability</a>
-        <a href="#contact" style="font:500 11px/1 'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#F4ECD8;background:#2F5E3A;padding:11px 18px;border-radius:2px;text-decoration:none">Get a Quote</a>
+        <a href="{{ section.settings.nav_1_link }}" style="font:400 12px/1 'Jost',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#3a3a3a;text-decoration:none">{{ section.settings.nav_1_label | escape }}</a>
+        <a href="{{ section.settings.nav_2_link }}" style="font:400 12px/1 'Jost',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#3a3a3a;text-decoration:none">{{ section.settings.nav_2_label | escape }}</a>
+        <a href="{{ section.settings.nav_3_link }}" style="font:400 12px/1 'Jost',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#3a3a3a;text-decoration:none">{{ section.settings.nav_3_label | escape }}</a>
+        <a href="{{ section.settings.nav_cta_link }}" style="font:500 11px/1 'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#F4ECD8;background:#2F5E3A;padding:11px 18px;border-radius:2px;text-decoration:none">{{ section.settings.nav_cta_label | escape }}</a>
       </div>
     </nav>
   </header>
 
-  <!-- HERO (light) -->
   <section id="top" style="position:relative;height:100vh;min-height:660px;overflow:hidden;background:#EFEAE0">
     <div data-parallax="-0.14" style="position:absolute;left:0;right:0;top:-8%;bottom:-8%">
-      <image-slot id="rr2-hero" style="width:100%;height:100%;display:block" shape="rect" placeholder="Drop hero image — signature gift box, full bleed"></image-slot>
+      {%- if section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 2400 | image_tag: class: 'rr2-editable-image rr2-hero-image', loading: 'eager', sizes: '100vw' }}
+      {%- else -%}
+        <image-slot id="rr2-hero" style="width:100%;height:100%;display:block" shape="rect" placeholder="{{ section.settings.hero_image_placeholder | escape }}"></image-slot>
+      {%- endif -%}
     </div>
     <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(250,250,248,.12) 0%,rgba(250,250,248,.5) 58%,rgba(250,250,248,.93) 100%)"></div>
 
     <div style="position:absolute;left:40px;right:40px;top:104px;display:flex;justify-content:space-between;font:400 11px/1 'Jost',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:rgba(20,20,20,.6)">
-      <span data-intro="l1" style="opacity:1;transform:none">Eco‑Luxury Packaging</span>
-      
+      <span data-intro="l1" style="opacity:1;transform:none">{{ section.settings.hero_eyebrow | escape }}</span>
     </div>
 
     <div style="position:absolute;left:40px;right:40px;bottom:72px">
       <h1 style="margin:0;font:300 clamp(52px,10.5vw,168px)/0.92 'Cormorant Garamond',serif;letter-spacing:-.02em;color:#141414">
-        <span style="display:block;overflow:hidden"><span data-intro="h1" style="display:block;opacity:1;transform:none">Packaging</span></span>
-        <span style="display:block;overflow:hidden"><span data-intro="h2" style="display:block;opacity:1;transform:none">worth <span style="font-style:italic;color:#2F5E3A">keeping</span>.</span></span>
+        <span style="display:block;overflow:hidden"><span data-intro="h1" style="display:block;opacity:1;transform:none">{{ section.settings.hero_title_line_1 | escape }}</span></span>
+        <span style="display:block;overflow:hidden"><span data-intro="h2" style="display:block;opacity:1;transform:none">{{ section.settings.hero_title_line_2_prefix | escape }} <span style="font-style:italic;color:#2F5E3A">{{ section.settings.hero_title_emphasis | escape }}</span>{{ section.settings.hero_title_line_2_suffix | escape }}</span></span>
       </h1>
-      <div data-intro="sub" style="opacity:1;transform:none;max-width:440px;margin-top:26px;font:300 16px/1.65 'Jost',sans-serif;color:rgba(20,20,20,.78)">Considered, sustainable packaging for food, holiday gifts, and cosmetic advent calendars — designed in‑house, produced with our partner atelier.</div>
+      <div data-intro="sub" class="rr2-rte" style="opacity:1;transform:none;max-width:440px;margin-top:26px;font:300 16px/1.65 'Jost',sans-serif;color:rgba(20,20,20,.78)">{{ section.settings.hero_text }}</div>
     </div>
-
-    
   </section>
 
-  <!-- KINETIC MARQUEE -->
-  
+  {%- if section.settings.show_marquee -%}
     <div style="border-bottom: 1px solid #ECEBE6; padding: 30px 0; overflow: hidden; background-color: #2F5E3A">
-      <div data-marquee="" style="display:flex;width:max-content;animation:rr-marquee 34s linear infinite;white-space:nowrap">
-        <div style="display:flex;align-items:center;font:300 clamp(38px,6vw,88px)/1 'Cormorant Garamond',serif;color:#141414;padding-right:0">
-          <span style="padding: 0 40px; color: #FAFAF8">Made to keep</span><span style="color: #F0EEE8">✦</span>
-          <span style="padding: 0 40px; font-style: italic; color: #FAFAF8">FSC certified</span><span style="color: #EEECE6">✦</span>
-          <span style="padding: 0 40px; color: #FAFAF8">Fully custom</span><span style="color:#2F5E3A">✦</span>
-          <span style="padding:0 40px;font-style:italic;color:#2F5E3A">Eco‑luxury</span><span style="color:#2F5E3A">✦</span>
-        </div>
-        <div style="display:flex;align-items:center;font:300 clamp(38px,6vw,88px)/1 'Cormorant Garamond',serif;color:#141414" aria-hidden="true">
-          <span style="padding:0 40px">Made to keep</span><span style="color:#2F5E3A">✦</span>
-          <span style="padding:0 40px;font-style:italic;color:#2F5E3A">FSC certified</span><span style="color:#2F5E3A">✦</span>
-          <span style="padding:0 40px">Fully custom</span><span style="color:#2F5E3A">✦</span>
-          <span style="padding:0 40px;font-style:italic;color:#2F5E3A">Eco‑luxury</span><span style="color:#2F5E3A">✦</span>
-        </div>
+      <div data-marquee style="display:flex;width:max-content;animation:rr-marquee 34s linear infinite;white-space:nowrap">
+        {%- for i in (1..2) -%}
+          <div style="display:flex;align-items:center;font:300 clamp(38px,6vw,88px)/1 'Cormorant Garamond',serif;color:#141414{% if i == 1 %};padding-right:0{% endif %}"{% if i == 2 %} aria-hidden="true"{% endif %}>
+            <span style="padding:0 40px;color:#FAFAF8">{{ section.settings.marquee_1 | escape }}</span><span style="color:#F0EEE8">✦</span>
+            <span style="padding:0 40px;font-style:italic;color:#FAFAF8">{{ section.settings.marquee_2 | escape }}</span><span style="color:#EEECE6">✦</span>
+            <span style="padding:0 40px;color:#FAFAF8">{{ section.settings.marquee_3 | escape }}</span><span style="color:#F0EEE8">✦</span>
+            <span style="padding:0 40px;font-style:italic;color:#FAFAF8">{{ section.settings.marquee_4 | escape }}</span><span style="color:#EEECE6">✦</span>
+          </div>
+        {%- endfor -%}
       </div>
     </div>
-  
+  {%- endif -%}
 
-  <!-- INTRO STATEMENT -->
   <section style="background:#FAFAF8">
     <div style="max-width:1100px;margin:0 auto;padding:150px 40px 130px">
-      <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 20%;font:500 11px/1 'Jost',sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#2F5E3A;margin-bottom:34px">The Philosophy</div>
-      <p data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 6% cover 26%;margin:0;font:300 clamp(28px,3.6vw,52px)/1.28 'Cormorant Garamond',serif;color:#141414;letter-spacing:-.01em">We uncover the <span style="font-style:italic;color:#2F5E3A">root</span> of every brand, then engineer the <span style="font-style:italic;color:#2F5E3A">route</span> to your customer — from dieline to doorstep, nothing left to chance.</p>
+      <div data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 20%;font:500 11px/1 'Jost',sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#2F5E3A;margin-bottom:34px">{{ section.settings.philosophy_eyebrow | escape }}</div>
+      <div data-reveal class="rr2-rte" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 6% cover 26%;margin:0;font:300 clamp(28px,3.6vw,52px)/1.28 'Cormorant Garamond',serif;color:#141414;letter-spacing:-.01em">{{ section.settings.philosophy_text }}</div>
     </div>
   </section>
 
-  <!-- COLLECTIONS — EDITORIAL -->
   <section id="collections" style="background:#fff;border-top:1px solid #ECEBE6">
     <div style="max-width:1360px;margin:0 auto;padding:120px 40px 40px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:20px">
-        <h2 data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 20%;margin:0;font:300 clamp(34px,5vw,72px)/1 'Cormorant Garamond',serif;color:#141414">Collections</h2>
-        <span data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 6% cover 26%;font:400 12px/1 'Jost',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#93A487">Three — ways to be remembered</span>
+        <h2 data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 20%;margin:0;font:300 clamp(34px,5vw,72px)/1 'Cormorant Garamond',serif;color:#141414">{{ section.settings.collections_heading | escape }}</h2>
+        <span data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 6% cover 26%;font:400 12px/1 'Jost',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#93A487">{{ section.settings.collections_kicker | escape }}</span>
       </div>
     </div>
 
-    <!-- row 01 -->
-    <div style="max-width:1360px;margin:0 auto;padding:56px 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;border-top:1px solid #ECEBE6">
-      <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 24%;overflow:hidden;border-radius:3px">
-        <image-slot id="rr2-food" style="width:100%;height:520px;display:block;transition:transform 1.2s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.06)" shape="rect" placeholder="Food packaging photo"></image-slot>
+    {%- for block in collection_blocks -%}
+      {%- liquid
+        assign row_num = forloop.index
+        assign image_order = ''
+        assign text_order = ''
+        if block.settings.reverse_layout
+          assign image_order = 'order:1;'
+          assign text_order = 'order:2;'
+        endif
+        assign row_padding = '56px 40px'
+        if forloop.last
+          assign row_padding = '56px 40px 120px'
+        endif
+      -%}
+      <div {{ block.shopify_attributes }} style="max-width:1360px;margin:0 auto;padding:{{ row_padding }};display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;border-top:1px solid #ECEBE6">
+        <div data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 24%;overflow:hidden;border-radius:3px;position:relative;{{ image_order }}">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1400 | image_tag: class: 'rr2-editable-image rr2-collection-image', loading: 'lazy', sizes: '(min-width: 990px) 50vw, 100vw' }}
+          {%- else -%}
+            <image-slot id="rr2-collection-{{ block.id }}" style="width:100%;height:520px;display:block;transition:transform 1.2s cubic-bezier(.16,1,.3,1)" shape="rect" placeholder="{{ block.settings.image_placeholder | escape }}"></image-slot>
+          {%- endif -%}
+        </div>
+        <div data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 8% cover 30%;{{ text_order }}">
+          <div style="font:300 72px/1 'Cormorant Garamond',serif;color:#DAD9D3">{{ block.settings.number | default: row_num | escape }}</div>
+          <div style="font:400 11px/1 'Jost',sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#93A487;margin-top:14px">{{ block.settings.eyebrow | escape }}</div>
+          <h3 style="margin:14px 0 0;font:400 40px/1.08 'Cormorant Garamond',serif;color:#141414">{{ block.settings.title | escape }}</h3>
+          <div class="rr2-rte" style="margin:18px 0 0;max-width:400px;font:300 15px/1.7 'Jost',sans-serif;color:#5a5a5a">{{ block.settings.text }}</div>
+          <a href="{{ block.settings.link }}" style="display:inline-block;margin-top:26px;font:500 12px/1 'Jost',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#2F5E3A;text-decoration:none;border-bottom:1px solid #2F5E3A;padding-bottom:5px">{{ block.settings.link_label | escape }}</a>
+        </div>
       </div>
-      <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 8% cover 30%">
-        <div style="font:300 72px/1 'Cormorant Garamond',serif;color:#DAD9D3">01</div>
-        <div style="font:400 11px/1 'Jost',sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#93A487;margin-top:14px">Everyday</div>
-        <h3 style="margin:14px 0 0;font:400 40px/1.08 'Cormorant Garamond',serif;color:#141414">Food Packaging</h3>
-        <p style="margin:18px 0 0;max-width:400px;font:300 15px/1.7 'Jost',sans-serif;color:#5a5a5a">Food‑safe boxes, sleeves and pouches that make artisan products feel like a gift worth opening slowly.</p>
-        <a href="#contact" style="display:inline-block;margin-top:26px;font:500 12px/1 'Jost',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#2F5E3A;text-decoration:none;border-bottom:1px solid #2F5E3A;padding-bottom:5px">Discuss a project</a>
-      </div>
-    </div>
-
-    <!-- row 02 (reversed) -->
-    <div style="max-width:1360px;margin:0 auto;padding:56px 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;border-top:1px solid #ECEBE6">
-      <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 8% cover 30%;order:2">
-        <div style="font:300 72px/1 'Cormorant Garamond',serif;color:#DAD9D3">02</div>
-        <div style="font:400 11px/1 'Jost',sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#93A487;margin-top:14px">Seasonal</div>
-        <h3 style="margin:14px 0 0;font:400 40px/1.08 'Cormorant Garamond',serif;color:#141414">Holiday Gift Sets</h3>
-        <p style="margin:18px 0 0;max-width:400px;font:300 15px/1.7 'Jost',sans-serif;color:#5a5a5a">Rigid boxes, ribbon and fitted inserts — complete, ready‑to‑gift sets for the giving season.</p>
-        <a href="#contact" style="display:inline-block;margin-top:26px;font:500 12px/1 'Jost',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#2F5E3A;text-decoration:none;border-bottom:1px solid #2F5E3A;padding-bottom:5px">Discuss a project</a>
-      </div>
-      <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 24%;overflow:hidden;border-radius:3px;order:1">
-        <image-slot id="rr2-holiday" style="width:100%;height:520px;display:block;transition:transform 1.2s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.06)" shape="rect" placeholder="Holiday gift set photo"></image-slot>
-      </div>
-    </div>
-
-    <!-- row 03 -->
-    <div style="max-width:1360px;margin:0 auto;padding:56px 40px 120px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;border-top:1px solid #ECEBE6">
-      <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 24%;overflow:hidden;border-radius:3px;position:relative">
-        <image-slot id="rr2-advent" style="width:100%;height:520px;display:block;transition:transform 1.2s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.06)" shape="rect" placeholder="Advent / blind-box photo"></image-slot>
-      </div>
-      <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 8% cover 30%">
-        <div style="font:300 72px/1 'Cormorant Garamond',serif;color:#DAD9D3">03</div>
-        <div style="font:400 11px/1 'Jost',sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#93A487;margin-top:14px">Countdown</div>
-        <h3 style="margin:14px 0 0;font:400 40px/1.08 'Cormorant Garamond',serif;color:#141414">Cosmetic Advent</h3>
-        <p style="margin:18px 0 0;max-width:400px;font:300 15px/1.7 'Jost',sans-serif;color:#5a5a5a">Christmas countdown &amp; blind‑box builds with reveal drawers — a moment of theatre behind every door.</p>
-        <a href="#contact" style="display:inline-block;margin-top:26px;font:500 12px/1 'Jost',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#2F5E3A;text-decoration:none;border-bottom:1px solid #2F5E3A;padding-bottom:5px">Discuss a project</a>
-      </div>
-    </div>
+    {%- endfor -%}
   </section>
 
-  <!-- CRAFT -->
   <section id="craft" style="background:#FAFAF8;border-top:1px solid #ECEBE6">
     <div style="max-width:1360px;margin:0 auto;padding:130px 40px;display:grid;grid-template-columns:1fr 1.05fr;gap:72px;align-items:center">
       <div data-parallax="0.05">
-        <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 24%;overflow:hidden;border-radius:3px">
-          <image-slot id="rr2-craft" style="width:100%;height:600px;display:block;transition:transform 1.2s cubic-bezier(.16,1,.3,1)" style-hover="transform:scale(1.06)" shape="rect" placeholder="Atelier / production floor photo"></image-slot>
+        <div data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 24%;overflow:hidden;border-radius:3px">
+          {%- if section.settings.craft_image != blank -%}
+            {{ section.settings.craft_image | image_url: width: 1400 | image_tag: class: 'rr2-editable-image rr2-craft-image', loading: 'lazy', sizes: '(min-width: 990px) 50vw, 100vw' }}
+          {%- else -%}
+            <image-slot id="rr2-craft" style="width:100%;height:600px;display:block;transition:transform 1.2s cubic-bezier(.16,1,.3,1)" shape="rect" placeholder="{{ section.settings.craft_image_placeholder | escape }}"></image-slot>
+          {%- endif -%}
         </div>
       </div>
       <div>
-        <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 20%;font:500 11px/1 'Jost',sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#2F5E3A">The Craft</div>
-        <h2 data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 4% cover 24%;margin:18px 0 0;font:300 clamp(32px,4vw,54px)/1.08 'Cormorant Garamond',serif;color:#141414">Designed in‑house.<br>Produced with our atelier.</h2>
-        <p data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 8% cover 28%;margin:22px 0 0;max-width:470px;font:300 16px/1.7 'Jost',sans-serif;color:#4a4a4a">Our partner factory brings full customisation to life at any scale — structure, finish and print, engineered to your product.</p>
-        <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 12% cover 32%;display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:40px;background:#ECEBE6;border:1px solid #ECEBE6;border-radius:3px;overflow:hidden">
-          <div style="background:#FAFAF8;padding:24px 26px"><div style="font:400 20px/1.2 'Cormorant Garamond',serif;color:#141414">Custom dielines</div><div style="font:300 13px/1.5 'Jost',sans-serif;color:#7a7a76;margin-top:6px">Structure built to your product</div></div>
-          <div style="background:#FAFAF8;padding:24px 26px"><div style="font:400 20px/1.2 'Cormorant Garamond',serif;color:#141414">Foil &amp; emboss</div><div style="font:300 13px/1.5 'Jost',sans-serif;color:#7a7a76;margin-top:6px">Debossing, spot UV, hot foil</div></div>
-          <div style="background:#FAFAF8;padding:24px 26px"><div style="font:400 20px/1.2 'Cormorant Garamond',serif;color:#141414">FSC materials</div><div style="font:300 13px/1.5 'Jost',sans-serif;color:#7a7a76;margin-top:6px">Recycled &amp; recyclable board</div></div>
-          <div style="background:#FAFAF8;padding:24px 26px"><div style="font:400 20px/1.2 'Cormorant Garamond',serif;color:#141414">Low MOQ</div><div style="font:300 13px/1.5 'Jost',sans-serif;color:#7a7a76;margin-top:6px">From pilot runs to full launch</div></div>
+        <div data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 20%;font:500 11px/1 'Jost',sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#2F5E3A">{{ section.settings.craft_eyebrow | escape }}</div>
+        <h2 data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 4% cover 24%;margin:18px 0 0;font:300 clamp(32px,4vw,54px)/1.08 'Cormorant Garamond',serif;color:#141414">{{ section.settings.craft_heading }}</h2>
+        <div data-reveal class="rr2-rte" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 8% cover 28%;margin:22px 0 0;max-width:470px;font:300 16px/1.7 'Jost',sans-serif;color:#4a4a4a">{{ section.settings.craft_text }}</div>
+        <div data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 12% cover 32%;display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:40px;background:#ECEBE6;border:1px solid #ECEBE6;border-radius:3px;overflow:hidden">
+          {%- for block in craft_feature_blocks -%}
+            <div {{ block.shopify_attributes }} style="background:#FAFAF8;padding:24px 26px"><div style="font:400 20px/1.2 'Cormorant Garamond',serif;color:#141414">{{ block.settings.title | escape }}</div><div class="rr2-rte" style="font:300 13px/1.5 'Jost',sans-serif;color:#7a7a76;margin-top:6px">{{ block.settings.text }}</div></div>
+          {%- endfor -%}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SUSTAINABILITY -->
   <section id="eco" style="background-color:#2F5E3A;color:#EAF1E5;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Cpath d=%22M30 12 C21 19 21 33 30 40 C39 33 39 19 30 12 Z%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-opacity=%220.05%22 stroke-width=%221.4%22/%3E%3C/svg%3E')">
     <div style="max-width:1100px;margin:0 auto;padding:140px 40px;text-align:center">
-      <svg data-reveal="" width="34" height="42" viewBox="0 0 40 50" fill="none" style="animation:rr-rise-sm .9s cubic-bezier(.16,1,.3,1) both;animation-timeline:view();animation-range:entry 0% cover 18%;margin:0 auto"><path d="M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z" fill="#F4ECD8"></path><path d="M20 20 V47" stroke="#F4ECD8" stroke-width="2.6" stroke-linecap="round"></path></svg>
-      <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 4% cover 22%;font:500 11px/1 'Jost',sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#9FCB6E;margin-top:24px">Rooted in Responsibility</div>
-      <h2 data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 8% cover 26%;margin:18px auto 0;max-width:760px;font:300 clamp(34px,4.6vw,64px)/1.08 'Cormorant Garamond',serif;color:#F4ECD8">Luxury shouldn’t cost the earth</h2>
+      <svg data-reveal width="34" height="42" viewBox="0 0 40 50" fill="none" style="animation:rr-rise-sm .9s cubic-bezier(.16,1,.3,1) both;animation-timeline:view();animation-range:entry 0% cover 18%;margin:0 auto"><path d="M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z" fill="#F4ECD8"></path><path d="M20 20 V47" stroke="#F4ECD8" stroke-width="2.6" stroke-linecap="round"></path></svg>
+      <div data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 4% cover 22%;font:500 11px/1 'Jost',sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#9FCB6E;margin-top:24px">{{ section.settings.eco_eyebrow | escape }}</div>
+      <h2 data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 8% cover 26%;margin:18px auto 0;max-width:760px;font:300 clamp(34px,4.6vw,64px)/1.08 'Cormorant Garamond',serif;color:#F4ECD8">{{ section.settings.eco_heading | escape }}</h2>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:70px;text-align:left">
-        <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 6% cover 26%;border-top:1px solid rgba(244,236,216,.25);padding-top:24px"><div style="font:300 30px/1 'Cormorant Garamond',serif;color:#F4ECD8">FSC‑certified</div><p style="margin:12px 0 0;font:300 14px/1.6 'Jost',sans-serif;color:#cfe0d4">Board from responsibly managed forests, traceable end to end.</p></div>
-        <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 10% cover 30%;border-top:1px solid rgba(244,236,216,.25);padding-top:24px"><div style="font:300 30px/1 'Cormorant Garamond',serif;color:#F4ECD8">Soy &amp; water inks</div><p style="margin:12px 0 0;font:300 14px/1.6 'Jost',sans-serif;color:#cfe0d4">Low‑VOC printing with plastic‑free coatings and finishes.</p></div>
-        <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 14% cover 34%;border-top:1px solid rgba(244,236,216,.25);padding-top:24px"><div style="font:300 30px/1 'Cormorant Garamond',serif;color:#F4ECD8">Made to keep</div><p style="margin:12px 0 0;font:300 14px/1.6 'Jost',sans-serif;color:#cfe0d4">Reusable, recyclable structures designed for a second life.</p></div>
+        {%- for block in eco_blocks -%}
+          <div {{ block.shopify_attributes }} data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 6% cover 26%;border-top:1px solid rgba(244,236,216,.25);padding-top:24px"><div style="font:300 30px/1 'Cormorant Garamond',serif;color:#F4ECD8">{{ block.settings.title | escape }}</div><div class="rr2-rte" style="margin:12px 0 0;font:300 14px/1.6 'Jost',sans-serif;color:#cfe0d4">{{ block.settings.text }}</div></div>
+        {%- endfor -%}
       </div>
     </div>
   </section>
 
-  <!-- GIANT STATEMENT / CTA -->
   <section id="contact" style="background:#FAFAF8;overflow:hidden">
     <div style="max-width:1360px;margin:0 auto;padding:150px 40px 40px;text-align:center">
-      <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 20%;font:500 11px/1 'Jost',sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#2F5E3A">Start a Project</div>
-      <h2 data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 4% cover 26%;margin:22px 0 0;font:300 clamp(52px,10vw,150px)/0.94 'Cormorant Garamond',serif;letter-spacing:-.02em;color:#141414">Let’s design<br>your <span style="font-style:italic;color:#2F5E3A">season</span></h2>
-      <div data-reveal="" style="animation:rr-rise both;animation-timeline:view();animation-range:entry 10% cover 32%;display:flex;gap:14px;justify-content:center;margin-top:46px">
-        <a href="mailto:hello@rootandroute.co" style="font:500 13px/1 'Jost',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:#2F5E3A;padding:18px 34px;border-radius:2px;text-decoration:none">Request a Sample</a>
-        <a href="#collections" style="font:500 13px/1 'Jost',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#2F5E3A;background:transparent;border:1px solid #2F5E3A;padding:18px 34px;border-radius:2px;text-decoration:none">View Collections</a>
+      <div data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 0% cover 20%;font:500 11px/1 'Jost',sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#2F5E3A">{{ section.settings.cta_eyebrow | escape }}</div>
+      <h2 data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 4% cover 26%;margin:22px 0 0;font:300 clamp(52px,10vw,150px)/0.94 'Cormorant Garamond',serif;letter-spacing:-.02em;color:#141414">{{ section.settings.cta_heading_line_1 | escape }}<br>{{ section.settings.cta_heading_line_2_prefix | escape }} <span style="font-style:italic;color:#2F5E3A">{{ section.settings.cta_heading_emphasis | escape }}</span></h2>
+      <div data-reveal style="animation:rr-rise both;animation-timeline:view();animation-range:entry 10% cover 32%;display:flex;gap:14px;justify-content:center;margin-top:46px">
+        <a href="{{ section.settings.cta_primary_link }}" style="font:500 13px/1 'Jost',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:#2F5E3A;padding:18px 34px;border-radius:2px;text-decoration:none">{{ section.settings.cta_primary_label | escape }}</a>
+        <a href="{{ section.settings.cta_secondary_link }}" style="font:500 13px/1 'Jost',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#2F5E3A;background:transparent;border:1px solid #2F5E3A;padding:18px 34px;border-radius:2px;text-decoration:none">{{ section.settings.cta_secondary_label | escape }}</a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer style="background:#141414;color:#cfcfca">
     <div style="max-width:1360px;margin:0 auto;padding:80px 40px 40px">
       <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px">
         <div>
           <div style="display:flex;align-items:center;gap:12px">
             <svg width="22" height="28" viewBox="0 0 40 50" fill="none"><path d="M20 4 C9 12 9 27 20 34 C31 27 31 12 20 4 Z" fill="#9FCB6E"></path><path d="M20 20 V47" stroke="#9FCB6E" stroke-width="2.6" stroke-linecap="round"></path></svg>
-            <span style="font:300 24px/1 'Cormorant Garamond',serif;color:#F4ECD8">Root <span style="font-style:italic;color:#9FCB6E">&amp;</span> Route</span>
+            <span style="font:300 24px/1 'Cormorant Garamond',serif;color:#F4ECD8">{{ section.settings.footer_logo_prefix | escape }} <span style="font-style:italic;color:#9FCB6E">&amp;</span> {{ section.settings.footer_logo_suffix | escape }}</span>
           </div>
-          <p style="margin:18px 0 0;max-width:300px;font:300 13px/1.7 'Jost',sans-serif;color:#8f8f8a">Root &amp; Route Creations Inc. — eco‑luxury packaging &amp; paper artistry for the giving season.</p>
+          <div class="rr2-rte" style="margin:18px 0 0;max-width:300px;font:300 13px/1.7 'Jost',sans-serif;color:#8f8f8a">{{ section.settings.footer_text }}</div>
         </div>
         <div>
-          <div style="font:500 11px/1 'Jost',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#6f6f6a">Collections</div>
+          <div style="font:500 11px/1 'Jost',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#6f6f6a">{{ section.settings.footer_col_1_heading | escape }}</div>
           <div style="display:flex;flex-direction:column;gap:12px;margin-top:18px">
-            <a href="#collections" style="font:300 13px/1 'Jost',sans-serif;color:#cfcfca;text-decoration:none">Food Packaging</a>
-            <a href="#collections" style="font:300 13px/1 'Jost',sans-serif;color:#cfcfca;text-decoration:none">Holiday Gift Sets</a>
-            <a href="#collections" style="font:300 13px/1 'Jost',sans-serif;color:#cfcfca;text-decoration:none">Cosmetic Advent</a>
+            <a href="{{ section.settings.footer_col_1_link_1 }}" style="font:300 13px/1 'Jost',sans-serif;color:#cfcfca;text-decoration:none">{{ section.settings.footer_col_1_label_1 | escape }}</a>
+            <a href="{{ section.settings.footer_col_1_link_2 }}" style="font:300 13px/1 'Jost',sans-serif;color:#cfcfca;text-decoration:none">{{ section.settings.footer_col_1_label_2 | escape }}</a>
+            <a href="{{ section.settings.footer_col_1_link_3 }}" style="font:300 13px/1 'Jost',sans-serif;color:#cfcfca;text-decoration:none">{{ section.settings.footer_col_1_label_3 | escape }}</a>
           </div>
         </div>
         <div>
-          <div style="font:500 11px/1 'Jost',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#6f6f6a">Studio</div>
+          <div style="font:500 11px/1 'Jost',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#6f6f6a">{{ section.settings.footer_col_2_heading | escape }}</div>
           <div style="display:flex;flex-direction:column;gap:12px;margin-top:18px">
-            <a href="#craft" style="font:300 13px/1 'Jost',sans-serif;color:#cfcfca;text-decoration:none">The Craft</a>
-            <a href="#eco" style="font:300 13px/1 'Jost',sans-serif;color:#cfcfca;text-decoration:none">Sustainability</a>
-            <a href="mailto:hello@rootandroute.co" style="font:300 13px/1 'Jost',sans-serif;color:#cfcfca;text-decoration:none">hello@rootandroute.co</a>
+            <a href="{{ section.settings.footer_col_2_link_1 }}" style="font:300 13px/1 'Jost',sans-serif;color:#cfcfca;text-decoration:none">{{ section.settings.footer_col_2_label_1 | escape }}</a>
+            <a href="{{ section.settings.footer_col_2_link_2 }}" style="font:300 13px/1 'Jost',sans-serif;color:#cfcfca;text-decoration:none">{{ section.settings.footer_col_2_label_2 | escape }}</a>
+            <a href="{{ section.settings.footer_col_2_link_3 }}" style="font:300 13px/1 'Jost',sans-serif;color:#cfcfca;text-decoration:none">{{ section.settings.footer_col_2_label_3 | escape }}</a>
           </div>
         </div>
       </div>
       <div style="border-top:1px solid #2a2a27;margin-top:56px;padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font:300 11.5px/1.5 'Jost',sans-serif;color:#6f6f6a">
-        <span>© 2026 Root &amp; Route Creations Inc.</span>
-        <span style="font-style:italic;font-family:'Cormorant Garamond',serif;font-size:14px;color:#9FCB6E">Uncovering the roots. Creating the routes.</span>
+        <span>{{ section.settings.footer_copyright | escape }}</span>
+        <span style="font-style:italic;font-family:'Cormorant Garamond',serif;font-size:14px;color:#9FCB6E">{{ section.settings.footer_tagline | escape }}</span>
       </div>
     </div>
   </footer>
@@ -237,10 +227,138 @@ body{margin:0;background:#FAFAF8}
 {% schema %}
 {
   "name": "Root Route Webdesign",
-  "settings": [],
+  "settings": [
+    { "type": "header", "content": "Navigation" },
+    { "type": "text", "id": "logo_text_prefix", "label": "Logo text before ampersand", "default": "Root" },
+    { "type": "text", "id": "logo_text_suffix", "label": "Logo text after ampersand", "default": "Route" },
+    { "type": "url", "id": "logo_link", "label": "Logo link" },
+    { "type": "text", "id": "nav_1_label", "label": "Nav 1 label", "default": "Collections" },
+    { "type": "text", "id": "nav_1_link", "label": "Nav 1 link", "default": "#collections" },
+    { "type": "text", "id": "nav_2_label", "label": "Nav 2 label", "default": "Craft" },
+    { "type": "text", "id": "nav_2_link", "label": "Nav 2 link", "default": "#craft" },
+    { "type": "text", "id": "nav_3_label", "label": "Nav 3 label", "default": "Sustainability" },
+    { "type": "text", "id": "nav_3_link", "label": "Nav 3 link", "default": "#eco" },
+    { "type": "text", "id": "nav_cta_label", "label": "Nav CTA label", "default": "Get a Quote" },
+    { "type": "text", "id": "nav_cta_link", "label": "Nav CTA link", "default": "#contact" },
+
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_image_placeholder", "label": "Hero image placeholder", "default": "Drop hero image - signature gift box, full bleed" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Eco-Luxury Packaging" },
+    { "type": "text", "id": "hero_title_line_1", "label": "Hero title line 1", "default": "Packaging" },
+    { "type": "text", "id": "hero_title_line_2_prefix", "label": "Hero title line 2 prefix", "default": "worth" },
+    { "type": "text", "id": "hero_title_emphasis", "label": "Hero title emphasis", "default": "keeping" },
+    { "type": "text", "id": "hero_title_line_2_suffix", "label": "Hero title suffix", "default": "." },
+    { "type": "richtext", "id": "hero_text", "label": "Hero text", "default": "<p>Considered, sustainable packaging for food, holiday gifts, and cosmetic advent calendars - designed in-house, produced with our partner atelier.</p>" },
+
+    { "type": "header", "content": "Marquee" },
+    { "type": "checkbox", "id": "show_marquee", "label": "Show marquee", "default": true },
+    { "type": "text", "id": "marquee_1", "label": "Marquee item 1", "default": "Made to keep" },
+    { "type": "text", "id": "marquee_2", "label": "Marquee item 2", "default": "FSC certified" },
+    { "type": "text", "id": "marquee_3", "label": "Marquee item 3", "default": "Fully custom" },
+    { "type": "text", "id": "marquee_4", "label": "Marquee item 4", "default": "Eco-luxury" },
+
+    { "type": "header", "content": "Philosophy" },
+    { "type": "text", "id": "philosophy_eyebrow", "label": "Philosophy eyebrow", "default": "The Philosophy" },
+    { "type": "richtext", "id": "philosophy_text", "label": "Philosophy text", "default": "<p>We uncover the <em>root</em> of every brand, then engineer the <em>route</em> to your customer - from dieline to doorstep, nothing left to chance.</p>" },
+
+    { "type": "header", "content": "Collections" },
+    { "type": "text", "id": "collections_heading", "label": "Collections heading", "default": "Collections" },
+    { "type": "text", "id": "collections_kicker", "label": "Collections kicker", "default": "Three - ways to be remembered" },
+
+    { "type": "header", "content": "Craft" },
+    { "type": "image_picker", "id": "craft_image", "label": "Craft image" },
+    { "type": "text", "id": "craft_image_placeholder", "label": "Craft image placeholder", "default": "Atelier / production floor photo" },
+    { "type": "text", "id": "craft_eyebrow", "label": "Craft eyebrow", "default": "The Craft" },
+    { "type": "textarea", "id": "craft_heading", "label": "Craft heading", "default": "Designed in-house.<br>Produced with our atelier." },
+    { "type": "richtext", "id": "craft_text", "label": "Craft text", "default": "<p>Our partner factory brings full customisation to life at any scale - structure, finish and print, engineered to your product.</p>" },
+
+    { "type": "header", "content": "Sustainability" },
+    { "type": "text", "id": "eco_eyebrow", "label": "Sustainability eyebrow", "default": "Rooted in Responsibility" },
+    { "type": "text", "id": "eco_heading", "label": "Sustainability heading", "default": "Luxury shouldn't cost the earth" },
+
+    { "type": "header", "content": "CTA" },
+    { "type": "text", "id": "cta_eyebrow", "label": "CTA eyebrow", "default": "Start a Project" },
+    { "type": "text", "id": "cta_heading_line_1", "label": "CTA heading line 1", "default": "Let's design" },
+    { "type": "text", "id": "cta_heading_line_2_prefix", "label": "CTA heading line 2 prefix", "default": "your" },
+    { "type": "text", "id": "cta_heading_emphasis", "label": "CTA heading emphasis", "default": "season" },
+    { "type": "text", "id": "cta_primary_label", "label": "Primary button label", "default": "Request a Sample" },
+    { "type": "text", "id": "cta_primary_link", "label": "Primary button link", "default": "mailto:hello@rootandroute.co" },
+    { "type": "text", "id": "cta_secondary_label", "label": "Secondary button label", "default": "View Collections" },
+    { "type": "text", "id": "cta_secondary_link", "label": "Secondary button link", "default": "#collections" },
+
+    { "type": "header", "content": "Footer" },
+    { "type": "text", "id": "footer_logo_prefix", "label": "Footer logo before ampersand", "default": "Root" },
+    { "type": "text", "id": "footer_logo_suffix", "label": "Footer logo after ampersand", "default": "Route" },
+    { "type": "richtext", "id": "footer_text", "label": "Footer text", "default": "<p>Root &amp; Route Creations Inc. - eco-luxury packaging &amp; paper artistry for the giving season.</p>" },
+    { "type": "text", "id": "footer_col_1_heading", "label": "Footer column 1 heading", "default": "Collections" },
+    { "type": "text", "id": "footer_col_1_label_1", "label": "Footer column 1 link 1 label", "default": "Food Packaging" },
+    { "type": "text", "id": "footer_col_1_link_1", "label": "Footer column 1 link 1", "default": "#collections" },
+    { "type": "text", "id": "footer_col_1_label_2", "label": "Footer column 1 link 2 label", "default": "Holiday Gift Sets" },
+    { "type": "text", "id": "footer_col_1_link_2", "label": "Footer column 1 link 2", "default": "#collections" },
+    { "type": "text", "id": "footer_col_1_label_3", "label": "Footer column 1 link 3 label", "default": "Cosmetic Advent" },
+    { "type": "text", "id": "footer_col_1_link_3", "label": "Footer column 1 link 3", "default": "#collections" },
+    { "type": "text", "id": "footer_col_2_heading", "label": "Footer column 2 heading", "default": "Studio" },
+    { "type": "text", "id": "footer_col_2_label_1", "label": "Footer column 2 link 1 label", "default": "The Craft" },
+    { "type": "text", "id": "footer_col_2_link_1", "label": "Footer column 2 link 1", "default": "#craft" },
+    { "type": "text", "id": "footer_col_2_label_2", "label": "Footer column 2 link 2 label", "default": "Sustainability" },
+    { "type": "text", "id": "footer_col_2_link_2", "label": "Footer column 2 link 2", "default": "#eco" },
+    { "type": "text", "id": "footer_col_2_label_3", "label": "Footer column 2 link 3 label", "default": "hello@rootandroute.co" },
+    { "type": "text", "id": "footer_col_2_link_3", "label": "Footer column 2 link 3", "default": "mailto:hello@rootandroute.co" },
+    { "type": "text", "id": "footer_copyright", "label": "Footer copyright", "default": "© 2026 Root & Route Creations Inc." },
+    { "type": "text", "id": "footer_tagline", "label": "Footer tagline", "default": "Uncovering the roots. Creating the routes." }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection row",
+      "limit": 6,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_placeholder", "label": "Image placeholder", "default": "Collection image" },
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Everyday" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Food Packaging" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Food-safe boxes, sleeves and pouches that make artisan products feel like a gift worth opening slowly.</p>" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Discuss a project" },
+        { "type": "text", "id": "link", "label": "Link", "default": "#contact" },
+        { "type": "checkbox", "id": "reverse_layout", "label": "Reverse layout", "default": false }
+      ]
+    },
+    {
+      "type": "craft_feature",
+      "name": "Craft feature",
+      "limit": 8,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Custom dielines" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Structure built to your product</p>" }
+      ]
+    },
+    {
+      "type": "eco_card",
+      "name": "Sustainability card",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "FSC-certified" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Board from responsibly managed forests, traceable end to end.</p>" }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Root Route Webdesign"
+      "name": "Root Route Webdesign",
+      "blocks": [
+        { "type": "collection", "settings": { "image_placeholder": "Food packaging photo", "number": "01", "eyebrow": "Everyday", "title": "Food Packaging", "text": "<p>Food-safe boxes, sleeves and pouches that make artisan products feel like a gift worth opening slowly.</p>", "link_label": "Discuss a project", "link": "#contact", "reverse_layout": false } },
+        { "type": "collection", "settings": { "image_placeholder": "Holiday gift set photo", "number": "02", "eyebrow": "Seasonal", "title": "Holiday Gift Sets", "text": "<p>Rigid boxes, ribbon and fitted inserts - complete, ready-to-gift sets for the giving season.</p>", "link_label": "Discuss a project", "link": "#contact", "reverse_layout": true } },
+        { "type": "collection", "settings": { "image_placeholder": "Advent / blind-box photo", "number": "03", "eyebrow": "Countdown", "title": "Cosmetic Advent", "text": "<p>Christmas countdown &amp; blind-box builds with reveal drawers - a moment of theatre behind every door.</p>", "link_label": "Discuss a project", "link": "#contact", "reverse_layout": false } },
+        { "type": "craft_feature", "settings": { "title": "Custom dielines", "text": "<p>Structure built to your product</p>" } },
+        { "type": "craft_feature", "settings": { "title": "Foil & emboss", "text": "<p>Debossing, spot UV, hot foil</p>" } },
+        { "type": "craft_feature", "settings": { "title": "FSC materials", "text": "<p>Recycled &amp; recyclable board</p>" } },
+        { "type": "craft_feature", "settings": { "title": "Low MOQ", "text": "<p>From pilot runs to full launch</p>" } },
+        { "type": "eco_card", "settings": { "title": "FSC-certified", "text": "<p>Board from responsibly managed forests, traceable end to end.</p>" } },
+        { "type": "eco_card", "settings": { "title": "Soy & water inks", "text": "<p>Low-VOC printing with plastic-free coatings and finishes.</p>" } },
+        { "type": "eco_card", "settings": { "title": "Made to keep", "text": "<p>Reusable, recyclable structures designed for a second life.</p>" } }
+      ]
     }
   ]
 }

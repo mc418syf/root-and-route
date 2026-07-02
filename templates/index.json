@@ -2,7 +2,109 @@
   "sections": {
     "root_route_webdesign": {
       "type": "root-route-webdesign",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "collection_food": {
+          "type": "collection",
+          "settings": {
+            "image_placeholder": "Food packaging photo",
+            "number": "01",
+            "eyebrow": "Everyday",
+            "title": "Food Packaging",
+            "text": "<p>Food-safe boxes, sleeves and pouches that make artisan products feel like a gift worth opening slowly.</p>",
+            "link_label": "Discuss a project",
+            "link": "#contact",
+            "reverse_layout": false
+          }
+        },
+        "collection_holiday": {
+          "type": "collection",
+          "settings": {
+            "image_placeholder": "Holiday gift set photo",
+            "number": "02",
+            "eyebrow": "Seasonal",
+            "title": "Holiday Gift Sets",
+            "text": "<p>Rigid boxes, ribbon and fitted inserts - complete, ready-to-gift sets for the giving season.</p>",
+            "link_label": "Discuss a project",
+            "link": "#contact",
+            "reverse_layout": true
+          }
+        },
+        "collection_advent": {
+          "type": "collection",
+          "settings": {
+            "image_placeholder": "Advent / blind-box photo",
+            "number": "03",
+            "eyebrow": "Countdown",
+            "title": "Cosmetic Advent",
+            "text": "<p>Christmas countdown &amp; blind-box builds with reveal drawers - a moment of theatre behind every door.</p>",
+            "link_label": "Discuss a project",
+            "link": "#contact",
+            "reverse_layout": false
+          }
+        },
+        "craft_dielines": {
+          "type": "craft_feature",
+          "settings": {
+            "title": "Custom dielines",
+            "text": "<p>Structure built to your product</p>"
+          }
+        },
+        "craft_foil": {
+          "type": "craft_feature",
+          "settings": {
+            "title": "Foil & emboss",
+            "text": "<p>Debossing, spot UV, hot foil</p>"
+          }
+        },
+        "craft_fsc": {
+          "type": "craft_feature",
+          "settings": {
+            "title": "FSC materials",
+            "text": "<p>Recycled &amp; recyclable board</p>"
+          }
+        },
+        "craft_moq": {
+          "type": "craft_feature",
+          "settings": {
+            "title": "Low MOQ",
+            "text": "<p>From pilot runs to full launch</p>"
+          }
+        },
+        "eco_fsc": {
+          "type": "eco_card",
+          "settings": {
+            "title": "FSC-certified",
+            "text": "<p>Board from responsibly managed forests, traceable end to end.</p>"
+          }
+        },
+        "eco_inks": {
+          "type": "eco_card",
+          "settings": {
+            "title": "Soy & water inks",
+            "text": "<p>Low-VOC printing with plastic-free coatings and finishes.</p>"
+          }
+        },
+        "eco_keep": {
+          "type": "eco_card",
+          "settings": {
+            "title": "Made to keep",
+            "text": "<p>Reusable, recyclable structures designed for a second life.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "collection_food",
+        "collection_holiday",
+        "collection_advent",
+        "craft_dielines",
+        "craft_foil",
+        "craft_fsc",
+        "craft_moq",
+        "eco_fsc",
+        "eco_inks",
+        "eco_keep"
+      ]
     }
   },
   "order": [
