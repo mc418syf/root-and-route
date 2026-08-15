@@ -1,0 +1,802 @@
+{%- liquid
+  assign collection_blocks = section.blocks | where: 'type', 'collection'
+  assign service_blocks = section.blocks | where: 'type', 'service'
+  assign process_blocks = section.blocks | where: 'type', 'process_step'
+-%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+{{ 'rr-framer-homepage.js' | asset_url | script_tag }}
+
+<style>
+  body:has(.rr-framer) #header-group,
+  body:has(.rr-framer) .page-wrapper > footer {
+    display: none;
+  }
+
+  .rr-framer {
+    --rrf-paper: #fafaf8;
+    --rrf-warm: #efeae0;
+    --rrf-ink: #141414;
+    --rrf-forest: #2f5e3a;
+    --rrf-dark: #24482d;
+    --rrf-butter: #f4ecd8;
+    --rrf-sage: #9fcb6e;
+    --rrf-line: #ecebe6;
+    --rrf-muted: #6f756a;
+    background: var(--rrf-paper);
+    color: var(--rrf-ink);
+    font-family: "Jost", system-ui, sans-serif;
+    overflow: hidden;
+  }
+
+  .rr-framer img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .rrf-nav {
+    align-items: center;
+    backdrop-filter: blur(10px);
+    background: rgba(250, 250, 248, .82);
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr auto 1fr;
+    left: 0;
+    min-height: 82px;
+    padding: 18px clamp(22px, 4vw, 58px);
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 40;
+  }
+
+  .rrf-nav__links,
+  .rrf-nav__actions {
+    align-items: center;
+    display: flex;
+    gap: clamp(18px, 2.2vw, 34px);
+  }
+
+  .rrf-nav__actions {
+    justify-content: flex-end;
+  }
+
+  .rrf-nav a {
+    color: var(--rrf-ink);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .rrf-logo {
+    height: 42px;
+    margin: auto;
+    object-fit: contain;
+    width: min(250px, 34vw);
+  }
+
+  .rrf-pill {
+    background: var(--rrf-forest);
+    border-radius: 999px;
+    color: var(--rrf-butter) !important;
+    padding: 13px 22px;
+  }
+
+  .rrf-hero {
+    background: var(--rrf-warm);
+    min-height: 100vh;
+    padding: 104px clamp(18px, 4vw, 54px) 32px;
+  }
+
+  .rrf-hero__media {
+    border-radius: 2px;
+    height: calc(100vh - 152px);
+    min-height: 560px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .rrf-hero__media::after {
+    background: linear-gradient(180deg, rgba(250,250,248,0) 20%, rgba(250,250,248,.54) 100%);
+    content: "";
+    inset: 0;
+    position: absolute;
+  }
+
+  .rrf-hero__content {
+    align-items: center;
+    bottom: 58px;
+    display: flex;
+    gap: 22px;
+    justify-content: center;
+    left: 24px;
+    position: absolute;
+    right: 24px;
+    z-index: 1;
+  }
+
+  .rrf-button {
+    align-items: center;
+    background: var(--rrf-forest);
+    border: 1px solid var(--rrf-forest);
+    border-radius: 999px;
+    color: var(--rrf-butter);
+    display: inline-flex;
+    font-size: 11.5px;
+    font-weight: 500;
+    justify-content: center;
+    letter-spacing: .1em;
+    min-height: 46px;
+    padding: 15px 24px;
+    text-transform: uppercase;
+    transition: transform .3s ease, background-color .3s ease;
+  }
+
+  .rrf-button:hover {
+    background: var(--rrf-dark);
+    transform: translateY(-2px);
+  }
+
+  .rrf-link {
+    color: var(--rrf-forest);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .rrf-ticker {
+    border-top: 1px solid var(--rrf-line);
+    overflow: hidden;
+    padding: 18px 0;
+  }
+
+  .rrf-ticker__track {
+    animation: rrf-marquee 34s linear infinite;
+    display: flex;
+    gap: 56px;
+    width: max-content;
+  }
+
+  .rrf-ticker__item {
+    background: var(--rrf-warm);
+    border-radius: 10px;
+    height: 86px;
+    overflow: hidden;
+    width: 134px;
+  }
+
+  .rrf-section {
+    border-top: 1px solid var(--rrf-line);
+    padding: clamp(86px, 9vw, 132px) clamp(22px, 5vw, 72px);
+  }
+
+  .rrf-wrap {
+    margin: 0 auto;
+    max-width: 1360px;
+  }
+
+  .rrf-eyebrow {
+    color: var(--rrf-forest);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .3em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .rrf-heading {
+    font-family: "Comfortaa", "Jost", sans-serif;
+    font-size: 66px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.04;
+    margin: 20px 0 0;
+  }
+
+  .rrf-heading--large {
+    font-size: 108px;
+    text-align: center;
+  }
+
+  .rrf-section-head {
+    align-items: end;
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+    margin-bottom: 46px;
+  }
+
+  .rrf-collections {
+    background: #fff;
+  }
+
+  .rrf-cards {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .rrf-card {
+    background: #fff;
+    border-top: 1px solid var(--rrf-line);
+    display: grid;
+    min-height: 590px;
+  }
+
+  .rrf-card__image {
+    background: var(--rrf-warm);
+    height: 360px;
+    overflow: hidden;
+  }
+
+  .rrf-card__body {
+    border-left: 1px solid var(--rrf-line);
+    padding: 34px 32px 40px;
+  }
+
+  .rrf-meta {
+    color: #93a487;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+  }
+
+  .rrf-card h3,
+  .rrf-service h3,
+  .rrf-step h3 {
+    font-family: "Comfortaa", "Jost", sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.14;
+    margin: 14px 0 0;
+  }
+
+  .rrf-text {
+    color: #555;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 18px 0 0;
+  }
+
+  .rrf-text p {
+    margin: 0;
+  }
+
+  .rrf-services {
+    background: var(--rrf-warm);
+  }
+
+  .rrf-service-grid {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 44px;
+  }
+
+  .rrf-service {
+    background: var(--rrf-paper);
+    min-height: 250px;
+    padding: 32px;
+  }
+
+  .rrf-service__icon {
+    align-items: center;
+    border: 1px solid var(--rrf-line);
+    border-radius: 999px;
+    color: var(--rrf-forest);
+    display: grid;
+    font-size: 13px;
+    height: 48px;
+    letter-spacing: .12em;
+    place-items: center;
+    width: 48px;
+  }
+
+  .rrf-journey {
+    background: var(--rrf-paper);
+  }
+
+  .rrf-journey__intro {
+    color: #555;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 24px 0 0;
+    max-width: 620px;
+  }
+
+  .rrf-process {
+    display: grid;
+    margin-top: 64px;
+  }
+
+  .rrf-step {
+    border-top: 1px solid var(--rrf-line);
+    display: grid;
+    gap: 32px;
+    grid-template-columns: 120px minmax(0, 1fr);
+    padding: 30px 0;
+  }
+
+  .rrf-step__num {
+    color: #dad9d3;
+    font-family: "Comfortaa", "Jost", sans-serif;
+    font-size: 54px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .rrf-about {
+    background: #fff;
+  }
+
+  .rrf-about__grid {
+    align-items: center;
+    display: grid;
+    gap: clamp(44px, 6vw, 92px);
+    grid-template-columns: 1.05fr .95fr;
+  }
+
+  .rrf-about__media {
+    background: var(--rrf-warm);
+    border-radius: 3px;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    min-height: 620px;
+    overflow: hidden;
+  }
+
+  .rrf-about__media img:nth-child(2) {
+    transform: translateY(42px);
+  }
+
+  .rrf-about__quote {
+    color: var(--rrf-forest);
+    display: inline-block;
+    font-family: "Comfortaa", "Jost", sans-serif;
+    font-size: 32px;
+    line-height: 1.22;
+    margin-top: 30px;
+  }
+
+  .rrf-about__heading {
+    font-size: 46px;
+  }
+
+  .rrf-footer {
+    background: var(--rrf-dark);
+    color: var(--rrf-butter);
+    padding: clamp(78px, 9vw, 128px) clamp(22px, 5vw, 72px) 36px;
+  }
+
+  .rrf-footer__cta {
+    text-align: center;
+  }
+
+  .rrf-footer__grid {
+    border-top: 1px solid rgba(244, 236, 216, .18);
+    display: grid;
+    gap: 42px;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    margin-top: 70px;
+    padding-top: 44px;
+  }
+
+  .rrf-footer__logo {
+    height: auto;
+    max-width: 175px;
+    object-fit: contain;
+  }
+
+  .rrf-footer a,
+  .rrf-footer p {
+    color: rgba(244, 236, 216, .8);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .rrf-footer__links {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .rrf-legal {
+    border-top: 1px solid rgba(244, 236, 216, .18);
+    color: rgba(244, 236, 216, .55);
+    font-size: 12.5px;
+    margin-top: 54px;
+    padding-top: 24px;
+  }
+
+  .rrf-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+
+  .rrf-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @keyframes rrf-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 900px) {
+    .rrf-nav {
+      grid-template-columns: auto 1fr auto;
+    }
+
+    .rrf-nav__links {
+      display: none;
+    }
+
+    .rrf-logo {
+      margin: 0;
+      width: 190px;
+    }
+
+    .rrf-hero {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .rrf-hero__media {
+      min-height: 610px;
+    }
+
+    .rrf-hero__content,
+    .rrf-section-head {
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .rrf-cards,
+    .rrf-service-grid,
+    .rrf-about__grid,
+    .rrf-footer__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .rrf-step {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .rrf-about__media {
+      min-height: 440px;
+    }
+
+    .rrf-heading {
+      font-size: 42px;
+    }
+
+    .rrf-heading--large {
+      font-size: 52px;
+    }
+
+    .rrf-card h3,
+    .rrf-service h3,
+    .rrf-step h3,
+    .rrf-about__quote {
+      font-size: 26px;
+    }
+
+    .rrf-about__heading {
+      font-size: 32px;
+    }
+  }
+</style>
+
+<div class="rr-framer" data-rr-framer>
+  <nav class="rrf-nav" aria-label="Primary">
+    <div class="rrf-nav__links">
+      <a href="{{ section.settings.nav_collections_link }}">{{ section.settings.nav_collections_label }}</a>
+      <a href="{{ section.settings.nav_services_link }}">{{ section.settings.nav_services_label }}</a>
+      <a href="{{ section.settings.nav_process_link }}">{{ section.settings.nav_process_label }}</a>
+      <a href="{{ section.settings.nav_about_link }}">{{ section.settings.nav_about_label }}</a>
+    </div>
+    <a href="{{ section.settings.logo_link }}" aria-label="{{ section.settings.logo_alt | escape }}">
+      {%- if section.settings.logo_image != blank -%}
+        {{ section.settings.logo_image | image_url: width: 520 | image_tag: class: 'rrf-logo', loading: 'eager', alt: section.settings.logo_alt }}
+      {%- else -%}
+        <img class="rrf-logo" src="{{ 'rr-logo-dark.png' | asset_url }}" alt="{{ section.settings.logo_alt | escape }}">
+      {%- endif -%}
+    </a>
+    <div class="rrf-nav__actions">
+      <a class="rrf-pill" href="{{ section.settings.nav_cta_link }}">{{ section.settings.nav_cta_label }}</a>
+    </div>
+  </nav>
+
+  <section class="rrf-hero" id="top">
+    <div class="rrf-hero__media">
+      {%- if section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 2600 | image_tag: loading: 'eager', sizes: '100vw', alt: section.settings.hero_alt }}
+      {%- else -%}
+        <img src="{{ 'rr-framer-hero.png' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">
+      {%- endif -%}
+      <div class="rrf-hero__content">
+        <a class="rrf-button" href="{{ section.settings.hero_primary_link }}">{{ section.settings.hero_primary_label }}</a>
+        <a class="rrf-link" href="{{ section.settings.hero_secondary_link }}">{{ section.settings.hero_secondary_label }}</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="rrf-ticker" aria-label="Brand imagery">
+    <div class="rrf-ticker__track">
+      {%- for i in (1..8) -%}
+        <div class="rrf-ticker__item">
+          {%- if section.settings.ticker_image != blank -%}
+            {{ section.settings.ticker_image | image_url: width: 280 | image_tag: loading: 'lazy', alt: section.settings.ticker_alt }}
+          {%- else -%}
+            <img src="{{ 'rr-ticker-packaging.png' | asset_url }}" alt="{{ section.settings.ticker_alt | escape }}">
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <section class="rrf-section rrf-collections" id="collections">
+    <div class="rrf-wrap">
+      <div class="rrf-section-head rrf-reveal">
+        <div>
+          <div class="rrf-eyebrow">{{ section.settings.collections_eyebrow }}</div>
+          <h2 class="rrf-heading">{{ section.settings.collections_heading }}</h2>
+        </div>
+        <div class="rrf-meta">{{ section.settings.collections_kicker }}</div>
+      </div>
+      <div class="rrf-cards">
+        {%- for block in collection_blocks -%}
+          <article class="rrf-card rrf-reveal" {{ block.shopify_attributes }}>
+            <div class="rrf-card__image">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 33vw, 100vw', alt: block.settings.title }}
+              {%- else -%}
+                {%- case forloop.index -%}
+                  {%- when 1 -%}
+                    <img src="{{ 'rr-collection-seasonal.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}">
+                  {%- when 2 -%}
+                    <img src="{{ 'rr-collection-retail.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}">
+                  {%- else -%}
+                    <img src="{{ 'rr-collection-bundles.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}">
+                {%- endcase -%}
+              {%- endif -%}
+            </div>
+            <div class="rrf-card__body">
+              <div class="rrf-meta">{{ block.settings.eyebrow }}</div>
+              <h3>{{ block.settings.title }}</h3>
+              <div class="rrf-text">{{ block.settings.text }}</div>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="rrf-section rrf-services" id="services">
+    <div class="rrf-wrap">
+      <div class="rrf-reveal">
+        <div class="rrf-eyebrow">{{ section.settings.services_eyebrow }}</div>
+        <h2 class="rrf-heading">{{ section.settings.services_heading }}</h2>
+      </div>
+      <div class="rrf-service-grid">
+        {%- for block in service_blocks -%}
+          <article class="rrf-service rrf-reveal" {{ block.shopify_attributes }}>
+            <div class="rrf-service__icon">{{ block.settings.icon_label }}</div>
+            <h3>{{ block.settings.title }}</h3>
+            <div class="rrf-text">{{ block.settings.text }}</div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="rrf-section rrf-journey" id="journey">
+    <div class="rrf-wrap">
+      <div class="rrf-reveal">
+        <div class="rrf-eyebrow">{{ section.settings.process_eyebrow }}</div>
+        <h2 class="rrf-heading">{{ section.settings.process_heading }}</h2>
+        <div class="rrf-journey__intro">{{ section.settings.process_text }}</div>
+      </div>
+      <div class="rrf-process">
+        {%- for block in process_blocks -%}
+          <article class="rrf-step rrf-reveal" {{ block.shopify_attributes }}>
+            <div class="rrf-step__num">{{ block.settings.number }}</div>
+            <div>
+              <h3>{{ block.settings.title }}</h3>
+              <div class="rrf-text">{{ block.settings.text }}</div>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="rrf-section rrf-about" id="about">
+      <div class="rrf-wrap rrf-about__grid">
+      <div class="rrf-about__media rrf-reveal">
+        {%- for i in (1..3) -%}
+          {%- assign image_key = 'about_image_' | append: i -%}
+          {%- if section.settings[image_key] != blank -%}
+            {{ section.settings[image_key] | image_url: width: 900 | image_tag: loading: 'lazy', alt: section.settings.about_alt }}
+          {%- else -%}
+            {%- case i -%}
+              {%- when 1 -%}
+                <img src="{{ 'rr-collection-seasonal.jpg' | asset_url }}" alt="{{ section.settings.about_alt | escape }}">
+              {%- when 2 -%}
+                <img src="{{ 'rr-collection-retail.jpg' | asset_url }}" alt="{{ section.settings.about_alt | escape }}">
+              {%- else -%}
+                <img src="{{ 'rr-collection-bundles.jpg' | asset_url }}" alt="{{ section.settings.about_alt | escape }}">
+            {%- endcase -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="rrf-reveal">
+        <div class="rrf-eyebrow">{{ section.settings.about_media_eyebrow }}</div>
+        <div class="rrf-eyebrow" style="margin-top:28px;">{{ section.settings.about_eyebrow }}</div>
+        <h2 class="rrf-heading rrf-about__heading">{{ section.settings.about_heading }}</h2>
+        <div class="rrf-text">{{ section.settings.about_text }}</div>
+        <a class="rrf-about__quote" href="{{ section.settings.about_quote_link }}">{{ section.settings.about_quote }}</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="rrf-footer">
+    <div class="rrf-wrap">
+      <div class="rrf-footer__cta rrf-reveal">
+        <h2 class="rrf-heading rrf-heading--large">{{ section.settings.footer_heading }}</h2>
+        <a class="rrf-button" style="background:var(--rrf-butter);color:var(--rrf-dark);border-color:var(--rrf-butter);margin-top:34px;" href="{{ section.settings.footer_cta_link }}">{{ section.settings.footer_cta_label }}</a>
+      </div>
+      <div class="rrf-footer__grid">
+        <div>
+          {%- if section.settings.footer_logo_image != blank -%}
+            {{ section.settings.footer_logo_image | image_url: width: 360 | image_tag: class: 'rrf-footer__logo', loading: 'lazy', alt: section.settings.logo_alt }}
+          {%- else -%}
+            <img class="rrf-footer__logo" src="{{ 'rr-logo-light.png' | asset_url }}" alt="{{ section.settings.logo_alt | escape }}">
+          {%- endif -%}
+        </div>
+        <div>
+          <div class="rrf-eyebrow" style="color:var(--rrf-sage);">{{ section.settings.footer_studio_heading }}</div>
+          <div class="rrf-footer__links">
+            <a href="{{ section.settings.footer_link_1_url }}">{{ section.settings.footer_link_1_label }}</a>
+            <a href="{{ section.settings.footer_link_2_url }}">{{ section.settings.footer_link_2_label }}</a>
+            <a href="{{ section.settings.footer_link_3_url }}">{{ section.settings.footer_link_3_label }}</a>
+          </div>
+        </div>
+        <div>
+          <div class="rrf-eyebrow" style="color:var(--rrf-sage);">{{ section.settings.footer_contact_heading }}</div>
+          <div class="rrf-footer__links">
+            <a href="{{ section.settings.footer_contact_link }}">{{ section.settings.footer_contact_label }}</a>
+            <p>{{ section.settings.footer_email }}</p>
+            <p>{{ section.settings.footer_location }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="rrf-legal">{{ section.settings.footer_legal }}</div>
+    </div>
+  </footer>
+</div>
+
+{% schema %}
+{
+  "name": "Root & Route homepage",
+  "settings": [
+    { "type": "header", "content": "Navigation" },
+    { "type": "image_picker", "id": "logo_image", "label": "Logo image override" },
+    { "type": "text", "id": "logo_alt", "label": "Logo alt text", "default": "Root & Route" },
+    { "type": "text", "id": "logo_link", "label": "Logo link", "default": "#top" },
+    { "type": "text", "id": "nav_collections_label", "label": "Collections label", "default": "COLLECTIONS" },
+    { "type": "text", "id": "nav_collections_link", "label": "Collections link", "default": "#collections" },
+    { "type": "text", "id": "nav_services_label", "label": "Services label", "default": "SERVICES" },
+    { "type": "text", "id": "nav_services_link", "label": "Services link", "default": "#services" },
+    { "type": "text", "id": "nav_process_label", "label": "Process label", "default": "PROCESS" },
+    { "type": "text", "id": "nav_process_link", "label": "Process link", "default": "#journey" },
+    { "type": "text", "id": "nav_about_label", "label": "About label", "default": "ABOUT" },
+    { "type": "text", "id": "nav_about_link", "label": "About link", "default": "#about" },
+    { "type": "text", "id": "nav_cta_label", "label": "CTA label", "default": "GET A QUOTE" },
+    { "type": "text", "id": "nav_cta_link", "label": "CTA link", "default": "mailto:hello@rootandroute.ca" },
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image override" },
+    { "type": "text", "id": "hero_alt", "label": "Hero alt text", "default": "Root & Route packaging presentation" },
+    { "type": "text", "id": "hero_primary_label", "label": "Primary button", "default": "START AN INQUIRY" },
+    { "type": "text", "id": "hero_primary_link", "label": "Primary link", "default": "mailto:hello@rootandroute.ca" },
+    { "type": "text", "id": "hero_secondary_label", "label": "Secondary link label", "default": "EXPLORE COLLECTIONS →" },
+    { "type": "text", "id": "hero_secondary_link", "label": "Secondary link", "default": "#collections" },
+    { "type": "header", "content": "Image ticker" },
+    { "type": "image_picker", "id": "ticker_image", "label": "Ticker image override" },
+    { "type": "text", "id": "ticker_alt", "label": "Ticker image alt", "default": "Packaging detail" },
+    { "type": "header", "content": "Collections" },
+    { "type": "text", "id": "collections_eyebrow", "label": "Eyebrow", "default": "EXPLORE OUR CORE PACKAGING STYLES, CRAFTED BY OUR PARTNER ATELIER" },
+    { "type": "text", "id": "collections_heading", "label": "Heading", "default": "Signature Collections" },
+    { "type": "text", "id": "collections_kicker", "label": "Side text", "default": "Three ways to be remembered" },
+    { "type": "header", "content": "Services" },
+    { "type": "text", "id": "services_eyebrow", "label": "Eyebrow", "default": "THE FAST-TRACK SUITE" },
+    { "type": "text", "id": "services_heading", "label": "Heading", "default": "Ready to ship" },
+    { "type": "header", "content": "Process" },
+    { "type": "text", "id": "process_eyebrow", "label": "Eyebrow", "default": "CUSTOMIZATION PROCESS" },
+    { "type": "text", "id": "process_heading", "label": "Heading", "default": "The Collaborative Journey" },
+    { "type": "richtext", "id": "process_text", "label": "Text", "default": "<p>From structural concept to final delivery - a seamless, four-step pipeline engineered for absolute precision.</p>" },
+    { "type": "header", "content": "About" },
+    { "type": "image_picker", "id": "about_image_1", "label": "About image 1 override" },
+    { "type": "image_picker", "id": "about_image_2", "label": "About image 2 override" },
+    { "type": "image_picker", "id": "about_image_3", "label": "About image 3 override" },
+    { "type": "text", "id": "about_alt", "label": "About image alt", "default": "Atelier craft photography" },
+    { "type": "text", "id": "about_media_eyebrow", "label": "Media eyebrow", "default": "ATELIER CRAFT PHOTOGRAPHY" },
+    { "type": "text", "id": "about_eyebrow", "label": "Eyebrow", "default": "THE PHILOSOPHY" },
+    { "type": "text", "id": "about_heading", "label": "Heading", "default": "Packaging isn't the final step. It's the beginning of every customer's first impression." },
+    { "type": "richtext", "id": "about_text", "label": "Text", "default": "<p>Root & Route is the North American gateway to an elite manufacturing atelier that has crafted for the world's most exacting beauty and lifestyle brands. We bring that world-class structural standard here; utilizing conscious, FSC-certified materials and rigid paperboard engineered to be kept, not discarded.</p>" },
+    { "type": "text", "id": "about_quote", "label": "Quote link", "default": "We uncover the root of every brand and create the route that leads it to consumers." },
+    { "type": "text", "id": "about_quote_link", "label": "Quote link URL", "default": "#contact" },
+    { "type": "header", "content": "Footer" },
+    { "type": "text", "id": "footer_heading", "label": "Footer heading", "default": "Let's find the root of your story." },
+    { "type": "text", "id": "footer_cta_label", "label": "Footer button label", "default": "START AN INQUIRY" },
+    { "type": "text", "id": "footer_cta_link", "label": "Footer button link", "default": "mailto:hello@rootandroute.ca" },
+    { "type": "image_picker", "id": "footer_logo_image", "label": "Footer logo image override" },
+    { "type": "text", "id": "footer_studio_heading", "label": "Studio heading", "default": "STUDIO" },
+    { "type": "text", "id": "footer_link_1_label", "label": "Footer link 1 label", "default": "Collections" },
+    { "type": "text", "id": "footer_link_1_url", "label": "Footer link 1 URL", "default": "#collections" },
+    { "type": "text", "id": "footer_link_2_label", "label": "Footer link 2 label", "default": "Services" },
+    { "type": "text", "id": "footer_link_2_url", "label": "Footer link 2 URL", "default": "#services" },
+    { "type": "text", "id": "footer_link_3_label", "label": "Footer link 3 label", "default": "Process" },
+    { "type": "text", "id": "footer_link_3_url", "label": "Footer link 3 URL", "default": "#journey" },
+    { "type": "text", "id": "footer_contact_heading", "label": "Contact heading", "default": "CONTACT" },
+    { "type": "text", "id": "footer_contact_label", "label": "Contact link label", "default": "Start an inquiry" },
+    { "type": "text", "id": "footer_contact_link", "label": "Contact link URL", "default": "mailto:hello@rootandroute.ca" },
+    { "type": "text", "id": "footer_email", "label": "Email", "default": "hello@rootandroute.ca" },
+    { "type": "text", "id": "footer_location", "label": "Location", "default": "Vancouver, Canada" },
+    { "type": "text", "id": "footer_legal", "label": "Legal text", "default": "© 2026 Root & Route Creations Inc." }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image override" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SEASONAL" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Advent & Countdown boxes" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Multi-drawer interactive structures engineered to anchor holiday campaigns and high-engagement product launches.</p>" }
+      ]
+    },
+    {
+      "type": "service",
+      "name": "Service card",
+      "settings": [
+        { "type": "text", "id": "icon_label", "label": "Icon label", "default": "XX" },
+        { "type": "text", "id": "title", "label": "Title", "default": "No factory wait" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Skip the production queue with pre-made, ready-to-ship blanks.</p>" }
+      ]
+    },
+    {
+      "type": "process_step",
+      "name": "Process step",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title", "default": "SPECIFICATION" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>We define your product's dimensions, dielines, and material weights to engineer the perfect format.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Root & Route homepage"
+    }
+  ]
+}
+{% endschema %}
