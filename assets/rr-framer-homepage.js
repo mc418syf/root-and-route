@@ -1,5 +1,28 @@
 (() => {
+  const root = document.querySelector('[data-rr-framer]');
   const items = document.querySelectorAll('.rrf-reveal');
+  const menu = document.querySelector('[data-rrf-menu]');
+  const openButton = document.querySelector('[data-rrf-menu-open]');
+  const closeButton = document.querySelector('[data-rrf-menu-close]');
+  const menuLinks = document.querySelectorAll('[data-rrf-menu-link]');
+
+  const setMenu = (isOpen) => {
+    if (!menu || !openButton) return;
+    menu.classList.toggle('is-open', isOpen);
+    menu.setAttribute('aria-hidden', String(!isOpen));
+    openButton.setAttribute('aria-expanded', String(isOpen));
+    document.documentElement.classList.toggle('rrf-menu-lock', isOpen);
+  };
+
+  openButton?.addEventListener('click', () => setMenu(true));
+  closeButton?.addEventListener('click', () => setMenu(false));
+  menu?.addEventListener('click', (event) => {
+    if (event.target === menu) setMenu(false);
+  });
+  menuLinks.forEach((link) => link.addEventListener('click', () => setMenu(false)));
+  root?.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMenu(false);
+  });
 
   if (!items.length) return;
 

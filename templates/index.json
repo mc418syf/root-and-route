@@ -39,7 +39,7 @@
         "service_wait": {
           "type": "service",
           "settings": {
-            "icon_label": "01",
+            "icon_label": "icon XX",
             "title": "No factory wait",
             "text": "<p>Skip the production queue with pre-made, ready-to-ship blanks.</p>"
           }
@@ -47,7 +47,7 @@
         "service_moq": {
           "type": "service",
           "settings": {
-            "icon_label": "02",
+            "icon_label": "icon XX",
             "title": "Low minimum order quantity",
             "text": "<p>Order exactly what you need - perfect for limited product launches and small businesses.</p>"
           }
@@ -55,7 +55,7 @@
         "service_turnaround": {
           "type": "service",
           "settings": {
-            "icon_label": "03",
+            "icon_label": "icon lightning bolt",
             "title": "Rapid turnaround",
             "text": "<p>Add your brand logo and ship in days.</p>"
           }
