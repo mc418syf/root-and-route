@@ -1,26 +1,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-{{ 'rr-framer-homepage.js' | asset_url | script_tag }}
+<script src="{{ 'rr-framer-homepage.js' | asset_url }}" defer></script>
 
 <style>
   body:has(.rr-home) #header-group, body:has(.rr-home) .page-wrapper > footer { display:none; }
-  body:has(.rr-home), body:has(.rr-home) .page-wrapper { background:#eeeeee; }
+  body:has(.rr-home), body:has(.rr-home) .page-wrapper { --paper:{{ settings.rr_paper | default: '#fafaf8' }}; --white:#fff; --warm:{{ settings.rr_placeholder | default: '#efeae0' }}; --ink:{{ settings.rr_ink | default: '#141414' }}; --forest:{{ settings.rr_forest | default: '#2f5e3a' }}; --dark:{{ settings.rr_deep_forest | default: '#24482d' }}; --butter:{{ settings.rr_cream | default: '#f4ecd8' }}; --sage:{{ settings.rr_leaf | default: '#9fcb6e' }}; --line:{{ settings.rr_hairline | default: '#ecebe6' }}; --muted:#6b6b63; --rr-page-max:{{ settings.rr_page_max | default: 1440 }}px; --rr-content-max:{{ settings.rr_content_max | default: 1360 }}px; background:var(--paper); color:var(--ink); font-family:Jost,system-ui,sans-serif; }
   html.rrf-menu-lock { overflow:hidden; }
-  .rr-home { --paper:#fafaf8; --white:#fff; --warm:#efeae0; --ink:#141414; --forest:#2f5e3a; --dark:#24482d; --butter:#f4ecd8; --sage:#9fcb6e; --line:#ecebe6; --muted:#6f756a; background:var(--paper); color:var(--ink); font-family:Jost,system-ui,sans-serif; margin:0 auto; max-width:1440px; overflow:hidden; }
+  .rr-home { background:var(--paper); color:var(--ink); font-family:Jost,system-ui,sans-serif; margin:0 auto; max-width:var(--rr-page-max); overflow:hidden; }
   .rr-home *, .rr-home *::before, .rr-home *::after { box-sizing:border-box; }
   .rr-home a { color:inherit; text-decoration:none; }
   .rr-home img { display:block; height:100%; object-fit:cover; width:100%; }
-  .rr-wrap { margin:0 auto; max-width:1360px; }
+  .rr-wrap { margin:0 auto; max-width:var(--rr-content-max); }
   .rr-eyebrow { color:var(--forest); font-size:11px; font-weight:500; letter-spacing:.3em; line-height:1.3; text-transform:uppercase; }
   .rr-heading { color:var(--ink); font-family:Comfortaa,Jost,sans-serif; font-size:clamp(42px,5vw,66px); font-weight:500; letter-spacing:0; line-height:1.04; margin:20px 0 0; }
   .rr-body { color:#555; font-size:15px; font-weight:300; line-height:1.7; margin:18px 0 0; }
   .rr-body p { margin:0; }
-  .rr-button { align-items:center; background:var(--forest); border:1px solid var(--forest); border-radius:999px; color:var(--butter); display:inline-flex; font-size:11.5px; font-weight:500; justify-content:center; letter-spacing:.1em; min-height:46px; padding:15px 24px; text-transform:uppercase; transition:background .3s ease,transform .3s ease; }
+  .rr-button { align-items:center; background:var(--forest); border:1px solid var(--forest); border-radius:2px; color:var(--butter); display:inline-flex; font-size:11.5px; font-weight:500; justify-content:center; letter-spacing:.1em; min-height:46px; padding:15px 24px; text-transform:uppercase; transition:background .3s ease,transform .3s ease; }
   .rr-button:hover { background:var(--dark); transform:translateY(-2px); }
   .rr-link { color:var(--forest); font-size:11.5px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; }
   .rr-reveal { opacity:0; transform:translateY(24px); transition:opacity .8s ease,transform .8s ease; }
   .rr-reveal.is-visible { opacity:1; transform:none; }
+  {%- unless settings.rr_reveal_motion -%}.rr-reveal { opacity:1; transform:none; transition:none; }{%- endunless -%}
   .rr-nav { align-items:center; backdrop-filter:blur(10px); background:rgba(250,250,248,.95); display:grid; gap:24px; grid-template-columns:1fr auto 1fr; min-height:68px; padding:18px 42px; position:sticky; top:0; z-index:40; }
   .rr-nav__links, .rr-nav__actions { align-items:center; display:flex; gap:clamp(18px,2.2vw,34px); }
   .rr-nav__actions { gap:12px; justify-content:flex-end; }
@@ -47,10 +48,11 @@
   <nav class="rr-nav" aria-label="Primary">
     <button class="rr-menu-button" type="button" aria-label="Open menu" aria-expanded="false" data-rrf-menu-open><span></span><span></span></button>
     <div class="rr-nav__links">
-      <a href="{{ section.settings.nav_collections_link }}">{{ section.settings.nav_collections_label }}</a>
-      <a href="{{ section.settings.nav_services_link }}">{{ section.settings.nav_services_label }}</a>
-      <a href="{{ section.settings.nav_process_link }}">{{ section.settings.nav_process_label }}</a>
-      <a href="{{ section.settings.nav_about_link }}">{{ section.settings.nav_about_label }}</a>
+      {%- if section.settings.menu != blank -%}
+        {%- for link in section.settings.menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+      {%- else -%}
+        <a href="{{ section.settings.nav_collections_link }}">{{ section.settings.nav_collections_label }}</a><a href="{{ section.settings.nav_services_link }}">{{ section.settings.nav_services_label }}</a><a href="{{ section.settings.nav_process_link }}">{{ section.settings.nav_process_label }}</a><a href="{{ section.settings.nav_about_link }}">{{ section.settings.nav_about_label }}</a>
+      {%- endif -%}
     </div>
     <a href="{{ section.settings.logo_link }}" aria-label="{{ section.settings.logo_alt | escape }}">{%- if section.settings.logo_image != blank -%}{{ section.settings.logo_image | image_url: width:520 | image_tag: class:'rr-logo', loading:'eager', alt:section.settings.logo_alt }}{%- else -%}<img class="rr-logo" src="{{ 'rr-logo-dark.png' | asset_url }}" alt="{{ section.settings.logo_alt | escape }}">{%- endif -%}</a>
     <div class="rr-nav__actions">
@@ -60,9 +62,9 @@
       <a class="rr-pill" href="{{ section.settings.nav_cta_link }}">{{ section.settings.nav_cta_label }}</a>
     </div>
   </nav>
-  <div class="rr-menu" data-rrf-menu aria-hidden="true"><div class="rr-menu__panel" role="dialog" aria-modal="true" aria-label="Navigation menu"><div class="rr-menu__top"><a href="{{ section.settings.logo_link }}" data-rrf-menu-link><img class="rr-logo" src="{{ 'rr-logo-dark.png' | asset_url }}" alt="{{ section.settings.logo_alt | escape }}"></a><button class="rr-menu-close" type="button" aria-label="Close menu" data-rrf-menu-close><span></span><span></span></button></div><div class="rr-menu__links"><a href="{{ section.settings.nav_collections_link }}" data-rrf-menu-link>{{ section.settings.nav_collections_label }}</a><a href="{{ section.settings.nav_process_link }}" data-rrf-menu-link>{{ section.settings.nav_process_label }}</a><a href="{{ section.settings.nav_services_link }}" data-rrf-menu-link>{{ section.settings.nav_services_label }}</a><a href="{{ section.settings.nav_about_link }}" data-rrf-menu-link>{{ section.settings.nav_about_label }}</a></div><a class="rr-button rr-menu__cta" href="{{ section.settings.nav_cta_link }}" data-rrf-menu-link>{{ section.settings.nav_cta_label }}</a></div></div>
+  <div class="rr-menu" data-rrf-menu aria-hidden="true"><div class="rr-menu__panel" role="dialog" aria-modal="true" aria-label="Navigation menu"><div class="rr-menu__top"><a href="{{ section.settings.logo_link }}" data-rrf-menu-link><img class="rr-logo" src="{{ 'rr-logo-dark.png' | asset_url }}" alt="{{ section.settings.logo_alt | escape }}"></a><button class="rr-menu-close" type="button" aria-label="Close menu" data-rrf-menu-close><span></span><span></span></button></div><div class="rr-menu__links">{%- if section.settings.menu != blank -%}{%- for link in section.settings.menu.links -%}<a href="{{ link.url }}" data-rrf-menu-link>{{ link.title }}</a>{%- endfor -%}{%- else -%}<a href="{{ section.settings.nav_collections_link }}" data-rrf-menu-link>{{ section.settings.nav_collections_label }}</a><a href="{{ section.settings.nav_process_link }}" data-rrf-menu-link>{{ section.settings.nav_process_label }}</a><a href="{{ section.settings.nav_services_link }}" data-rrf-menu-link>{{ section.settings.nav_services_label }}</a><a href="{{ section.settings.nav_about_link }}" data-rrf-menu-link>{{ section.settings.nav_about_label }}</a>{%- endif -%}</div><a class="rr-button rr-menu__cta" href="{{ section.settings.nav_cta_link }}" data-rrf-menu-link>{{ section.settings.nav_cta_label }}</a></div></div>
 </div>
 
 {% schema %}
-{"name":"RR navigation shell","settings":[{"type":"image_picker","id":"logo_image","label":"Logo image override"},{"type":"text","id":"logo_alt","label":"Logo alt text","default":"Root & Route"},{"type":"url","id":"logo_link","label":"Logo link"},{"type":"text","id":"nav_collections_label","label":"Collections label","default":"COLLECTIONS"},{"type":"url","id":"nav_collections_link","label":"Collections link"},{"type":"text","id":"nav_services_label","label":"Services label","default":"SERVICES"},{"type":"url","id":"nav_services_link","label":"Services link"},{"type":"text","id":"nav_process_label","label":"Process label","default":"PROCESS"},{"type":"url","id":"nav_process_link","label":"Process link"},{"type":"text","id":"nav_about_label","label":"About label","default":"ABOUT"},{"type":"url","id":"nav_about_link","label":"About link"},{"type":"text","id":"nav_cta_label","label":"CTA label","default":"GET A QUOTE"},{"type":"url","id":"nav_cta_link","label":"CTA link"}],"presets":[{"name":"RR navigation shell"}]}
+{"name":"RR navigation shell","settings":[{"type":"image_picker","id":"logo_image","label":"Logo image override"},{"type":"text","id":"logo_alt","label":"Logo alt text","default":"Root & Route"},{"type":"url","id":"logo_link","label":"Logo link"},{"type":"link_list","id":"menu","label":"Navigation menu"},{"type":"header","content":"Fallback navigation"},{"type":"text","id":"nav_collections_label","label":"Collections label","default":"COLLECTIONS"},{"type":"url","id":"nav_collections_link","label":"Collections link"},{"type":"text","id":"nav_services_label","label":"Services label","default":"SERVICES"},{"type":"url","id":"nav_services_link","label":"Services link"},{"type":"text","id":"nav_process_label","label":"Process label","default":"PROCESS"},{"type":"url","id":"nav_process_link","label":"Process link"},{"type":"text","id":"nav_about_label","label":"About label","default":"ABOUT"},{"type":"url","id":"nav_about_link","label":"About link"},{"type":"text","id":"nav_cta_label","label":"CTA label","default":"GET A QUOTE"},{"type":"url","id":"nav_cta_link","label":"CTA link"}],"presets":[{"name":"RR navigation shell"}]}
 {% endschema %}

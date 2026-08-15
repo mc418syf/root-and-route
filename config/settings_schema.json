@@ -2116,5 +2116,22 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "Root & Route design",
+    "settings": [
+      { "type": "paragraph", "content": "Shared brand settings used by the modular Root & Route sections." },
+      { "type": "color", "id": "rr_paper", "label": "Paper background", "default": "#fafaf8" },
+      { "type": "color", "id": "rr_ink", "label": "Ink", "default": "#141414" },
+      { "type": "color", "id": "rr_forest", "label": "Forest", "default": "#2f5e3a" },
+      { "type": "color", "id": "rr_deep_forest", "label": "Deep forest", "default": "#24482d" },
+      { "type": "color", "id": "rr_cream", "label": "Cream", "default": "#f4ecd8" },
+      { "type": "color", "id": "rr_leaf", "label": "Leaf accent", "default": "#9fcb6e" },
+      { "type": "color", "id": "rr_hairline", "label": "Hairline", "default": "#ecebe6" },
+      { "type": "color", "id": "rr_placeholder", "label": "Image placeholder", "default": "#efeae0" },
+      { "type": "range", "id": "rr_page_max", "label": "Page maximum width", "min": 1200, "max": 1800, "step": 20, "unit": "px", "default": 1440 },
+      { "type": "range", "id": "rr_content_max", "label": "Content maximum width", "min": 1000, "max": 1600, "step": 20, "unit": "px", "default": 1360 },
+      { "type": "checkbox", "id": "rr_reveal_motion", "label": "Enable reveal motion", "default": true }
+    ]
   }
 ]

@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "shell": { "type": "rr-home-shell", "settings": { "logo_link": "/", "nav_collections_link": "/#collections", "nav_services_link": "/#services", "nav_process_link": "/#journey", "nav_about_link": "/pages/about", "nav_cta_link": "mailto:hello@rootandroute.ca" } },
+    "hero": { "type": "rr-page-hero", "settings": { "show_images": false, "eyebrow": "BRANDS WE WORK WITH", "heading": "Built to meet the standards behind remarkable brands.", "text": "<p>Through our manufacturing partnership, Root & Route connects North American teams with an atelier trusted across beauty, fragrance, entertainment, luxury retail, and lifestyle.</p>", "padding_bottom": 104 } },
+    "wall": { "type": "rr-brand-wall", "blocks": {
+      "harrods": { "type": "brand", "settings": { "name": "Harrods", "category": "Luxury retail" } },
+      "disney": { "type": "brand", "settings": { "name": "Disney", "category": "Entertainment" } },
+      "mentholatum": { "type": "brand", "settings": { "name": "Mentholatum", "category": "Beauty & wellness" } },
+      "glo": { "type": "brand", "settings": { "name": "Glo Beauty", "category": "Beauty" } },
+      "lido": { "type": "brand", "settings": { "name": "Lido", "category": "Lifestyle" } },
+      "mac": { "type": "brand", "settings": { "name": "MAC", "category": "Beauty" } },
+      "uefa": { "type": "brand", "settings": { "name": "UEFA", "category": "Sport & events" } },
+      "s1": { "type": "stat", "settings": { "value": "18+", "label": "Years of specialized manufacturing" } },
+      "s2": { "type": "stat", "settings": { "value": "6 years", "label": "Disney-Certified Vendor standing" } },
+      "s3": { "type": "stat", "settings": { "value": "Global", "label": "Production and delivery alignment" } }
+    }, "block_order": ["harrods", "disney", "mentholatum", "glo", "lido", "mac", "uefa", "s1", "s2", "s3"], "settings": {} },
+    "partner": { "type": "rr-partner-feature", "blocks": { "one": { "type": "badge", "settings": { "label": "BSCI-Compliant" } }, "two": { "type": "badge", "settings": { "label": "FSC-Certified" } }, "three": { "type": "badge", "settings": { "label": "Direct factory alignment" } } }, "block_order": ["one", "two", "three"], "settings": { "eyebrow": "THE STANDARD BEHIND THE NAMES", "heading": "A manufacturing relationship built for precision", "text": "<p>These relationships reflect the capabilities of our partner atelier and its long-standing production standards. Root & Route brings that engineering discipline, material knowledge, and quality alignment to brands building for the North American market.</p>", "image_right": true } },
+    "principles": { "type": "rr-principles", "blocks": { "one": { "type": "principle", "settings": { "title": "Confidential by default", "text": "<p>Project details, designs, and commercial information are handled with care throughout development and production.</p>" } }, "two": { "type": "principle", "settings": { "title": "Built to specification", "text": "<p>Materials, tolerances, color, finishes, and quality checkpoints are aligned before production.</p>" } }, "three": { "type": "principle", "settings": { "title": "One route to delivery", "text": "<p>Our Canadian team keeps communication clear across design, sampling, production, freight, and final delivery.</p>" } } }, "block_order": ["one", "two", "three"], "settings": { "eyebrow": "HOW WE PARTNER", "heading": "Quiet confidence, from brief to shelf" } },
+    "cta": { "type": "rr-page-cta", "blocks": { "one": { "type": "button", "settings": { "label": "START A PACKAGING PROJECT →", "link": "mailto:hello@rootandroute.ca" } } }, "block_order": ["one"], "settings": { "eyebrow": "YOUR BRAND, NEXT", "heading": "Bring us the standard you need to meet." } },
+    "footer": { "type": "rr-home-footer", "settings": { "cta_link": "mailto:hello@rootandroute.ca" } }
+  },
+  "order": ["shell", "hero", "wall", "partner", "principles", "cta", "footer"]
+}

@@ -1,6 +1,6 @@
 (() => {
   const root = document.querySelector('[data-rr-framer]');
-  const items = document.querySelectorAll('.rrf-reveal');
+  const items = document.querySelectorAll('.rrf-reveal, .rr-reveal');
   const menu = document.querySelector('[data-rrf-menu]');
   const openButton = document.querySelector('[data-rrf-menu-open]');
   const closeButton = document.querySelector('[data-rrf-menu-close]');
@@ -20,8 +20,14 @@
     if (event.target === menu) setMenu(false);
   });
   menuLinks.forEach((link) => link.addEventListener('click', () => setMenu(false)));
-  root?.addEventListener('keydown', (event) => {
+  document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') setMenu(false);
+  });
+
+  document.addEventListener('shopify:section:load', (event) => {
+    event.target.querySelectorAll('.rrf-reveal, .rr-reveal').forEach((item) => {
+      item.classList.add('is-visible');
+    });
   });
 
   if (!items.length) return;
