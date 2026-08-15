@@ -34,6 +34,7 @@
     --rrf-sage: #9fcb6e;
     --rrf-line: #ecebe6;
     --rrf-muted: #6f756a;
+    --icon-stroke-width: 1.8;
     background: var(--rrf-paper);
     color: var(--rrf-ink);
     font-family: "Jost", system-ui, sans-serif;
@@ -72,6 +73,7 @@
 
   .rrf-nav__actions {
     justify-content: flex-end;
+    gap: 12px;
   }
 
   .rrf-nav a {
@@ -81,6 +83,47 @@
     letter-spacing: .14em;
     line-height: 1;
     text-transform: uppercase;
+  }
+
+  .rrf-icon-link {
+    align-items: center;
+    border-radius: 999px;
+    color: var(--rrf-ink);
+    display: inline-flex;
+    height: 34px;
+    justify-content: center;
+    position: relative;
+    transition: background-color .25s ease, color .25s ease, transform .25s ease;
+    width: 34px;
+  }
+
+  .rrf-icon-link:hover {
+    background: var(--rrf-warm);
+    color: var(--rrf-forest);
+    transform: translateY(-1px);
+  }
+
+  .rrf-icon-link svg {
+    height: 19px;
+    width: 19px;
+  }
+
+  .rrf-cart-count {
+    align-items: center;
+    background: var(--rrf-forest);
+    border: 1px solid var(--rrf-paper);
+    border-radius: 999px;
+    color: var(--rrf-butter);
+    display: flex;
+    font-size: 9px;
+    height: 16px;
+    justify-content: center;
+    line-height: 1;
+    min-width: 16px;
+    padding: 0 4px;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 
   .rrf-menu-button,
@@ -128,10 +171,23 @@
   }
 
   .rrf-pill {
+    align-items: center;
     background: var(--rrf-forest);
     border-radius: 999px;
     color: var(--rrf-butter) !important;
-    padding: 13px 22px;
+    display: inline-flex;
+    gap: 9px;
+    min-height: 34px;
+    padding: 11px 18px;
+  }
+
+  .rrf-pill::after {
+    background: currentColor;
+    border-radius: 999px;
+    content: "";
+    height: 5px;
+    opacity: .72;
+    width: 5px;
   }
 
   .rrf-hero {
@@ -625,6 +681,10 @@
       padding: 9px 15px;
     }
 
+    .rrf-nav__actions .rrf-icon-link {
+      display: none;
+    }
+
     .rrf-hero {
       padding-left: 12px;
       padding-right: 12px;
@@ -742,6 +802,18 @@
       {%- endif -%}
     </a>
     <div class="rrf-nav__actions">
+      <a class="rrf-icon-link" href="{{ routes.search_url }}" aria-label="Search">
+        {{ 'icon-search.svg' | inline_asset_content }}
+      </a>
+      <a class="rrf-icon-link" href="{{ routes.account_url }}" aria-label="Account">
+        {{ 'icon-account.svg' | inline_asset_content }}
+      </a>
+      <a class="rrf-icon-link" href="{{ routes.cart_url }}" aria-label="Cart">
+        {{ 'icon-cart.svg' | inline_asset_content }}
+        {%- if cart.item_count > 0 -%}
+          <span class="rrf-cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
       <a class="rrf-pill" href="{{ section.settings.nav_cta_link }}">{{ section.settings.nav_cta_label }}</a>
     </div>
   </nav>
