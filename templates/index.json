@@ -1,13 +1,114 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "rr_shell": { "type": "rr-home-shell", "settings": { "logo_link": "#top", "nav_collections_link": "#collections", "nav_services_link": "#services", "nav_process_link": "#journey", "nav_about_link": "#about", "nav_cta_link": "mailto:hello@rootandroute.ca" } },
-    "rr_hero": { "type": "rr-home-hero", "settings": { "primary_link": "mailto:hello@rootandroute.ca", "secondary_link": "#collections" } },
-    "rr_collections": { "type": "rr-home-collections", "blocks": { "one": { "type": "collection", "settings": { "fallback": "seasonal" } }, "two": { "type": "collection", "settings": { "fallback": "retail", "eyebrow": "02 / Blind Box", "title": "Collectible blind boxes" } }, "three": { "type": "collection", "settings": { "fallback": "bundles", "eyebrow": "03 / Bespoke Gift", "title": "Custom gift packaging" } } }, "block_order": ["one", "two", "three"], "settings": {} },
-    "rr_philosophy": { "type": "rr-home-philosophy", "settings": { "link": "#about" } },
-    "rr_services": { "type": "rr-home-services", "blocks": { "one": { "type": "service", "settings": { "number": "01", "title": "Material Innovation" } }, "two": { "type": "service", "settings": { "number": "02", "title": "Structural Engineering", "text": "<p>The damped hush of a lid, the clean snap of a magnet — unboxing designed as an experience.</p>" } }, "three": { "type": "service", "settings": { "number": "03", "title": "Global Supply Alignment", "text": "<p>Seamless communication between Canada and our partner atelier — one standard, delivered worldwide.</p>" } } }, "block_order": ["one", "two", "three"], "settings": {} },
-    "rr_journey": { "type": "rr-home-journey", "blocks": { "one": { "type": "step", "settings": { "number": "01", "title": "Discovery & Briefing" } }, "two": { "type": "step", "settings": { "number": "02", "title": "Tactile Concepts & Structural Design", "text": "<p>Materials in hand, dielines on the table — structure decided by touch.</p>" } }, "three": { "type": "step", "settings": { "number": "03", "title": "Prototyping & Material Selection", "text": "<p>Physical samples shipped to you before a single unit is produced.</p>" } }, "four": { "type": "step", "settings": { "number": "04", "title": "Artisan Production & Logistics", "text": "<p>Craft production with our partner atelier, delivered to Canada and beyond.</p>" } } }, "block_order": ["one", "two", "three", "four"], "settings": { "cta_link": "mailto:hello@rootandroute.ca" } },
-    "rr_faq": { "type": "rr-faq", "blocks": { "one": { "type": "question", "settings": { "question": "What is the minimum order quantity?", "answer": "<p>Minimums depend on structure, materials, finishing, and production method. Share your target quantity and we will recommend the most practical route.</p>" } }, "two": { "type": "question", "settings": { "question": "How long does a custom packaging project take?", "answer": "<p>Timing depends on complexity, sampling rounds, production quantity, and destination. We establish the schedule before work begins.</p>" } }, "three": { "type": "question", "settings": { "question": "Can you work from an existing dieline or design?", "answer": "<p>Yes. We can produce from approved artwork and dielines, refine an existing structure, or develop the packaging system with you from the beginning.</p>" } }, "four": { "type": "question", "settings": { "question": "Do you offer sustainable materials?", "answer": "<p>Yes. We source FSC-certified paperboards, specialty papers, and lower-impact options according to the structural and visual requirements of the project.</p>" } } }, "block_order": ["one", "two", "three", "four"], "settings": { "cta_link": "mailto:hello@rootandroute.ca" } },
-    "rr_footer": { "type": "rr-home-footer", "settings": { "cta_link": "mailto:hello@rootandroute.ca" } }
+    "rr_framer_homepage": {
+      "type": "rr-framer-homepage",
+      "blocks": {
+        "collection_seasonal": {
+          "type": "collection",
+          "settings": {
+            "eyebrow": "SEASONAL",
+            "title": "Advent & Countdown boxes",
+            "text": "<p>Multi-drawer interactive structures engineered to anchor holiday campaigns and high-engagement product launches.</p>"
+          }
+        },
+        "collection_retail": {
+          "type": "collection",
+          "settings": {
+            "eyebrow": "RETAIL INNOVATION",
+            "title": "Collapsible Magnetic Boxes",
+            "text": "<p>Premium rigid packaging built with space-saving technology to ship completely flat, drastically reducing your storage and logistics costs.</p>"
+          }
+        },
+        "collection_bundles": {
+          "type": "collection",
+          "settings": {
+            "eyebrow": "BUNDLES",
+            "title": "Coordinated Gift Suites",
+            "text": "<p>Fully matched packaging ensembles combining custom rigid boxes, textured retail bags, and branded accessories for a seamless retail presence.</p>"
+          }
+        },
+        "service_wait": {
+          "type": "service",
+          "settings": {
+            "icon_label": "icon XX",
+            "title": "No factory wait",
+            "text": "<p>Skip the production queue with pre-made, ready-to-ship blanks.</p>"
+          }
+        },
+        "service_moq": {
+          "type": "service",
+          "settings": {
+            "icon_label": "icon XX",
+            "title": "Low minimum order quantity",
+            "text": "<p>Order exactly what you need - perfect for limited product launches and small businesses.</p>"
+          }
+        },
+        "service_turnaround": {
+          "type": "service",
+          "settings": {
+            "icon_label": "icon lightning bolt",
+            "title": "Rapid turnaround",
+            "text": "<p>Add your brand logo and ship in days.</p>"
+          }
+        },
+        "process_spec": {
+          "type": "process_step",
+          "settings": {
+            "number": "01",
+            "title": "SPECIFICATION",
+            "text": "<p>We define your product's dimensions, dielines, and material weights to engineer the perfect format.</p>"
+          }
+        },
+        "process_proto": {
+          "type": "process_step",
+          "settings": {
+            "number": "02",
+            "title": "PROTOTYPING",
+            "text": "<p>We ship a production-grade sample straight to your office to test the exact structural fit and feel.</p>"
+          }
+        },
+        "process_production": {
+          "type": "process_step",
+          "settings": {
+            "number": "03",
+            "title": "PRODUCTION",
+            "text": "<p>Your approved design moves immediately to our partner factory for high-volume precision manufacturing.</p>"
+          }
+        },
+        "process_logistics": {
+          "type": "process_step",
+          "settings": {
+            "number": "04",
+            "title": "LOGISTICS",
+            "text": "<p>We handle all international freight and customs clearance, delivering retail-ready inventory straight to your doors.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "collection_seasonal",
+        "collection_retail",
+        "collection_bundles",
+        "service_wait",
+        "service_moq",
+        "service_turnaround",
+        "process_spec",
+        "process_proto",
+        "process_production",
+        "process_logistics"
+      ],
+      "settings": {}
+    }
   },
-  "order": ["rr_shell", "rr_hero", "rr_collections", "rr_philosophy", "rr_services", "rr_journey", "rr_faq", "rr_footer"]
+  "order": [
+    "rr_framer_homepage"
+  ]
 }
