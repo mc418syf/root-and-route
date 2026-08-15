@@ -1,6 +1,473 @@
+{% doc %}
+  @prompt
+    create a editable brand thicker section to display brand we worked with, can you only show logo once instead of two , can you only show each logo once insead of two in a row
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-brand-ticker-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding_vertical }}px 0;
+    overflow: hidden;
+  }
+
+  .ai-brand-ticker__wrapper-{{ ai_gen_id }} {
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .ai-brand-ticker__heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin: 0 0 {{ block.settings.heading_spacing }}px;
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.heading_size }}px;
+  }
+
+  .ai-brand-ticker__track-container-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-brand-ticker__track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.logo_spacing }}px;
+  }
+
+  .ai-brand-ticker__track-{{ ai_gen_id }}.animate {
+    animation: ai-brand-ticker-scroll-{{ ai_gen_id }} {{ block.settings.animation_speed }}s linear infinite;
+    will-change: transform;
+  }
+
+  {% if block.settings.pause_on_hover %}
+    .ai-brand-ticker__track-{{ ai_gen_id }}.animate:hover {
+      animation-play-state: paused;
+    }
+  {% endif %}
+
+  .ai-brand-ticker__item-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: {{ block.settings.logo_width }}px;
+    height: {{ block.settings.logo_height }}px;
+  }
+
+  .ai-brand-ticker__image-{{ ai_gen_id }} {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    {% if block.settings.grayscale %}
+      filter: grayscale(100%);
+      opacity: {{ block.settings.logo_opacity | divided_by: 100.0 }};
+      transition: filter 0.3s ease, opacity 0.3s ease;
+    {% else %}
+      opacity: {{ block.settings.logo_opacity | divided_by: 100.0 }};
+      transition: opacity 0.3s ease;
+    {% endif %}
+  }
+
+  {% if block.settings.grayscale %}
+    .ai-brand-ticker__item-{{ ai_gen_id }}:hover .ai-brand-ticker__image-{{ ai_gen_id }} {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+  {% else %}
+    .ai-brand-ticker__item-{{ ai_gen_id }}:hover .ai-brand-ticker__image-{{ ai_gen_id }} {
+      opacity: 1;
+    }
+  {% endif %}
+
+  .ai-brand-ticker__placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.placeholder_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+  }
+
+  .ai-brand-ticker__placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-brand-ticker__empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 40px 20px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.6;
+    font-size: 14px;
+  }
+
+  @keyframes ai-brand-ticker-scroll-{{ ai_gen_id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-50% - {{ block.settings.logo_spacing | divided_by: 2.0 }}px));
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-brand-ticker__item-{{ ai_gen_id }} {
+      width: {{ block.settings.logo_width | times: 0.7 }}px;
+      height: {{ block.settings.logo_height | times: 0.7 }}px;
+    }
+  }
+{% endstyle %}
+
+<brand-ticker-{{ ai_gen_id }} class="ai-brand-ticker-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-brand-ticker__wrapper-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-brand-ticker__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    {% assign has_logos = false %}
+    {% for i in (1..12) %}
+      {% assign logo_key = 'logo_' | append: i %}
+      {% if block.settings[logo_key] != blank %}
+        {% assign has_logos = true %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% if has_logos %}
+      <div class="ai-brand-ticker__track-container-{{ ai_gen_id }}">
+        <div class="ai-brand-ticker__track-{{ ai_gen_id }}">
+          {% for i in (1..12) %}
+            {% assign logo_key = 'logo_' | append: i %}
+            {% assign logo = block.settings[logo_key] %}
+            {% if logo != blank %}
+              <div class="ai-brand-ticker__item-{{ ai_gen_id }}">
+                <img
+                  src="{{ logo | image_url: width: 400 }}"
+                  alt="{{ logo.alt | escape }}"
+                  class="ai-brand-ticker__image-{{ ai_gen_id }}"
+                  loading="lazy"
+                  width="{{ block.settings.logo_width }}"
+                  height="{{ block.settings.logo_height }}"
+                >
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <div class="ai-brand-ticker__empty-state-{{ ai_gen_id }}">
+        Add brand logos to display them in the ticker
+      </div>
+    {% endif %}
+  </div>
+</brand-ticker-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class BrandTicker{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('.ai-brand-ticker__track-{{ ai_gen_id }}');
+        if (this.track && this.track.children.length > 0) {
+          this.setupTicker();
+        }
+      }
+
+      setupTicker() {
+        const container = this.track.parentElement;
+        const containerWidth = container.offsetWidth;
+        const trackWidth = this.track.scrollWidth;
+
+        if (trackWidth > containerWidth) {
+          this.duplicateLogos();
+          this.track.classList.add('animate');
+        }
+      }
+
+      duplicateLogos() {
+        const items = Array.from(this.track.children);
+        items.forEach(item => {
+          const clone = item.cloneNode(true);
+          this.track.appendChild(clone);
+        });
+      }
+    }
+
+    customElements.define('brand-ticker-{{ ai_gen_id }}', BrandTicker{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Brand ticker",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Brands we've worked with"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Heading spacing",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 80,
+      "max": 240,
+      "step": 10,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height",
+      "min": 40,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "logo_spacing",
+      "label": "Logo spacing",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "label": "Animation speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 30
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Logo style"
+    },
+    {
+      "type": "checkbox",
+      "id": "grayscale",
+      "label": "Grayscale logos",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "logo_opacity",
+      "label": "Logo opacity",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#fafaf8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_color",
+      "label": "Placeholder",
+      "default": "#efeae0"
+    },
+    {
+      "type": "header",
+      "content": "Logo 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_1",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Logo 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_2",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Logo 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_3",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Logo 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_4",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Logo 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_5",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Logo 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_6",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Logo 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_7",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Logo 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_8",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Logo 9"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_9",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Logo 10"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_10",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Logo 11"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_11",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Logo 12"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_12",
+      "label": "Logo image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand ticker"
+    }
+  ]
+}
 {% endschema %}
