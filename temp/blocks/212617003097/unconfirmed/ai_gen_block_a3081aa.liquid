@@ -1,6 +1,409 @@
+{% doc %}
+  @prompt
+    generate a thicker section able to add up to 15 images and able to change margin/padding and background color and auto play time
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-ticker-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding-top: {{ block.settings.padding_top }}px;
+    padding-bottom: {{ block.settings.padding_bottom }}px;
+    margin-top: {{ block.settings.margin_top }}px;
+    margin-bottom: {{ block.settings.margin_bottom }}px;
+    overflow: hidden;
+  }
+
+  .ai-ticker-track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.image_gap }}px;
+    width: max-content;
+  }
+
+  .ai-ticker-track-{{ ai_gen_id }}.ai-ticker-paused-{{ ai_gen_id }} {
+    animation-play-state: paused;
+  }
+
+  .ai-ticker-image-wrapper-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.image_width }}px;
+    height: {{ block.settings.image_height }}px;
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+  }
+
+  .ai-ticker-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-ticker-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.placeholder_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-ticker-placeholder-{{ ai_gen_id }} svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.3;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-ticker-image-wrapper-{{ ai_gen_id }} {
+      width: {{ block.settings.image_width | times: 0.7 }}px;
+      height: {{ block.settings.image_height | times: 0.7 }}px;
+    }
+  }
+{% endstyle %}
+
+<image-ticker-{{ ai_gen_id }}
+  class="ai-ticker-{{ ai_gen_id }}"
+  data-autoplay-time="{{ block.settings.autoplay_time }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-ticker-track-{{ ai_gen_id }}">
+    {% liquid
+      assign has_images = false
+      for i in (1..15)
+        assign image_key = 'image_' | append: i
+        if block.settings[image_key] != blank
+          assign has_images = true
+          break
+        endif
+      endfor
+    %}
+
+    {% if has_images %}
+      {% for i in (1..15) %}
+        {% liquid
+          assign image_key = 'image_' | append: i
+          assign image = block.settings[image_key]
+        %}
+        {% if image != blank %}
+          <div class="ai-ticker-image-wrapper-{{ ai_gen_id }}">
+            <img
+              src="{{ image | image_url: width: 800 }}"
+              alt="{{ image.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image_width }}"
+              height="{{ block.settings.image_height }}"
+              class="ai-ticker-image-{{ ai_gen_id }}"
+            >
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% for i in (1..15) %}
+        {% liquid
+          assign image_key = 'image_' | append: i
+          assign image = block.settings[image_key]
+        %}
+        {% if image != blank %}
+          <div class="ai-ticker-image-wrapper-{{ ai_gen_id }}">
+            <img
+              src="{{ image | image_url: width: 800 }}"
+              alt="{{ image.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image_width }}"
+              height="{{ block.settings.image_height }}"
+              class="ai-ticker-image-{{ ai_gen_id }}"
+            >
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% for i in (1..6) %}
+        <div class="ai-ticker-image-wrapper-{{ ai_gen_id }}">
+          <div class="ai-ticker-placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        </div>
+      {% endfor %}
+      {% for i in (1..6) %}
+        <div class="ai-ticker-image-wrapper-{{ ai_gen_id }}">
+          <div class="ai-ticker-placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</image-ticker-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ImageTicker{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.track = null;
+        this.autoplayTime = 0;
+        this.animationId = null;
+        this.isPaused = false;
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('.ai-ticker-track-{{ ai_gen_id }}');
+        this.autoplayTime = parseFloat(this.dataset.autoplayTime) || 5;
+        
+        if (this.track) {
+          this.setupAnimation();
+          this.setupHoverPause();
+        }
+      }
+
+      setupAnimation() {
+        const trackWidth = this.track.scrollWidth / 2;
+        const duration = this.autoplayTime * 1000;
+        
+        const keyframes = `
+          @keyframes ai-ticker-scroll-{{ ai_gen_id }} {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-${trackWidth}px);
+            }
+          }
+        `;
+        
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = keyframes;
+        document.head.appendChild(styleSheet);
+        
+        this.track.style.animation = `ai-ticker-scroll-{{ ai_gen_id }} ${duration}ms linear infinite`;
+      }
+
+      setupHoverPause() {
+        this.addEventListener('mouseenter', () => {
+          this.track.classList.add('ai-ticker-paused-{{ ai_gen_id }}');
+        });
+
+        this.addEventListener('mouseleave', () => {
+          this.track.classList.remove('ai-ticker-paused-{{ ai_gen_id }}');
+        });
+      }
+
+      disconnectedCallback() {
+        if (this.animationId) {
+          cancelAnimationFrame(this.animationId);
+        }
+      }
+    }
+
+    customElements.define('image-ticker-{{ ai_gen_id }}', ImageTicker{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Image ticker",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#fafaf8"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_time",
+      "label": "Autoplay time",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "unit": "s",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Image style"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Image width",
+      "min": 100,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Image height",
+      "min": 100,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "image_gap",
+      "label": "Gap between images",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "placeholder_color",
+      "label": "Placeholder color",
+      "default": "#efeae0"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "Image 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_7",
+      "label": "Image 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_8",
+      "label": "Image 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_9",
+      "label": "Image 9"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_10",
+      "label": "Image 10"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_11",
+      "label": "Image 11"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_12",
+      "label": "Image 12"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_13",
+      "label": "Image 13"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_14",
+      "label": "Image 14"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_15",
+      "label": "Image 15"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image ticker"
+    }
+  ]
+}
 {% endschema %}
