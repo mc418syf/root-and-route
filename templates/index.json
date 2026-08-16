@@ -41,13 +41,23 @@
             "style": "round",
             "show_arrow": false
           }
+        },
+        "button_dfH4wt": {
+          "type": "button",
+          "settings": {
+            "label": "START AN INQUIRY",
+            "link": "",
+            "style": "text",
+            "show_arrow": true
+          }
         }
       },
       "block_order": [
         "heading_main",
         "description_main",
         "image_main",
-        "button_primary"
+        "button_primary",
+        "button_dfH4wt"
       ],
       "name": "RR hero",
       "settings": {
@@ -59,7 +69,7 @@
         "background": "#fafaf8",
         "image_background": "#efeae0",
         "padding_top": 104,
-        "padding_bottom": 32,
+        "padding_bottom": 80,
         "side_padding": 42
       }
     },
