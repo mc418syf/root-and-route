@@ -66,12 +66,12 @@
         "link_label": "",
         "link": "",
         "show_arrow": true,
-        "background": "#ffffff",
+        "background": "{{ settings.color_palette.color2 }}",
         "image_background": "#efeae0",
-        "muted_text": "#6b6b63",
+        "muted_text": "{{ settings.color_palette.foreground }}",
         "padding_top": 40,
         "padding_bottom": 40,
-        "side_padding": 40
+        "side_padding": 20
       }
     }
   },
