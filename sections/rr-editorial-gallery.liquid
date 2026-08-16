@@ -1,0 +1,602 @@
+{%- liquid
+  assign image_blocks = section.blocks | where: 'type', 'image'
+
+  assign grid_class = 'rr-editorial__grid'
+  if section.settings.desktop_carousel
+    assign grid_class = grid_class | append: ' rr-editorial__hide-desktop'
+  endif
+  if section.settings.mobile_carousel
+    assign grid_class = grid_class | append: ' rr-editorial__hide-mobile'
+  endif
+
+  assign carousel_class = 'rr-editorial__carousel'
+  unless section.settings.desktop_carousel
+    assign carousel_class = carousel_class | append: ' rr-editorial__hide-desktop'
+  endunless
+  unless section.settings.mobile_carousel
+    assign carousel_class = carousel_class | append: ' rr-editorial__hide-mobile'
+  endunless
+-%}
+
+{%- capture grid_images -%}
+  {%- for block in image_blocks -%}
+    {%- liquid
+      assign image_alt = block.settings.alt | default: block.settings.image.alt
+      assign image_loading = 'lazy'
+      if section.index <= 2 and forloop.first
+        assign image_loading = 'eager'
+      endif
+    -%}
+    <figure class="rr-editorial__figure" {{ block.shopify_attributes }}>
+      <div class="rr-editorial__image">
+        {%- if block.settings.image != blank -%}
+          {{
+            block.settings.image
+            | image_url: width: 1800
+            | image_tag:
+              loading: image_loading,
+              widths: '480, 720, 960, 1200, 1600, 1800',
+              sizes: '(min-width: 750px) 34vw, 100vw',
+              alt: image_alt
+          }}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'rr-editorial__placeholder' }}
+        {%- endif -%}
+      </div>
+      {%- if block.settings.caption != blank -%}
+        <figcaption>{{ block.settings.caption }}</figcaption>
+      {%- endif -%}
+    </figure>
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- capture carousel_slides -%}
+  {%- for block in image_blocks -%}
+    {%- liquid
+      assign image_alt = block.settings.alt | default: block.settings.image.alt
+      assign image_loading = 'lazy'
+      if section.index <= 2 and forloop.first
+        assign image_loading = 'eager'
+      endif
+    -%}
+    {%- capture slide_content -%}
+      <figure class="rr-editorial__figure" {{ block.shopify_attributes }}>
+        <div class="rr-editorial__image">
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 2000
+              | image_tag:
+                loading: image_loading,
+                widths: '600, 900, 1200, 1600, 2000',
+                sizes: '(min-width: 750px) 67vw, 100vw',
+                alt: image_alt
+            }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'rr-editorial__placeholder' }}
+          {%- endif -%}
+        </div>
+        {%- if block.settings.caption != blank -%}
+          <figcaption>{{ block.settings.caption }}</figcaption>
+        {%- endif -%}
+      </figure>
+    {%- endcapture -%}
+    {% render 'slideshow-slide', children: slide_content, index: forloop.index0 %}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- capture carousel_controls -%}
+  {% render 'slideshow-controls',
+    style: 'dots',
+    item_count: image_blocks.size,
+    show_arrows: true,
+    arrows_on_media: false,
+    controls_on_media: false,
+    pagination_position: 'center',
+    icon_style: 'arrow',
+    shape: 'none'
+  %}
+{%- endcapture -%}
+
+<section
+  id="RREditorial-{{ section.id }}"
+  class="rr-editorial rr-reveal"
+  style="--rr-background:{{ section.settings.background }};--rr-image-background:{{ section.settings.image_background }};--rr-image-fit:{{ section.settings.image_fit }};--rr-ink:{{ settings.rr_ink | default: '#141414' }};--rr-forest:{{ settings.rr_forest | default: '#2f5e3a' }};--rr-muted:{{ section.settings.muted_text }};--rr-line:{{ settings.rr_hairline | default: '#ecebe6' }};--rr-cream:{{ settings.rr_cream | default: '#f4ecd8' }};--rr-content-max:{{ settings.rr_content_max | default: 1360 }}px;--rr-side:{{ section.settings.side_padding }}px;--rr-top:{{ section.settings.padding_top }}px;--rr-bottom:{{ section.settings.padding_bottom }}px;--rr-gap:{{ section.settings.image_gap }}px;--rr-image-height:{{ section.settings.image_height }}px;--rr-image-height-mobile:{{ section.settings.image_height_mobile }}px;"
+>
+  <div class="rr-editorial__inner rr-editorial__inner--media-{{ section.settings.image_position }}">
+    <div class="rr-editorial__media">
+      {%- if image_blocks.size > 0 -%}
+        <div class="{{ grid_class }}">
+          {{ grid_images }}
+        </div>
+
+        {% render 'slideshow',
+          slides: carousel_slides,
+          slide_count: image_blocks.size,
+          controls: carousel_controls,
+          class: carousel_class,
+          ref: 'rrEditorialGallery',
+          infinite: false,
+          auto_hide_controls: true
+        %}
+      {%- else -%}
+        <div class="rr-editorial__grid rr-editorial__grid--empty">
+          <figure class="rr-editorial__figure">
+            <div class="rr-editorial__image">
+              {{ 'image' | placeholder_svg_tag: 'rr-editorial__placeholder' }}
+            </div>
+          </figure>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="rr-editorial__content rr-editorial__content--{{ section.settings.content_alignment }}">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="rr-editorial__eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2>{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <div class="rr-editorial__subheading">{{ section.settings.subheading }}</div>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="rr-editorial__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.link_label != blank -%}
+        <a class="rr-editorial__link" href="{{ section.settings.link }}">
+          <span>{{ section.settings.link_label }}</span>
+          {%- if section.settings.show_arrow -%}
+            <svg aria-hidden="true" viewBox="0 0 16 12" fill="none"><path d="M1 6h13M10 1.5 14.5 6 10 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          {%- endif -%}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .rr-editorial {
+    background: var(--rr-background);
+    border-top: 1px solid var(--rr-line);
+    color: var(--rr-ink);
+    font-family: Jost, system-ui, sans-serif;
+    padding: var(--rr-top) var(--rr-side) var(--rr-bottom);
+  }
+
+  .rr-editorial__inner {
+    align-items: center;
+    display: grid;
+    gap: clamp(44px, 5vw, 84px);
+    grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+    margin: 0 auto;
+    max-width: var(--rr-content-max);
+  }
+
+  .rr-editorial__inner--media-right {
+    grid-template-columns: minmax(260px, 1fr) minmax(0, 2fr);
+  }
+
+  .rr-editorial__inner--media-right .rr-editorial__media {
+    order: 2;
+  }
+
+  .rr-editorial__inner--media-right .rr-editorial__content {
+    order: 1;
+  }
+
+  .rr-editorial__media {
+    min-width: 0;
+  }
+
+  .rr-editorial__grid {
+    display: grid;
+    gap: var(--rr-gap);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rr-editorial__grid:has(.rr-editorial__figure:only-child) {
+    grid-template-columns: 1fr;
+  }
+
+  .rr-editorial__grid--empty {
+    grid-template-columns: 1fr;
+  }
+
+  .rr-editorial__figure {
+    margin: 0;
+    min-width: 0;
+  }
+
+  .rr-editorial__image {
+    background: var(--rr-image-background);
+    height: var(--rr-image-height);
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .rr-editorial__image :is(img, svg) {
+    display: block;
+    height: 100%;
+    object-fit: var(--rr-image-fit);
+    width: 100%;
+  }
+
+  .rr-editorial__placeholder {
+    color: color-mix(in srgb, var(--rr-muted) 35%, transparent);
+  }
+
+  .rr-editorial figcaption {
+    color: var(--rr-muted);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: .08em;
+    line-height: 1.45;
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+
+  .rr-editorial__carousel {
+    --slideshow-gap: 0;
+  }
+
+  .rr-editorial__carousel slideshow-controls {
+    margin-top: 12px;
+  }
+
+  .rr-editorial__content {
+    max-width: 440px;
+  }
+
+  .rr-editorial__content--center {
+    text-align: center;
+  }
+
+  .rr-editorial__content--right {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .rr-editorial__eyebrow {
+    color: var(--rr-forest);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .3em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .rr-editorial h2 {
+    color: var(--rr-ink);
+    font-family: Comfortaa, Jost, sans-serif;
+    font-size: clamp(32px, 3.4vw, 48px);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .rr-editorial__eyebrow + h2 {
+    margin-top: 22px;
+  }
+
+  .rr-editorial__subheading {
+    color: var(--rr-forest);
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.45;
+    margin-top: 24px;
+  }
+
+  .rr-editorial__text {
+    color: var(--rr-muted);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.65;
+    margin-top: 24px;
+  }
+
+  .rr-editorial__text p {
+    margin: 0 0 10px;
+  }
+
+  .rr-editorial__text strong {
+    color: var(--rr-ink);
+    font-weight: 500;
+  }
+
+  .rr-editorial__link {
+    align-items: center;
+    color: var(--rr-forest);
+    display: inline-flex;
+    font-size: 11px;
+    font-weight: 500;
+    gap: 10px;
+    letter-spacing: .12em;
+    margin-top: 28px;
+    min-height: 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .rr-editorial__link svg {
+    height: 12px;
+    transition: transform .25s ease;
+    width: 16px;
+  }
+
+  .rr-editorial__link:hover svg {
+    transform: translateX(3px);
+  }
+
+  @media screen and (min-width: 750px) {
+    .rr-editorial__hide-desktop {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-editorial {
+      --rr-side: 20px !important;
+      --rr-top: 72px !important;
+      --rr-bottom: 72px !important;
+    }
+
+    .rr-editorial__inner,
+    .rr-editorial__inner--media-right {
+      gap: 40px;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .rr-editorial__inner--media-right .rr-editorial__media,
+    .rr-editorial__inner--media-right .rr-editorial__content {
+      order: initial;
+    }
+
+    .rr-editorial__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .rr-editorial__image {
+      height: var(--rr-image-height-mobile);
+    }
+
+    .rr-editorial__content {
+      max-width: 620px;
+    }
+
+    .rr-editorial__hide-mobile {
+      display: none;
+    }
+
+    .rr-editorial h2 {
+      font-size: 32px;
+    }
+
+    .rr-editorial__subheading {
+      font-size: 17px;
+    }
+
+    .rr-editorial__text {
+      font-size: 15px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RR editorial gallery",
+  "max_blocks": 4,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position on desktop",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_carousel",
+      "label": "Enable carousel on desktop",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_carousel",
+      "label": "Enable carousel on mobile",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "image_gap",
+      "label": "Image spacing",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Desktop image height",
+      "min": 280,
+      "max": 760,
+      "step": 20,
+      "unit": "px",
+      "default": 520
+    },
+    {
+      "type": "range",
+      "id": "image_height_mobile",
+      "label": "Mobile image height",
+      "min": 260,
+      "max": 680,
+      "step": 20,
+      "unit": "px",
+      "default": 420
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Hudson's Bay"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Architectural Advent Calendar Packaging"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Description",
+      "default": "<p><strong>Structure:</strong> Gatefold double-door rigid box with custom-fitted internal compartments.</p><p><strong>Craftsmanship:</strong> Custom facade featuring deep debossing, foil stamping, and reinforced chipboard.</p>"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "Show link arrow",
+      "default": true,
+      "visible_if": "{{ section.settings.link_label != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "image_background",
+      "label": "Image background",
+      "default": "#efeae0"
+    },
+    {
+      "type": "color",
+      "id": "muted_text",
+      "label": "Body text color",
+      "default": "#6b6b63"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "min": 40,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "min": 40,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "side_padding",
+      "label": "Side spacing",
+      "min": 16,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alt text"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR editorial gallery",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}
