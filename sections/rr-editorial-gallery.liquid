@@ -17,6 +17,16 @@
     assign carousel_class = carousel_class | append: ' rr-editorial__hide-mobile'
   endunless
 
+  assign carousel_show_dots = section.settings.carousel_show_dots
+  if carousel_show_dots == nil
+    assign carousel_show_dots = true
+  endif
+
+  assign carousel_show_arrows = section.settings.carousel_show_arrows
+  if carousel_show_arrows == nil
+    assign carousel_show_arrows = true
+  endif
+
   case section.settings.image_aspect_ratio
     when 'portrait'
       assign image_aspect_ratio = '4 / 5'
@@ -99,21 +109,24 @@
 {%- endcapture -%}
 
 {%- capture carousel_controls -%}
-  {% render 'slideshow-controls',
-    style: 'dots',
-    item_count: image_blocks.size,
-    show_arrows: true,
-    arrows_on_media: false,
-    controls_on_media: false,
-    pagination_position: 'center',
-    icon_style: 'arrow',
-    shape: 'none'
-  %}
+  {%- if carousel_show_dots or carousel_show_arrows -%}
+    {% render 'slideshow-controls',
+      style: 'dots',
+      item_count: image_blocks.size,
+      show_arrows: carousel_show_arrows,
+      arrows_on_media: false,
+      controls_on_media: false,
+      pagination_position: 'center',
+      icon_style: section.settings.carousel_arrow_style | default: 'arrow',
+      shape: 'none',
+      class: 'rr-editorial__controls'
+    %}
+  {%- endif -%}
 {%- endcapture -%}
 
 <section
   id="RREditorial-{{ section.id }}"
-  class="rr-editorial rr-editorial--image-{{ section.settings.image_aspect_ratio | default: 'fixed' }} rr-reveal"
+  class="rr-editorial rr-editorial--image-{{ section.settings.image_aspect_ratio | default: 'fixed' }}{% unless carousel_show_dots %} rr-editorial--hide-carousel-dots{% endunless %} rr-reveal"
   style="--rr-background:{{ section.settings.background }};--rr-image-aspect-ratio:{{ image_aspect_ratio }};--rr-image-background:{{ section.settings.image_background }};--rr-image-fit:{{ section.settings.image_fit }};--rr-ink:{{ settings.rr_ink | default: '#141414' }};--rr-forest:{{ settings.rr_forest | default: '#2f5e3a' }};--rr-muted:{{ section.settings.muted_text }};--rr-line:{{ settings.rr_hairline | default: '#ecebe6' }};--rr-cream:{{ settings.rr_cream | default: '#f4ecd8' }};--rr-content-max:{{ settings.rr_content_max | default: 1360 }}px;--rr-side:{{ section.settings.side_padding }}px;--rr-top:{{ section.settings.padding_top }}px;--rr-bottom:{{ section.settings.padding_bottom }}px;--rr-gap:{{ section.settings.image_gap }}px;--rr-image-height:{{ section.settings.image_height }}px;--rr-image-height-mobile:{{ section.settings.image_height_mobile }}px;"
 >
   <div class="rr-editorial__inner rr-editorial__inner--media-{{ section.settings.image_position }} rr-editorial__inner--text-{{ section.settings.text_width | default: 'one-third' }}">
@@ -269,6 +282,10 @@
 
   .rr-editorial__carousel slideshow-controls {
     margin-top: 12px;
+  }
+
+  .rr-editorial--hide-carousel-dots .rr-editorial__controls .slideshow-controls__dots {
+    display: none;
   }
 
   .rr-editorial__content {
@@ -460,6 +477,31 @@
       "id": "mobile_carousel",
       "label": "Enable carousel on mobile",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "carousel_show_dots",
+      "label": "Show carousel dot indicator",
+      "default": true,
+      "visible_if": "{{ section.settings.desktop_carousel or section.settings.mobile_carousel }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "carousel_show_arrows",
+      "label": "Show carousel arrows",
+      "default": true,
+      "visible_if": "{{ section.settings.desktop_carousel or section.settings.mobile_carousel }}"
+    },
+    {
+      "type": "select",
+      "id": "carousel_arrow_style",
+      "label": "Carousel arrow style",
+      "options": [
+        { "value": "arrow", "label": "Arrow" },
+        { "value": "chevron", "label": "Chevron" }
+      ],
+      "default": "arrow",
+      "visible_if": "{{ section.settings.carousel_show_arrows and section.settings.desktop_carousel or section.settings.carousel_show_arrows and section.settings.mobile_carousel }}"
     },
     {
       "type": "range",
