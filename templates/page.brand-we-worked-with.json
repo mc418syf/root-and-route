@@ -47,9 +47,14 @@
       "name": "RR editorial gallery",
       "settings": {
         "image_position": "left",
+        "text_width": "one-half",
         "desktop_carousel": true,
         "mobile_carousel": true,
+        "carousel_show_dots": true,
+        "carousel_show_arrows": true,
+        "carousel_arrow_style": "arrow",
         "image_gap": 10,
+        "image_aspect_ratio": "square",
         "image_height": 400,
         "image_height_mobile": 360,
         "image_fit": "cover",
@@ -64,8 +69,8 @@
         "background": "#ffffff",
         "image_background": "#efeae0",
         "muted_text": "#6b6b63",
-        "padding_top": 96,
-        "padding_bottom": 96,
+        "padding_top": 40,
+        "padding_bottom": 40,
         "side_padding": 40
       }
     }
