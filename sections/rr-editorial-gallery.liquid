@@ -16,6 +16,19 @@
   unless section.settings.mobile_carousel
     assign carousel_class = carousel_class | append: ' rr-editorial__hide-mobile'
   endunless
+
+  case section.settings.image_aspect_ratio
+    when 'portrait'
+      assign image_aspect_ratio = '4 / 5'
+    when 'square'
+      assign image_aspect_ratio = '1 / 1'
+    when 'landscape'
+      assign image_aspect_ratio = '4 / 3'
+    when 'wide'
+      assign image_aspect_ratio = '16 / 9'
+    else
+      assign image_aspect_ratio = 'auto'
+  endcase
 -%}
 
 {%- capture grid_images -%}
@@ -100,10 +113,10 @@
 
 <section
   id="RREditorial-{{ section.id }}"
-  class="rr-editorial rr-reveal"
-  style="--rr-background:{{ section.settings.background }};--rr-image-background:{{ section.settings.image_background }};--rr-image-fit:{{ section.settings.image_fit }};--rr-ink:{{ settings.rr_ink | default: '#141414' }};--rr-forest:{{ settings.rr_forest | default: '#2f5e3a' }};--rr-muted:{{ section.settings.muted_text }};--rr-line:{{ settings.rr_hairline | default: '#ecebe6' }};--rr-cream:{{ settings.rr_cream | default: '#f4ecd8' }};--rr-content-max:{{ settings.rr_content_max | default: 1360 }}px;--rr-side:{{ section.settings.side_padding }}px;--rr-top:{{ section.settings.padding_top }}px;--rr-bottom:{{ section.settings.padding_bottom }}px;--rr-gap:{{ section.settings.image_gap }}px;--rr-image-height:{{ section.settings.image_height }}px;--rr-image-height-mobile:{{ section.settings.image_height_mobile }}px;"
+  class="rr-editorial rr-editorial--image-{{ section.settings.image_aspect_ratio | default: 'fixed' }} rr-reveal"
+  style="--rr-background:{{ section.settings.background }};--rr-image-aspect-ratio:{{ image_aspect_ratio }};--rr-image-background:{{ section.settings.image_background }};--rr-image-fit:{{ section.settings.image_fit }};--rr-ink:{{ settings.rr_ink | default: '#141414' }};--rr-forest:{{ settings.rr_forest | default: '#2f5e3a' }};--rr-muted:{{ section.settings.muted_text }};--rr-line:{{ settings.rr_hairline | default: '#ecebe6' }};--rr-cream:{{ settings.rr_cream | default: '#f4ecd8' }};--rr-content-max:{{ settings.rr_content_max | default: 1360 }}px;--rr-side:{{ section.settings.side_padding }}px;--rr-top:{{ section.settings.padding_top }}px;--rr-bottom:{{ section.settings.padding_bottom }}px;--rr-gap:{{ section.settings.image_gap }}px;--rr-image-height:{{ section.settings.image_height }}px;--rr-image-height-mobile:{{ section.settings.image_height_mobile }}px;"
 >
-  <div class="rr-editorial__inner rr-editorial__inner--media-{{ section.settings.image_position }}">
+  <div class="rr-editorial__inner rr-editorial__inner--media-{{ section.settings.image_position }} rr-editorial__inner--text-{{ section.settings.text_width | default: 'one-third' }}">
     <div class="rr-editorial__media">
       {%- if image_blocks.size > 0 -%}
         <div class="{{ grid_class }}">
@@ -177,6 +190,11 @@
     grid-template-columns: minmax(260px, 1fr) minmax(0, 2fr);
   }
 
+  .rr-editorial__inner--text-one-half,
+  .rr-editorial__inner--media-right.rr-editorial__inner--text-one-half {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .rr-editorial__inner--media-right .rr-editorial__media {
     order: 2;
   }
@@ -209,10 +227,15 @@
   }
 
   .rr-editorial__image {
+    aspect-ratio: var(--rr-image-aspect-ratio);
     background: var(--rr-image-background);
-    height: var(--rr-image-height);
     overflow: hidden;
     width: 100%;
+  }
+
+  .rr-editorial--image-fixed .rr-editorial__image {
+    aspect-ratio: auto;
+    height: var(--rr-image-height);
   }
 
   .rr-editorial__image :is(img, svg) {
@@ -220,6 +243,10 @@
     height: 100%;
     object-fit: var(--rr-image-fit);
     width: 100%;
+  }
+
+  .rr-editorial--image-adapt .rr-editorial__image :is(img, svg) {
+    height: auto;
   }
 
   .rr-editorial__placeholder {
@@ -246,6 +273,10 @@
 
   .rr-editorial__content {
     max-width: 440px;
+  }
+
+  .rr-editorial__inner--text-one-half .rr-editorial__content {
+    max-width: 600px;
   }
 
   .rr-editorial__content--center {
@@ -344,7 +375,9 @@
     }
 
     .rr-editorial__inner,
-    .rr-editorial__inner--media-right {
+    .rr-editorial__inner--media-right,
+    .rr-editorial__inner--text-one-half,
+    .rr-editorial__inner--media-right.rr-editorial__inner--text-one-half {
       gap: 40px;
       grid-template-columns: minmax(0, 1fr);
     }
@@ -358,7 +391,7 @@
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .rr-editorial__image {
+    .rr-editorial--image-fixed .rr-editorial__image {
       height: var(--rr-image-height-mobile);
     }
 
@@ -407,6 +440,16 @@
       "default": "left"
     },
     {
+      "type": "select",
+      "id": "text_width",
+      "label": "Text width on desktop",
+      "options": [
+        { "value": "one-third", "label": "One third" },
+        { "value": "one-half", "label": "One half" }
+      ],
+      "default": "one-third"
+    },
+    {
       "type": "checkbox",
       "id": "desktop_carousel",
       "label": "Enable carousel on desktop",
@@ -429,6 +472,20 @@
       "default": 16
     },
     {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        { "value": "fixed", "label": "Fixed height" },
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "portrait", "label": "Portrait 4:5" },
+        { "value": "square", "label": "Square 1:1" },
+        { "value": "landscape", "label": "Landscape 4:3" },
+        { "value": "wide", "label": "Wide 16:9" }
+      ],
+      "default": "fixed"
+    },
+    {
       "type": "range",
       "id": "image_height",
       "label": "Desktop image height",
@@ -436,7 +493,8 @@
       "max": 760,
       "step": 20,
       "unit": "px",
-      "default": 520
+      "default": 520,
+      "visible_if": "{{ section.settings.image_aspect_ratio == 'fixed' }}"
     },
     {
       "type": "range",
@@ -446,7 +504,8 @@
       "max": 680,
       "step": 20,
       "unit": "px",
-      "default": 420
+      "default": 420,
+      "visible_if": "{{ section.settings.image_aspect_ratio == 'fixed' }}"
     },
     {
       "type": "select",
