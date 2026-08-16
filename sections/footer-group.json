@@ -63,7 +63,7 @@
                 "mobile_logo": "shopify://shop_images/logo-mark-cream.svg",
                 "unit": "pixel",
                 "percent_width": 100,
-                "pixel_height": 16,
+                "pixel_height": 64,
                 "custom_mobile_size": true,
                 "unit_mobile": "pixel",
                 "percent_width_mobile": 15,
@@ -188,6 +188,7 @@
         },
         "policy_list": {
           "type": "footer-policy-list",
+          "disabled": true,
           "settings": {
             "text_color": "",
             "font_size": "0.75rem",
