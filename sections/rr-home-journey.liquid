@@ -1,5 +1,135 @@
-<section class="rr-journey" id="journey" style="background:{{ section.settings.background }};padding:{{ section.settings.padding }}px {{ section.settings.side_padding }}px;"><div class="rr-wrap rr-journey__grid"><div class="rr-reveal"><div class="rr-eyebrow">{{ section.settings.eyebrow }}</div><h2 class="rr-heading">{{ section.settings.heading }}</h2><div class="rr-body" style="max-width:400px;">{{ section.settings.text }}</div><a class="rr-button" href="{{ section.settings.cta_link }}" style="margin-top:30px;">{{ section.settings.cta_label }}</a></div><div>{%- for block in section.blocks -%}<article class="rr-step rr-reveal" {{ block.shopify_attributes }}><div class="rr-step__number">{{ block.settings.number }}</div><div><h3>{{ block.settings.title }}</h3><div class="rr-body">{{ block.settings.text }}</div></div></article>{%- endfor -%}</div></div></section>
-<style>.rr-journey{border-top:1px solid var(--line)}.rr-journey__grid{display:grid;gap:80px;grid-template-columns:.9fr 1.1fr}.rr-step{display:grid;gap:28px;grid-template-columns:72px 1fr;padding-bottom:44px}.rr-step__number{border-right:1px solid var(--line);color:var(--forest);font:400 22px/1 Comfortaa,Jost,sans-serif;min-height:64px}.rr-step h3{color:var(--ink);font:500 25px/1.18 Comfortaa,Jost,sans-serif;margin:0}.rr-step .rr-body{margin-top:8px}@media(max-width:900px){.rr-journey{padding-left:22px!important;padding-right:22px!important}.rr-journey__grid{grid-template-columns:1fr;gap:54px}.rr-step{grid-template-columns:54px 1fr;gap:18px}}</style>
+{%- liquid
+  assign intro_block = section.blocks | where: 'type', 'intro' | first
+  assign button_block = section.blocks | where: 'type', 'button' | first
+  assign step_blocks = section.blocks | where: 'type', 'step'
+-%}
+
+<section
+  id="RRProcess-{{ section.id }}"
+  class="rr-process"
+  style="--rr-background:{{ section.settings.background }};--rr-ink:{{ settings.rr_ink | default: '#141414' }};--rr-forest:{{ settings.rr_forest | default: '#2f5e3a' }};--rr-cream:{{ settings.rr_cream | default: '#f4ecd8' }};--rr-muted:{{ section.settings.muted_text }};--rr-line:{{ settings.rr_hairline | default: '#ecebe6' }};--rr-content-max:{{ settings.rr_content_max | default: 1360 }}px;--rr-side:{{ section.settings.side_padding }}px;--rr-top:{{ section.settings.padding_top }}px;--rr-bottom:{{ section.settings.padding_bottom }}px;"
+>
+  <span id="journey" class="rr-process__anchor" aria-hidden="true"></span>
+  <div class="rr-process__inner">
+    <div class="rr-process__intro">
+      {%- if intro_block != blank -%}
+        <div {{ intro_block.shopify_attributes }}>
+          {%- if intro_block.settings.eyebrow != blank -%}<p class="rr-process__eyebrow">{{ intro_block.settings.eyebrow }}</p>{%- endif -%}
+          {%- if intro_block.settings.heading != blank -%}<h2>{{ intro_block.settings.heading }}</h2>{%- endif -%}
+          {%- if intro_block.settings.text != blank -%}<div class="rr-process__lead">{{ intro_block.settings.text }}</div>{%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if button_block != blank and button_block.settings.label != blank -%}
+        <a class="rr-process__button" href="{{ button_block.settings.link | default: '#contact' }}" {{ button_block.shopify_attributes }}>
+          <span>{{ button_block.settings.label }}</span>
+          {%- if button_block.settings.show_arrow -%}<span aria-hidden="true">&rarr;</span>{%- endif -%}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="rr-process__steps">
+      {%- for block in step_blocks -%}
+        <article class="rr-process-step" {{ block.shopify_attributes }}>
+          <div class="rr-process-step__number">{{ block.settings.number }}</div>
+          <div class="rr-process-step__copy">
+            <h3>{{ block.settings.title }}</h3>
+            {%- if block.settings.text != blank -%}<div>{{ block.settings.text }}</div>{%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  #RRProcess-{{ section.id }} { background:var(--rr-background); border-top:{% if section.settings.show_top_border %}1px solid var(--rr-line){% else %}0{% endif %}; color:var(--rr-ink); font-family:Jost,system-ui,sans-serif; padding:var(--rr-top) var(--rr-side) var(--rr-bottom); position:relative; }
+  #RRProcess-{{ section.id }} .rr-process__anchor { left:0; position:absolute; top:0; }
+  #RRProcess-{{ section.id }} * { box-sizing:border-box; }
+  #RRProcess-{{ section.id }} .rr-process__inner { display:grid; gap:88px; grid-template-columns:minmax(0,.95fr) minmax(0,1.25fr); margin:0 auto; max-width:var(--rr-content-max); }
+  #RRProcess-{{ section.id }} .rr-process__intro { align-self:start; max-width:510px; }
+  #RRProcess-{{ section.id }} .rr-process__eyebrow { color:var(--rr-forest); font-size:11px; font-weight:500; letter-spacing:.3em; line-height:1.35; margin:0; text-transform:uppercase; }
+  #RRProcess-{{ section.id }} h2 { color:var(--rr-ink); font-family:Comfortaa,Jost,sans-serif; font-size:60px; font-weight:500; letter-spacing:0; line-height:1.08; margin:22px 0 0; }
+  #RRProcess-{{ section.id }} .rr-process__lead { color:var(--rr-muted); font-size:15px; font-weight:300; line-height:1.7; margin-top:28px; max-width:390px; }
+  #RRProcess-{{ section.id }} .rr-process__lead p { margin:0; }
+  #RRProcess-{{ section.id }} .rr-process__button { align-items:center; background:var(--rr-forest); border:1px solid var(--rr-forest); border-radius:999px; color:var(--rr-cream); display:inline-flex; font-size:11px; font-weight:500; gap:9px; justify-content:center; letter-spacing:.12em; margin-top:28px; min-height:40px; padding:11px 24px; text-decoration:none; text-transform:uppercase; transition:background-color .25s ease,transform .25s ease; }
+  #RRProcess-{{ section.id }} .rr-process__button:hover { background:#24482d; transform:translateY(-1px); }
+  #RRProcess-{{ section.id }} .rr-process__steps { display:grid; gap:39px; }
+  #RRProcess-{{ section.id }} .rr-process-step { display:grid; gap:28px; grid-template-columns:68px minmax(0,1fr); }
+  #RRProcess-{{ section.id }} .rr-process-step__number { border-right:1px solid var(--rr-line); color:var(--rr-forest); font-family:Comfortaa,Jost,sans-serif; font-size:20px; font-weight:400; line-height:1.2; min-height:56px; padding-right:20px; }
+  #RRProcess-{{ section.id }} .rr-process-step h3 { color:var(--rr-ink); font-family:Comfortaa,Jost,sans-serif; font-size:21px; font-weight:500; letter-spacing:0; line-height:1.28; margin:0; text-transform:uppercase; }
+  #RRProcess-{{ section.id }} .rr-process-step__copy > div { color:var(--rr-muted); font-size:14px; font-weight:300; line-height:1.7; margin-top:8px; }
+  #RRProcess-{{ section.id }} .rr-process-step__copy p { margin:0; }
+  @media(max-width:900px) {
+    #RRProcess-{{ section.id }} { --rr-side:28px!important; }
+    #RRProcess-{{ section.id }} .rr-process__inner { gap:64px; grid-template-columns:1fr; }
+    #RRProcess-{{ section.id }} .rr-process__intro { max-width:650px; }
+    #RRProcess-{{ section.id }} h2 { font-size:50px; }
+  }
+  @media(max-width:600px) {
+    #RRProcess-{{ section.id }} { --rr-side:20px!important; --rr-top:76px!important; --rr-bottom:76px!important; }
+    #RRProcess-{{ section.id }} .rr-process__inner { gap:52px; }
+    #RRProcess-{{ section.id }} h2 { font-size:40px; }
+    #RRProcess-{{ section.id }} .rr-process-step { gap:18px; grid-template-columns:48px minmax(0,1fr); }
+    #RRProcess-{{ section.id }} .rr-process-step__number { font-size:17px; padding-right:14px; }
+    #RRProcess-{{ section.id }} .rr-process-step h3 { font-size:18px; }
+  }
+</style>
+
 {% schema %}
-{"name":"RR journey","settings":[{"type":"color","id":"background","label":"Background","default":"#fafaf8"},{"type":"range","id":"padding","label":"Section spacing","min":60,"max":180,"step":4,"unit":"px","default":120},{"type":"range","id":"side_padding","label":"Side spacing","min":0,"max":100,"step":2,"unit":"px","default":42},{"type":"text","id":"eyebrow","label":"Eyebrow","default":"Customization Process"},{"type":"text","id":"heading","label":"Heading","default":"The Collaborative Journey"},{"type":"richtext","id":"text","label":"Text","default":"<p>Four steps from first conversation to doorstep — each one shared, reviewed, and signed off together.</p>"},{"type":"text","id":"cta_label","label":"Button label","default":"BEGIN STEP 01"},{"type":"url","id":"cta_link","label":"Button link"}],"blocks":[{"type":"step","name":"Journey step","settings":[{"type":"text","id":"number","label":"Number","default":"01"},{"type":"text","id":"title","label":"Title","default":"Discovery & Briefing"},{"type":"richtext","id":"text","label":"Description","default":"<p>We uncover the root — your brand, audience, and the moment of giving.</p>"}]}],"presets":[{"name":"RR journey","blocks":[{"type":"step"},{"type":"step","settings":{"number":"02","title":"Tactile Concepts & Structural Design","text":"<p>Materials in hand, dielines on the table — structure decided by touch.</p>"}},{"type":"step","settings":{"number":"03","title":"Prototyping & Material Selection","text":"<p>Physical samples shipped to you before a single unit is produced.</p>"}},{"type":"step","settings":{"number":"04","title":"Artisan Production & Logistics","text":"<p>Craft production with our partner atelier, delivered to Canada and beyond.</p>"}}]}]}
+{
+  "name": "RR process",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "color", "id": "background", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "muted_text", "label": "Description color", "default": "#8a8a82" },
+    { "type": "checkbox", "id": "show_top_border", "label": "Show top border", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 40, "max": 180, "step": 4, "unit": "px", "default": 108 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 40, "max": 180, "step": 4, "unit": "px", "default": 116 },
+    { "type": "range", "id": "side_padding", "label": "Side spacing", "min": 16, "max": 100, "step": 2, "unit": "px", "default": 42 }
+  ],
+  "blocks": [
+    {
+      "type": "intro",
+      "name": "Process intro",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customization Process" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "The Blueprint to Production" },
+        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>From structural concept to final delivery - a seamless, four-step pipeline engineered for absolute precision.</p>" }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Process button",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Begin Step 01" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "checkbox", "id": "show_arrow", "label": "Show arrow", "default": false }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Process step",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Specification" },
+        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>We define your product's dimensions, dielines, and material weights to engineer the perfect format.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR process",
+      "blocks": [
+        { "type": "intro" },
+        { "type": "button" },
+        { "type": "step" },
+        { "type": "step", "settings": { "number": "02", "title": "Prototyping", "text": "<p>We ship a production-grade sample straight to your office to test the exact structural fit and feel.</p>" } },
+        { "type": "step", "settings": { "number": "03", "title": "Production", "text": "<p>Your approved design moves immediately to our partner factory for high-volume precision manufacturing.</p>" } },
+        { "type": "step", "settings": { "number": "04", "title": "Logistics", "text": "<p>We handle international freight and customs clearance, delivering retail-ready inventory straight to your doors.</p>" } }
+      ]
+    }
+  ]
+}
 {% endschema %}

@@ -12,26 +12,65 @@
     "rr_home_hero_3rtz7y": {
       "type": "rr-home-hero",
       "name": "RR hero",
+      "blocks": {
+        "heading_main": {
+          "type": "heading",
+          "settings": {
+            "eyebrow": "Eco-Luxury Gift Packaging · Designed in Canada",
+            "heading": "Every package is a conversation."
+          }
+        },
+        "description_main": {
+          "type": "description",
+          "settings": {
+            "text": "<p>We uncover the <em>root</em> of your brand, then design the <em>route</em> — holiday countdown boxes, blind boxes, and custom gift packaging that begins your customer's first impression.</p>"
+          }
+        },
+        "button_primary": {
+          "type": "button",
+          "settings": {
+            "label": "START AN INQUIRY",
+            "link": "",
+            "style": "round",
+            "show_arrow": false
+          }
+        },
+        "button_secondary": {
+          "type": "button",
+          "settings": {
+            "label": "EXPLORE COLLECTIONS",
+            "link": "",
+            "style": "text",
+            "show_arrow": true
+          }
+        },
+        "image_main": {
+          "type": "image",
+          "settings": {
+            "alt": "Root & Route packaging",
+            "height": 680,
+            "height_mobile": 480
+          }
+        }
+      },
+      "block_order": [
+        "heading_main",
+        "description_main",
+        "button_primary",
+        "button_secondary",
+        "image_main"
+      ],
       "settings": {
+        "text_position": "above",
+        "overlay_alignment": "left",
+        "overlay_text": "#f4ecd8",
+        "overlay_color": "#141414",
+        "overlay_opacity": 55,
         "background": "#fafaf8",
         "image_background": "#efeae0",
         "padding_top": 104,
         "padding_bottom": 32,
-        "side_padding": 42,
-        "eyebrow": "Eco-Luxury Gift Packaging · Designed in Canada",
-        "heading": "Every package is a conversation.",
-        "text": "<p>We uncover the <em>root</em> of your brand, then design the <em>route</em> — holiday countdown boxes, blind boxes, and custom gift packaging that begins your customer's first impression.</p>",
-        "primary_label": "START AN INQUIRY",
-        "primary_link": "",
-        "primary_style": "round",
-        "primary_arrow": false,
-        "secondary_label": "EXPLORE COLLECTIONS →",
-        "secondary_link": "",
-        "secondary_style": "text",
-        "secondary_arrow": true,
-        "image_alt": "Root & Route packaging",
-        "proof_label": "",
-        "proof_names": ""
+        "side_padding": 42
       }
     },
     "1786824935273dc36e": {
@@ -96,10 +135,200 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "rr_featured_collections": {
+      "type": "rr-home-collections",
+      "name": "RR featured collections",
+      "blocks": {
+        "featured_heading": {
+          "type": "heading",
+          "settings": {
+            "eyebrow": "Explore our core packaging styles, crafted by our partner atelier",
+            "heading": "Signature Collections"
+          }
+        },
+        "featured_seasonal": {
+          "type": "collection",
+          "settings": {
+            "image_alt": "Advent and countdown packaging",
+            "fallback": "seasonal",
+            "eyebrow": "Seasonal",
+            "title": "Advent & Countdown Boxes",
+            "text": "<p>Multi-drawer interactive structures engineered to anchor holiday campaigns and high-engagement product launches.</p>",
+            "link": "",
+            "show_arrow": true
+          }
+        },
+        "featured_retail": {
+          "type": "collection",
+          "settings": {
+            "image_alt": "Collapsible magnetic packaging",
+            "fallback": "retail",
+            "eyebrow": "Retail Innovation",
+            "title": "Collapsible Magnetic Boxes",
+            "text": "<p>Premium rigid packaging built with space-saving technology to ship completely flat, drastically reducing your storage and logistics costs.</p>",
+            "link": "",
+            "show_arrow": true
+          }
+        },
+        "featured_bundles": {
+          "type": "collection",
+          "settings": {
+            "image_alt": "Coordinated gift packaging suite",
+            "fallback": "bundles",
+            "eyebrow": "Bundles",
+            "title": "Coordinated Gift Suites",
+            "text": "<p>Fully matched packaging ensembles combining custom rigid boxes, textured retail bags, and branded accessories for a seamless retail presence.</p>",
+            "link": "",
+            "show_arrow": true
+          }
+        }
+      },
+      "block_order": [
+        "featured_heading",
+        "featured_seasonal",
+        "featured_retail",
+        "featured_bundles"
+      ],
+      "settings": {
+        "background": "#ffffff",
+        "image_background": "#efeae0",
+        "muted_text": "#8a8a82",
+        "show_top_border": false,
+        "padding_top": 104,
+        "padding_bottom": 96,
+        "side_padding": 42,
+        "image_height": 370,
+        "image_height_mobile": 330
+      }
+    },
+    "rr_ready_to_ship": {
+      "type": "rr-home-ready-to-ship",
+      "name": "RR ready to ship",
+      "blocks": {
+        "ready_heading": {
+          "type": "heading",
+          "settings": {
+            "eyebrow": "The Fast-Track Suite",
+            "heading": "Ready to ship"
+          }
+        },
+        "ready_wait": {
+          "type": "feature",
+          "settings": {
+            "icon": "wait",
+            "title": "No factory wait",
+            "text": "<p>Skip the production queue with pre-made, ready-to-ship blanks.</p>"
+          }
+        },
+        "ready_minimum": {
+          "type": "feature",
+          "settings": {
+            "icon": "minimum",
+            "title": "Low minimum order quantity",
+            "text": "<p>Order exactly what you need - perfect for limited product launches and small businesses.</p>"
+          }
+        },
+        "ready_rapid": {
+          "type": "feature",
+          "settings": {
+            "icon": "rapid",
+            "title": "Rapid turnaround",
+            "text": "<p>Add your brand logo and ship in days.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "ready_heading",
+        "ready_wait",
+        "ready_minimum",
+        "ready_rapid"
+      ],
+      "settings": {
+        "background": "#f4ecd8",
+        "muted_text": "#66645f",
+        "show_icons": true,
+        "padding_top": 72,
+        "padding_bottom": 84,
+        "side_padding": 42
+      }
+    },
+    "rr_process": {
+      "type": "rr-home-journey",
+      "name": "RR process",
+      "blocks": {
+        "process_intro": {
+          "type": "intro",
+          "settings": {
+            "eyebrow": "Customization Process",
+            "heading": "The Blueprint to Production",
+            "text": "<p>From structural concept to final delivery - a seamless, four-step pipeline engineered for absolute precision.</p>"
+          }
+        },
+        "process_button": {
+          "type": "button",
+          "settings": {
+            "label": "Begin Step 01",
+            "link": "",
+            "show_arrow": false
+          }
+        },
+        "process_step_1": {
+          "type": "step",
+          "settings": {
+            "number": "01",
+            "title": "Specification",
+            "text": "<p>We define your product's dimensions, dielines, and material weights to engineer the perfect format.</p>"
+          }
+        },
+        "process_step_2": {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "title": "Prototyping",
+            "text": "<p>We ship a production-grade sample straight to your office to test the exact structural fit and feel.</p>"
+          }
+        },
+        "process_step_3": {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "title": "Production",
+            "text": "<p>Your approved design moves immediately to our partner factory for high-volume precision manufacturing.</p>"
+          }
+        },
+        "process_step_4": {
+          "type": "step",
+          "settings": {
+            "number": "04",
+            "title": "Logistics",
+            "text": "<p>We handle international freight and customs clearance, delivering retail-ready inventory straight to your doors.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "process_intro",
+        "process_button",
+        "process_step_1",
+        "process_step_2",
+        "process_step_3",
+        "process_step_4"
+      ],
+      "settings": {
+        "background": "#ffffff",
+        "muted_text": "#8a8a82",
+        "show_top_border": true,
+        "padding_top": 108,
+        "padding_bottom": 116,
+        "side_padding": 42
+      }
     }
   },
   "order": [
     "rr_home_hero_3rtz7y",
-    "1786824935273dc36e"
+    "1786824935273dc36e",
+    "rr_featured_collections",
+    "rr_ready_to_ship",
+    "rr_process"
   ]
 }

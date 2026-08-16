@@ -1,0 +1,119 @@
+{%- liquid
+  assign heading_block = section.blocks | where: 'type', 'heading' | first
+  assign feature_blocks = section.blocks | where: 'type', 'feature'
+-%}
+
+<section
+  id="RRReady-{{ section.id }}"
+  class="rr-ready"
+  style="--rr-background:{{ section.settings.background }};--rr-ink:{{ settings.rr_ink | default: '#141414' }};--rr-forest:{{ settings.rr_forest | default: '#2f5e3a' }};--rr-muted:{{ section.settings.muted_text }};--rr-content-max:{{ settings.rr_content_max | default: 1360 }}px;--rr-side:{{ section.settings.side_padding }}px;--rr-top:{{ section.settings.padding_top }}px;--rr-bottom:{{ section.settings.padding_bottom }}px;"
+>
+  <span id="ready-to-ship" class="rr-ready__anchor" aria-hidden="true"></span>
+  <div class="rr-ready__inner">
+    {%- if heading_block != blank -%}
+      <header class="rr-ready__header" {{ heading_block.shopify_attributes }}>
+        {%- if heading_block.settings.eyebrow != blank -%}<p class="rr-ready__eyebrow">{{ heading_block.settings.eyebrow }}</p>{%- endif -%}
+        {%- if heading_block.settings.heading != blank -%}<h2>{{ heading_block.settings.heading }}</h2>{%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <div class="rr-ready__grid" style="--rr-feature-count:{{ feature_blocks.size | at_most: 4 }};">
+      {%- for block in feature_blocks -%}
+        <article class="rr-ready-feature" {{ block.shopify_attributes }}>
+          {%- if section.settings.show_icons -%}
+            <div class="rr-ready-feature__icon" aria-hidden="true">
+              {%- if block.settings.icon_image != blank -%}
+                {{ block.settings.icon_image | image_url: width: 96 | image_tag: loading: 'lazy', alt: '' }}
+              {%- else -%}
+                {%- case block.settings.icon -%}
+                  {%- when 'minimum' -%}
+                    <svg viewBox="0 0 24 24" fill="none"><path d="m12 2 8 4-8 4-8-4 8-4Z"/><path d="m4 10 8 4 8-4M4 14l8 4 8-4"/></svg>
+                  {%- when 'rapid' -%}
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4.5 13H11l-1 9 8.5-12H12l1-8Z"/></svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+          <h3>{{ block.settings.title }}</h3>
+          {%- if block.settings.text != blank -%}<div class="rr-ready-feature__text">{{ block.settings.text }}</div>{%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  #RRReady-{{ section.id }} { background:var(--rr-background); color:var(--rr-ink); font-family:Jost,system-ui,sans-serif; padding:var(--rr-top) var(--rr-side) var(--rr-bottom); position:relative; }
+  #RRReady-{{ section.id }} .rr-ready__anchor { left:0; position:absolute; top:0; }
+  #RRReady-{{ section.id }} * { box-sizing:border-box; }
+  #RRReady-{{ section.id }} .rr-ready__inner { margin:0 auto; max-width:var(--rr-content-max); }
+  #RRReady-{{ section.id }} .rr-ready__header { max-width:760px; }
+  #RRReady-{{ section.id }} .rr-ready__eyebrow { color:var(--rr-forest); font-size:11px; font-weight:500; letter-spacing:.3em; line-height:1.35; margin:0; text-transform:uppercase; }
+  #RRReady-{{ section.id }} h2 { color:var(--rr-ink); font-family:Comfortaa,Jost,sans-serif; font-size:60px; font-weight:500; letter-spacing:0; line-height:1.08; margin:22px 0 0; }
+  #RRReady-{{ section.id }} .rr-ready__grid { display:grid; gap:56px; grid-template-columns:repeat(var(--rr-feature-count),minmax(0,1fr)); margin-top:72px; }
+  #RRReady-{{ section.id }} .rr-ready-feature__icon { color:var(--rr-forest); height:30px; margin-bottom:15px; width:30px; }
+  #RRReady-{{ section.id }} .rr-ready-feature__icon svg { display:block; height:100%; stroke:currentColor; stroke-linecap:round; stroke-linejoin:round; stroke-width:1.5; width:100%; }
+  #RRReady-{{ section.id }} .rr-ready-feature__icon img { display:block; height:100%; object-fit:contain; object-position:left center; width:100%; }
+  #RRReady-{{ section.id }} .rr-ready-feature h3 { color:var(--rr-ink); font-family:Comfortaa,Jost,sans-serif; font-size:20px; font-weight:500; letter-spacing:0; line-height:1.3; margin:0; }
+  #RRReady-{{ section.id }} .rr-ready-feature__text { color:var(--rr-muted); font-size:14px; font-weight:300; line-height:1.7; margin-top:10px; max-width:390px; }
+  #RRReady-{{ section.id }} .rr-ready-feature__text p { margin:0; }
+  @media(max-width:900px) {
+    #RRReady-{{ section.id }} { --rr-side:28px!important; }
+    #RRReady-{{ section.id }} h2 { font-size:50px; }
+    #RRReady-{{ section.id }} .rr-ready__grid { gap:44px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  }
+  @media(max-width:600px) {
+    #RRReady-{{ section.id }} { --rr-side:20px!important; --rr-top:72px!important; --rr-bottom:72px!important; }
+    #RRReady-{{ section.id }} h2 { font-size:40px; }
+    #RRReady-{{ section.id }} .rr-ready__grid { grid-template-columns:1fr; margin-top:48px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "RR ready to ship",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "color", "id": "background", "label": "Background", "default": "#f4ecd8" },
+    { "type": "color", "id": "muted_text", "label": "Description color", "default": "#66645f" },
+    { "type": "checkbox", "id": "show_icons", "label": "Show icons", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 40, "max": 160, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 40, "max": 160, "step": 4, "unit": "px", "default": 84 },
+    { "type": "range", "id": "side_padding", "label": "Side spacing", "min": 16, "max": 100, "step": 2, "unit": "px", "default": 42 }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Section heading",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Fast-Track Suite" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Ready to ship" }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Ready-to-ship feature",
+      "settings": [
+        { "type": "image_picker", "id": "icon_image", "label": "Custom icon" },
+        { "type": "select", "id": "icon", "label": "Default icon", "options": [{ "value": "wait", "label": "No wait" }, { "value": "minimum", "label": "Low minimum" }, { "value": "rapid", "label": "Rapid turnaround" }], "default": "wait" },
+        { "type": "text", "id": "title", "label": "Title", "default": "No factory wait" },
+        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>Skip the production queue with pre-made, ready-to-ship blanks.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR ready to ship",
+      "blocks": [
+        { "type": "heading" },
+        { "type": "feature" },
+        { "type": "feature", "settings": { "icon": "minimum", "title": "Low minimum order quantity", "text": "<p>Order exactly what you need - perfect for limited product launches and small businesses.</p>" } },
+        { "type": "feature", "settings": { "icon": "rapid", "title": "Rapid turnaround", "text": "<p>Add your brand logo and ship in days.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
