@@ -12,22 +12,65 @@
     "rr_home_hero_3rtz7y": {
       "type": "rr-home-hero",
       "name": "RR hero",
+      "blocks": {
+        "heading_main": {
+          "type": "heading",
+          "settings": {
+            "eyebrow": "Eco-Luxury Gift Packaging · Designed in Canada",
+            "heading": "Every package is a conversation."
+          }
+        },
+        "description_main": {
+          "type": "description",
+          "settings": {
+            "text": "<p>We uncover the <em>root</em> of your brand, then design the <em>route</em> — holiday countdown boxes, blind boxes, and custom gift packaging that begins your customer's first impression.</p>"
+          }
+        },
+        "button_primary": {
+          "type": "button",
+          "settings": {
+            "label": "START AN INQUIRY",
+            "link": "",
+            "style": "round",
+            "show_arrow": false
+          }
+        },
+        "button_secondary": {
+          "type": "button",
+          "settings": {
+            "label": "EXPLORE COLLECTIONS",
+            "link": "",
+            "style": "text",
+            "show_arrow": true
+          }
+        },
+        "image_main": {
+          "type": "image",
+          "settings": {
+            "alt": "Root & Route packaging",
+            "height": 680,
+            "height_mobile": 480
+          }
+        }
+      },
+      "block_order": [
+        "heading_main",
+        "description_main",
+        "button_primary",
+        "button_secondary",
+        "image_main"
+      ],
       "settings": {
+        "text_position": "above",
+        "overlay_alignment": "left",
+        "overlay_text": "#f4ecd8",
+        "overlay_color": "#141414",
+        "overlay_opacity": 55,
         "background": "#fafaf8",
         "image_background": "#efeae0",
         "padding_top": 104,
         "padding_bottom": 56,
-        "side_padding": 42,
-        "eyebrow": "Eco-Luxury Gift Packaging · Designed in Canada",
-        "heading": "Every package is a conversation.",
-        "text": "<p>We uncover the <em>root</em> of your brand, then design the <em>route</em> — holiday countdown boxes, blind boxes, and custom gift packaging that begins your customer's first impression.</p>",
-        "primary_label": "START AN INQUIRY",
-        "primary_link": "",
-        "secondary_label": "EXPLORE COLLECTIONS →",
-        "secondary_link": "",
-        "image_alt": "Root & Route packaging",
-        "proof_label": "",
-        "proof_names": ""
+        "side_padding": 42
       }
     },
     "1786824935273dc36e": {
