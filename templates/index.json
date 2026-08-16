@@ -25,13 +25,12 @@
             "text": "<p>We uncover the <em>root</em> of your brand, then design the <em>route</em> — holiday countdown boxes, blind boxes, and custom gift packaging that begins your customer's first impression.</p>"
           }
         },
-        "button_primary": {
-          "type": "button",
+        "image_main": {
+          "type": "image",
           "settings": {
-            "label": "START AN INQUIRY",
-            "link": "",
-            "style": "round",
-            "show_arrow": false
+            "alt": "Root & Route packaging",
+            "height": 680,
+            "height_mobile": 480
           }
         },
         "button_secondary": {
@@ -43,21 +42,22 @@
             "show_arrow": true
           }
         },
-        "image_main": {
-          "type": "image",
+        "button_primary": {
+          "type": "button",
           "settings": {
-            "alt": "Root & Route packaging",
-            "height": 680,
-            "height_mobile": 480
+            "label": "START AN INQUIRY",
+            "link": "",
+            "style": "round",
+            "show_arrow": false
           }
         }
       },
       "block_order": [
         "heading_main",
         "description_main",
-        "button_primary",
+        "image_main",
         "button_secondary",
-        "image_main"
+        "button_primary"
       ],
       "name": "RR hero",
       "settings": {
