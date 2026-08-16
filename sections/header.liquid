@@ -326,6 +326,7 @@
   class="{{ class }}"
   data-theme-color="rgb({{ section.settings.background_color_top.rgb | default: settings.page_background_color.rgb }})"
   data-bubble-style="{{ section.settings.bubble_style }}"
+  data-mobile-layout="{{ section.settings.mobile_layout | default: 'centered' }}"
   {% if transparent %}
     transparent="{{ transparent }}"
   {% endif %}
@@ -915,6 +916,33 @@
     }
   }
 
+  @media screen and (max-width: 749px) {
+    #header-component[data-mobile-layout='logo-left-menu-right'] .header__columns {
+      --header-template-columns: minmax(0, 1fr) auto auto var(--header-mobile-bookend);
+
+      grid-template-areas: 'logo search actions menu';
+      padding-inline: var(--padding-lg) var(--padding-3xs);
+
+      .header-logo {
+        grid-area: logo;
+        justify-self: flex-start;
+      }
+
+      .search-action {
+        grid-area: search;
+      }
+
+      header-actions {
+        grid-area: actions;
+      }
+
+      .header__drawer {
+        grid-area: menu;
+        justify-self: flex-end;
+      }
+    }
+  }
+
   /* Single column layout if there are no columns within */
   .header__columns:not(:has(.header__column)) {
     grid-template-columns: 1fr;
@@ -1221,6 +1249,22 @@
         }
       ],
       "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile header layout",
+      "options": [
+        {
+          "value": "centered",
+          "label": "Menu left, logo centered"
+        },
+        {
+          "value": "logo-left-menu-right",
+          "label": "Logo left, menu right"
+        }
+      ],
+      "default": "centered"
     },
     {
       "type": "header",
@@ -1550,6 +1594,19 @@
     },
     {
       "type": "checkbox",
+      "id": "show_cart_action",
+      "label": "Show cart action",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_on_mobile",
+      "label": "Show cart on mobile",
+      "default": true,
+      "visible_if": "{{ section.settings.show_cart_action }}"
+    },
+    {
+      "type": "checkbox",
       "id": "show_quote_button",
       "label": "Show Get a Quote button",
       "default": false
@@ -1570,8 +1627,15 @@
     {
       "type": "checkbox",
       "id": "quote_show_mobile",
-      "label": "Show quote button on mobile",
+      "label": "Show quote button in mobile header",
       "default": false,
+      "visible_if": "{{ section.settings.show_quote_button }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "quote_show_in_drawer",
+      "label": "Show quote button in mobile menu",
+      "default": true,
       "visible_if": "{{ section.settings.show_quote_button }}"
     },
     {

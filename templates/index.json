@@ -62,6 +62,7 @@
       "name": "RR hero",
       "settings": {
         "text_position": "above",
+        "button_alignment": "left",
         "overlay_alignment": "left",
         "overlay_text": "#f4ecd8",
         "overlay_color": "#141414",

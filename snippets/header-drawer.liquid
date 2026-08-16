@@ -589,9 +589,28 @@
           {% endif %}
         </ul>
       </nav>
+      {% if data_header_drawer_type == 'mobile-drawer'
+        and section.settings.show_quote_button
+        and section.settings.quote_show_in_drawer
+        and section.settings.quote_label != blank
+      %}
+        <div
+          class="menu-drawer__quote-wrap menu-drawer__animated-element"
+          style="--menu-drawer-animation-index: {{ linklist.links.size | plus: 1 }};"
+        >
+          <a
+            class="menu-drawer__quote"
+            href="{{ section.settings.quote_link | default: '/pages/contact' }}"
+            on:click="header-drawer/close"
+            style="--quote-background:{{ settings.rr_forest | default: '#2f5e3a' }};--quote-background-hover:{{ settings.rr_deep_forest | default: '#24482d' }};--quote-text:{{ settings.rr_cream | default: '#f4ecd8' }};"
+          >
+            {{ section.settings.quote_label }}
+          </a>
+        </div>
+      {% endif %}
       <div
-        class="menu-drawer__utility-links menu-drawer__animated-element"
-        style="--menu-drawer-animation-index: {{ linklist.links.size }};"
+        class="menu-drawer__utility-links{% if data_header_drawer_type == 'mobile-drawer' and section.settings.show_quote_button and section.settings.quote_show_in_drawer and section.settings.quote_label != blank %} menu-drawer__utility-links--after-quote{% endif %} menu-drawer__animated-element"
+        style="--menu-drawer-animation-index: {{ linklist.links.size | plus: 2 }};"
       >
         {% liquid
           assign show_language = section.settings.show_language
@@ -1308,6 +1327,42 @@
     padding: 0;
     margin-block: auto var(--padding-sm);
     margin-inline-start: var(--padding-xl);
+  }
+
+  .menu-drawer__utility-links--after-quote {
+    margin-block-start: 0;
+  }
+
+  .menu-drawer__quote-wrap {
+    margin-block-start: auto;
+    padding: var(--padding-lg) var(--drawer-padding) 0;
+    width: 100%;
+  }
+
+  .menu-drawer__quote {
+    align-items: center;
+    background: var(--quote-background);
+    border: 1px solid var(--quote-background);
+    border-radius: 999px;
+    color: var(--quote-text);
+    display: flex;
+    font-family: var(--font-body--family);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    justify-content: center;
+    letter-spacing: 0.1em;
+    min-height: 42px;
+    padding: 12px 24px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color var(--animation-speed) var(--animation-easing), border-color var(--animation-speed) var(--animation-easing);
+    width: 100%;
+  }
+
+  .menu-drawer__quote:hover {
+    background: var(--quote-background-hover);
+    border-color: var(--quote-background-hover);
+    color: var(--quote-text);
   }
 
   .menu-drawer__account {

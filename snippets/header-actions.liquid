@@ -17,6 +17,16 @@
   if section and section.settings.show_account_action == false
     assign show_account_action = false
   endif
+
+  assign show_cart_action = true
+  if section and section.settings.show_cart_action == false
+    assign show_cart_action = false
+  endif
+
+  assign show_cart_on_mobile = true
+  if section and section.settings.show_cart_on_mobile == false
+    assign show_cart_on_mobile = false
+  endif
 %}
 
 <script
@@ -120,28 +130,30 @@
     </div>
   {% endif %}
 
-  {% if settings.cart_type == 'drawer' and template.name != 'cart' %}
-    <button
-      class="header-actions__action button-unstyled{% if display_style == 'text' %} header-actions__text-style{% endif %}"
-      on:click="#cart-drawer/toggle"
-      aria-haspopup="dialog"
-      aria-expanded="false"
-      aria-controls="cart-drawer"
-      aria-label="{{ 'accessibility.cart' | t }}"
-      aria-describedby="cart-bubble-text"
-      data-testid="cart-drawer-trigger"
-    >
-      {{ cart_icon }}
-    </button>
-  {% else %}
-    <a
-      href="{{ routes.cart_url }}"
-      class="header-actions__action action__cart{% if display_style == 'text' %} header-actions__text-style{% endif %}"
-      aria-label="{{ 'accessibility.cart' | t }}"
-      aria-describedby="cart-bubble-text"
-    >
-      {{ cart_icon }}
-    </a>
+  {% if show_cart_action %}
+    {% if settings.cart_type == 'drawer' and template.name != 'cart' %}
+      <button
+        class="header-actions__action header-actions__cart-action button-unstyled{% unless show_cart_on_mobile %} header-actions__cart-action--desktop-only{% endunless %}{% if display_style == 'text' %} header-actions__text-style{% endif %}"
+        on:click="#cart-drawer/toggle"
+        aria-haspopup="dialog"
+        aria-expanded="false"
+        aria-controls="cart-drawer"
+        aria-label="{{ 'accessibility.cart' | t }}"
+        aria-describedby="cart-bubble-text"
+        data-testid="cart-drawer-trigger"
+      >
+        {{ cart_icon }}
+      </button>
+    {% else %}
+      <a
+        href="{{ routes.cart_url }}"
+        class="header-actions__action header-actions__cart-action action__cart{% unless show_cart_on_mobile %} header-actions__cart-action--desktop-only{% endunless %}{% if display_style == 'text' %} header-actions__text-style{% endif %}"
+        aria-label="{{ 'accessibility.cart' | t }}"
+        aria-describedby="cart-bubble-text"
+      >
+        {{ cart_icon }}
+      </a>
+    {% endif %}
   {% endif %}
 
   {% if section and section.settings.show_quote_button and section.settings.quote_label != blank %}
@@ -295,7 +307,8 @@
   }
 
   @media screen and (max-width: 749px) {
-    .header-actions__quote--desktop-only {
+    .header-actions__quote--desktop-only,
+    .header-actions__cart-action--desktop-only {
       display: none;
     }
   }
