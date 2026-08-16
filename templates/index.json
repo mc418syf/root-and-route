@@ -33,15 +33,6 @@
             "height_mobile": 480
           }
         },
-        "button_secondary": {
-          "type": "button",
-          "settings": {
-            "label": "EXPLORE COLLECTIONS",
-            "link": "",
-            "style": "text",
-            "show_arrow": true
-          }
-        },
         "button_primary": {
           "type": "button",
           "settings": {
@@ -56,7 +47,6 @@
         "heading_main",
         "description_main",
         "image_main",
-        "button_secondary",
         "button_primary"
       ],
       "name": "RR hero",
