@@ -24,7 +24,7 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
+            "gap": 0,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -58,16 +58,16 @@
               "name": "t:names.logo",
               "settings": {
                 "inverse": true,
-                "mobile_logo": "",
                 "font": "heading",
                 "text_color": "",
+                "mobile_logo": "shopify://shop_images/logo-mark-cream.svg",
                 "unit": "pixel",
                 "percent_width": 100,
-                "pixel_height": 80,
-                "custom_mobile_size": false,
-                "unit_mobile": "percent",
-                "percent_width_mobile": 100,
-                "pixel_height_mobile": 120,
+                "pixel_height": 16,
+                "custom_mobile_size": true,
+                "unit_mobile": "pixel",
+                "percent_width_mobile": 15,
+                "pixel_height_mobile": 48,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -115,11 +115,11 @@
             "email-signup_HafH7P"
           ]
         },
-        "menu_footer": {
+        "menu_main": {
           "type": "menu",
           "settings": {
-            "menu": "footer",
-            "heading": "CONTACT",
+            "menu": "main-menu",
+            "heading": "STUDIO",
             "menu_spacing": 12,
             "show_as_accordion": false,
             "accordion_icon": "plus",
@@ -135,11 +135,11 @@
           },
           "blocks": {}
         },
-        "menu_main": {
+        "menu_footer": {
           "type": "menu",
           "settings": {
-            "menu": "main-menu",
-            "heading": "STUDIO",
+            "menu": "footer",
+            "heading": "CONTACT",
             "menu_spacing": 12,
             "show_as_accordion": false,
             "accordion_icon": "plus",
@@ -164,7 +164,7 @@
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
-        "gap": 40,
+        "gap": 10,
         "background_color": "{{ settings.color_palette.color1 }}",
         "mobile_layout": "logo-menus",
         "mobile_logo_column_width": 80,
