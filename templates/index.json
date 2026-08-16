@@ -11,7 +11,6 @@
   "sections": {
     "rr_home_hero_3rtz7y": {
       "type": "rr-home-hero",
-      "name": "RR hero",
       "blocks": {
         "heading_main": {
           "type": "heading",
@@ -60,6 +59,7 @@
         "button_secondary",
         "image_main"
       ],
+      "name": "RR hero",
       "settings": {
         "text_position": "above",
         "overlay_alignment": "left",
@@ -138,7 +138,6 @@
     },
     "rr_featured_collections": {
       "type": "rr-home-collections",
-      "name": "RR featured collections",
       "blocks": {
         "featured_heading": {
           "type": "heading",
@@ -150,6 +149,7 @@
         "featured_seasonal": {
           "type": "collection",
           "settings": {
+            "image": "shopify://shop_images/TeddyBear1.jpg",
             "image_alt": "Advent and countdown packaging",
             "fallback": "seasonal",
             "eyebrow": "Seasonal",
@@ -190,6 +190,7 @@
         "featured_retail",
         "featured_bundles"
       ],
+      "name": "RR featured collections",
       "settings": {
         "background": "#ffffff",
         "image_background": "#efeae0",
@@ -204,7 +205,6 @@
     },
     "rr_ready_to_ship": {
       "type": "rr-home-ready-to-ship",
-      "name": "RR ready to ship",
       "blocks": {
         "ready_heading": {
           "type": "heading",
@@ -244,18 +244,18 @@
         "ready_minimum",
         "ready_rapid"
       ],
+      "name": "RR ready to ship",
       "settings": {
         "background": "#f4ecd8",
         "muted_text": "#66645f",
         "show_icons": true,
-        "padding_top": 72,
-        "padding_bottom": 84,
-        "side_padding": 42
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "side_padding": 40
       }
     },
     "rr_process": {
       "type": "rr-home-journey",
-      "name": "RR process",
       "blocks": {
         "process_intro": {
           "type": "intro",
@@ -314,13 +314,14 @@
         "process_step_3",
         "process_step_4"
       ],
+      "name": "RR process",
       "settings": {
         "background": "#ffffff",
         "muted_text": "#8a8a82",
-        "show_top_border": true,
-        "padding_top": 108,
-        "padding_bottom": 116,
-        "side_padding": 42
+        "show_top_border": false,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "side_padding": 40
       }
     }
   },
