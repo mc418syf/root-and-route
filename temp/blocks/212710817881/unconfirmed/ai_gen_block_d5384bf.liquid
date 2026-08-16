@@ -1,6 +1,871 @@
+{% doc %}
+  @prompt
+    an editorial block with ability to add 4 images and ability to show 2 images next to each other and have a optional show carousal button for mobile and desktop. the other 1/2 or 1/3 of the block will be description section include heading, description text, caption and buttons
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-editorial-block-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-editorial-container-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.gap }}px;
+    align-items: stretch;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .ai-editorial-images-{{ ai_gen_id }} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.image_gap }}px;
+  }
+
+  .ai-editorial-image-row-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.image_gap }}px;
+  }
+
+  .ai-editorial-image-wrapper-{{ ai_gen_id }} {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-editorial-image-wrapper-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-editorial-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    background-color: {{ block.settings.placeholder_bg_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-editorial-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .ai-editorial-carousel-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-editorial-carousel-track-{{ ai_gen_id }} {
+    display: flex;
+    transition: transform 0.4s ease;
+  }
+
+  .ai-editorial-carousel-slide-{{ ai_gen_id }} {
+    min-width: 100%;
+    flex-shrink: 0;
+  }
+
+  .ai-editorial-carousel-slide-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-editorial-carousel-nav-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: {{ block.settings.carousel_nav_bg }};
+    color: {{ block.settings.carousel_nav_color }};
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-editorial-carousel-nav-{{ ai_gen_id }}:hover {
+    opacity: 1;
+  }
+
+  .ai-editorial-carousel-nav-{{ ai_gen_id }}--prev {
+    left: 10px;
+  }
+
+  .ai-editorial-carousel-nav-{{ ai_gen_id }}--next {
+    right: 10px;
+  }
+
+  .ai-editorial-carousel-dots-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  .ai-editorial-carousel-dot-{{ ai_gen_id }} {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: {{ block.settings.carousel_nav_color }};
+    opacity: 0.5;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-editorial-carousel-dot-{{ ai_gen_id }}.active {
+    opacity: 1;
+  }
+
+  .ai-editorial-content-{{ ai_gen_id }} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: {{ block.settings.content_alignment }};
+    padding: {{ block.settings.content_padding }}px;
+    background-color: {{ block.settings.content_bg_color }};
+    border-radius: {{ block.settings.content_border_radius }}px;
+  }
+
+  .ai-editorial-caption-{{ ai_gen_id }} {
+    font-size: {{ block.settings.caption_size }}px;
+    color: {{ block.settings.caption_color }};
+    margin-bottom: 12px;
+    text-transform: {{ block.settings.caption_transform }};
+  }
+
+  .ai-editorial-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+  }
+
+  .ai-editorial-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.description_color }};
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .ai-editorial-buttons-{{ ai_gen_id }} {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .ai-editorial-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    transition: all 0.3s ease;
+    border: {{ block.settings.button_border_width }}px solid transparent;
+  }
+
+  .ai-editorial-button-{{ ai_gen_id }}--primary {
+    background-color: {{ block.settings.button_primary_bg }};
+    color: {{ block.settings.button_primary_color }};
+    border-color: {{ block.settings.button_primary_border }};
+  }
+
+  .ai-editorial-button-{{ ai_gen_id }}--primary:hover {
+    background-color: {{ block.settings.button_primary_hover_bg }};
+    color: {{ block.settings.button_primary_hover_color }};
+  }
+
+  .ai-editorial-button-{{ ai_gen_id }}--secondary {
+    background-color: {{ block.settings.button_secondary_bg }};
+    color: {{ block.settings.button_secondary_color }};
+    border-color: {{ block.settings.button_secondary_border }};
+  }
+
+  .ai-editorial-button-{{ ai_gen_id }}--secondary:hover {
+    background-color: {{ block.settings.button_secondary_hover_bg }};
+    color: {{ block.settings.button_secondary_hover_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-editorial-container-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-editorial-content-{{ ai_gen_id }} {
+      padding: {{ block.settings.content_padding | times: 0.7 }}px;
+    }
+
+    .ai-editorial-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    }
+
+    .ai-editorial-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.description_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<editorial-block-{{ ai_gen_id }}
+  class="ai-editorial-block-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-editorial-container-{{ ai_gen_id }}">
+    <div class="ai-editorial-images-{{ ai_gen_id }}">
+      {% if block.settings.show_carousel_desktop %}
+        <div class="ai-editorial-carousel-{{ ai_gen_id }}" data-carousel="desktop">
+          <div class="ai-editorial-carousel-track-{{ ai_gen_id }}">
+            {% for i in (1..4) %}
+              {% assign image_key = 'image_' | append: i %}
+              {% assign image = block.settings[image_key] %}
+              {% if image != blank %}
+                <div class="ai-editorial-carousel-slide-{{ ai_gen_id }}">
+                  <img
+                    src="{{ image | image_url: width: 1000 }}"
+                    alt="{{ image.alt | escape }}"
+                    loading="lazy"
+                    width="{{ image.width }}"
+                    height="{{ image.height }}"
+                  >
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <button
+            class="ai-editorial-carousel-nav-{{ ai_gen_id }} ai-editorial-carousel-nav-{{ ai_gen_id }}--prev"
+            aria-label="Previous image"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="12 4 6 10 12 16"></polyline>
+            </svg>
+          </button>
+          <button
+            class="ai-editorial-carousel-nav-{{ ai_gen_id }} ai-editorial-carousel-nav-{{ ai_gen_id }}--next"
+            aria-label="Next image"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="8 4 14 10 8 16"></polyline>
+            </svg>
+          </button>
+          <div class="ai-editorial-carousel-dots-{{ ai_gen_id }}">
+            {% for i in (1..4) %}
+              {% assign image_key = 'image_' | append: i %}
+              {% assign image = block.settings[image_key] %}
+              {% if image != blank %}
+                <button
+                  class="ai-editorial-carousel-dot-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+                  data-index="{{ forloop.index0 }}"
+                  aria-label="Go to image {{ forloop.index }}"
+                ></button>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        {% assign images_count = 0 %}
+        {% for i in (1..4) %}
+          {% assign image_key = 'image_' | append: i %}
+          {% if block.settings[image_key] != blank %}
+            {% assign images_count = images_count | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+
+        {% if images_count > 0 %}
+          {% if block.settings.layout == 'two_columns' %}
+            <div class="ai-editorial-image-row-{{ ai_gen_id }}">
+              {% for i in (1..2) %}
+                {% assign image_key = 'image_' | append: i %}
+                {% assign image = block.settings[image_key] %}
+                <div class="ai-editorial-image-wrapper-{{ ai_gen_id }}">
+                  {% if image != blank %}
+                    <img
+                      src="{{ image | image_url: width: 800 }}"
+                      alt="{{ image.alt | escape }}"
+                      loading="lazy"
+                      width="{{ image.width }}"
+                      height="{{ image.height }}"
+                    >
+                  {% else %}
+                    <div class="ai-editorial-image-placeholder-{{ ai_gen_id }}">
+                      {{ 'image' | placeholder_svg_tag }}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+            <div class="ai-editorial-image-row-{{ ai_gen_id }}">
+              {% for i in (3..4) %}
+                {% assign image_key = 'image_' | append: i %}
+                {% assign image = block.settings[image_key] %}
+                <div class="ai-editorial-image-wrapper-{{ ai_gen_id }}">
+                  {% if image != blank %}
+                    <img
+                      src="{{ image | image_url: width: 800 }}"
+                      alt="{{ image.alt | escape }}"
+                      loading="lazy"
+                      width="{{ image.width }}"
+                      height="{{ image.height }}"
+                    >
+                  {% else %}
+                    <div class="ai-editorial-image-placeholder-{{ ai_gen_id }}">
+                      {{ 'image' | placeholder_svg_tag }}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            {% for i in (1..4) %}
+              {% assign image_key = 'image_' | append: i %}
+              {% assign image = block.settings[image_key] %}
+              <div class="ai-editorial-image-wrapper-{{ ai_gen_id }}">
+                {% if image != blank %}
+                  <img
+                    src="{{ image | image_url: width: 1000 }}"
+                    alt="{{ image.alt | escape }}"
+                    loading="lazy"
+                    width="{{ image.width }}"
+                    height="{{ image.height }}"
+                  >
+                {% else %}
+                  <div class="ai-editorial-image-placeholder-{{ ai_gen_id }}">
+                    {{ 'image' | placeholder_svg_tag }}
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% else %}
+          <div class="ai-editorial-image-wrapper-{{ ai_gen_id }}">
+            <div class="ai-editorial-image-placeholder-{{ ai_gen_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+
+    <div class="ai-editorial-content-{{ ai_gen_id }}">
+      {% if block.settings.caption != blank %}
+        <div class="ai-editorial-caption-{{ ai_gen_id }}">{{ block.settings.caption }}</div>
+      {% endif %}
+
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-editorial-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+      {% endif %}
+
+      {% if block.settings.description != blank %}
+        <div class="ai-editorial-description-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+      {% endif %}
+
+      <div class="ai-editorial-buttons-{{ ai_gen_id }}">
+        {% if block.settings.button_primary_label != blank %}
+          <a
+            href="{{ block.settings.button_primary_link }}"
+            class="ai-editorial-button-{{ ai_gen_id }} ai-editorial-button-{{ ai_gen_id }}--primary"
+          >
+            {{ block.settings.button_primary_label }}
+          </a>
+        {% endif %}
+
+        {% if block.settings.button_secondary_label != blank %}
+          <a
+            href="{{ block.settings.button_secondary_link }}"
+            class="ai-editorial-button-{{ ai_gen_id }} ai-editorial-button-{{ ai_gen_id }}--secondary"
+          >
+            {{ block.settings.button_secondary_label }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</editorial-block-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class EditorialBlock{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentSlide = 0;
+        this.autoplayInterval = null;
+      }
+
+      connectedCallback() {
+        this.carousel = this.querySelector('[data-carousel]');
+        if (!this.carousel) return;
+
+        this.track = this.carousel.querySelector('.ai-editorial-carousel-track-{{ ai_gen_id }}');
+        this.slides = this.track.querySelectorAll('.ai-editorial-carousel-slide-{{ ai_gen_id }}');
+        this.prevButton = this.carousel.querySelector('.ai-editorial-carousel-nav-{{ ai_gen_id }}--prev');
+        this.nextButton = this.carousel.querySelector('.ai-editorial-carousel-nav-{{ ai_gen_id }}--next');
+        this.dots = this.carousel.querySelectorAll('.ai-editorial-carousel-dot-{{ ai_gen_id }}');
+
+        if (this.slides.length === 0) return;
+
+        this.prevButton.addEventListener('click', () => this.goToPrevSlide());
+        this.nextButton.addEventListener('click', () => this.goToNextSlide());
+
+        this.dots.forEach((dot) => {
+          dot.addEventListener('click', (e) => {
+            const index = parseInt(e.target.dataset.index);
+            this.goToSlide(index);
+          });
+        });
+
+        this.startAutoplay();
+
+        this.carousel.addEventListener('mouseenter', () => this.stopAutoplay());
+        this.carousel.addEventListener('mouseleave', () => this.startAutoplay());
+      }
+
+      goToSlide(index) {
+        this.currentSlide = index;
+        this.track.style.transform = `translateX(-${this.currentSlide * 100}%)`;
+        this.updateDots();
+      }
+
+      goToNextSlide() {
+        this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+        this.goToSlide(this.currentSlide);
+      }
+
+      goToPrevSlide() {
+        this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+        this.goToSlide(this.currentSlide);
+      }
+
+      updateDots() {
+        this.dots.forEach((dot, index) => {
+          if (index === this.currentSlide) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+
+      startAutoplay() {
+        this.autoplayInterval = setInterval(() => {
+          this.goToNextSlide();
+        }, 4000);
+      }
+
+      stopAutoplay() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+          this.autoplayInterval = null;
+        }
+      }
+
+      disconnectedCallback() {
+        this.stopAutoplay();
+      }
+    }
+
+    customElements.define('editorial-block-{{ ai_gen_id }}', EditorialBlock{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Editorial block",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between images and content",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image layout",
+      "options": [
+        {
+          "value": "two_columns",
+          "label": "2x2 grid"
+        },
+        {
+          "value": "stacked",
+          "label": "Stacked"
+        }
+      ],
+      "default": "two_columns"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image 4"
+    },
+    {
+      "type": "range",
+      "id": "image_gap",
+      "label": "Gap between images",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "placeholder_bg_color",
+      "label": "Placeholder background",
+      "default": "#efeae0"
+    },
+    {
+      "type": "header",
+      "content": "Carousel"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_carousel_desktop",
+      "label": "Show carousel on desktop",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "carousel_nav_bg",
+      "label": "Navigation background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "carousel_nav_color",
+      "label": "Navigation color",
+      "default": "#141414"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption"
+    },
+    {
+      "type": "range",
+      "id": "caption_size",
+      "label": "Caption size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Caption color",
+      "default": "#2f5e3a"
+    },
+    {
+      "type": "select",
+      "id": "caption_transform",
+      "label": "Caption text case",
+      "options": [
+        {
+          "value": "none",
+          "label": "Default"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Editorial heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#141414"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Share your story, highlight your values, or showcase your products with this editorial block.</p>"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#141414"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Content padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "content_bg_color",
+      "label": "Content background",
+      "default": "#fafaf8"
+    },
+    {
+      "type": "range",
+      "id": "content_border_radius",
+      "label": "Content border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Primary button"
+    },
+    {
+      "type": "text",
+      "id": "button_primary_label",
+      "label": "Label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_primary_link",
+      "label": "Link"
+    },
+    {
+      "type": "color",
+      "id": "button_primary_bg",
+      "label": "Background",
+      "default": "#2f5e3a"
+    },
+    {
+      "type": "color",
+      "id": "button_primary_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_primary_border",
+      "label": "Border",
+      "default": "#2f5e3a"
+    },
+    {
+      "type": "color",
+      "id": "button_primary_hover_bg",
+      "label": "Hover background",
+      "default": "#24482d"
+    },
+    {
+      "type": "color",
+      "id": "button_primary_hover_color",
+      "label": "Hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Secondary button"
+    },
+    {
+      "type": "text",
+      "id": "button_secondary_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "button_secondary_link",
+      "label": "Link"
+    },
+    {
+      "type": "color",
+      "id": "button_secondary_bg",
+      "label": "Background",
+      "default": "#fafaf8"
+    },
+    {
+      "type": "color",
+      "id": "button_secondary_color",
+      "label": "Text color",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "button_secondary_border",
+      "label": "Border",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "button_secondary_hover_bg",
+      "label": "Hover background",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "button_secondary_hover_color",
+      "label": "Hover text color",
+      "default": "#fafaf8"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial block"
+    }
+  ]
+}
 {% endschema %}
