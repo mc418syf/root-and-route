@@ -1128,6 +1128,13 @@ summary:hover {
   font-size: var(--font-size);
 }
 
+@media screen and (max-width: 749px) {
+  .custom-font-size,
+  .custom-font-size > * {
+    font-size: max(0.5rem, calc(var(--font-size) - var(--font-mobile-reduction, 2px)));
+  }
+}
+
 .custom-font-weight,
 .custom-font-weight > * {
   font-weight: var(--font-weight);

@@ -124,6 +124,17 @@
         "content": "t:content.responsive_font_sizes"
       },
       {
+        "type": "range",
+        "id": "mobile_font_size_reduction",
+        "label": "Mobile font-size reduction",
+        "info": "Reduces paragraph and heading presets below 750px",
+        "min": 0,
+        "max": 6,
+        "step": 1,
+        "unit": "px",
+        "default": 2
+      },
+      {
         "type": "header",
         "content": "t:content.paragraph"
       },

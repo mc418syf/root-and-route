@@ -639,6 +639,19 @@
     --cart-secondary-font-weight: var(--font-{{ settings.cart_price_font }}--weight);
   }
 
+  @media screen and (max-width: 749px) {
+    :root {
+      --font-mobile-reduction: {{ settings.mobile_font_size_reduction | default: 2 }}px;
+      --font-paragraph--size: max(0.5rem, calc(var(--font-size--paragraph) - var(--font-mobile-reduction)));
+      --font-h1--size: max(0.5rem, calc(var(--font-size--h1) - var(--font-mobile-reduction)));
+      --font-h2--size: max(0.5rem, calc(var(--font-size--h2) - var(--font-mobile-reduction)));
+      --font-h3--size: max(0.5rem, calc(var(--font-size--h3) - var(--font-mobile-reduction)));
+      --font-h4--size: max(0.5rem, calc(var(--font-size--h4) - var(--font-mobile-reduction)));
+      --font-h5--size: max(0.5rem, calc(var(--font-size--h5) - var(--font-mobile-reduction)));
+      --font-h6--size: max(0.5rem, calc(var(--font-size--h6) - var(--font-mobile-reduction)));
+    }
+  }
+
   .custom-color-quick-add {
     --quick-add-background: {{ settings.quick_add_background }};
     --quick-add-foreground: {{ settings.quick_add_text }};

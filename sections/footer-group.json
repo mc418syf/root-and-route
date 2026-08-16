@@ -58,6 +58,7 @@
               "name": "t:names.logo",
               "settings": {
                 "inverse": true,
+                "mobile_logo": "",
                 "font": "heading",
                 "text_color": "",
                 "unit": "pixel",
@@ -138,14 +139,14 @@
           "type": "menu",
           "settings": {
             "menu": "main-menu",
-            "heading": "",
+            "heading": "STUDIO",
             "menu_spacing": 12,
             "show_as_accordion": false,
             "accordion_icon": "plus",
             "accordion_dividers": false,
             "background_color": "",
             "text_color": "",
-            "heading_preset": "paragraph",
+            "heading_preset": "h5",
             "link_preset": "paragraph",
             "padding-block-start": 0,
             "padding-block-end": 0,
@@ -157,14 +158,17 @@
       },
       "block_order": [
         "group_wErUQf",
-        "menu_footer",
-        "menu_main"
+        "menu_main",
+        "menu_footer"
       ],
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
         "gap": 40,
         "background_color": "{{ settings.color_palette.color1 }}",
+        "mobile_layout": "logo-menus",
+        "mobile_logo_column_width": 80,
+        "mobile_column_gap": 18,
         "padding-block-start": 30,
         "padding-block-end": 30
       }

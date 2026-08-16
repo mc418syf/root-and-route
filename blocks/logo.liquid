@@ -1,6 +1,7 @@
 {% liquid
   assign block_settings = block.settings
   assign image = settings.logo
+  assign mobile_image = block_settings.mobile_logo
 
   if block_settings.inverse and settings.logo_inverse
     assign image = settings.logo_inverse
@@ -16,9 +17,25 @@
         width: image.width,
         widths: '240, 352, 832, 1200, 1600, 1920, 2560, 3840',
         height: image.height,
-        class: 'logo-block__image',
+        class: 'logo-block__image logo-block__image--desktop',
         alt: shop.name,
         sizes: '(min-width: 750px) calc(var(--logo-width)), 100vw'
+    -}}
+  {% endcapture %}
+{%- endif -%}
+
+{%- if mobile_image -%}
+  {% capture mobile_logo_image %}
+    {{-
+      mobile_image
+      | image_url: width: 1200
+      | image_tag:
+        width: mobile_image.width,
+        widths: '120, 240, 352, 600, 832, 1200',
+        height: mobile_image.height,
+        class: 'logo-block__image logo-block__image--mobile',
+        alt: shop.name,
+        sizes: '(max-width: 749px) calc(var(--logo-width-mobile, var(--logo-width))), 0px'
     -}}
   {% endcapture %}
 {%- endif -%}
@@ -45,7 +62,9 @@
         --logo-width-mobile: {{ block_settings.percent_width_mobile }}%;
         --logo-height-mobile: auto;
       {% else %}
-        {% if image %}
+        {% if mobile_image %}
+          --logo-width-mobile: {{ mobile_image.width | times: 1.00 | divided_by: mobile_image.height | times: block_settings.pixel_height_mobile }}px;
+        {% elsif image %}
           --logo-width-mobile: {{ image.width | times: 1.00 | divided_by: image.height | times: block_settings.pixel_height_mobile }}px;
           {% else %}
             --logo-width-mobile: {{ shop.name.size | times: 0.65 }}em;
@@ -57,9 +76,10 @@
   "
   {{ block.shopify_attributes }}
 >
-  {% if logo_image %}
-    <div class="logo-block__image-wrapper">
+  {% if logo_image or mobile_logo_image %}
+    <div class="logo-block__image-wrapper{% if mobile_logo_image %} logo-block__image-wrapper--has-mobile{% endif %}">
       {{ logo_image }}
+      {{ mobile_logo_image }}
     </div>
   {% else %}
     {% render 'jumbo-text', text: shop.name %}
@@ -95,6 +115,20 @@
   .logo-block__image {
     object-fit: contain;
     width: 100%;
+  }
+
+  .logo-block__image--mobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .logo-block__image-wrapper--has-mobile .logo-block__image--desktop {
+      display: none;
+    }
+
+    .logo-block__image--mobile {
+      display: block;
+    }
   }
 {% endstylesheet %}
 
@@ -144,6 +178,12 @@
     {
       "type": "paragraph",
       "content": "t:content.edit_logo_in_theme_settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_logo",
+      "label": "Mobile logo",
+      "info": "Optional logo used below 750px"
     },
     {
       "type": "header",
