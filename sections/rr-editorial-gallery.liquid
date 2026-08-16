@@ -286,6 +286,32 @@
     bottom: 12px;
   }
 
+  .rr-editorial__carousel .rr-editorial__controls .slideshow-controls__dots {
+    gap: 5px;
+    padding: 9px 0;
+    width: min(180px, calc(100% - 48px));
+  }
+
+  .rr-editorial__carousel .rr-editorial__controls .slideshow-controls__dots li {
+    display: flex;
+    flex: 1 1 0;
+  }
+
+  .rr-editorial__carousel .rr-editorial__controls .slideshow-controls__dots button {
+    border-radius: 0;
+    flex: 1 1 0;
+    height: 18px;
+    margin: 0;
+    width: auto;
+  }
+
+  .rr-editorial__carousel .rr-editorial__controls .slideshow-controls__dots button::after {
+    border-radius: 999px;
+    box-shadow: none;
+    height: 2px;
+    width: 100%;
+  }
+
   .rr-editorial__carousel slideshow-arrows .slideshow-control {
     opacity: 1;
   }
@@ -499,7 +525,7 @@
     {
       "type": "checkbox",
       "id": "carousel_show_dots",
-      "label": "Show carousel dot indicator",
+      "label": "Show carousel progress indicator",
       "default": true,
       "visible_if": "{{ section.settings.desktop_carousel or section.settings.mobile_carousel }}"
     },
