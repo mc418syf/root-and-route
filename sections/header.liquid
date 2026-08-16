@@ -1543,6 +1543,38 @@
       "content": "t:content.utilities"
     },
     {
+      "type": "checkbox",
+      "id": "show_account_action",
+      "label": "Show account action",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quote_button",
+      "label": "Show Get a Quote button",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "quote_label",
+      "label": "Quote button label",
+      "default": "GET A QUOTE",
+      "visible_if": "{{ section.settings.show_quote_button }}"
+    },
+    {
+      "type": "url",
+      "id": "quote_link",
+      "label": "Quote button link",
+      "visible_if": "{{ section.settings.show_quote_button }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "quote_show_mobile",
+      "label": "Show quote button on mobile",
+      "default": false,
+      "visible_if": "{{ section.settings.show_quote_button }}"
+    },
+    {
       "type": "select",
       "id": "actions_display_style",
       "label": "t:settings.actions_display_style",

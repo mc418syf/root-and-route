@@ -12,6 +12,13 @@
   {% render 'header-actions', section: section %}
 {% enddoc %}
 
+{% liquid
+  assign show_account_action = true
+  if section and section.settings.show_account_action == false
+    assign show_account_action = false
+  endif
+%}
+
 <script
   type="module"
   src="{{ 'cart-icon.js' | asset_url }}"
@@ -63,7 +70,7 @@
   {% endif %}
   {{- block.shopify_attributes -}}
 >
-  {% if shop.customer_accounts_enabled %}
+  {% if shop.customer_accounts_enabled and show_account_action %}
     {% liquid
       assign account_actions_style = ''
       if display_style == 'text' and section
@@ -134,6 +141,16 @@
       aria-describedby="cart-bubble-text"
     >
       {{ cart_icon }}
+    </a>
+  {% endif %}
+
+  {% if section and section.settings.show_quote_button and section.settings.quote_label != blank %}
+    <a
+      class="header-actions__quote{% unless section.settings.quote_show_mobile %} header-actions__quote--desktop-only{% endunless %}"
+      href="{{ section.settings.quote_link | default: '/pages/contact' }}"
+      style="--quote-background:{{ settings.rr_forest | default: '#2f5e3a' }};--quote-background-hover:{{ settings.rr_deep_forest | default: '#24482d' }};--quote-text:{{ settings.rr_cream | default: '#f4ecd8' }};"
+    >
+      {{ section.settings.quote_label }}
     </a>
   {% endif %}
 
@@ -219,6 +236,7 @@
   }
 
   header-actions {
+    align-items: center;
     display: flex;
 
     @media screen and (max-width: 749px) {
@@ -245,6 +263,41 @@
 
   .header__column--right header-actions {
     margin-inline-start: calc(var(--gap-md) * -1);
+  }
+
+  .header-actions__quote {
+    align-items: center;
+    background: var(--quote-background);
+    border: 1px solid var(--quote-background);
+    border-radius: 999px;
+    color: var(--quote-text);
+    display: inline-flex;
+    font-family: var(--font-body--family);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    justify-content: center;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    margin-inline-start: var(--gap-sm);
+    min-height: 34px;
+    padding: 10px 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color var(--animation-speed) var(--animation-easing), border-color var(--animation-speed) var(--animation-easing), transform var(--animation-speed) var(--animation-easing);
+    white-space: nowrap;
+  }
+
+  .header-actions__quote:hover {
+    background: var(--quote-background-hover);
+    border-color: var(--quote-background-hover);
+    color: var(--quote-text);
+    transform: translateY(-1px);
+  }
+
+  @media screen and (max-width: 749px) {
+    .header-actions__quote--desktop-only {
+      display: none;
+    }
   }
 
   .header-actions__cart-icon {
