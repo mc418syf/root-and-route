@@ -120,7 +120,7 @@
         "link_label": "",
         "link": "",
         "show_arrow": true,
-        "background": "{{ settings.color_palette.color2 }}",
+        "background": "{{ settings.color_palette.background }}",
         "image_background": "#efeae0",
         "muted_text": "{{ settings.color_palette.foreground }}",
         "padding_top": 40,
