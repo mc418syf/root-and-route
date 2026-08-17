@@ -26,7 +26,7 @@
         "image_3r4ieR": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/200.png",
+            "image": "shopify://shop_images/4956ac538bdf287113041734e264d7ad.png",
             "alt": "",
             "caption": ""
           }
@@ -34,7 +34,7 @@
         "image_ytPPtV": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/202.png",
+            "image": "shopify://shop_images/119.png",
             "alt": "",
             "caption": ""
           }
@@ -48,7 +48,7 @@
       "settings": {
         "image_position": "left",
         "text_width": "one-half",
-        "desktop_carousel": true,
+        "desktop_carousel": false,
         "mobile_carousel": true,
         "carousel_show_dots": true,
         "carousel_show_arrows": true,
