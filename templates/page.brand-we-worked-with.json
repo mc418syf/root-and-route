@@ -14,10 +14,136 @@
       "disabled": true,
       "settings": {
         "content_direction": "column",
-        "gap": 32,
+        "gap": 10,
         "background_color": "",
         "padding-block-start": 40,
-        "padding-block-end": 80
+        "padding-block-end": 40
+      }
+    },
+    "section_cB8DUg": {
+      "type": "section",
+      "blocks": {
+        "text_3ifjWQ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Copy needed</p>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.color2 }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_3ifjWQ"
+      ],
+      "name": "t:names.pull_quote",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "image",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image": "shopify://shop_images/motif-bg-dark.svg",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    },
+    "blocks_JgY7GW": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_97ccb89_hY8d4n": {
+          "type": "ai_gen_block_97ccb89",
+          "settings": {
+            "heading": "Brands we've worked with",
+            "heading_size": 30,
+            "heading_spacing": 24,
+            "desktop_width_percent": 100,
+            "padding_vertical": 40,
+            "logo_width": 140,
+            "logo_height": 60,
+            "logo_spacing": 60,
+            "animation_speed": 30,
+            "pause_on_hover": true,
+            "grayscale": true,
+            "logo_opacity": 60,
+            "background_color": "#fafaf8",
+            "text_color": "#141414",
+            "placeholder_color": "#efeae0",
+            "logo_3": "shopify://shop_images/Maybelline_logo.png",
+            "logo_4": "shopify://shop_images/Hudsons-Bay-Logo.png",
+            "logo_5": "shopify://shop_images/helena-rubinstein-logo-vector.png",
+            "logo_6": "shopify://shop_images/glo_beauty.png",
+            "logo_7": "shopify://shop_images/Lancome-logo.jpg",
+            "logo_8": "shopify://shop_images/hd-starbucks-black-text-logo-png-701751694778975lzftt5lvls.png"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_97ccb89_hY8d4n"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "rr_editorial_gallery_BbzRNp": {
@@ -72,7 +198,7 @@
         "background": "{{ settings.color_palette.color2 }}",
         "image_background": "#efeae0",
         "muted_text": "{{ settings.color_palette.foreground }}",
-        "padding_top": 20,
+        "padding_top": 40,
         "padding_bottom": 20,
         "side_padding": 40
       }
@@ -126,7 +252,118 @@
         "background": "{{ settings.color_palette.background }}",
         "image_background": "#efeae0",
         "muted_text": "{{ settings.color_palette.foreground }}",
-        "padding_top": 20,
+        "padding_top": 40,
+        "padding_bottom": 20,
+        "side_padding": 20
+      }
+    },
+    "rr_editorial_gallery_tPwPKk": {
+      "type": "rr-editorial-gallery",
+      "blocks": {
+        "image_3fXdVm": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/4956ac538bdf287113041734e264d7ad.png",
+            "alt": "",
+            "caption": ""
+          }
+        },
+        "image_HyU4iq": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/119.png",
+            "alt": "",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_3fXdVm",
+        "image_HyU4iq"
+      ],
+      "custom_css": [
+        ".rr-editorial__subheading {font-size: 16px;}"
+      ],
+      "name": "RR editorial gallery",
+      "settings": {
+        "image_position": "left",
+        "text_width": "one-third",
+        "desktop_carousel": false,
+        "mobile_carousel": true,
+        "carousel_show_dots": true,
+        "carousel_show_arrows": true,
+        "carousel_arrow_style": "arrow",
+        "image_gap": 10,
+        "image_aspect_ratio": "square",
+        "image_height": 400,
+        "image_height_mobile": 360,
+        "image_fit": "cover",
+        "eyebrow": "",
+        "heading": "Hudson's Bay",
+        "subheading": "Architectural Advent Calendar Packaging",
+        "text": "<p><strong>Structure:</strong> Gatefold double-door rigid box with custom-fitted internal compartments.</p><p><strong>Craftsmanship:</strong> Custom facade featuring deep debossing, foil stamping, and reinforced chipboard.</p>",
+        "content_alignment": "left",
+        "link_label": "",
+        "link": "",
+        "show_arrow": true,
+        "background": "{{ settings.color_palette.color2 }}",
+        "image_background": "#efeae0",
+        "muted_text": "{{ settings.color_palette.foreground }}",
+        "padding_top": 40,
+        "padding_bottom": 20,
+        "side_padding": 40
+      }
+    },
+    "rr_editorial_gallery_EtFkLQ": {
+      "type": "rr-editorial-gallery",
+      "blocks": {
+        "image_mKTAAL": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/5ffa930c75ea62bec161474ddcf22fda.png",
+            "alt": "",
+            "caption": ""
+          }
+        },
+        "image_K8K9hy": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/fc8f548ae6767fdf2237757aa62be8df.png",
+            "alt": "",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_mKTAAL",
+        "image_K8K9hy"
+      ],
+      "name": "RR editorial gallery",
+      "settings": {
+        "image_position": "right",
+        "text_width": "one-third",
+        "desktop_carousel": false,
+        "mobile_carousel": true,
+        "carousel_show_dots": true,
+        "carousel_show_arrows": true,
+        "carousel_arrow_style": "arrow",
+        "image_gap": 10,
+        "image_aspect_ratio": "square",
+        "image_height": 400,
+        "image_height_mobile": 360,
+        "image_fit": "cover",
+        "eyebrow": "",
+        "heading": "Maybelline New York",
+        "subheading": "<em>Brooklyn Beats Interactive Diorama & Drawer Packaging</em>",
+        "text": "<p><strong>Structure: </strong>Multi-layered counter display with a clear acrylic window and a smooth pull-out bottom drawer.</p><p><strong>Craftsmanship: </strong>High-precision die-cutting for the interior diorama combined with structural board engineering for retail durability. </p>",
+        "content_alignment": "left",
+        "link_label": "",
+        "link": "",
+        "show_arrow": true,
+        "background": "{{ settings.color_palette.background }}",
+        "image_background": "#efeae0",
+        "muted_text": "{{ settings.color_palette.foreground }}",
+        "padding_top": 40,
         "padding_bottom": 20,
         "side_padding": 20
       }
@@ -134,7 +371,11 @@
   },
   "order": [
     "main",
+    "section_cB8DUg",
+    "blocks_JgY7GW",
     "rr_editorial_gallery_BbzRNp",
-    "rr_editorial_gallery_WeFNti"
+    "rr_editorial_gallery_WeFNti",
+    "rr_editorial_gallery_tPwPKk",
+    "rr_editorial_gallery_EtFkLQ"
   ]
 }
