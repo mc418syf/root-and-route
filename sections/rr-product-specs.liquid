@@ -1,0 +1,415 @@
+{%- liquid
+  assign metafield_namespace = section.settings.metafield_namespace | strip
+  assign sizes_key = section.settings.sizes_key | strip
+  assign production_key = section.settings.production_key | strip
+  assign shipping_key = section.settings.shipping_key | strip
+
+  assign sizes_metafield = product.metafields[metafield_namespace][sizes_key]
+  assign production_metafield = product.metafields[metafield_namespace][production_key]
+  assign shipping_metafield = product.metafields[metafield_namespace][shipping_key]
+
+  assign sizes_value = sizes_metafield.value
+  assign production_value = production_metafield.value
+  assign shipping_value = shipping_metafield.value
+
+  assign show_sizes = false
+  assign show_production = false
+  assign show_shipping = false
+
+  if sizes_metafield != blank
+    assign show_sizes = true
+  elsif request.design_mode
+    assign show_sizes = true
+  endif
+
+  if production_metafield != blank
+    assign show_production = true
+  elsif request.design_mode
+    assign show_production = true
+  endif
+
+  if shipping_metafield != blank
+    assign show_shipping = true
+  elsif request.design_mode and section.settings.show_shipping
+    assign show_shipping = true
+  endif
+-%}
+
+{%- if show_sizes or show_production or show_shipping -%}
+  <section
+    id="RRProductSpecs-{{ section.id }}"
+    class="rr-product-specs"
+    style="
+      --rr-specs-background: {{ section.settings.background }};
+      --rr-specs-card: {{ section.settings.card_background }};
+      --rr-specs-ink: {{ section.settings.text_color }};
+      --rr-specs-muted: {{ section.settings.muted_text }};
+      --rr-specs-accent: {{ section.settings.accent_color }};
+      --rr-specs-border: {{ section.settings.border_color }};
+      --rr-specs-max: {{ section.settings.content_width }}px;
+      --rr-specs-top: {{ section.settings.padding_top }}px;
+      --rr-specs-bottom: {{ section.settings.padding_bottom }}px;
+    "
+  >
+    <div class="rr-product-specs__inner">
+      {%- if show_sizes -%}
+        <div class="rr-product-specs__sizes">
+          {%- if section.settings.sizes_heading != blank -%}
+            <h2>{{ section.settings.sizes_heading | escape }}</h2>
+          {%- endif -%}
+
+          <div class="rr-product-specs__size-grid">
+            {%- if sizes_metafield != blank -%}
+              {%- if sizes_metafield.type contains 'list.' -%}
+                {%- for size_item in sizes_value -%}
+                  {%- liquid
+                    assign size_title = size_item.name.value | default: size_item.label.value | default: size_item.title.value
+                    assign size_dimensions = size_item.dimensions.value | default: size_item.measurements.value
+
+                    if size_title == blank
+                      assign size_parts = size_item | split: '|'
+                      assign size_title = size_parts.first | strip
+                      if size_parts.size > 1
+                        assign size_dimensions = size_parts.last | strip
+                      endif
+                    endif
+                  -%}
+                  <article class="rr-product-specs__size-card">
+                    <h3>{{ size_title | escape }}</h3>
+                    {%- if size_dimensions != blank -%}<p>{{ size_dimensions | escape }}</p>{%- endif -%}
+                  </article>
+                {%- endfor -%}
+              {%- else -%}
+                {%- liquid
+                  assign size_title = sizes_value.name.value | default: sizes_value.label.value | default: sizes_value.title.value
+                  assign size_dimensions = sizes_value.dimensions.value | default: sizes_value.measurements.value
+
+                  if size_title == blank
+                    assign size_parts = sizes_value | split: '|'
+                    assign size_title = size_parts.first | strip
+                    if size_parts.size > 1
+                      assign size_dimensions = size_parts.last | strip
+                    endif
+                  endif
+                -%}
+                <article class="rr-product-specs__size-card">
+                  <h3>{{ size_title | escape }}</h3>
+                  {%- if size_dimensions != blank -%}<p>{{ size_dimensions | escape }}</p>{%- endif -%}
+                </article>
+              {%- endif -%}
+            {%- else -%}
+              <article class="rr-product-specs__size-card"><h3>Small</h3><p>6 in x 4 in x 2 in</p></article>
+              <article class="rr-product-specs__size-card"><h3>Medium</h3><p>9 in x 6 in x 3 in</p></article>
+              <article class="rr-product-specs__size-card"><h3>Large</h3><p>12 in x 9 in x 4 in</p></article>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if show_production or show_shipping -%}
+        <div class="rr-product-specs__durations">
+          {%- if show_production -%}
+            <article class="rr-product-specs__duration">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6M12 2v3M4.5 6.5 6 8M19.5 6.5 18 8"/>
+              </svg>
+              <div>
+                <p>{{ section.settings.production_label | escape }}</p>
+                <strong>{{ production_value | default: '15-20 days' | escape }}</strong>
+              </div>
+            </article>
+          {%- endif -%}
+
+          {%- if section.settings.show_shipping and show_shipping -%}
+            <article class="rr-product-specs__duration">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                <path d="M3 5h11v12H3zM14 9h4l3 3v5h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>
+              </svg>
+              <div>
+                <p>{{ section.settings.shipping_label | escape }}</p>
+                <strong>{{ shipping_value | default: '7-12 days' | escape }}</strong>
+              </div>
+            </article>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% stylesheet %}
+  .rr-product-specs {
+    background: var(--rr-specs-background);
+    border-top: 1px solid var(--rr-specs-border);
+    color: var(--rr-specs-ink);
+    font-family: var(--font-body--family);
+    padding: var(--rr-specs-top) 42px var(--rr-specs-bottom);
+  }
+
+  .rr-product-specs * {
+    box-sizing: border-box;
+  }
+
+  .rr-product-specs__inner {
+    margin: 0 auto;
+    max-width: var(--rr-specs-max);
+  }
+
+  .rr-product-specs h2 {
+    font-family: var(--font-heading--family);
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin: 0;
+    text-align: center;
+  }
+
+  .rr-product-specs__size-grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 28px;
+  }
+
+  .rr-product-specs__size-card {
+    background: var(--rr-specs-card);
+    border: 1px solid var(--rr-specs-border);
+    border-radius: 8px;
+    min-height: 96px;
+    padding: 18px 20px;
+  }
+
+  .rr-product-specs__size-card h3 {
+    font-family: var(--font-subheading--family);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .rr-product-specs__size-card p {
+    color: var(--rr-specs-muted);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 7px 0 0;
+  }
+
+  .rr-product-specs__durations {
+    border-top: 1px solid var(--rr-specs-border);
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 30px;
+    padding-top: 30px;
+  }
+
+  .rr-product-specs__durations:has(.rr-product-specs__duration:only-child) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rr-product-specs__duration {
+    align-items: center;
+    background: var(--rr-specs-card);
+    border-radius: 8px;
+    display: flex;
+    gap: 16px;
+    min-height: 88px;
+    padding: 17px 22px;
+  }
+
+  .rr-product-specs__duration svg {
+    color: var(--rr-specs-accent);
+    flex: 0 0 auto;
+    height: 28px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.6;
+    width: 28px;
+  }
+
+  .rr-product-specs__duration p {
+    color: var(--rr-specs-muted);
+    font-size: 12px;
+    line-height: 1.3;
+    margin: 0 0 2px;
+  }
+
+  .rr-product-specs__duration strong {
+    font-family: var(--font-subheading--family);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-product-specs {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .rr-product-specs h2 {
+      font-size: 28px;
+    }
+
+    .rr-product-specs__size-grid,
+    .rr-product-specs__durations {
+      grid-template-columns: 1fr;
+    }
+
+    .rr-product-specs__size-card h3,
+    .rr-product-specs__duration strong {
+      font-size: 16px;
+    }
+
+    .rr-product-specs__size-card p {
+      font-size: 12px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RR product specs",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product metafields"
+    },
+    {
+      "type": "text",
+      "id": "metafield_namespace",
+      "label": "Namespace",
+      "default": "custom"
+    },
+    {
+      "type": "text",
+      "id": "sizes_key",
+      "label": "Available sizes key",
+      "default": "available_sizes"
+    },
+    {
+      "type": "text",
+      "id": "production_key",
+      "label": "Production duration key",
+      "default": "production_days"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping",
+      "label": "Show shipping duration",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shipping_key",
+      "label": "Shipping duration key",
+      "default": "shipping_days",
+      "visible_if": "{{ section.settings.show_shipping }}"
+    },
+    {
+      "type": "header",
+      "content": "Labels"
+    },
+    {
+      "type": "text",
+      "id": "sizes_heading",
+      "label": "Sizes heading",
+      "default": "Available Sizes"
+    },
+    {
+      "type": "text",
+      "id": "production_label",
+      "label": "Production label",
+      "default": "Production Duration"
+    },
+    {
+      "type": "text",
+      "id": "shipping_label",
+      "label": "Shipping label",
+      "default": "Shipping Duration",
+      "visible_if": "{{ section.settings.show_shipping }}"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#f4ecd8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "muted_text",
+      "label": "Muted text",
+      "default": "#66645f"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Icon color",
+      "default": "#2f5e3a"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#e7e3db"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 760,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "default": 1360
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR product specs"
+    }
+  ]
+}
+{% endschema %}
