@@ -73,10 +73,65 @@
         "padding_bottom": 40,
         "side_padding": 20
       }
+    },
+    "rr_editorial_gallery_WeFNti": {
+      "type": "rr-editorial-gallery",
+      "blocks": {
+        "image_3mXqpR": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/5ffa930c75ea62bec161474ddcf22fda.png",
+            "alt": "",
+            "caption": ""
+          }
+        },
+        "image_qPXqJJ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/fc8f548ae6767fdf2237757aa62be8df.png",
+            "alt": "",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_3mXqpR",
+        "image_qPXqJJ"
+      ],
+      "name": "RR editorial gallery",
+      "settings": {
+        "image_position": "right",
+        "text_width": "one-half",
+        "desktop_carousel": false,
+        "mobile_carousel": true,
+        "carousel_show_dots": true,
+        "carousel_show_arrows": true,
+        "carousel_arrow_style": "arrow",
+        "image_gap": 10,
+        "image_aspect_ratio": "square",
+        "image_height": 400,
+        "image_height_mobile": 360,
+        "image_fit": "cover",
+        "eyebrow": "",
+        "heading": "Maybelline New York",
+        "subheading": "<em>Brooklyn Beats Interactive Diorama & Drawer Packaging</em>",
+        "text": "<p><strong>Structure: </strong>Multi-layered counter display with a clear acrylic window and a smooth pull-out bottom drawer.</p><p><strong>Craftsmanship: </strong>High-precision die-cutting for the interior diorama combined with structural board engineering for retail durability. </p>",
+        "content_alignment": "left",
+        "link_label": "",
+        "link": "",
+        "show_arrow": true,
+        "background": "{{ settings.color_palette.color2 }}",
+        "image_background": "#efeae0",
+        "muted_text": "{{ settings.color_palette.foreground }}",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "side_padding": 20
+      }
     }
   },
   "order": [
     "main",
-    "rr_editorial_gallery_BbzRNp"
+    "rr_editorial_gallery_BbzRNp",
+    "rr_editorial_gallery_WeFNti"
   ]
 }
