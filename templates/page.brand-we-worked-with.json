@@ -44,10 +44,13 @@
         "image_3r4ieR",
         "image_ytPPtV"
       ],
+      "custom_css": [
+        ".rr-editorial__subheading {font-size: 16px;}"
+      ],
       "name": "RR editorial gallery",
       "settings": {
         "image_position": "left",
-        "text_width": "one-half",
+        "text_width": "one-third",
         "desktop_carousel": false,
         "mobile_carousel": true,
         "carousel_show_dots": true,
@@ -71,7 +74,7 @@
         "muted_text": "{{ settings.color_palette.foreground }}",
         "padding_top": 20,
         "padding_bottom": 20,
-        "side_padding": 20
+        "side_padding": 40
       }
     },
     "rr_editorial_gallery_WeFNti": {
@@ -101,7 +104,7 @@
       "name": "RR editorial gallery",
       "settings": {
         "image_position": "right",
-        "text_width": "one-half",
+        "text_width": "one-third",
         "desktop_carousel": false,
         "mobile_carousel": true,
         "carousel_show_dots": true,
