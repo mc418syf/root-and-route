@@ -29,9 +29,10 @@
     {% render 'variant-button-custom-styles', block_settings: block_settings, block_id: block.id %}
   {% endif %}
   <variant-picker
-    class="variant-picker spacing-style variant-picker--{{ block_settings.alignment }}{% if has_custom_variant_buttons %} variant-picker--custom-{{ block.id }}{% endif %}"
+    class="variant-picker spacing-style variant-picker--{{ block_settings.alignment }}{% if has_custom_variant_buttons %} variant-picker--custom-{{ block.id }}{% endif %}{% if block_settings.fit_buttons_to_text %} variant-picker--fit-buttons{% endif %}"
     style="
       {% render 'spacing-style', settings: block_settings %}
+      --variant-button-padding: {{ block_settings.button_padding | default: 15 }}px;
        {% if block_settings.option_label_text_color != blank %}
         --variant-option-label-color: rgba({{ block_settings.option_label_text_color.rgba }});
         --variant-option-label-color-subdued: rgba({{ block_settings.option_label_text_color.rgb }} / var(--opacity-subdued-text));

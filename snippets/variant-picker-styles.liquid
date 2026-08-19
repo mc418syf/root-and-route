@@ -359,6 +359,30 @@
     }
   }
 
+  .variant-picker--fit-buttons .variant-option--buttons:not(.variant-option--swatches) {
+    display: flex;
+    grid-template-columns: none;
+  }
+
+  .variant-picker--fit-buttons
+    .variant-option--buttons:not(.variant-option--swatches)
+    .variant-option__button-label:not(.variant-option__button-label--has-swatch) {
+    flex: 0 1 auto;
+    max-width: 100%;
+    min-height: auto;
+    min-width: 0;
+    padding: var(--variant-button-padding, 15px);
+    white-space: normal;
+    width: fit-content;
+  }
+
+  .variant-picker--fit-buttons
+    .variant-option--buttons:not(.variant-option--swatches)
+    .variant-option__button-label__text {
+    text-align: center;
+    text-wrap: balance;
+  }
+
   .variant-option__button-label:has(:focus-visible) {
     --variant-picker-stroke-color: var(--color-foreground);
 

@@ -141,6 +141,29 @@
     },
     {
       "type": "header",
+      "content": "Button size",
+      "visible_if": "{{ block.settings.variant_style == 'buttons' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "fit_buttons_to_text",
+      "label": "Fit buttons to text",
+      "default": true,
+      "visible_if": "{{ block.settings.variant_style == 'buttons' }}"
+    },
+    {
+      "type": "range",
+      "id": "button_padding",
+      "label": "Button padding",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ block.settings.variant_style == 'buttons' }}"
+    },
+    {
+      "type": "header",
       "content": "t:content.padding"
     },
     {
