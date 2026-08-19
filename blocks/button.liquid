@@ -84,6 +84,17 @@
       "visible_if": "{{ block.settings.style_class == 'button-unstyled' }}"
     },
     {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 2,
+      "visible_if": "{{ block.settings.style_class != 'button-unstyled' }}"
+    },
+    {
       "type": "header",
       "content": "t:content.size"
     },
