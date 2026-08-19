@@ -94,10 +94,10 @@
             "heading_spacing": 24,
             "desktop_width_percent": 100,
             "padding_vertical": 40,
-            "logo_width": 140,
+            "logo_width": 180,
             "logo_height": 60,
             "logo_spacing": 60,
-            "animation_speed": 30,
+            "animation_speed": 20,
             "pause_on_hover": true,
             "grayscale": true,
             "logo_opacity": 60,
@@ -263,23 +263,14 @@
         "image_3fXdVm": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/4956ac538bdf287113041734e264d7ad.png",
-            "alt": "",
-            "caption": ""
-          }
-        },
-        "image_HyU4iq": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/119.png",
+            "image": "shopify://shop_images/Gemini_Generated_Image_9cupfq9cupfq9cup.png",
             "alt": "",
             "caption": ""
           }
         }
       },
       "block_order": [
-        "image_3fXdVm",
-        "image_HyU4iq"
+        "image_3fXdVm"
       ],
       "custom_css": [
         ".rr-editorial__subheading {font-size: 16px;}"
@@ -294,7 +285,7 @@
         "carousel_show_arrows": true,
         "carousel_arrow_style": "arrow",
         "image_gap": 10,
-        "image_aspect_ratio": "square",
+        "image_aspect_ratio": "wide",
         "image_height": 400,
         "image_height_mobile": 360,
         "image_fit": "cover",
@@ -320,7 +311,7 @@
         "image_mKTAAL": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/5ffa930c75ea62bec161474ddcf22fda.png",
+            "image": "shopify://shop_images/200.png",
             "alt": "",
             "caption": ""
           }
@@ -328,7 +319,7 @@
         "image_K8K9hy": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/fc8f548ae6767fdf2237757aa62be8df.png",
+            "image": "shopify://shop_images/202.png",
             "alt": "",
             "caption": ""
           }
