@@ -281,26 +281,6 @@
               },
               "block_order": []
             },
-            "button_JyMeUj": {
-              "type": "button",
-              "name": "t:names.button",
-              "settings": {
-                "label": "GET A QUOTE",
-                "link": "",
-                "open_in_new_tab": false,
-                "style_class": "button-custom",
-                "custom_button_background": "{{ settings.color_palette.color1 }}",
-                "custom_button_text": "{{ settings.color_palette.color2 }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
-                "link_text_color": "",
-                "corner_radius": 100,
-                "width": "custom",
-                "custom_width": 100,
-                "width_mobile": "custom",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            },
             "text_aEtTtq": {
               "type": "text",
               "name": "t:names.product_description",
@@ -326,6 +306,26 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "button_JyMeUj": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "GET A QUOTE",
+                "link": "",
+                "open_in_new_tab": false,
+                "style_class": "button-custom",
+                "custom_button_background": "{{ settings.color_palette.color1 }}",
+                "custom_button_text": "{{ settings.color_palette.color2 }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
+                "corner_radius": 100,
+                "width": "custom",
+                "custom_width": 100,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -333,8 +333,8 @@
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
-            "button_JyMeUj",
-            "text_aEtTtq"
+            "text_aEtTtq",
+            "button_JyMeUj"
           ]
         }
       },
