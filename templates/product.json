@@ -34,8 +34,8 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "media_presentation": "carousel",
-            "media_columns": "two",
+            "media_presentation": "grid",
+            "media_columns": "one",
             "image_gap": 4,
             "large_first_image": true,
             "icons_style": "arrow",
@@ -303,7 +303,7 @@
               "type": "text",
               "name": "t:names.product_description",
               "settings": {
-                "text": "<p>{{ closest.product.description }}</p>",
+                "text": "{{ closest.product.description }}",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -345,7 +345,7 @@
         "equal_columns": true,
         "limit_details_width": false,
         "gap": 20,
-        "enable_sticky_add_to_cart": false,
+        "enable_sticky_add_to_cart": true,
         "background_color": "",
         "padding-block-start": 0,
         "padding-block-end": 0
