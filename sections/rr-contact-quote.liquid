@@ -1,0 +1,661 @@
+{%- assign form_id = 'RRQuoteForm-' | append: section.id -%}
+
+<section
+  id="RRContactQuote-{{ section.id }}"
+  class="rr-contact-quote"
+  style="
+    --rr-contact-background: {{ section.settings.background }};
+    --rr-contact-ink: {{ section.settings.text_color }};
+    --rr-contact-muted: {{ section.settings.muted_text }};
+    --rr-contact-accent: {{ section.settings.accent_color }};
+    --rr-contact-input-background: {{ section.settings.input_background }};
+    --rr-contact-input-border: {{ section.settings.input_border }};
+    --rr-contact-placeholder: {{ section.settings.placeholder_color }};
+    --rr-contact-button-background: {{ section.settings.button_background }};
+    --rr-contact-button-text: {{ section.settings.button_text_color }};
+    --rr-contact-width: {{ section.settings.content_width }}px;
+    --rr-contact-top: {{ section.settings.padding_top }}px;
+    --rr-contact-bottom: {{ section.settings.padding_bottom }}px;
+  "
+  {{ section.shopify_attributes }}
+>
+  <div class="rr-contact-quote__inner">
+    <header class="rr-contact-quote__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="rr-contact-quote__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1>{{ section.settings.heading | escape }}</h1>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="rr-contact-quote__description">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </header>
+
+    {%- form 'contact', id: form_id, class: 'rr-contact-quote__form' -%}
+      <input name="contact[id]" type="hidden" value="{{ form_id }}">
+
+      {%- if form.errors -%}
+        <div class="rr-contact-quote__notice rr-contact-quote__notice--error" role="alert" tabindex="-1">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+
+      {%- if form.posted_successfully? -%}
+        <div class="rr-contact-quote__notice rr-contact-quote__notice--success" role="status" tabindex="-1">
+          {{ section.settings.success_message | escape }}
+        </div>
+      {%- endif -%}
+
+      <div class="rr-contact-quote__row">
+        <div class="rr-contact-quote__field">
+          <label for="{{ form_id }}-name">
+            {{ section.settings.name_label | escape }}
+            <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="{{ form_id }}-name"
+            type="text"
+            name="contact[name]"
+            autocomplete="name"
+            value="{% if form.name %}{{ form.name | escape }}{% elsif customer %}{{ customer.name | escape }}{% endif %}"
+            placeholder="{{ section.settings.name_placeholder | escape }}"
+            required
+          >
+        </div>
+
+        <div class="rr-contact-quote__field">
+          <label for="{{ form_id }}-email">
+            {{ section.settings.email_label | escape }}
+            <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="{{ form_id }}-email"
+            type="email"
+            name="contact[email]"
+            autocomplete="email"
+            autocapitalize="off"
+            spellcheck="false"
+            value="{% if form.email %}{{ form.email | escape }}{% elsif customer %}{{ customer.email | escape }}{% endif %}"
+            placeholder="{{ section.settings.email_placeholder | escape }}"
+            aria-required="true"
+            {% if form.errors contains 'email' %}aria-invalid="true"{% endif %}
+            required
+          >
+        </div>
+      </div>
+
+      <div class="rr-contact-quote__field">
+        <label for="{{ form_id }}-company">{{ section.settings.company_label | escape }}</label>
+        <input
+          id="{{ form_id }}-company"
+          type="text"
+          name="contact[Company]"
+          autocomplete="organization"
+          placeholder="{{ section.settings.company_placeholder | escape }}"
+        >
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <fieldset class="rr-contact-quote__quantity">
+          <legend>{{ section.settings.quantity_label | escape }}</legend>
+          <div class="rr-contact-quote__quantity-options">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'quantity_option' and block.settings.label != blank -%}
+                <label class="rr-contact-quote__check" for="{{ form_id }}-quantity-{{ forloop.index }}" {{ block.shopify_attributes }}>
+                  <input
+                    id="{{ form_id }}-quantity-{{ forloop.index }}"
+                    type="checkbox"
+                    name="contact[Desired quantity - {{ block.settings.label | escape }}]"
+                    value="Selected"
+                  >
+                  <span aria-hidden="true"></span>
+                  <strong>{{ block.settings.label | escape }}</strong>
+                </label>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </fieldset>
+      {%- endif -%}
+
+      <div class="rr-contact-quote__field">
+        <label for="{{ form_id }}-message">
+          {{ section.settings.message_label | escape }}
+          <span aria-hidden="true">*</span>
+        </label>
+        <textarea
+          id="{{ form_id }}-message"
+          name="contact[body]"
+          rows="6"
+          placeholder="{{ section.settings.message_placeholder | escape }}"
+          required
+        >{{ form.body }}</textarea>
+      </div>
+
+      <button class="rr-contact-quote__submit" type="submit">
+        {{ section.settings.button_label | escape }}
+      </button>
+    {%- endform -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .rr-contact-quote {
+    background: var(--rr-contact-background);
+    color: var(--rr-contact-ink);
+    font-family: var(--font-body--family);
+    padding: var(--rr-contact-top) 24px var(--rr-contact-bottom);
+  }
+
+  .rr-contact-quote * {
+    box-sizing: border-box;
+  }
+
+  .rr-contact-quote__inner {
+    margin: 0 auto;
+    max-width: var(--rr-contact-width);
+  }
+
+  .rr-contact-quote__header {
+    margin: 0 auto 52px;
+    max-width: 620px;
+    text-align: center;
+  }
+
+  .rr-contact-quote__eyebrow {
+    color: var(--rr-contact-accent);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    line-height: 1.3;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .rr-contact-quote h1 {
+    color: var(--rr-contact-ink);
+    font-family: var(--font-heading--family);
+    font-size: 56px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.1;
+    margin: 14px 0 0;
+  }
+
+  .rr-contact-quote__description {
+    color: var(--rr-contact-muted);
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.65;
+    margin: 16px auto 0;
+    max-width: 560px;
+  }
+
+  .rr-contact-quote__description p {
+    margin: 0;
+  }
+
+  .rr-contact-quote__form {
+    display: grid;
+    gap: 20px;
+  }
+
+  .rr-contact-quote__row {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rr-contact-quote__field {
+    display: grid;
+    gap: 9px;
+  }
+
+  .rr-contact-quote__field label,
+  .rr-contact-quote__quantity legend {
+    color: var(--rr-contact-ink);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.35;
+  }
+
+  .rr-contact-quote__field label span {
+    color: var(--rr-contact-accent);
+  }
+
+  .rr-contact-quote__field input,
+  .rr-contact-quote__field textarea {
+    appearance: none;
+    background: var(--rr-contact-input-background);
+    border: 1px solid var(--rr-contact-input-border);
+    border-radius: 8px;
+    color: var(--rr-contact-ink);
+    font: 400 16px/1.5 var(--font-body--family);
+    margin: 0;
+    outline: none;
+    padding: 14px 16px;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+    width: 100%;
+  }
+
+  .rr-contact-quote__field input {
+    min-height: 52px;
+  }
+
+  .rr-contact-quote__field textarea {
+    min-height: 132px;
+    resize: vertical;
+  }
+
+  .rr-contact-quote__field input::placeholder,
+  .rr-contact-quote__field textarea::placeholder {
+    color: var(--rr-contact-placeholder);
+    opacity: 1;
+  }
+
+  .rr-contact-quote__field input:focus,
+  .rr-contact-quote__field textarea:focus {
+    border-color: var(--rr-contact-accent);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--rr-contact-accent) 18%, transparent);
+  }
+
+  .rr-contact-quote__quantity {
+    border: 0;
+    margin: 0;
+    min-width: 0;
+    padding: 0;
+  }
+
+  .rr-contact-quote__quantity legend {
+    margin-bottom: 12px;
+    padding: 0;
+  }
+
+  .rr-contact-quote__quantity-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 20px;
+  }
+
+  .rr-contact-quote__check {
+    align-items: center;
+    color: var(--rr-contact-muted);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 18px;
+    gap: 9px;
+    line-height: 1.35;
+    position: relative;
+  }
+
+  .rr-contact-quote__check input {
+    height: 1px;
+    opacity: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .rr-contact-quote__check > span {
+    align-items: center;
+    background: transparent;
+    border: 1px solid var(--rr-contact-input-border);
+    border-radius: 4px;
+    display: flex;
+    flex: 0 0 19px;
+    height: 19px;
+    justify-content: center;
+    transition: background-color 160ms ease, border-color 160ms ease;
+    width: 19px;
+  }
+
+  .rr-contact-quote__check > span::after {
+    border-bottom: 2px solid var(--rr-contact-button-text);
+    border-right: 2px solid var(--rr-contact-button-text);
+    content: '';
+    display: none;
+    height: 8px;
+    transform: rotate(45deg) translate(-1px, -1px);
+    width: 4px;
+  }
+
+  .rr-contact-quote__check input:checked + span {
+    background: var(--rr-contact-accent);
+    border-color: var(--rr-contact-accent);
+  }
+
+  .rr-contact-quote__check input:checked + span::after {
+    display: block;
+  }
+
+  .rr-contact-quote__check input:focus-visible + span {
+    outline: 2px solid var(--rr-contact-accent);
+    outline-offset: 3px;
+  }
+
+  .rr-contact-quote__check strong {
+    font: inherit;
+  }
+
+  .rr-contact-quote__submit {
+    appearance: none;
+    background: var(--rr-contact-button-background);
+    border: 1px solid var(--rr-contact-button-background);
+    border-radius: 999px;
+    color: var(--rr-contact-button-text);
+    cursor: pointer;
+    font-family: var(--font-body--family);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    min-height: 54px;
+    padding: 14px 24px;
+    text-transform: uppercase;
+    transition: filter 160ms ease;
+    width: 100%;
+  }
+
+  .rr-contact-quote__submit:hover {
+    filter: brightness(0.92);
+  }
+
+  .rr-contact-quote__submit:focus-visible {
+    outline: 2px solid var(--rr-contact-accent);
+    outline-offset: 3px;
+  }
+
+  .rr-contact-quote__notice {
+    border: 1px solid currentcolor;
+    border-radius: 8px;
+    font-size: 15px;
+    padding: 14px 16px;
+  }
+
+  .rr-contact-quote__notice--error {
+    color: #9c2f2f;
+  }
+
+  .rr-contact-quote__notice--success {
+    color: var(--rr-contact-accent);
+  }
+
+  .rr-contact-quote__notice ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-contact-quote {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .rr-contact-quote__header {
+      margin-bottom: 38px;
+    }
+
+    .rr-contact-quote h1 {
+      font-size: 42px;
+    }
+
+    .rr-contact-quote__description,
+    .rr-contact-quote__check {
+      font-size: 16px;
+    }
+
+    .rr-contact-quote__eyebrow,
+    .rr-contact-quote__submit {
+      font-size: 10px;
+    }
+
+    .rr-contact-quote__field label,
+    .rr-contact-quote__quantity legend {
+      font-size: 13px;
+    }
+
+    .rr-contact-quote__row {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RR quote form",
+  "max_blocks": 6,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "GET IN TOUCH"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Request a Quote"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Tell us about your project and we'll follow up with pricing and lead times tailored to your run.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Fields"
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name label",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "name_placeholder",
+      "label": "Name placeholder",
+      "default": "Jane Smith"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "jane@company.com"
+    },
+    {
+      "type": "text",
+      "id": "company_label",
+      "label": "Company label",
+      "default": "Company"
+    },
+    {
+      "type": "text",
+      "id": "company_placeholder",
+      "label": "Company placeholder",
+      "default": "Company name"
+    },
+    {
+      "type": "text",
+      "id": "quantity_label",
+      "label": "Quantity heading",
+      "default": "Desired Quantity Range"
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Message label",
+      "default": "Message"
+    },
+    {
+      "type": "text",
+      "id": "message_placeholder",
+      "label": "Message placeholder",
+      "default": "Tell us about your project, target volumes, and timelines"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "SUBMIT REQUEST"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you. We'll be in touch shortly."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#f4ecd8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "muted_text",
+      "label": "Muted text",
+      "default": "#66645f"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#2f5e3a"
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Input background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_border",
+      "label": "Input border",
+      "default": "#d2d0ca"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_color",
+      "label": "Placeholder text",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#2f5e3a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#f4ecd8"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Form width",
+      "min": 600,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 760
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quantity_option",
+      "name": "Quantity option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "50-100"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR quote form",
+      "blocks": [
+        {
+          "type": "quantity_option",
+          "settings": {
+            "label": "50-100"
+          }
+        },
+        {
+          "type": "quantity_option",
+          "settings": {
+            "label": "100-500"
+          }
+        },
+        {
+          "type": "quantity_option",
+          "settings": {
+            "label": "500-1,000"
+          }
+        },
+        {
+          "type": "quantity_option",
+          "settings": {
+            "label": "1,000+"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
