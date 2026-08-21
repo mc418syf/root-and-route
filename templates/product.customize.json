@@ -412,8 +412,8 @@
         "padding-block-end": 0
       }
     },
-    "rr_pdp_editorial": {
-      "type": "rr-pdp-editorial",
+    "rr_pdp_features": {
+      "type": "rr-pdp-features",
       "blocks": {
         "feature_structure": {
           "type": "feature",
@@ -442,27 +442,100 @@
             "heading": "Global delivery",
             "text": "<p>Production oversight, quality control, freight, and customs aligned for final delivery.</p>"
           }
-        },
+        }
+      },
+      "block_order": [
+        "feature_structure",
+        "feature_material",
+        "feature_sample",
+        "feature_delivery"
+      ],
+      "settings": {
+        "eyebrow": "Built into every project",
+        "heading": "What you get",
+        "text": "<p>Every project is engineered around your product, audience, and route to market.</p>",
+        "show_numbers": true,
+        "sticky_heading": true,
+        "heading_size": 52,
+        "subheading_size": 24,
+        "body_size": 15,
+        "max_width": 1360,
+        "column_gap": 72,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "background": "#fafaf8",
+        "text_color": "#141414",
+        "muted_color": "#6b6b63",
+        "accent": "#2f5e3a",
+        "border_color": "#ecebe6"
+      }
+    },
+    "rr_pdp_specifications": {
+      "type": "rr-pdp-specifications",
+      "blocks": {
         "spec_materials": {
-          "type": "specification",
-          "settings": { "label": "Materials", "value": "FSC-certified paperboard and specialty paper options" }
+          "type": "row",
+          "settings": {
+            "label": "Materials",
+            "value": "FSC-certified paperboard and specialty paper options"
+          }
         },
         "spec_printing": {
-          "type": "specification",
-          "settings": { "label": "Printing", "value": "Offset, Pantone, digital, and specialty color matching" }
+          "type": "row",
+          "settings": {
+            "label": "Printing",
+            "value": "Offset, Pantone, digital, and specialty color matching"
+          }
         },
         "spec_finishes": {
-          "type": "specification",
-          "settings": { "label": "Finishes", "value": "Foil stamping, embossing, debossing, spot UV, and soft-touch lamination" }
+          "type": "row",
+          "settings": {
+            "label": "Finishes",
+            "value": "Foil stamping, embossing, debossing, spot UV, and soft-touch lamination"
+          }
         },
         "spec_inserts": {
-          "type": "specification",
-          "settings": { "label": "Inserts", "value": "Paperboard, molded pulp, EVA, foam, or custom-fit trays" }
+          "type": "row",
+          "settings": {
+            "label": "Inserts",
+            "value": "Paperboard, molded pulp, EVA, foam, or custom-fit trays"
+          }
         },
         "spec_artwork": {
-          "type": "specification",
-          "settings": { "label": "Artwork", "value": "Dielines supplied after structural approval" }
-        },
+          "type": "row",
+          "settings": {
+            "label": "Artwork",
+            "value": "Dielines supplied after structural approval"
+          }
+        }
+      },
+      "block_order": [
+        "spec_materials",
+        "spec_printing",
+        "spec_finishes",
+        "spec_inserts",
+        "spec_artwork"
+      ],
+      "settings": {
+        "eyebrow": "Material and finish",
+        "heading": "Specification",
+        "text": "<p>Final construction and finish are confirmed through sampling before production.</p>",
+        "heading_size": 52,
+        "body_size": 15,
+        "max_width": 1360,
+        "column_gap": 72,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "background": "#fafaf8",
+        "text_color": "#141414",
+        "muted_color": "#6b6b63",
+        "accent": "#2f5e3a",
+        "border_color": "#ecebe6"
+      }
+    },
+    "rr_pdp_audiences": {
+      "type": "rr-pdp-audiences",
+      "blocks": {
         "audience_beauty": {
           "type": "audience",
           "settings": {
@@ -490,84 +563,118 @@
             "heading": "Lifestyle collections",
             "text": "<p>Coordinated packaging suites for products designed to live beautifully in the home.</p>"
           }
-        },
+        }
+      },
+      "block_order": [
+        "audience_beauty",
+        "audience_holiday",
+        "audience_retail",
+        "audience_lifestyle"
+      ],
+      "settings": {
+        "eyebrow": "Designed for impact",
+        "heading": "Perfect for",
+        "heading_size": 52,
+        "subheading_size": 24,
+        "body_size": 15,
+        "max_width": 1360,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "background": "#24482d",
+        "text_color": "#fafaf8",
+        "muted_color": "#c1c9be",
+        "eyebrow_color": "#f4ecd8",
+        "border_color": "#55705c"
+      }
+    },
+    "rr_pdp_related": {
+      "type": "rr-pdp-related",
+      "blocks": {
         "related_one": {
-          "type": "related_product",
+          "type": "card",
           "settings": {
             "product": "",
             "eyebrow": "Custom packaging",
-            "fallback_title": "Signature rigid boxes",
-            "text": "A considered format with a precise, tactile reveal."
+            "text": "A considered format with a precise, tactile reveal.",
+            "title": "Signature rigid boxes",
+            "image": "",
+            "link": ""
           }
         },
         "related_two": {
-          "type": "related_product",
+          "type": "card",
           "settings": {
             "product": "",
             "eyebrow": "Custom packaging",
-            "fallback_title": "Advent collections",
-            "text": "Interactive structures made for seasonal storytelling."
+            "text": "Interactive structures made for seasonal storytelling.",
+            "title": "Advent collections",
+            "image": "",
+            "link": ""
           }
         },
         "related_three": {
-          "type": "related_product",
+          "type": "card",
           "settings": {
             "product": "",
             "eyebrow": "Custom packaging",
-            "fallback_title": "Coordinated gift suites",
-            "text": "Matched packaging elements designed as one visual system."
+            "text": "Matched packaging elements designed as one visual system.",
+            "title": "Coordinated gift suites",
+            "image": "",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "feature_structure",
-        "feature_material",
-        "feature_sample",
-        "feature_delivery",
-        "spec_materials",
-        "spec_printing",
-        "spec_finishes",
-        "spec_inserts",
-        "spec_artwork",
-        "audience_beauty",
-        "audience_holiday",
-        "audience_retail",
-        "audience_lifestyle",
         "related_one",
         "related_two",
         "related_three"
       ],
       "settings": {
-        "show_features": true,
-        "features_eyebrow": "Built into every project",
-        "features_heading": "What you get",
-        "features_text": "<p>Every project is engineered around your product, audience, and route to market.</p>",
-        "show_specs": true,
-        "specs_eyebrow": "Material and finish",
-        "specs_heading": "Specification",
-        "specs_text": "<p>Final construction and finish are confirmed through sampling before production.</p>",
-        "show_audiences": true,
-        "audiences_eyebrow": "Designed for impact",
-        "audiences_heading": "Perfect for",
-        "show_related": true,
-        "related_eyebrow": "Continue exploring",
-        "related_heading": "Related collections",
-        "related_link_label": "View all collections",
-        "related_link": "shopify://collections/all",
-        "show_cta": true,
-        "cta_eyebrow": "Start a conversation",
-        "cta_heading": "Have a project in mind?",
-        "cta_text": "<p>Share your product, target volume, and timeline. We will shape the right route to production.</p>",
-        "cta_label": "Request a quote",
-        "cta_link": "shopify://pages/contact",
+        "eyebrow": "Continue exploring",
+        "heading": "Related collections",
+        "link_label": "View all collections",
+        "link": "shopify://collections/all",
+        "columns": 3,
+        "card_gap": 22,
+        "image_ratio": "portrait",
+        "image_fit": "cover",
+        "heading_size": 52,
+        "subheading_size": 24,
+        "body_size": 16,
+        "max_width": 1360,
+        "padding_top": 96,
+        "padding_bottom": 96,
         "background": "#fafaf8",
         "text_color": "#141414",
         "muted_color": "#6b6b63",
-        "border_color": "#ecebe6",
         "accent": "#2f5e3a",
-        "dark_background": "#24482d",
-        "cream_background": "#f4ecd8",
+        "border_color": "#ecebe6",
         "image_background": "#efeae0"
+      }
+    },
+    "rr_pdp_cta": {
+      "type": "rr-pdp-cta",
+      "settings": {
+        "eyebrow": "Start a conversation",
+        "heading": "Have a project in mind?",
+        "text": "<p>Share your product, target volume, and timeline. We will shape the right route to production.</p>",
+        "alignment": "center",
+        "button_label": "Request a quote",
+        "button_link": "shopify://pages/contact",
+        "show_arrow": true,
+        "button_radius": 2,
+        "heading_size": 52,
+        "body_size": 17,
+        "max_width": 1360,
+        "content_width": 760,
+        "padding_top": 104,
+        "padding_bottom": 104,
+        "background": "#f4ecd8",
+        "text_color": "#141414",
+        "muted_color": "#6b6b63",
+        "accent": "#2f5e3a",
+        "button_background": "#2f5e3a",
+        "button_text": "#fafaf8"
       }
     },
     "17872726377a43df85": {
@@ -692,7 +799,11 @@
   "order": [
     "rr_pdp_breadcrumb",
     "main",
-    "rr_pdp_editorial",
+    "rr_pdp_features",
+    "rr_pdp_specifications",
+    "rr_pdp_audiences",
+    "rr_pdp_related",
+    "rr_pdp_cta",
     "17872726377a43df85",
     "rr_contact_quote_WtYLhX"
   ]

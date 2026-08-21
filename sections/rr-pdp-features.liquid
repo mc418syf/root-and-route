@@ -1,0 +1,88 @@
+<section
+  class="rr-pdp-component rr-pdp-features"
+  style="
+    --rr-pdp-background: {{ section.settings.background }};
+    --rr-pdp-text: {{ section.settings.text_color }};
+    --rr-pdp-muted: {{ section.settings.muted_color }};
+    --rr-pdp-accent: {{ section.settings.accent }};
+    --rr-pdp-line: {{ section.settings.border_color }};
+    --rr-pdp-max-width: {{ section.settings.max_width }}px;
+    --rr-pdp-padding-top: {{ section.settings.padding_top }}px;
+    --rr-pdp-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --rr-pdp-column-gap: {{ section.settings.column_gap }}px;
+    --rr-pdp-heading-size: {{ section.settings.heading_size }}px;
+    --rr-pdp-subheading-size: {{ section.settings.subheading_size }}px;
+    --rr-pdp-body-size: {{ section.settings.body_size }}px;
+  "
+>
+  <div class="rr-pdp-component__inner rr-pdp-component__split">
+    <header class="{% if section.settings.sticky_heading %}rr-pdp-component__sticky{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}<p class="rr-pdp-component__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="rr-pdp-component__intro rte">{{ section.settings.text }}</div>{%- endif -%}
+    </header>
+
+    <div class="rr-pdp-features__list">
+      {%- for block in section.blocks -%}
+        <article class="rr-pdp-features__item" {{ block.shopify_attributes }}>
+          {%- if section.settings.show_numbers -%}<span class="rr-pdp-features__number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>{%- endif -%}
+          <div>
+            <h3>{{ block.settings.heading | escape }}</h3>
+            {%- if block.settings.text != blank -%}<div class="rte">{{ block.settings.text }}</div>{%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RR PDP - What you get",
+  "max_blocks": 8,
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Built into every project" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What you get" },
+    { "type": "richtext", "id": "text", "label": "Description", "default": "<p>Every project is engineered around your product, audience, and route to market.</p>" },
+    { "type": "checkbox", "id": "show_numbers", "label": "Show item numbers", "default": true },
+    { "type": "checkbox", "id": "sticky_heading", "label": "Keep heading visible on desktop", "default": true },
+    { "type": "header", "content": "Typography" },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 28, "max": 72, "step": 1, "unit": "px", "default": 52 },
+    { "type": "range", "id": "subheading_size", "label": "Item heading size", "min": 16, "max": 40, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "body_size", "label": "Body size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 15 },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "max_width", "label": "Maximum width", "min": 960, "max": 1600, "step": 20, "unit": "px", "default": 1360 },
+    { "type": "range", "id": "column_gap", "label": "Column gap", "min": 24, "max": 120, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 96 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#fafaf8" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#141414" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#6b6b63" },
+    { "type": "color", "id": "accent", "label": "Accent", "default": "#2f5e3a" },
+    { "type": "color", "id": "border_color", "label": "Lines", "default": "#ecebe6" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Structural concept" },
+        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>A format engineered around your product dimensions, weight, and unboxing sequence.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR PDP - What you get",
+      "blocks": [
+        { "type": "feature" },
+        { "type": "feature", "settings": { "heading": "Material curation", "text": "<p>Specialty papers, responsible substrates, and finishes selected for tactile impact.</p>" } },
+        { "type": "feature", "settings": { "heading": "Production sampling", "text": "<p>A production-grade prototype to test the structural fit, finish, and opening experience.</p>" } },
+        { "type": "feature", "settings": { "heading": "Global delivery", "text": "<p>Production oversight, quality control, freight, and customs aligned for final delivery.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

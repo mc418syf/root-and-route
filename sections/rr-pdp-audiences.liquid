@@ -1,0 +1,79 @@
+<section
+  class="rr-pdp-component rr-pdp-audiences"
+  style="
+    --rr-pdp-background: {{ section.settings.background }};
+    --rr-pdp-text: {{ section.settings.text_color }};
+    --rr-pdp-muted: {{ section.settings.muted_color }};
+    --rr-pdp-eyebrow-color: {{ section.settings.eyebrow_color }};
+    --rr-pdp-grid-line: {{ section.settings.border_color }};
+    --rr-pdp-max-width: {{ section.settings.max_width }}px;
+    --rr-pdp-padding-top: {{ section.settings.padding_top }}px;
+    --rr-pdp-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --rr-pdp-heading-size: {{ section.settings.heading_size }}px;
+    --rr-pdp-subheading-size: {{ section.settings.subheading_size }}px;
+    --rr-pdp-body-size: {{ section.settings.body_size }}px;
+  "
+>
+  <div class="rr-pdp-component__inner">
+    <header class="rr-pdp-audiences__heading">
+      {%- if section.settings.eyebrow != blank -%}<p class="rr-pdp-component__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
+    </header>
+
+    <div class="rr-pdp-audiences__grid">
+      {%- for block in section.blocks -%}
+        <article class="rr-pdp-audiences__item" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.heading | escape }}</h3>
+          {%- if block.settings.text != blank -%}<div class="rte">{{ block.settings.text }}</div>{%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RR PDP - Perfect for",
+  "max_blocks": 8,
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Designed for impact" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Perfect for" },
+    { "type": "header", "content": "Typography" },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 28, "max": 72, "step": 1, "unit": "px", "default": 52 },
+    { "type": "range", "id": "subheading_size", "label": "Item heading size", "min": 16, "max": 40, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "body_size", "label": "Body size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 15 },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "max_width", "label": "Maximum width", "min": 960, "max": 1600, "step": 20, "unit": "px", "default": 1360 },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 96 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#24482d" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#fafaf8" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#c1c9be" },
+    { "type": "color", "id": "eyebrow_color", "label": "Eyebrow", "default": "#f4ecd8" },
+    { "type": "color", "id": "border_color", "label": "Grid lines", "default": "#55705c" }
+  ],
+  "blocks": [
+    {
+      "type": "audience",
+      "name": "Perfect for item",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Beauty and fragrance" },
+        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>High-touch launches, discovery sets, and gifting moments that need a memorable reveal.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR PDP - Perfect for",
+      "blocks": [
+        { "type": "audience" },
+        { "type": "audience", "settings": { "heading": "Holiday and gifting", "text": "<p>Seasonal campaigns, advent formats, and premium gifting programs built to hold attention.</p>" } },
+        { "type": "audience", "settings": { "heading": "Retail launches", "text": "<p>Distinctive structures that translate a product story into a strong shelf presence.</p>" } },
+        { "type": "audience", "settings": { "heading": "Lifestyle collections", "text": "<p>Coordinated packaging suites for products designed to live beautifully in the home.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
