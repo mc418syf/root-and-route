@@ -55,7 +55,7 @@
             "thumbnail_position": "bottom",
             "thumbnail_width": 72,
             "thumbnail_radius": 3,
-            "aspect_ratio": "1/1.25",
+            "aspect_ratio": "adapt",
             "constrain_to_viewport": true,
             "media_fit": "contain",
             "media_radius": 3,
@@ -201,6 +201,32 @@
                 "price_tVjtKg"
               ]
             },
+            "text_aEtTtq": {
+              "type": "text",
+              "name": "t:names.product_description",
+              "settings": {
+                "text": "<p>{{ closest.product.description }}</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "divider_VJhene": {
               "type": "_divider",
               "name": "t:names.divider",
@@ -301,36 +327,10 @@
               },
               "block_order": []
             },
-            "text_aEtTtq": {
-              "type": "text",
-              "name": "t:names.product_description",
-              "settings": {
-                "text": "<p>{{ closest.product.description }}</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "button_JyMeUj": {
               "type": "button",
-              "disabled": true,
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "GET A QUOTE",
                 "link": "",
@@ -405,7 +405,7 @@
         "desktop_media_position": "left",
         "equal_columns": false,
         "limit_details_width": false,
-        "gap": 48,
+        "gap": 0,
         "enable_sticky_add_to_cart": false,
         "background_color": "",
         "padding-block-start": 0,
@@ -587,71 +587,6 @@
         "border_color": "#55705c"
       }
     },
-    "rr_pdp_related": {
-      "type": "rr-pdp-related",
-      "blocks": {
-        "related_one": {
-          "type": "card",
-          "settings": {
-            "product": "",
-            "eyebrow": "Custom packaging",
-            "text": "A considered format with a precise, tactile reveal.",
-            "title": "Signature rigid boxes",
-            "image": "",
-            "link": ""
-          }
-        },
-        "related_two": {
-          "type": "card",
-          "settings": {
-            "product": "",
-            "eyebrow": "Custom packaging",
-            "text": "Interactive structures made for seasonal storytelling.",
-            "title": "Advent collections",
-            "image": "",
-            "link": ""
-          }
-        },
-        "related_three": {
-          "type": "card",
-          "settings": {
-            "product": "",
-            "eyebrow": "Custom packaging",
-            "text": "Matched packaging elements designed as one visual system.",
-            "title": "Coordinated gift suites",
-            "image": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "related_one",
-        "related_two",
-        "related_three"
-      ],
-      "settings": {
-        "eyebrow": "Continue exploring",
-        "heading": "Related collections",
-        "link_label": "View all collections",
-        "link": "shopify://collections/all",
-        "columns": 3,
-        "card_gap": 22,
-        "image_ratio": "portrait",
-        "image_fit": "cover",
-        "heading_size": 52,
-        "subheading_size": 24,
-        "body_size": 16,
-        "max_width": 1360,
-        "padding_top": 96,
-        "padding_bottom": 96,
-        "background": "#fafaf8",
-        "text_color": "#141414",
-        "muted_color": "#6b6b63",
-        "accent": "#2f5e3a",
-        "border_color": "#ecebe6",
-        "image_background": "#efeae0"
-      }
-    },
     "rr_pdp_cta": {
       "type": "rr-pdp-cta",
       "settings": {
@@ -686,9 +621,9 @@
             "form_id": "1121481",
             "text_color": "#202020",
             "button_background_color": "{{ settings.color_palette.color1 }}",
-            "button_label_color": "#FFFFFF",
-            "links_color": "#1878B9",
-            "errors_color": "#E02229",
+            "button_label_color": "#ffffff",
+            "links_color": "#1878b9",
+            "errors_color": "#e02229",
             "text_alignment": "center",
             "form_alignment": "center",
             "padding_top": 40,
@@ -701,6 +636,7 @@
       "block_order": [
         "forms_inline_ADbYpH"
       ],
+      "disabled": true,
       "settings": {
         "content_direction": "row",
         "vertical_on_mobile": true,
@@ -802,7 +738,6 @@
     "rr_pdp_features",
     "rr_pdp_specifications",
     "rr_pdp_audiences",
-    "rr_pdp_related",
     "rr_pdp_cta",
     "17872726377a43df85",
     "rr_contact_quote_WtYLhX"
