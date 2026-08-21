@@ -29,7 +29,10 @@
     <dl class="rr-pdp-specifications__list">
       {%- for block in section.blocks -%}
         {%- liquid
-          assign metafield_key = block.settings.metafield_key | strip
+          assign metafield_key = block.settings.metafield_source | default: block.settings.metafield_key | strip
+          if metafield_key == 'manual'
+            assign metafield_key = blank
+          endif
           assign specification_metafield = blank
           if metafield_namespace != blank and metafield_key != blank
             assign specification_metafield = specification_product.metafields[metafield_namespace][metafield_key]
@@ -68,7 +71,7 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Specification" },
     { "type": "richtext", "id": "text", "label": "Description", "default": "<p>Final construction and finish are confirmed through sampling before production.</p>" },
     { "type": "header", "content": "Product metafields" },
-    { "type": "text", "id": "metafield_namespace", "label": "Metafield namespace", "default": "custom", "info": "Rows use this namespace and their metafield key. The manual value is used when the metafield is empty." },
+    { "type": "text", "id": "metafield_namespace", "label": "Metafield namespace", "default": "custom", "info": "The selected product metafield automatically supplies each row value. Manual values are used only when that metafield is empty." },
     { "type": "header", "content": "Typography" },
     { "type": "range", "id": "heading_size", "label": "Heading size", "min": 28, "max": 72, "step": 1, "unit": "px", "default": 52 },
     { "type": "range", "id": "body_size", "label": "Body size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 15 },
@@ -90,8 +93,20 @@
       "name": "Specification row",
       "settings": [
         { "type": "text", "id": "label", "label": "Label", "default": "Materials" },
-        { "type": "text", "id": "metafield_key", "label": "Metafield key", "default": "materials", "info": "For example: materials, printing, finishes, or customization." },
-        { "type": "textarea", "id": "value", "label": "Value", "default": "FSC-certified paperboard and specialty paper options" }
+        {
+          "type": "select",
+          "id": "metafield_source",
+          "label": "Metafield source",
+          "options": [
+            { "value": "materials", "label": "Materials" },
+            { "value": "printing", "label": "Printing" },
+            { "value": "finishes", "label": "Finishes" },
+            { "value": "customization", "label": "Customization" },
+            { "value": "manual", "label": "Manual value" }
+          ],
+          "default": "materials"
+        },
+        { "type": "textarea", "id": "value", "label": "Fallback value", "default": "FSC-certified paperboard and specialty paper options", "info": "Shown only when the selected product metafield is empty, or when Manual value is selected." }
       ]
     }
   ],
@@ -100,10 +115,10 @@
       "name": "RR PDP - Specification",
       "blocks": [
         { "type": "row" },
-        { "type": "row", "settings": { "label": "Printing", "metafield_key": "printing", "value": "Offset, Pantone, digital, and specialty color matching" } },
-        { "type": "row", "settings": { "label": "Finishes", "metafield_key": "finishes", "value": "Foil stamping, embossing, debossing, spot UV, and soft-touch lamination" } },
-        { "type": "row", "settings": { "label": "Customization", "metafield_key": "customization", "value": "Custom structures, inserts, dimensions, and finishes" } },
-        { "type": "row", "settings": { "label": "Artwork", "metafield_key": "artwork", "value": "Dielines supplied after structural approval" } }
+        { "type": "row", "settings": { "label": "Printing", "metafield_source": "printing", "value": "Offset, Pantone, digital, and specialty color matching" } },
+        { "type": "row", "settings": { "label": "Finishes", "metafield_source": "finishes", "value": "Foil stamping, embossing, debossing, spot UV, and soft-touch lamination" } },
+        { "type": "row", "settings": { "label": "Customization", "metafield_source": "customization", "value": "Custom structures, inserts, dimensions, and finishes" } },
+        { "type": "row", "settings": { "label": "Artwork", "metafield_source": "manual", "value": "Dielines supplied after structural approval" } }
       ]
     }
   ]

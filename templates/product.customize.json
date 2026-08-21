@@ -464,7 +464,7 @@
           "type": "row",
           "settings": {
             "label": "Materials",
-            "metafield_key": "{{ product.metafields.custom.materials | metafield_text }}",
+            "metafield_source": "materials",
             "value": ""
           }
         },
@@ -472,7 +472,7 @@
           "type": "row",
           "settings": {
             "label": "Printing",
-            "metafield_key": "printing",
+            "metafield_source": "printing",
             "value": "Offset, Pantone, digital, and specialty color matching"
           }
         },
@@ -480,7 +480,7 @@
           "type": "row",
           "settings": {
             "label": "Finishes",
-            "metafield_key": "finishes",
+            "metafield_source": "finishes",
             "value": "Foil stamping, embossing, debossing, spot UV, and soft-touch lamination"
           }
         },
@@ -488,7 +488,7 @@
           "type": "row",
           "settings": {
             "label": "Customization",
-            "metafield_key": "customization",
+            "metafield_source": "customization",
             "value": "Custom structures, inserts, dimensions, and finishes"
           }
         },
@@ -496,7 +496,7 @@
           "type": "row",
           "settings": {
             "label": "Artwork",
-            "metafield_key": "artwork",
+            "metafield_source": "manual",
             "value": "Dielines supplied after structural approval"
           }
         }
