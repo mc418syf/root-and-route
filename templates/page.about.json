@@ -18,7 +18,7 @@
           "settings": {
             "text": "<h1>{{ closest.page.title }}</h1>",
             "width": "100%",
-            "max_width": "normal",
+            "max_width": "none",
             "alignment": "left",
             "type_preset": "h2",
             "font": "var(--font-body--family)",
@@ -27,6 +27,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -39,7 +40,9 @@
         },
         "page-content": {
           "type": "page-content",
-          "settings": {},
+          "settings": {
+            "text_color": ""
+          },
           "blocks": {}
         }
       },
@@ -47,15 +50,158 @@
         "heading",
         "page-content"
       ],
+      "disabled": true,
       "settings": {
         "content_direction": "column",
         "gap": 32,
+        "background_color": "",
         "padding-block-start": 40,
         "padding-block-end": 80
+      }
+    },
+    "rr_page_hero_daXL9r": {
+      "type": "rr-page-hero",
+      "name": "RR page hero",
+      "settings": {
+        "background": "#fafaf8",
+        "padding_top": 112,
+        "padding_bottom": 72,
+        "eyebrow": "About · Root & Route Creations",
+        "heading": "Packaging, rooted in your brand. Built for the way you grow.",
+        "text": "<p>Root & Route Creations is a North American packaging partner helping brands turn ideas into thoughtfully engineered, production-ready packaging.</p>",
+        "show_images": true,
+        "image_alt": "Root & Route packaging studio",
+        "placeholder_1": "Studio / atelier photography",
+        "placeholder_2": "Dieline / prototype",
+        "placeholder_3": "Material detail"
+      }
+    },
+    "rr_partner_feature_cHWECf": {
+      "type": "rr-partner-feature",
+      "blocks": {
+        "badge_aURxie": {
+          "type": "badge",
+          "settings": {
+            "label": "18+ years"
+          }
+        },
+        "badge_WjkamK": {
+          "type": "badge",
+          "settings": {
+            "label": "Disney-Certified Vendor"
+          }
+        },
+        "badge_bmGkBE": {
+          "type": "badge",
+          "settings": {
+            "label": "BSCI-Compliant"
+          }
+        },
+        "badge_wHxgmz": {
+          "type": "badge",
+          "settings": {
+            "label": "FSC-Certified"
+          }
+        }
+      },
+      "block_order": [
+        "badge_aURxie",
+        "badge_WjkamK",
+        "badge_bmGkBE",
+        "badge_wHxgmz"
+      ],
+      "name": "RR partner feature",
+      "settings": {
+        "background": "#ffffff",
+        "padding": 120,
+        "image_right": false,
+        "image_alt": "Partner factory and quality control",
+        "placeholder": "Partner factory floor — production line, quality control",
+        "eyebrow": "Our Manufacturing Partnership",
+        "heading": "Behind the structure: our partner atelier",
+        "text": "<p>Root & Route Creations Inc. is the dedicated North American gateway to Guangzhou Shinelee Paper Product Co., Ltd., with over 18 years of specialized packaging experience.</p><p>Clients gain direct access to structural engineering, responsible material sourcing, and rigorous quality controls.</p>"
+      }
+    },
+    "rr_principles_iKVCxc": {
+      "type": "rr-principles",
+      "blocks": {
+        "principle_Mwa9wg": {
+          "type": "principle",
+          "settings": {
+            "title": "Design without assumptions",
+            "text": "<p>Not every product needs to fit an existing packaging template. Sometimes the right structure hasn't been created yet.</p>"
+          }
+        },
+        "principle_w7wBCp": {
+          "type": "principle",
+          "settings": {
+            "title": "Design without assumptions",
+            "text": "<p>Not every product needs to fit an existing packaging template. Sometimes the right structure hasn't been created yet.</p>"
+          }
+        },
+        "principle_NHJJr4": {
+          "type": "principle",
+          "settings": {
+            "title": "Design without assumptions",
+            "text": "<p>Not every product needs to fit an existing packaging template. Sometimes the right structure hasn't been created yet.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "principle_Mwa9wg",
+        "principle_w7wBCp",
+        "principle_NHJJr4"
+      ],
+      "name": "RR principles",
+      "settings": {
+        "background": "#fafaf8",
+        "padding": 120,
+        "eyebrow": "Our Principles",
+        "heading": "What we believe",
+        "show_mark": true
+      }
+    },
+    "rr_story_cards_6zxVak": {
+      "type": "rr-story-cards",
+      "blocks": {
+        "card_y7CENe": {
+          "type": "card",
+          "settings": {
+            "label": "ROOT",
+            "text": "<p>We start with the root of every project — the brand, product, story, and experience it wants to create.</p>",
+            "dark": true,
+            "mark_variant": ""
+          }
+        },
+        "card_9WXPci": {
+          "type": "card",
+          "settings": {
+            "label": "ROUTE",
+            "text": "<p>We start with the root of every project — the brand, product, story, and experience it wants to create.</p>",
+            "dark": true,
+            "mark_variant": "-leaf"
+          }
+        }
+      },
+      "block_order": [
+        "card_y7CENe",
+        "card_9WXPci"
+      ],
+      "name": "RR story cards",
+      "settings": {
+        "background": "#ffffff",
+        "padding": 120,
+        "eyebrow": "Our Story",
+        "heading": "From brand roots to market routes",
+        "lead": "<p>We uncover the root of every brand and create the route that brings its ideas to life.</p>"
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "rr_page_hero_daXL9r",
+    "rr_partner_feature_cHWECf",
+    "rr_principles_iKVCxc",
+    "rr_story_cards_6zxVak"
   ]
 }
