@@ -28,7 +28,7 @@
             "case": "none",
             "wrap": "pretty",
             "text_color": "",
-            "background": true,
+            "background": false,
             "background_color": "#efeae06b",
             "corner_radius": 0,
             "padding-block-start": 0,
