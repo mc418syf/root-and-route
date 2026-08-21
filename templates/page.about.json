@@ -66,9 +66,9 @@
         "background": "#fafaf8",
         "padding_top": 112,
         "padding_bottom": 72,
-        "eyebrow": "About · Root & Route Creations",
+        "eyebrow": "About · Root & Route Package",
         "heading": "Packaging, rooted in your brand. Built for the way you grow.",
-        "text": "<p>Root & Route Creations is a North American packaging partner helping brands turn ideas into thoughtfully engineered, production-ready packaging.</p>",
+        "text": "<p>Root & Route Package is a North American packaging partner helping brands turn ideas into thoughtfully engineered, production-ready packaging.</p>",
         "show_images": true,
         "image_alt": "Root & Route packaging studio",
         "placeholder_1": "Studio / atelier photography",
@@ -122,20 +122,33 @@
             "text_color": "#2f5e3a",
             "border_color": "#dfded8"
           }
+        },
+        "image_KwBKcf": {
+          "type": "image",
+          "settings": {
+            "alt": "",
+            "aspect_ratio": "portrait",
+            "image_fit": "cover",
+            "image_position": "center",
+            "corner_radius": 3,
+            "background": "#efeae0",
+            "placeholder": "Partner factory and quality control"
+          }
         }
       },
       "block_order": [
         "badge_aURxie",
         "badge_WjkamK",
         "badge_bmGkBE",
-        "badge_wHxgmz"
+        "badge_wHxgmz",
+        "image_KwBKcf"
       ],
       "name": "RR partner feature",
       "settings": {
         "eyebrow": "Our Manufacturing Partnership",
         "heading": "Behind the structure: our partner atelier",
         "text": "<p>Root & Route Creations Inc. is the dedicated North American gateway to Guangzhou Shinelee Paper Product Co., Ltd. — an elite manufacturing powerhouse with over 18 years of specialized packaging excellence. This direct-to-factory integration means your brand's presentation is never restricted by generic, mass-market templates.</p><p>Clients gain immediate access to an advanced facility renowned for structural engineering precision, a six-year standing as a Disney-Certified Vendor, and rigorous BSCI-compliant quality controls. Every system we build uses sustainably sourced, FSC-certified paperboards.</p>",
-        "text_position": "right",
+        "text_position": "left",
         "image_width": 45,
         "column_gap": 72,
         "max_width": 1360,
