@@ -464,8 +464,8 @@
           "type": "row",
           "settings": {
             "label": "Materials",
-            "metafield_key": "materials",
-            "value": "FSC-certified paperboard and specialty paper options"
+            "metafield_key": "{{ product.metafields.custom.materials | metafield_text }}",
+            "value": ""
           }
         },
         "spec_printing": {
