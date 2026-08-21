@@ -320,6 +320,10 @@
     min-height: 44px;
   }
 
+  body:has(.rr-pdp-summary) .variant-option__strikethrough {
+    display: none;
+  }
+
   body:has(.rr-pdp-summary) .product-media-container {
     background: #efeae0;
   }
@@ -401,10 +405,10 @@
     { "type": "text", "id": "moq_key", "label": "Minimum order metafield key", "default": "minimum_order" },
     { "type": "text", "id": "moq_fallback", "label": "Minimum order fallback", "default": "500 units" },
     { "type": "text", "id": "production_label", "label": "Production label", "default": "Production" },
-    { "type": "text", "id": "production_key", "label": "Production metafield key", "default": "production_days" },
+    { "type": "text", "id": "production_key", "label": "Production metafield key", "default": "production" },
     { "type": "text", "id": "production_fallback", "label": "Production fallback", "default": "15–20 days" },
     { "type": "text", "id": "shipping_label", "label": "Shipping label", "default": "Shipping" },
-    { "type": "text", "id": "shipping_key", "label": "Shipping metafield key", "default": "shipping_days" },
+    { "type": "text", "id": "shipping_key", "label": "Shipping metafield key", "default": "shipping" },
     { "type": "text", "id": "shipping_fallback", "label": "Shipping fallback", "default": "7–12 days" },
     { "type": "text", "id": "compliance_label", "label": "Compliance label", "default": "Compliance" },
     { "type": "text", "id": "compliance_key", "label": "Compliance metafield key", "default": "compliance" },

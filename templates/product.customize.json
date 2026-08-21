@@ -328,10 +328,10 @@
                 "moq_key": "minimum_order",
                 "moq_fallback": "500 units",
                 "production_label": "Production",
-                "production_key": "production_days",
+                "production_key": "production",
                 "production_fallback": "15-20 days",
                 "shipping_label": "Shipping",
-                "shipping_key": "shipping_days",
+                "shipping_key": "shipping",
                 "shipping_fallback": "7-12 days",
                 "compliance_label": "Compliance",
                 "compliance_key": "compliance",
@@ -464,6 +464,7 @@
           "type": "row",
           "settings": {
             "label": "Materials",
+            "metafield_key": "materials",
             "value": "FSC-certified paperboard and specialty paper options"
           }
         },
@@ -471,6 +472,7 @@
           "type": "row",
           "settings": {
             "label": "Printing",
+            "metafield_key": "printing",
             "value": "Offset, Pantone, digital, and specialty color matching"
           }
         },
@@ -478,20 +480,23 @@
           "type": "row",
           "settings": {
             "label": "Finishes",
+            "metafield_key": "finishes",
             "value": "Foil stamping, embossing, debossing, spot UV, and soft-touch lamination"
           }
         },
         "spec_inserts": {
           "type": "row",
           "settings": {
-            "label": "Inserts",
-            "value": "Paperboard, molded pulp, EVA, foam, or custom-fit trays"
+            "label": "Customization",
+            "metafield_key": "customization",
+            "value": "Custom structures, inserts, dimensions, and finishes"
           }
         },
         "spec_artwork": {
           "type": "row",
           "settings": {
             "label": "Artwork",
+            "metafield_key": "artwork",
             "value": "Dielines supplied after structural approval"
           }
         }
@@ -507,6 +512,7 @@
         "eyebrow": "Material and finish",
         "heading": "Specification",
         "text": "<p>Final construction and finish are confirmed through sampling before production.</p>",
+        "metafield_namespace": "custom",
         "heading_size": 52,
         "body_size": 15,
         "max_width": 1360,
