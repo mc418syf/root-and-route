@@ -473,7 +473,7 @@
           "settings": {
             "label": "Printing",
             "metafield_source": "printing",
-            "value": "Offset, Pantone, digital, and specialty color matching"
+            "value": ""
           }
         },
         "spec_finishes": {
@@ -481,7 +481,7 @@
           "settings": {
             "label": "Finishes",
             "metafield_source": "finishes",
-            "value": "Foil stamping, embossing, debossing, spot UV, and soft-touch lamination"
+            "value": ""
           }
         },
         "spec_inserts": {
@@ -489,7 +489,7 @@
           "settings": {
             "label": "Customization",
             "metafield_source": "customization",
-            "value": "Custom structures, inserts, dimensions, and finishes"
+            "value": ""
           }
         },
         "spec_artwork": {
@@ -497,7 +497,7 @@
           "settings": {
             "label": "Artwork",
             "metafield_source": "manual",
-            "value": "Dielines supplied after structural approval"
+            "value": ""
           }
         }
       },
