@@ -82,25 +82,45 @@
         "badge_aURxie": {
           "type": "badge",
           "settings": {
-            "label": "18+ years"
+            "label": "18+ years",
+            "link": "",
+            "custom_colors": false,
+            "background": "#ffffff",
+            "text_color": "#2f5e3a",
+            "border_color": "#dfded8"
           }
         },
         "badge_WjkamK": {
           "type": "badge",
           "settings": {
-            "label": "Disney-Certified Vendor"
+            "label": "Disney-Certified Vendor",
+            "link": "",
+            "custom_colors": false,
+            "background": "#ffffff",
+            "text_color": "#2f5e3a",
+            "border_color": "#dfded8"
           }
         },
         "badge_bmGkBE": {
           "type": "badge",
           "settings": {
-            "label": "BSCI-Compliant"
+            "label": "BSCI-Compliant",
+            "link": "",
+            "custom_colors": false,
+            "background": "#ffffff",
+            "text_color": "#2f5e3a",
+            "border_color": "#dfded8"
           }
         },
         "badge_wHxgmz": {
           "type": "badge",
           "settings": {
-            "label": "FSC-Certified"
+            "label": "FSC-Certified",
+            "link": "",
+            "custom_colors": false,
+            "background": "#ffffff",
+            "text_color": "#2f5e3a",
+            "border_color": "#dfded8"
           }
         }
       },
@@ -114,7 +134,7 @@
       "settings": {
         "eyebrow": "Our Manufacturing Partnership",
         "heading": "Behind the structure: our partner atelier",
-        "text": "<p>Root & Route Creations Inc. is the dedicated North American gateway to Guangzhou Shinelee Paper Product Co., Ltd., with over 18 years of specialized packaging experience.</p><p>Clients gain direct access to structural engineering, responsible material sourcing, and rigorous quality controls.</p>",
+        "text": "<p>Root & Route Creations Inc. is the dedicated North American gateway to Guangzhou Shinelee Paper Product Co., Ltd. — an elite manufacturing powerhouse with over 18 years of specialized packaging excellence. This direct-to-factory integration means your brand's presentation is never restricted by generic, mass-market templates.</p><p>Clients gain immediate access to an advanced facility renowned for structural engineering precision, a six-year standing as a Disney-Certified Vendor, and rigorous BSCI-compliant quality controls. Every system we build uses sustainably sourced, FSC-certified paperboards.</p>",
         "text_position": "right",
         "image_width": 45,
         "column_gap": 72,
