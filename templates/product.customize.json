@@ -450,6 +450,7 @@
         "feature_sample",
         "feature_delivery"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Built into every project",
         "heading": "What you get",
