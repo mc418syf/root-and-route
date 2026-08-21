@@ -352,9 +352,129 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "17872726377a43df85": {
+      "type": "_blocks",
+      "blocks": {
+        "forms_inline_ADbYpH": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "1121481",
+            "text_color": "#202020",
+            "button_background_color": "{{ settings.color_palette.color1 }}",
+            "button_label_color": "#FFFFFF",
+            "links_color": "#1878B9",
+            "errors_color": "#E02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 40,
+            "padding_bottom": 40,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        }
+      },
+      "block_order": [
+        "forms_inline_ADbYpH"
+      ],
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "small",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.color2 }}",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "{{ settings.color_palette.color2 }}",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "rr_contact_quote_WtYLhX": {
+      "type": "rr-contact-quote",
+      "blocks": {
+        "quantity_option_z3nnem": {
+          "type": "quantity_option",
+          "settings": {
+            "label": "50-100"
+          }
+        },
+        "quantity_option_zMnUxi": {
+          "type": "quantity_option",
+          "settings": {
+            "label": "100-500"
+          }
+        },
+        "quantity_option_iGDRNR": {
+          "type": "quantity_option",
+          "settings": {
+            "label": "500-1,000"
+          }
+        },
+        "quantity_option_c4Ba4z": {
+          "type": "quantity_option",
+          "settings": {
+            "label": "1,000+"
+          }
+        }
+      },
+      "block_order": [
+        "quantity_option_z3nnem",
+        "quantity_option_zMnUxi",
+        "quantity_option_iGDRNR",
+        "quantity_option_c4Ba4z"
+      ],
+      "disabled": true,
+      "name": "RR quote form",
+      "settings": {
+        "eyebrow": "GET IN TOUCH",
+        "heading": "Request a Quote",
+        "description": "<p>Tell us about your project and we'll follow up with pricing and lead times tailored to your run.</p>",
+        "name_label": "Name",
+        "name_placeholder": "Jane Smith",
+        "email_label": "Email",
+        "email_placeholder": "jane@company.com",
+        "company_label": "Company",
+        "company_placeholder": "Company name",
+        "quantity_label": "Desired Quantity Range",
+        "message_label": "Message",
+        "message_placeholder": "Tell us about your project, target volumes, and timelines",
+        "button_label": "SUBMIT REQUEST",
+        "success_message": "Thank you. We'll be in touch shortly.",
+        "background": "#f4ecd8",
+        "text_color": "#141414",
+        "muted_text": "#66645f",
+        "accent_color": "#2f5e3a",
+        "input_background": "#ffffff",
+        "input_border": "#d2d0ca",
+        "placeholder_color": "#999999",
+        "button_background": "#2f5e3a",
+        "button_text_color": "#f4ecd8",
+        "content_width": 600,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "17872726377a43df85",
+    "rr_contact_quote_WtYLhX"
   ]
 }
