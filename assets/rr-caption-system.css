@@ -1,0 +1,54 @@
+:root {
+  --rr-caption-green: #2f5e3a;
+  --rr-caption-green-inverse: #9fcb6e;
+}
+
+.rr-eyebrow,
+.rr-hero__eyebrow,
+.rr-featured__eyebrow,
+.rr-ready__eyebrow,
+.rr-process__eyebrow,
+.rr-editorial__eyebrow,
+.rr-contact-quote__eyebrow,
+.rr-pdp-component__eyebrow,
+.rr-partner__caption {
+  color: var(--rr-caption-color, var(--rr-caption-green)) !important;
+  font-family: var(--font-body--family, Jost, sans-serif) !important;
+  font-size: 11px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.2em !important;
+  line-height: 1.4 !important;
+  text-transform: uppercase !important;
+}
+
+.rr-page-cta,
+.rr-dark-philosophy,
+.rr-home-services,
+.rr-home-footer,
+.rr-footer,
+.rr-pdp-audiences {
+  --rr-caption-color: var(--rr-caption-green-inverse);
+}
+
+.rr-brands__caption {
+  color: var(--rr-caption-green) !important;
+}
+
+.rr-hero--overlay .rr-hero__eyebrow {
+  color: var(--overlay-text) !important;
+}
+
+@media screen and (max-width: 749px) {
+  .rr-eyebrow,
+  .rr-hero__eyebrow,
+  .rr-featured__eyebrow,
+  .rr-ready__eyebrow,
+  .rr-process__eyebrow,
+  .rr-editorial__eyebrow,
+  .rr-contact-quote__eyebrow,
+  .rr-pdp-component__eyebrow,
+  .rr-partner__caption {
+    font-size: 9px !important;
+  }
+}

@@ -28,6 +28,7 @@
   class="rr-partner{% if has_image %} rr-partner--has-image rr-partner--text-{{ section.settings.text_position }}{% else %} rr-partner--text-only{% endif %}"
   style="
     --rr-partner-background: {{ section.settings.background }};
+    --rr-caption-color: {{ section.settings.caption_color }};
     --rr-partner-text: {{ section.settings.text_color }};
     --rr-partner-body: {{ section.settings.body_color }};
     --rr-partner-caption: {{ section.settings.caption_color }};
@@ -355,7 +356,7 @@
     { "type": "color", "id": "background", "label": "Background", "default": "#ffffff" },
     { "type": "color", "id": "text_color", "label": "Heading", "default": "#141414" },
     { "type": "color", "id": "body_color", "label": "Body text", "default": "#4b4b47" },
-    { "type": "color", "id": "caption_color", "label": "Caption", "default": "#9fcb6b" },
+    { "type": "color", "id": "caption_color", "label": "Caption", "default": "#2f5e3a" },
     { "type": "header", "content": "Credential badge style" },
     { "type": "color", "id": "badge_background", "label": "Background", "default": "#ffffff" },
     { "type": "color", "id": "badge_text", "label": "Text", "default": "#2f5e3a" },

@@ -37,6 +37,13 @@
 
     {%- render 'meta-tags' -%}
     {%- render 'stylesheets' -%}
+    {{ 'rr-caption-system.css' | asset_url | stylesheet_tag }}
+    {% style %}
+      :root {
+        --rr-caption-green: {{ settings.rr_forest | default: '#2f5e3a' }};
+        --rr-caption-green-inverse: {{ settings.rr_leaf | default: '#9fcb6e' }};
+      }
+    {% endstyle %}
     {%- if request.page_type == 'product' -%}
       {{ 'rr-pdp-components.css' | asset_url | stylesheet_tag }}
     {%- endif -%}

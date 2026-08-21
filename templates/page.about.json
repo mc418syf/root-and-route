@@ -160,7 +160,7 @@
         "background": "#ffffff",
         "text_color": "#141414",
         "body_color": "#4b4b47",
-        "caption_color": "#9fcb6b",
+        "caption_color": "#2f5e3a",
         "badge_background": "#ffffff",
         "badge_text": "#2f5e3a",
         "badge_border": "#dfded8",
@@ -216,7 +216,8 @@
           "settings": {
             "label": "ROOT",
             "text": "<p>We start with the root of every project — the brand, product, story, and experience it wants to create.</p>",
-            "dark": true,
+            "dark": false,
+            "show_mark": true,
             "mark_variant": ""
           }
         },
@@ -224,8 +225,9 @@
           "type": "card",
           "settings": {
             "label": "ROUTE",
-            "text": "<p>We start with the root of every project — the brand, product, story, and experience it wants to create.</p>",
+            "text": "<p>Then we find the route to bring that idea into the physical world — through structure, materials, finishes, prototyping, engineering, and production.</p>",
             "dark": true,
+            "show_mark": true,
             "mark_variant": "-leaf"
           }
         }
@@ -237,11 +239,29 @@
       "custom_css": [],
       "name": "RR story cards",
       "settings": {
-        "background": "#ffffff",
-        "padding": 120,
         "eyebrow": "Our Story",
         "heading": "From brand roots to market routes",
-        "lead": "<p>We uncover the root of every brand and create the route that brings its ideas to life.</p>"
+        "lead": "<p>We uncover the root of every brand and create the route that brings its ideas to life.</p>",
+        "max_width": 1360,
+        "padding": 104,
+        "side_padding": 40,
+        "card_gap": 32,
+        "card_padding": 44,
+        "card_min_height": 220,
+        "card_radius": 6,
+        "heading_size": 56,
+        "lead_size": 19,
+        "background": "#ffffff",
+        "text_color": "#141414",
+        "muted_color": "#6b6b63",
+        "light_card_background": "#fafaf8",
+        "light_card_border": "#e6e4de",
+        "light_card_title": "#2f5e3a",
+        "light_card_text": "#555550",
+        "dark_card_background": "#2f5e3a",
+        "dark_card_border": "#2f5e3a",
+        "dark_card_title": "#9fcb6e",
+        "dark_card_text": "#f4ecd8"
       }
     }
   },

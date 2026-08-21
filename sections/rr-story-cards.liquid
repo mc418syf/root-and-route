@@ -1,5 +1,247 @@
-<section class="rr-story" style="background:{{ section.settings.background }};padding:{{ section.settings.padding }}px 40px"><div class="rr-wrap"><div class="rr-reveal rr-section-copy"><div class="rr-eyebrow">{{ section.settings.eyebrow }}</div><h2 class="rr-heading">{{ section.settings.heading }}</h2><div class="rr-story__lead">{{ section.settings.lead }}</div></div><div class="rr-story__grid">{%- for block in section.blocks -%}<article class="rr-story__card rr-reveal{% if block.settings.dark %} is-dark{% endif %}" {{ block.shopify_attributes }}><div class="rr-story__label"><img src="{{ 'rr-logo-mark' | append: block.settings.mark_variant | append: '.svg' | asset_url }}" alt=""><span>{{ block.settings.label }}</span></div><div class="rr-body">{{ block.settings.text }}</div></article>{%- endfor -%}</div></div></section>
-<style>.rr-story{border-top:1px solid var(--line)}.rr-section-copy{max-width:760px}.rr-story__lead{color:var(--muted);font:300 19px/1.65 Jost,sans-serif;margin-top:24px}.rr-story__grid{display:grid;gap:32px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:64px}.rr-story__card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:44px}.rr-story__card.is-dark{background:var(--forest);border-color:var(--forest)}.rr-story__label{align-items:center;color:var(--forest);display:flex;font:600 22px/1 Comfortaa,sans-serif;gap:12px}.rr-story__label img{height:26px;width:26px}.rr-story__card.is-dark .rr-story__label{color:var(--sage)}.rr-story__card.is-dark .rr-body{color:var(--butter)}@media(max-width:700px){.rr-story{padding:72px 20px!important}.rr-story__grid{grid-template-columns:1fr;margin-top:44px}.rr-story__card{padding:28px}}</style>
+<section
+  class="rr-story"
+  style="
+    --rr-story-background: {{ section.settings.background }};
+    --rr-story-text: {{ section.settings.text_color }};
+    --rr-story-muted: {{ section.settings.muted_color }};
+    --rr-story-light-background: {{ section.settings.light_card_background }};
+    --rr-story-light-border: {{ section.settings.light_card_border }};
+    --rr-story-light-title: {{ section.settings.light_card_title }};
+    --rr-story-light-text: {{ section.settings.light_card_text }};
+    --rr-story-dark-background: {{ section.settings.dark_card_background }};
+    --rr-story-dark-border: {{ section.settings.dark_card_border }};
+    --rr-story-dark-title: {{ section.settings.dark_card_title }};
+    --rr-story-dark-text: {{ section.settings.dark_card_text }};
+    --rr-story-max-width: {{ section.settings.max_width }}px;
+    --rr-story-padding: {{ section.settings.padding }}px;
+    --rr-story-side-padding: {{ section.settings.side_padding }}px;
+    --rr-story-heading-size: {{ section.settings.heading_size }}px;
+    --rr-story-lead-size: {{ section.settings.lead_size }}px;
+    --rr-story-card-gap: {{ section.settings.card_gap }}px;
+    --rr-story-card-padding: {{ section.settings.card_padding }}px;
+    --rr-story-card-radius: {{ section.settings.card_radius }}px;
+    --rr-story-card-height: {{ section.settings.card_min_height }}px;
+  "
+>
+  <div class="rr-story__inner">
+    <header class="rr-story__header rr-reveal">
+      {%- if section.settings.eyebrow != blank -%}<p class="rr-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.lead != blank -%}<div class="rr-story__lead rte">{{ section.settings.lead }}</div>{%- endif -%}
+    </header>
+
+    <div class="rr-story__grid">
+      {%- for block in section.blocks -%}
+        <article class="rr-story__card rr-reveal{% if block.settings.dark %} rr-story__card--dark{% endif %}" {{ block.shopify_attributes }}>
+          <div class="rr-story__label">
+            {%- if block.settings.show_mark -%}
+              <img src="{{ 'rr-logo-mark' | append: block.settings.mark_variant | append: '.svg' | asset_url }}" alt="">
+            {%- endif -%}
+            <h3>{{ block.settings.label | escape }}</h3>
+          </div>
+          {%- if block.settings.text != blank -%}<div class="rr-story__body rte">{{ block.settings.text }}</div>{%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .rr-story {
+    background: var(--rr-story-background);
+    border-top: 1px solid rgb(20 20 20 / 0.08);
+    color: var(--rr-story-text);
+    font-family: var(--font-body--family);
+    padding: var(--rr-story-padding) var(--rr-story-side-padding);
+  }
+
+  .rr-story * {
+    box-sizing: border-box;
+  }
+
+  .rr-story__inner {
+    margin: 0 auto;
+    max-width: var(--rr-story-max-width);
+  }
+
+  .rr-story__header {
+    max-width: 920px;
+  }
+
+  .rr-story h2 {
+    color: var(--rr-story-text);
+    font-family: var(--font-heading--family);
+    font-size: clamp(32px, 5vw, var(--rr-story-heading-size));
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.08;
+    margin: 24px 0 0;
+  }
+
+  .rr-story__lead {
+    color: var(--rr-story-muted);
+    font-size: var(--rr-story-lead-size);
+    font-weight: 300;
+    line-height: 1.65;
+    margin-top: 24px;
+    max-width: 760px;
+  }
+
+  .rr-story__lead p,
+  .rr-story__body p {
+    margin: 0;
+  }
+
+  .rr-story__grid {
+    display: grid;
+    gap: var(--rr-story-card-gap);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 64px;
+  }
+
+  .rr-story__card {
+    background: var(--rr-story-light-background);
+    border: 1px solid var(--rr-story-light-border);
+    border-radius: var(--rr-story-card-radius);
+    color: var(--rr-story-light-text);
+    min-height: var(--rr-story-card-height);
+    padding: var(--rr-story-card-padding);
+  }
+
+  .rr-story__card--dark {
+    background: var(--rr-story-dark-background);
+    border-color: var(--rr-story-dark-border);
+    color: var(--rr-story-dark-text);
+  }
+
+  .rr-story__label {
+    align-items: center;
+    color: var(--rr-story-light-title);
+    display: flex;
+    gap: 12px;
+  }
+
+  .rr-story__card--dark .rr-story__label {
+    color: var(--rr-story-dark-title);
+  }
+
+  .rr-story__label img {
+    flex: 0 0 auto;
+    height: 26px;
+    object-fit: contain;
+    width: 26px;
+  }
+
+  .rr-story__label h3 {
+    color: inherit;
+    font-family: var(--font-heading--family);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .rr-story__body {
+    color: inherit;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin-top: 22px;
+    max-width: 620px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-story {
+      padding: max(60px, calc(var(--rr-story-padding) * 0.7)) 20px;
+    }
+
+    .rr-story h2 {
+      font-size: max(32px, calc(var(--rr-story-heading-size) - 2px));
+    }
+
+    .rr-story__lead {
+      font-size: max(14px, calc(var(--rr-story-lead-size) - 2px));
+    }
+
+    .rr-story__grid {
+      grid-template-columns: 1fr;
+      margin-top: 44px;
+    }
+
+    .rr-story__card {
+      min-height: 0;
+      padding: min(var(--rr-story-card-padding), 30px);
+    }
+
+    .rr-story__label h3 {
+      font-size: 20px;
+    }
+
+    .rr-story__body {
+      font-size: 14px;
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
-{"name":"RR story cards","settings":[{"type":"color","id":"background","label":"Background","default":"#ffffff"},{"type":"range","id":"padding","label":"Section spacing","min":60,"max":180,"step":4,"unit":"px","default":120},{"type":"text","id":"eyebrow","label":"Eyebrow","default":"Our Story"},{"type":"text","id":"heading","label":"Heading","default":"From brand roots to market routes"},{"type":"richtext","id":"lead","label":"Lead","default":"<p>We uncover the root of every brand and create the route that brings its ideas to life.</p>"}],"blocks":[{"type":"card","name":"Story card","settings":[{"type":"text","id":"label","label":"Label","default":"ROOT"},{"type":"richtext","id":"text","label":"Text","default":"<p>We start with the root of every project — the brand, product, story, and experience it wants to create.</p>"},{"type":"checkbox","id":"dark","label":"Dark card","default":false},{"type":"select","id":"mark_variant","label":"Mark color","options":[{"value":"","label":"Forest"},{"value":"-leaf","label":"Leaf"},{"value":"-cream","label":"Cream"}],"default":""}]}],"presets":[{"name":"RR story cards","blocks":[{"type":"card"},{"type":"card","settings":{"label":"ROUTE","dark":true,"mark_variant":"-leaf"}}]}]}
+{
+  "name": "RR story cards",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Caption", "default": "Our Story" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "From brand roots to market routes" },
+    { "type": "richtext", "id": "lead", "label": "Lead", "default": "<p>We uncover the root of every brand and create the route that brings its ideas to life.</p>" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "max_width", "label": "Maximum width", "min": 960, "max": 1600, "step": 20, "unit": "px", "default": 1360 },
+    { "type": "range", "id": "padding", "label": "Section spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 104 },
+    { "type": "range", "id": "side_padding", "label": "Side spacing", "min": 20, "max": 100, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "card_gap", "label": "Card gap", "min": 8, "max": 64, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "card_padding", "label": "Card padding", "min": 20, "max": 64, "step": 2, "unit": "px", "default": 44 },
+    { "type": "range", "id": "card_min_height", "label": "Minimum card height", "min": 160, "max": 360, "step": 10, "unit": "px", "default": 220 },
+    { "type": "range", "id": "card_radius", "label": "Card corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 6 },
+    { "type": "header", "content": "Typography" },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 32, "max": 80, "step": 1, "unit": "px", "default": 56 },
+    { "type": "range", "id": "lead_size", "label": "Lead size", "min": 14, "max": 24, "step": 1, "unit": "px", "default": 19 },
+    { "type": "header", "content": "Section colors" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "Heading", "default": "#141414" },
+    { "type": "color", "id": "muted_color", "label": "Lead", "default": "#6b6b63" },
+    { "type": "header", "content": "Light card colors" },
+    { "type": "color", "id": "light_card_background", "label": "Background", "default": "#fafaf8" },
+    { "type": "color", "id": "light_card_border", "label": "Border", "default": "#e6e4de" },
+    { "type": "color", "id": "light_card_title", "label": "Title", "default": "#2f5e3a" },
+    { "type": "color", "id": "light_card_text", "label": "Text", "default": "#555550" },
+    { "type": "header", "content": "Dark card colors" },
+    { "type": "color", "id": "dark_card_background", "label": "Background", "default": "#2f5e3a" },
+    { "type": "color", "id": "dark_card_border", "label": "Border", "default": "#2f5e3a" },
+    { "type": "color", "id": "dark_card_title", "label": "Title", "default": "#9fcb6e" },
+    { "type": "color", "id": "dark_card_text", "label": "Text", "default": "#f4ecd8" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Story card",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "ROOT" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>We start with the root of every project — the brand, product, story, and experience it wants to create.</p>" },
+        { "type": "checkbox", "id": "dark", "label": "Dark card", "default": false },
+        { "type": "checkbox", "id": "show_mark", "label": "Show logo mark", "default": true },
+        { "type": "select", "id": "mark_variant", "label": "Mark color", "options": [
+          { "value": "", "label": "Forest" },
+          { "value": "-leaf", "label": "Leaf" },
+          { "value": "-cream", "label": "Cream" }
+        ], "default": "" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR story cards",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card", "settings": { "label": "ROUTE", "text": "<p>Then we find the route to bring that idea into the physical world — through structure, materials, finishes, prototyping, engineering, and production.</p>", "dark": true, "mark_variant": "-leaf" } }
+      ]
+    }
+  ]
+}
 {% endschema %}
