@@ -1,0 +1,63 @@
+{%- liquid
+  assign eyebrow_product = closest.product | default: product
+  assign eyebrow_text = block.settings.text
+  if eyebrow_text == blank
+    assign eyebrow_text = eyebrow_product.type
+  endif
+-%}
+
+{%- if eyebrow_text != blank -%}
+  <p
+    class="rr-pdp-eyebrow"
+    style="--rr-pdp-eyebrow-color: {{ block.settings.color }};"
+    {{ block.shopify_attributes }}
+  >
+    {{ eyebrow_text | escape }}
+  </p>
+{%- endif -%}
+
+{% stylesheet %}
+  .rr-pdp-eyebrow {
+    color: var(--rr-pdp-eyebrow-color, #2f5e3a);
+    font-family: var(--font-body--family);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    line-height: 1.4;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-pdp-eyebrow {
+      font-size: 9px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RR PDP eyebrow",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "info": "Leave blank to use the product type."
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Color",
+      "default": "#2f5e3a"
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR PDP eyebrow",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

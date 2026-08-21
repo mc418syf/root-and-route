@@ -1,0 +1,92 @@
+{%- liquid
+  assign breadcrumb_collection = product.collections.first
+  assign collection_label = section.settings.collection_label
+  if collection_label == blank and breadcrumb_collection != blank
+    assign collection_label = breadcrumb_collection.title
+  endif
+  if collection_label == blank
+    assign collection_label = 'Collections'
+  endif
+  assign collection_link = section.settings.collection_link
+  if collection_link == blank and breadcrumb_collection != blank
+    assign collection_link = breadcrumb_collection.url
+  endif
+  if collection_link == blank
+    assign collection_link = routes.collections_url
+  endif
+-%}
+
+<nav
+  class="rr-pdp-breadcrumb"
+  aria-label="Breadcrumb"
+  style="
+    --rr-breadcrumb-background: {{ section.settings.background }};
+    --rr-breadcrumb-text: {{ section.settings.text_color }};
+    --rr-breadcrumb-muted: {{ section.settings.muted_color }};
+  "
+>
+  <div class="rr-pdp-breadcrumb__inner">
+    <a href="{{ routes.root_url }}">{{ section.settings.home_label | escape }}</a>
+    <span aria-hidden="true">/</span>
+    <a href="{{ collection_link }}">{{ collection_label | escape }}</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">{{ product.title | escape }}</span>
+  </div>
+</nav>
+
+{% stylesheet %}
+  .rr-pdp-breadcrumb {
+    background: var(--rr-breadcrumb-background);
+    color: var(--rr-breadcrumb-muted);
+    font-family: var(--font-body--family);
+    padding: 24px 40px 0;
+  }
+
+  .rr-pdp-breadcrumb__inner {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 12px;
+    gap: 8px;
+    margin: 0 auto;
+    max-width: 1360px;
+  }
+
+  .rr-pdp-breadcrumb a {
+    color: var(--rr-breadcrumb-muted);
+    text-decoration: none;
+  }
+
+  .rr-pdp-breadcrumb a:hover,
+  .rr-pdp-breadcrumb [aria-current='page'] {
+    color: var(--rr-breadcrumb-text);
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-pdp-breadcrumb {
+      padding: 18px 20px 0;
+    }
+
+    .rr-pdp-breadcrumb__inner {
+      font-size: 10px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RR PDP breadcrumb",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "home_label", "label": "Home label", "default": "Home" },
+    { "type": "text", "id": "collection_label", "label": "Collection label", "info": "Leave blank to use the product's first collection." },
+    { "type": "url", "id": "collection_link", "label": "Collection link" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#fafaf8" },
+    { "type": "color", "id": "text_color", "label": "Current page", "default": "#141414" },
+    { "type": "color", "id": "muted_color", "label": "Links", "default": "#8a8a82" }
+  ],
+  "presets": [
+    { "name": "RR PDP breadcrumb" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,425 @@
+{%- liquid
+  assign summary_product = closest.product | default: product
+  assign namespace = block.settings.metafield_namespace | strip
+  assign moq_key = block.settings.moq_key | strip
+  assign production_key = block.settings.production_key | strip
+  assign shipping_key = block.settings.shipping_key | strip
+  assign compliance_key = block.settings.compliance_key | strip
+  assign moq_value = summary_product.metafields[namespace][moq_key].value | default: block.settings.moq_fallback
+  assign production_value = summary_product.metafields[namespace][production_key].value | default: block.settings.production_fallback
+  assign shipping_value = summary_product.metafields[namespace][shipping_key].value | default: block.settings.shipping_fallback
+  assign compliance_value = summary_product.metafields[namespace][compliance_key].value | default: block.settings.compliance_fallback
+  assign quote_base_url = block.settings.quote_link | default: '/pages/contact'
+  assign query_separator = '?'
+  if quote_base_url contains '?'
+    assign query_separator = '&'
+  endif
+  capture quote_url
+    echo quote_base_url
+    echo query_separator
+    echo 'product='
+    echo summary_product.title | url_encode
+    echo '&product_handle='
+    echo summary_product.handle | url_encode
+  endcapture
+-%}
+
+<rr-pdp-summary
+  class="rr-pdp-summary"
+  style="
+    --rr-pdp-forest: {{ block.settings.accent }};
+    --rr-pdp-forest-dark: {{ block.settings.accent_hover }};
+    --rr-pdp-paper: {{ block.settings.background }};
+    --rr-pdp-ink: {{ block.settings.text_color }};
+    --rr-pdp-muted: {{ block.settings.muted_color }};
+    --rr-pdp-line: {{ block.settings.border_color }};
+    --rr-pdp-cream: {{ block.settings.fact_background }};
+  "
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.show_quantity -%}
+    <div class="rr-pdp-summary__quantity">
+      <div>
+        <p>{{ block.settings.quantity_label | escape }}</p>
+        {%- if block.settings.quantity_note != blank -%}<span>{{ block.settings.quantity_note | escape }}</span>{%- endif -%}
+      </div>
+      <div class="rr-pdp-summary__quantity-controls">
+        <div class="rr-pdp-summary__stepper">
+          <button type="button" data-quantity-action="decrease" aria-label="Decrease quantity">−</button>
+          <input
+            type="number"
+            min="{{ block.settings.quantity_step }}"
+            step="{{ block.settings.quantity_step }}"
+            value="{{ block.settings.quantity_default }}"
+            aria-label="{{ block.settings.quantity_label | escape }}"
+            data-quote-quantity
+          >
+          <button type="button" data-quantity-action="increase" aria-label="Increase quantity">+</button>
+        </div>
+        {%- if block.settings.unit_cost != blank -%}
+          <span class="rr-pdp-summary__cost">{{ block.settings.unit_cost | escape }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="rr-pdp-summary__actions">
+    <a class="rr-pdp-summary__button rr-pdp-summary__button--primary" href="{{ quote_url | strip | escape }}" data-quote-link>
+      {{ block.settings.quote_label | escape }}
+      <span aria-hidden="true">→</span>
+    </a>
+    {%- if block.settings.sample_label != blank -%}
+      <a class="rr-pdp-summary__button rr-pdp-summary__button--secondary" href="{{ block.settings.sample_link | default: '/pages/contact' }}">
+        {{ block.settings.sample_label | escape }}
+      </a>
+    {%- endif -%}
+  </div>
+
+  {%- if block.settings.show_facts -%}
+    <dl class="rr-pdp-summary__facts">
+      <div><dt>{{ block.settings.moq_label | escape }}</dt><dd>{{ moq_value | escape }}</dd></div>
+      <div><dt>{{ block.settings.production_label | escape }}</dt><dd>{{ production_value | escape }}</dd></div>
+      <div><dt>{{ block.settings.shipping_label | escape }}</dt><dd>{{ shipping_value | escape }}</dd></div>
+      <div><dt>{{ block.settings.compliance_label | escape }}</dt><dd>{{ compliance_value | escape }}</dd></div>
+    </dl>
+  {%- endif -%}
+</rr-pdp-summary>
+
+<script>
+  if (!customElements.get('rr-pdp-summary')) {
+    customElements.define('rr-pdp-summary', class extends HTMLElement {
+      connectedCallback() {
+        this.input = this.querySelector('[data-quote-quantity]');
+        this.quoteLink = this.querySelector('[data-quote-link]');
+        this.querySelectorAll('[data-quantity-action]').forEach((button) => {
+          button.addEventListener('click', () => this.updateQuantity(button.dataset.quantityAction));
+        });
+        this.input?.addEventListener('change', () => this.normalizeQuantity());
+        this.quoteLink?.addEventListener('click', () => this.attachQuantity());
+      }
+
+      updateQuantity(action) {
+        if (!this.input) return;
+        const step = Number(this.input.step) || 1;
+        const minimum = Number(this.input.min) || step;
+        const current = Number(this.input.value) || minimum;
+        this.input.value = Math.max(minimum, current + (action === 'increase' ? step : -step));
+      }
+
+      normalizeQuantity() {
+        if (!this.input) return;
+        const minimum = Number(this.input.min) || 1;
+        this.input.value = Math.max(minimum, Number(this.input.value) || minimum);
+      }
+
+      attachQuantity() {
+        if (!this.input || !this.quoteLink) return;
+        const url = new URL(this.quoteLink.href, window.location.origin);
+        url.searchParams.set('quantity', this.input.value);
+        this.quoteLink.href = url.toString();
+      }
+    });
+  }
+</script>
+
+{% stylesheet %}
+  .rr-pdp-summary {
+    color: var(--rr-pdp-ink);
+    display: block;
+    font-family: var(--font-body--family);
+    width: 100%;
+  }
+
+  .rr-pdp-summary * {
+    box-sizing: border-box;
+  }
+
+  .rr-pdp-summary__quantity {
+    align-items: center;
+    border-block: 1px solid var(--rr-pdp-line);
+    display: flex;
+    justify-content: space-between;
+    padding: 22px 0;
+  }
+
+  .rr-pdp-summary__quantity p,
+  .rr-pdp-summary__quantity span {
+    margin: 0;
+  }
+
+  .rr-pdp-summary__quantity p {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .rr-pdp-summary__quantity > div:first-child span,
+  .rr-pdp-summary__cost {
+    color: var(--rr-pdp-muted);
+    display: block;
+    font-size: 12px;
+    margin-top: 3px;
+  }
+
+  .rr-pdp-summary__quantity-controls {
+    align-items: center;
+    display: flex;
+    gap: 18px;
+  }
+
+  .rr-pdp-summary__stepper {
+    align-items: center;
+    border: 1px solid var(--rr-pdp-line);
+    display: grid;
+    grid-template-columns: 36px 58px 36px;
+    min-height: 42px;
+  }
+
+  .rr-pdp-summary__stepper button,
+  .rr-pdp-summary__stepper input {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    height: 100%;
+    margin: 0;
+    min-width: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .rr-pdp-summary__stepper button {
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .rr-pdp-summary__stepper input {
+    border-inline: 1px solid var(--rr-pdp-line);
+    font-size: 14px;
+    -moz-appearance: textfield;
+  }
+
+  .rr-pdp-summary__stepper input::-webkit-inner-spin-button,
+  .rr-pdp-summary__stepper input::-webkit-outer-spin-button {
+    appearance: none;
+  }
+
+  .rr-pdp-summary__actions {
+    display: grid;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .rr-pdp-summary__button {
+    align-items: center;
+    border: 1px solid var(--rr-pdp-forest);
+    border-radius: 2px;
+    display: flex;
+    font-size: 12px;
+    font-weight: 600;
+    justify-content: center;
+    letter-spacing: 0.14em;
+    min-height: 52px;
+    padding: 14px 24px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 180ms ease, color 180ms ease;
+  }
+
+  .rr-pdp-summary__button--primary {
+    background: var(--rr-pdp-forest);
+    color: var(--rr-pdp-paper);
+    gap: 12px;
+  }
+
+  .rr-pdp-summary__button--primary:hover {
+    background: var(--rr-pdp-forest-dark);
+    color: var(--rr-pdp-paper);
+  }
+
+  .rr-pdp-summary__button--secondary {
+    background: transparent;
+    color: var(--rr-pdp-forest);
+  }
+
+  .rr-pdp-summary__button--secondary:hover {
+    background: var(--rr-pdp-cream);
+  }
+
+  .rr-pdp-summary__facts {
+    border-top: 1px solid var(--rr-pdp-line);
+    margin: 30px 0 0;
+  }
+
+  .rr-pdp-summary__facts > div {
+    align-items: baseline;
+    border-bottom: 1px solid var(--rr-pdp-line);
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+    padding: 13px 0;
+  }
+
+  .rr-pdp-summary__facts dt,
+  .rr-pdp-summary__facts dd {
+    font-size: 13px;
+    margin: 0;
+  }
+
+  .rr-pdp-summary__facts dt {
+    color: var(--rr-pdp-muted);
+  }
+
+  .rr-pdp-summary__facts dd {
+    font-weight: 500;
+    text-align: right;
+  }
+
+  body:has(.rr-pdp-summary) .product-information__grid {
+    margin-inline: auto;
+    max-width: 1360px;
+    width: 100%;
+  }
+
+  body:has(.rr-pdp-summary) .product-details > .group-block {
+    gap: 24px;
+  }
+
+  body:has(.rr-pdp-summary) .product-details h1 {
+    font-family: var(--font-heading--family);
+    font-size: clamp(38px, 3.65vw, 52px);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.08;
+  }
+
+  body:has(.rr-pdp-summary) .product-details .rte,
+  body:has(.rr-pdp-summary) .product-details .rte p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  body:has(.rr-pdp-summary) .product-details .text-block:is(.rte, [class*='rte']) {
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+  }
+
+  body:has(.rr-pdp-summary) .variant-option legend {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  body:has(.rr-pdp-summary) .variant-option {
+    border-top: 1px solid var(--rr-pdp-line, #ecebe6);
+    padding-top: 20px;
+  }
+
+  body:has(.rr-pdp-summary) .variant-option__button-label {
+    border-radius: 2px;
+    min-height: 44px;
+  }
+
+  body:has(.rr-pdp-summary) .product-media-container {
+    background: #efeae0;
+  }
+
+  @media screen and (min-width: 990px) {
+    body:has(.rr-pdp-summary) .product-information {
+      padding: 28px 40px 100px;
+    }
+
+    body:has(.rr-pdp-summary) .product-information__grid:not(.product-information--media-none) {
+      column-gap: 72px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(360px, 1fr);
+    }
+
+    body:has(.rr-pdp-summary) .product-details > .group-block {
+      padding-top: 24px;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    body:has(.rr-pdp-summary) .product-information {
+      padding: 16px 20px 64px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-pdp-summary__quantity {
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .rr-pdp-summary__quantity-controls {
+      align-items: flex-end;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .rr-pdp-summary__button {
+      font-size: 10px;
+    }
+
+    .rr-pdp-summary__facts dt,
+    .rr-pdp-summary__facts dd {
+      font-size: 12px;
+    }
+
+    body:has(.rr-pdp-summary) .product-details h1 {
+      font-size: 36px;
+    }
+
+    body:has(.rr-pdp-summary) .product-details .rte,
+    body:has(.rr-pdp-summary) .product-details .rte p {
+      font-size: 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RR PDP quote summary",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Actions" },
+    { "type": "text", "id": "quote_label", "label": "Quote button", "default": "Request a quote" },
+    { "type": "url", "id": "quote_link", "label": "Quote page", "info": "Defaults to /pages/contact and includes the product and quantity." },
+    { "type": "text", "id": "sample_label", "label": "Secondary button", "default": "Order a sample kit" },
+    { "type": "url", "id": "sample_link", "label": "Secondary link" },
+    { "type": "header", "content": "Quantity estimate" },
+    { "type": "checkbox", "id": "show_quantity", "label": "Show quantity estimate", "default": true },
+    { "type": "text", "id": "quantity_label", "label": "Label", "default": "Indicative order quantity" },
+    { "type": "text", "id": "quantity_note", "label": "Note", "default": "Final pricing follows your approved specification." },
+    { "type": "range", "id": "quantity_default", "label": "Default quantity", "min": 50, "max": 5000, "step": 50, "default": 500 },
+    { "type": "range", "id": "quantity_step", "label": "Quantity step", "min": 10, "max": 500, "step": 10, "default": 50 },
+    { "type": "text", "id": "unit_cost", "label": "Indicative cost note", "default": "Pricing confirmed after briefing" },
+    { "type": "header", "content": "Product facts" },
+    { "type": "checkbox", "id": "show_facts", "label": "Show product facts", "default": true },
+    { "type": "text", "id": "metafield_namespace", "label": "Metafield namespace", "default": "custom" },
+    { "type": "text", "id": "moq_label", "label": "Minimum order label", "default": "Minimum order" },
+    { "type": "text", "id": "moq_key", "label": "Minimum order metafield key", "default": "minimum_order" },
+    { "type": "text", "id": "moq_fallback", "label": "Minimum order fallback", "default": "500 units" },
+    { "type": "text", "id": "production_label", "label": "Production label", "default": "Production" },
+    { "type": "text", "id": "production_key", "label": "Production metafield key", "default": "production_days" },
+    { "type": "text", "id": "production_fallback", "label": "Production fallback", "default": "15–20 days" },
+    { "type": "text", "id": "shipping_label", "label": "Shipping label", "default": "Shipping" },
+    { "type": "text", "id": "shipping_key", "label": "Shipping metafield key", "default": "shipping_days" },
+    { "type": "text", "id": "shipping_fallback", "label": "Shipping fallback", "default": "7–12 days" },
+    { "type": "text", "id": "compliance_label", "label": "Compliance label", "default": "Compliance" },
+    { "type": "text", "id": "compliance_key", "label": "Compliance metafield key", "default": "compliance" },
+    { "type": "text", "id": "compliance_fallback", "label": "Compliance fallback", "default": "FSC-certified options" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background", "label": "Page background", "default": "#fafaf8" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#141414" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#6b6b63" },
+    { "type": "color", "id": "border_color", "label": "Lines", "default": "#ecebe6" },
+    { "type": "color", "id": "fact_background", "label": "Secondary hover", "default": "#f4ecd8" },
+    { "type": "color", "id": "accent", "label": "Accent", "default": "#2f5e3a" },
+    { "type": "color", "id": "accent_hover", "label": "Accent hover", "default": "#24482d" }
+  ],
+  "presets": [
+    { "name": "RR PDP quote summary", "category": "Product" }
+  ]
+}
+{% endschema %}

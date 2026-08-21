@@ -9,6 +9,17 @@
  */
 {
   "sections": {
+    "rr_pdp_breadcrumb": {
+      "type": "rr-pdp-breadcrumb",
+      "settings": {
+        "home_label": "Home",
+        "collection_label": "",
+        "collection_link": "",
+        "background": "#fafaf8",
+        "text_color": "#141414",
+        "muted_color": "#8a8a82"
+      }
+    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -39,15 +50,15 @@
             "image_gap": 4,
             "large_first_image": true,
             "icons_style": "arrow",
-            "slideshow_controls_style": "counter",
+            "slideshow_controls_style": "thumbnails",
             "slideshow_mobile_controls_style": "dots",
             "thumbnail_position": "bottom",
-            "thumbnail_width": 44,
-            "thumbnail_radius": 0,
-            "aspect_ratio": "adapt",
+            "thumbnail_width": 72,
+            "thumbnail_radius": 3,
+            "aspect_ratio": "1/1.25",
             "constrain_to_viewport": true,
             "media_fit": "contain",
-            "media_radius": 0,
+            "media_radius": 3,
             "extend_media": false,
             "zoom": true,
             "video_loop": false,
@@ -126,6 +137,14 @@
                 "padding-inline-end": 0
               },
               "blocks": {
+                "rr_pdp_eyebrow": {
+                  "type": "rr-pdp-eyebrow",
+                  "settings": {
+                    "text": "",
+                    "color": "#2f5e3a"
+                  },
+                  "blocks": {}
+                },
                 "text_xpVMaM": {
                   "type": "text",
                   "name": "t:names.title",
@@ -177,6 +196,7 @@
                 }
               },
               "block_order": [
+                "rr_pdp_eyebrow",
                 "text_xpVMaM",
                 "price_tVjtKg"
               ]
@@ -286,7 +306,7 @@
               "name": "t:names.product_description",
               "settings": {
                 "text": "<p>{{ closest.product.description }}</p>",
-                "width": "fit-content",
+                "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -297,9 +317,9 @@
                 "case": "none",
                 "wrap": "pretty",
                 "text_color": "",
-                "background": true,
-                "background_color": "{{ settings.color_palette.color2 }}",
-                "corner_radius": 50,
+                "background": false,
+                "background_color": "",
+                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -309,6 +329,7 @@
             },
             "button_JyMeUj": {
               "type": "button",
+              "disabled": true,
               "name": "t:names.button",
               "settings": {
                 "label": "GET A QUOTE",
@@ -326,15 +347,53 @@
                 "custom_width_mobile": 100
               },
               "blocks": {}
+            },
+            "rr_pdp_summary": {
+              "type": "rr-pdp-summary",
+              "settings": {
+                "quote_label": "Request a quote",
+                "quote_link": "shopify://pages/contact",
+                "sample_label": "Order a sample kit",
+                "sample_link": "shopify://pages/contact",
+                "show_quantity": true,
+                "quantity_label": "Indicative order quantity",
+                "quantity_note": "Final pricing follows your approved specification.",
+                "quantity_default": 500,
+                "quantity_step": 50,
+                "unit_cost": "Pricing confirmed after briefing",
+                "show_facts": true,
+                "metafield_namespace": "custom",
+                "moq_label": "Minimum order",
+                "moq_key": "minimum_order",
+                "moq_fallback": "500 units",
+                "production_label": "Production",
+                "production_key": "production_days",
+                "production_fallback": "15-20 days",
+                "shipping_label": "Shipping",
+                "shipping_key": "shipping_days",
+                "shipping_fallback": "7-12 days",
+                "compliance_label": "Compliance",
+                "compliance_key": "compliance",
+                "compliance_fallback": "FSC-certified options",
+                "background": "#fafaf8",
+                "text_color": "#141414",
+                "muted_color": "#6b6b63",
+                "border_color": "#ecebe6",
+                "fact_background": "#f4ecd8",
+                "accent": "#2f5e3a",
+                "accent_hover": "#24482d"
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "group_icgrde",
+            "text_aEtTtq",
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
-            "text_aEtTtq",
-            "button_JyMeUj"
+            "button_JyMeUj",
+            "rr_pdp_summary"
           ]
         }
       },
@@ -344,13 +403,171 @@
       "settings": {
         "content_width": "content-full-width",
         "desktop_media_position": "left",
-        "equal_columns": true,
+        "equal_columns": false,
         "limit_details_width": false,
-        "gap": 20,
+        "gap": 48,
         "enable_sticky_add_to_cart": false,
         "background_color": "",
         "padding-block-start": 0,
-        "padding-block-end": 40
+        "padding-block-end": 0
+      }
+    },
+    "rr_pdp_editorial": {
+      "type": "rr-pdp-editorial",
+      "blocks": {
+        "feature_structure": {
+          "type": "feature",
+          "settings": {
+            "heading": "Structural concept",
+            "text": "<p>A format engineered around your product dimensions, weight, and unboxing sequence.</p>"
+          }
+        },
+        "feature_material": {
+          "type": "feature",
+          "settings": {
+            "heading": "Material curation",
+            "text": "<p>Specialty papers, responsible substrates, and finishes selected for tactile impact.</p>"
+          }
+        },
+        "feature_sample": {
+          "type": "feature",
+          "settings": {
+            "heading": "Production sampling",
+            "text": "<p>A production-grade prototype to test the structural fit, finish, and opening experience.</p>"
+          }
+        },
+        "feature_delivery": {
+          "type": "feature",
+          "settings": {
+            "heading": "Global delivery",
+            "text": "<p>Production oversight, quality control, freight, and customs aligned for final delivery.</p>"
+          }
+        },
+        "spec_materials": {
+          "type": "specification",
+          "settings": { "label": "Materials", "value": "FSC-certified paperboard and specialty paper options" }
+        },
+        "spec_printing": {
+          "type": "specification",
+          "settings": { "label": "Printing", "value": "Offset, Pantone, digital, and specialty color matching" }
+        },
+        "spec_finishes": {
+          "type": "specification",
+          "settings": { "label": "Finishes", "value": "Foil stamping, embossing, debossing, spot UV, and soft-touch lamination" }
+        },
+        "spec_inserts": {
+          "type": "specification",
+          "settings": { "label": "Inserts", "value": "Paperboard, molded pulp, EVA, foam, or custom-fit trays" }
+        },
+        "spec_artwork": {
+          "type": "specification",
+          "settings": { "label": "Artwork", "value": "Dielines supplied after structural approval" }
+        },
+        "audience_beauty": {
+          "type": "audience",
+          "settings": {
+            "heading": "Beauty and fragrance",
+            "text": "<p>High-touch launches, discovery sets, and gifting moments that need a memorable reveal.</p>"
+          }
+        },
+        "audience_holiday": {
+          "type": "audience",
+          "settings": {
+            "heading": "Holiday and gifting",
+            "text": "<p>Seasonal campaigns, advent formats, and premium gifting programs built to hold attention.</p>"
+          }
+        },
+        "audience_retail": {
+          "type": "audience",
+          "settings": {
+            "heading": "Retail launches",
+            "text": "<p>Distinctive structures that translate a product story into a strong shelf presence.</p>"
+          }
+        },
+        "audience_lifestyle": {
+          "type": "audience",
+          "settings": {
+            "heading": "Lifestyle collections",
+            "text": "<p>Coordinated packaging suites for products designed to live beautifully in the home.</p>"
+          }
+        },
+        "related_one": {
+          "type": "related_product",
+          "settings": {
+            "product": "",
+            "eyebrow": "Custom packaging",
+            "fallback_title": "Signature rigid boxes",
+            "text": "A considered format with a precise, tactile reveal."
+          }
+        },
+        "related_two": {
+          "type": "related_product",
+          "settings": {
+            "product": "",
+            "eyebrow": "Custom packaging",
+            "fallback_title": "Advent collections",
+            "text": "Interactive structures made for seasonal storytelling."
+          }
+        },
+        "related_three": {
+          "type": "related_product",
+          "settings": {
+            "product": "",
+            "eyebrow": "Custom packaging",
+            "fallback_title": "Coordinated gift suites",
+            "text": "Matched packaging elements designed as one visual system."
+          }
+        }
+      },
+      "block_order": [
+        "feature_structure",
+        "feature_material",
+        "feature_sample",
+        "feature_delivery",
+        "spec_materials",
+        "spec_printing",
+        "spec_finishes",
+        "spec_inserts",
+        "spec_artwork",
+        "audience_beauty",
+        "audience_holiday",
+        "audience_retail",
+        "audience_lifestyle",
+        "related_one",
+        "related_two",
+        "related_three"
+      ],
+      "settings": {
+        "show_features": true,
+        "features_eyebrow": "Built into every project",
+        "features_heading": "What you get",
+        "features_text": "<p>Every project is engineered around your product, audience, and route to market.</p>",
+        "show_specs": true,
+        "specs_eyebrow": "Material and finish",
+        "specs_heading": "Specification",
+        "specs_text": "<p>Final construction and finish are confirmed through sampling before production.</p>",
+        "show_audiences": true,
+        "audiences_eyebrow": "Designed for impact",
+        "audiences_heading": "Perfect for",
+        "show_related": true,
+        "related_eyebrow": "Continue exploring",
+        "related_heading": "Related collections",
+        "related_link_label": "View all collections",
+        "related_link": "shopify://collections/all",
+        "show_cta": true,
+        "cta_eyebrow": "Start a conversation",
+        "cta_heading": "Have a project in mind?",
+        "cta_text": "<p>Share your product, target volume, and timeline. We will shape the right route to production.</p>",
+        "cta_label": "Request a quote",
+        "cta_link": "shopify://pages/contact",
+        "background": "#fafaf8",
+        "text_color": "#141414",
+        "muted_color": "#6b6b63",
+        "border_color": "#ecebe6",
+        "accent": "#2f5e3a",
+        "dark_background": "#24482d",
+        "cream_background": "#f4ecd8",
+        "image_background": "#efeae0"
       }
     },
     "17872726377a43df85": {
@@ -473,7 +690,9 @@
     }
   },
   "order": [
+    "rr_pdp_breadcrumb",
     "main",
+    "rr_pdp_editorial",
     "17872726377a43df85",
     "rr_contact_quote_WtYLhX"
   ]

@@ -1,0 +1,604 @@
+{%- liquid
+  assign has_features = false
+  assign has_specs = false
+  assign has_audiences = false
+  assign has_related = false
+  for block in section.blocks
+    case block.type
+      when 'feature'
+        assign has_features = true
+      when 'specification'
+        assign has_specs = true
+      when 'audience'
+        assign has_audiences = true
+      when 'related_product'
+        assign has_related = true
+    endcase
+  endfor
+-%}
+
+<section
+  class="rr-pdp-editorial"
+  style="
+    --rr-pdp-paper: {{ section.settings.background }};
+    --rr-pdp-ink: {{ section.settings.text_color }};
+    --rr-pdp-muted: {{ section.settings.muted_color }};
+    --rr-pdp-line: {{ section.settings.border_color }};
+    --rr-pdp-forest: {{ section.settings.accent }};
+    --rr-pdp-forest-dark: {{ section.settings.dark_background }};
+    --rr-pdp-cream: {{ section.settings.cream_background }};
+    --rr-pdp-image: {{ section.settings.image_background }};
+  "
+>
+  {%- if section.settings.show_features and has_features -%}
+    <div class="rr-pdp-editorial__band rr-pdp-editorial__split">
+      <header class="rr-pdp-editorial__sticky-heading">
+        {%- if section.settings.features_eyebrow != blank -%}<p class="rr-pdp-editorial__eyebrow">{{ section.settings.features_eyebrow | escape }}</p>{%- endif -%}
+        <h2>{{ section.settings.features_heading | escape }}</h2>
+        {%- if section.settings.features_text != blank -%}<div class="rr-pdp-editorial__intro rte">{{ section.settings.features_text }}</div>{%- endif -%}
+      </header>
+      <div class="rr-pdp-editorial__feature-list">
+        {%- assign feature_index = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'feature' -%}
+            {%- assign feature_index = feature_index | plus: 1 -%}
+            <article class="rr-pdp-editorial__feature" {{ block.shopify_attributes }}>
+              <span>{{ feature_index | prepend: '0' | slice: -2, 2 }}</span>
+              <div>
+                <h3>{{ block.settings.heading | escape }}</h3>
+                <div class="rte">{{ block.settings.text }}</div>
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_specs and has_specs -%}
+    <div class="rr-pdp-editorial__band rr-pdp-editorial__split rr-pdp-editorial__spec-band">
+      <header>
+        {%- if section.settings.specs_eyebrow != blank -%}<p class="rr-pdp-editorial__eyebrow">{{ section.settings.specs_eyebrow | escape }}</p>{%- endif -%}
+        <h2>{{ section.settings.specs_heading | escape }}</h2>
+        {%- if section.settings.specs_text != blank -%}<div class="rr-pdp-editorial__intro rte">{{ section.settings.specs_text }}</div>{%- endif -%}
+      </header>
+      <dl class="rr-pdp-editorial__spec-list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'specification' -%}
+            <div {{ block.shopify_attributes }}>
+              <dt>{{ block.settings.label | escape }}</dt>
+              <dd>{{ block.settings.value | escape }}</dd>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </dl>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_audiences and has_audiences -%}
+    <div class="rr-pdp-editorial__audiences">
+      <div class="rr-pdp-editorial__band">
+        <header class="rr-pdp-editorial__audience-heading">
+          {%- if section.settings.audiences_eyebrow != blank -%}<p class="rr-pdp-editorial__eyebrow">{{ section.settings.audiences_eyebrow | escape }}</p>{%- endif -%}
+          <h2>{{ section.settings.audiences_heading | escape }}</h2>
+        </header>
+        <div class="rr-pdp-editorial__audience-grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'audience' -%}
+              <article {{ block.shopify_attributes }}>
+                <h3>{{ block.settings.heading | escape }}</h3>
+                <div class="rte">{{ block.settings.text }}</div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_related and has_related -%}
+    <div class="rr-pdp-editorial__band rr-pdp-editorial__related">
+      <header class="rr-pdp-editorial__section-heading">
+        <div>
+          {%- if section.settings.related_eyebrow != blank -%}<p class="rr-pdp-editorial__eyebrow">{{ section.settings.related_eyebrow | escape }}</p>{%- endif -%}
+          <h2>{{ section.settings.related_heading | escape }}</h2>
+        </div>
+        {%- if section.settings.related_link_label != blank -%}
+          <a href="{{ section.settings.related_link | default: routes.collections_url }}">{{ section.settings.related_link_label | escape }} <span aria-hidden="true">→</span></a>
+        {%- endif -%}
+      </header>
+      <div class="rr-pdp-editorial__related-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'related_product' -%}
+            {%- assign card_product = block.settings.product -%}
+            {%- assign card_image_alt = card_product.featured_image.alt | default: card_product.title -%}
+            <article class="rr-pdp-editorial__product-card" {{ block.shopify_attributes }}>
+              <a href="{{ card_product.url | default: routes.collections_url }}" class="rr-pdp-editorial__product-image">
+                {%- if card_product.featured_image != blank -%}
+                  {{ card_product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 30vw, 100vw', alt: card_image_alt }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag }}
+                {%- endif -%}
+              </a>
+              <div class="rr-pdp-editorial__product-copy">
+                {%- if block.settings.eyebrow != blank -%}<p class="rr-pdp-editorial__eyebrow">{{ block.settings.eyebrow | escape }}</p>{%- endif -%}
+                <h3><a href="{{ card_product.url | default: routes.collections_url }}">{{ card_product.title | default: block.settings.fallback_title | escape }}</a></h3>
+                {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_cta -%}
+    <div class="rr-pdp-editorial__cta">
+      <div class="rr-pdp-editorial__cta-inner">
+        {%- if section.settings.cta_eyebrow != blank -%}<p class="rr-pdp-editorial__eyebrow">{{ section.settings.cta_eyebrow | escape }}</p>{%- endif -%}
+        <h2>{{ section.settings.cta_heading | escape }}</h2>
+        {%- if section.settings.cta_text != blank -%}<div class="rte">{{ section.settings.cta_text }}</div>{%- endif -%}
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_link | default: '/pages/contact' }}">{{ section.settings.cta_label | escape }} <span aria-hidden="true">→</span></a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .rr-pdp-editorial {
+    background: var(--rr-pdp-paper);
+    color: var(--rr-pdp-ink);
+    font-family: var(--font-body--family);
+  }
+
+  .rr-pdp-editorial * {
+    box-sizing: border-box;
+  }
+
+  .rr-pdp-editorial__band {
+    margin: 0 auto;
+    max-width: 1360px;
+    padding: 96px 40px;
+  }
+
+  .rr-pdp-editorial__split {
+    display: grid;
+    gap: 72px;
+    grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.55fr);
+  }
+
+  .rr-pdp-editorial__eyebrow {
+    color: var(--rr-pdp-forest);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    line-height: 1.4;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+  }
+
+  .rr-pdp-editorial h2,
+  .rr-pdp-editorial h3,
+  .rr-pdp-editorial p {
+    letter-spacing: 0;
+  }
+
+  .rr-pdp-editorial h2 {
+    font-family: var(--font-heading--family);
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.08;
+    margin: 0;
+  }
+
+  .rr-pdp-editorial__intro {
+    color: var(--rr-pdp-muted);
+    font-size: 16px;
+    line-height: 1.65;
+    margin-top: 24px;
+    max-width: 360px;
+  }
+
+  .rr-pdp-editorial__intro p,
+  .rr-pdp-editorial__feature .rte p,
+  .rr-pdp-editorial__audience-grid .rte p,
+  .rr-pdp-editorial__cta .rte p {
+    margin: 0;
+  }
+
+  .rr-pdp-editorial__sticky-heading {
+    align-self: start;
+    position: sticky;
+    top: calc(var(--header-group-height, 0px) + 32px);
+  }
+
+  .rr-pdp-editorial__feature {
+    border-top: 1px solid var(--rr-pdp-line);
+    display: grid;
+    gap: 28px;
+    grid-template-columns: 42px minmax(0, 1fr);
+    padding: 28px 0 32px;
+  }
+
+  .rr-pdp-editorial__feature:last-child {
+    border-bottom: 1px solid var(--rr-pdp-line);
+  }
+
+  .rr-pdp-editorial__feature > span {
+    color: var(--rr-pdp-forest);
+    font-size: 13px;
+  }
+
+  .rr-pdp-editorial__feature h3,
+  .rr-pdp-editorial__audience-grid h3,
+  .rr-pdp-editorial__product-card h3 {
+    font-family: var(--font-heading--family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .rr-pdp-editorial__feature .rte {
+    color: var(--rr-pdp-muted);
+    font-size: 15px;
+    line-height: 1.65;
+    margin-top: 10px;
+  }
+
+  .rr-pdp-editorial__spec-band {
+    border-top: 1px solid var(--rr-pdp-line);
+  }
+
+  .rr-pdp-editorial__spec-list {
+    border-top: 1px solid var(--rr-pdp-line);
+    margin: 0;
+  }
+
+  .rr-pdp-editorial__spec-list > div {
+    border-bottom: 1px solid var(--rr-pdp-line);
+    display: grid;
+    gap: 24px;
+    grid-template-columns: minmax(110px, 0.35fr) 1fr;
+    padding: 20px 0;
+  }
+
+  .rr-pdp-editorial__spec-list dt,
+  .rr-pdp-editorial__spec-list dd {
+    font-size: 15px;
+    margin: 0;
+  }
+
+  .rr-pdp-editorial__spec-list dt {
+    font-weight: 500;
+  }
+
+  .rr-pdp-editorial__spec-list dd {
+    color: var(--rr-pdp-muted);
+  }
+
+  .rr-pdp-editorial__audiences {
+    background: var(--rr-pdp-forest-dark);
+    color: var(--rr-pdp-paper);
+  }
+
+  .rr-pdp-editorial__audiences .rr-pdp-editorial__eyebrow {
+    color: var(--rr-pdp-cream);
+  }
+
+  .rr-pdp-editorial__audience-heading {
+    align-items: end;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 56px;
+  }
+
+  .rr-pdp-editorial__audience-grid {
+    border-left: 1px solid rgb(255 255 255 / 0.18);
+    border-top: 1px solid rgb(255 255 255 / 0.18);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rr-pdp-editorial__audience-grid article {
+    border-bottom: 1px solid rgb(255 255 255 / 0.18);
+    border-right: 1px solid rgb(255 255 255 / 0.18);
+    min-height: 210px;
+    padding: 36px;
+  }
+
+  .rr-pdp-editorial__audience-grid .rte {
+    color: rgb(250 250 248 / 0.72);
+    font-size: 15px;
+    line-height: 1.65;
+    margin-top: 14px;
+    max-width: 440px;
+  }
+
+  .rr-pdp-editorial__related {
+    border-bottom: 1px solid var(--rr-pdp-line);
+  }
+
+  .rr-pdp-editorial__section-heading {
+    align-items: end;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+
+  .rr-pdp-editorial__section-heading > a {
+    color: var(--rr-pdp-forest);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .rr-pdp-editorial__related-grid {
+    display: grid;
+    gap: 22px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .rr-pdp-editorial__product-image {
+    aspect-ratio: 4 / 5;
+    background: var(--rr-pdp-image);
+    display: block;
+    overflow: hidden;
+  }
+
+  .rr-pdp-editorial__product-image img,
+  .rr-pdp-editorial__product-image svg {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms ease;
+    width: 100%;
+  }
+
+  .rr-pdp-editorial__product-card:hover .rr-pdp-editorial__product-image img {
+    transform: scale(1.025);
+  }
+
+  .rr-pdp-editorial__product-copy {
+    padding-top: 20px;
+  }
+
+  .rr-pdp-editorial__product-copy .rr-pdp-editorial__eyebrow {
+    margin-bottom: 9px;
+  }
+
+  .rr-pdp-editorial__product-card h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .rr-pdp-editorial__product-copy > p:last-child {
+    color: var(--rr-pdp-muted);
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 10px 0 0;
+  }
+
+  .rr-pdp-editorial__cta {
+    background: var(--rr-pdp-cream);
+    padding: 104px 40px;
+    text-align: center;
+  }
+
+  .rr-pdp-editorial__cta-inner {
+    margin: 0 auto;
+    max-width: 760px;
+  }
+
+  .rr-pdp-editorial__cta .rte {
+    color: var(--rr-pdp-muted);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 22px auto 0;
+    max-width: 560px;
+  }
+
+  .rr-pdp-editorial__cta a {
+    align-items: center;
+    background: var(--rr-pdp-forest);
+    border: 1px solid var(--rr-pdp-forest);
+    border-radius: 2px;
+    color: var(--rr-pdp-paper);
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 600;
+    gap: 12px;
+    justify-content: center;
+    letter-spacing: 0.14em;
+    margin-top: 30px;
+    min-height: 52px;
+    padding: 14px 28px;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  @media screen and (max-width: 989px) {
+    .rr-pdp-editorial__band {
+      padding: 72px 24px;
+    }
+
+    .rr-pdp-editorial__split {
+      gap: 44px;
+      grid-template-columns: 1fr;
+    }
+
+    .rr-pdp-editorial__sticky-heading {
+      position: static;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-pdp-editorial__band {
+      padding: 60px 20px;
+    }
+
+    .rr-pdp-editorial__eyebrow {
+      font-size: 9px;
+    }
+
+    .rr-pdp-editorial h2 {
+      font-size: 34px;
+    }
+
+    .rr-pdp-editorial__intro,
+    .rr-pdp-editorial__feature .rte,
+    .rr-pdp-editorial__audience-grid .rte,
+    .rr-pdp-editorial__spec-list dt,
+    .rr-pdp-editorial__spec-list dd {
+      font-size: 13px;
+    }
+
+    .rr-pdp-editorial__feature h3,
+    .rr-pdp-editorial__audience-grid h3,
+    .rr-pdp-editorial__product-card h3 {
+      font-size: 22px;
+    }
+
+    .rr-pdp-editorial__feature {
+      gap: 12px;
+      grid-template-columns: 32px minmax(0, 1fr);
+    }
+
+    .rr-pdp-editorial__spec-list > div {
+      gap: 8px;
+      grid-template-columns: 1fr;
+    }
+
+    .rr-pdp-editorial__audience-grid,
+    .rr-pdp-editorial__related-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .rr-pdp-editorial__audience-grid article {
+      min-height: 0;
+      padding: 28px 24px;
+    }
+
+    .rr-pdp-editorial__section-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .rr-pdp-editorial__cta {
+      padding: 72px 20px;
+    }
+
+    .rr-pdp-editorial__cta .rte {
+      font-size: 15px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RR PDP editorial",
+  "max_blocks": 20,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "header", "content": "What you get" },
+    { "type": "checkbox", "id": "show_features", "label": "Show section", "default": true },
+    { "type": "text", "id": "features_eyebrow", "label": "Eyebrow", "default": "Built into every project" },
+    { "type": "text", "id": "features_heading", "label": "Heading", "default": "What you get" },
+    { "type": "richtext", "id": "features_text", "label": "Description", "default": "<p>Every project is engineered around your product, audience, and route to market.</p>" },
+    { "type": "header", "content": "Specification" },
+    { "type": "checkbox", "id": "show_specs", "label": "Show section", "default": true },
+    { "type": "text", "id": "specs_eyebrow", "label": "Eyebrow", "default": "Material and finish" },
+    { "type": "text", "id": "specs_heading", "label": "Heading", "default": "Specification" },
+    { "type": "richtext", "id": "specs_text", "label": "Description", "default": "<p>Final construction and finish are confirmed through sampling before production.</p>" },
+    { "type": "header", "content": "Perfect for" },
+    { "type": "checkbox", "id": "show_audiences", "label": "Show section", "default": true },
+    { "type": "text", "id": "audiences_eyebrow", "label": "Eyebrow", "default": "Designed for impact" },
+    { "type": "text", "id": "audiences_heading", "label": "Heading", "default": "Perfect for" },
+    { "type": "header", "content": "Related products" },
+    { "type": "checkbox", "id": "show_related", "label": "Show section", "default": true },
+    { "type": "text", "id": "related_eyebrow", "label": "Eyebrow", "default": "Continue exploring" },
+    { "type": "text", "id": "related_heading", "label": "Heading", "default": "Related collections" },
+    { "type": "text", "id": "related_link_label", "label": "View all label", "default": "View all collections" },
+    { "type": "url", "id": "related_link", "label": "View all link" },
+    { "type": "header", "content": "Closing call to action" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show call to action", "default": true },
+    { "type": "text", "id": "cta_eyebrow", "label": "Eyebrow", "default": "Start a conversation" },
+    { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Have a project in mind?" },
+    { "type": "richtext", "id": "cta_text", "label": "Description", "default": "<p>Share your product, target volume, and timeline. We will shape the right route to production.</p>" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Request a quote" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#fafaf8" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#141414" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#6b6b63" },
+    { "type": "color", "id": "border_color", "label": "Lines", "default": "#ecebe6" },
+    { "type": "color", "id": "accent", "label": "Accent", "default": "#2f5e3a" },
+    { "type": "color", "id": "dark_background", "label": "Perfect for background", "default": "#24482d" },
+    { "type": "color", "id": "cream_background", "label": "CTA background", "default": "#f4ecd8" },
+    { "type": "color", "id": "image_background", "label": "Image background", "default": "#efeae0" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Structural concept" },
+        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>A format engineered around your product dimensions, weight, and unboxing sequence.</p>" }
+      ]
+    },
+    {
+      "type": "specification",
+      "name": "Specification row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Materials" },
+        { "type": "textarea", "id": "value", "label": "Value", "default": "FSC-certified paperboard and specialty paper options" }
+      ]
+    },
+    {
+      "type": "audience",
+      "name": "Perfect for item",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Beauty and fragrance" },
+        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>High-touch launches, discovery sets, and gifting moments that need a memorable reveal.</p>" }
+      ]
+    },
+    {
+      "type": "related_product",
+      "name": "Related product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Custom packaging" },
+        { "type": "text", "id": "fallback_title", "label": "Placeholder title", "default": "Signature collection" },
+        { "type": "textarea", "id": "text", "label": "Short description" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR PDP editorial",
+      "blocks": [
+        { "type": "feature" },
+        { "type": "feature", "settings": { "heading": "Material curation", "text": "<p>Specialty papers, responsible substrates, and finishes selected for tactile impact.</p>" } },
+        { "type": "feature", "settings": { "heading": "Production sampling", "text": "<p>A production-grade prototype to test the structural fit, finish, and opening experience.</p>" } },
+        { "type": "feature", "settings": { "heading": "Global delivery", "text": "<p>Production oversight, quality control, freight, and customs aligned for final delivery.</p>" } },
+        { "type": "specification" },
+        { "type": "specification", "settings": { "label": "Printing", "value": "Offset, Pantone, digital, and specialty color matching" } },
+        { "type": "specification", "settings": { "label": "Finishes", "value": "Foil stamping, embossing, debossing, spot UV, and soft-touch lamination" } },
+        { "type": "specification", "settings": { "label": "Inserts", "value": "Paperboard, molded pulp, EVA, foam, or custom-fit trays" } },
+        { "type": "specification", "settings": { "label": "Artwork", "value": "Dielines supplied after structural approval" } },
+        { "type": "audience" },
+        { "type": "audience", "settings": { "heading": "Holiday and gifting", "text": "<p>Seasonal campaigns, advent formats, and premium gifting programs built to hold attention.</p>" } },
+        { "type": "audience", "settings": { "heading": "Retail launches", "text": "<p>Distinctive structures that translate a product story into a strong shelf presence.</p>" } },
+        { "type": "audience", "settings": { "heading": "Lifestyle collections", "text": "<p>Coordinated packaging suites for products designed to live beautifully in the home.</p>" } },
+        { "type": "related_product" },
+        { "type": "related_product" },
+        { "type": "related_product" }
+      ]
+    }
+  ]
+}
+{% endschema %}
