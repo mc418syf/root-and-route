@@ -1,12 +1,21 @@
 {%- liquid
   assign heading_block = section.blocks | where: 'type', 'heading' | first
   assign collection_blocks = section.blocks | where: 'type', 'collection'
+  assign desktop_columns = section.settings.columns_desktop | default: '3'
+  case desktop_columns
+    when '1'
+      assign collection_image_sizes = '(min-width: 991px) 100vw, (min-width: 650px) 50vw, 100vw'
+    when '2'
+      assign collection_image_sizes = '(min-width: 650px) 50vw, 100vw'
+    else
+      assign collection_image_sizes = '(min-width: 991px) 33vw, (min-width: 650px) 50vw, 100vw'
+  endcase
 -%}
 
 <section
   id="RRFeatured-{{ section.id }}"
   class="rr-featured"
-  style="--rr-background:{{ section.settings.background }};--rr-image-background:{{ section.settings.image_background }};--rr-ink:{{ settings.rr_ink | default: '#141414' }};--rr-forest:{{ settings.rr_forest | default: '#2f5e3a' }};--rr-muted:{{ section.settings.muted_text }};--rr-line:{{ settings.rr_hairline | default: '#ecebe6' }};--rr-content-max:{{ settings.rr_content_max | default: 1360 }}px;--rr-side:{{ section.settings.side_padding }}px;--rr-top:{{ section.settings.padding_top }}px;--rr-bottom:{{ section.settings.padding_bottom }}px;--rr-image-height:{{ section.settings.image_height }}px;--rr-image-height-mobile:{{ section.settings.image_height_mobile }}px;"
+  style="--rr-background:{{ section.settings.background }};--rr-image-background:{{ section.settings.image_background }};--rr-ink:{{ settings.rr_ink | default: '#141414' }};--rr-forest:{{ settings.rr_forest | default: '#2f5e3a' }};--rr-muted:{{ section.settings.muted_text }};--rr-line:{{ settings.rr_hairline | default: '#ecebe6' }};--rr-content-max:{{ settings.rr_content_max | default: 1360 }}px;--rr-side:{{ section.settings.side_padding }}px;--rr-top:{{ section.settings.padding_top }}px;--rr-bottom:{{ section.settings.padding_bottom }}px;--rr-image-height:{{ section.settings.image_height }}px;--rr-image-height-mobile:{{ section.settings.image_height_mobile }}px;--rr-columns-desktop:{{ desktop_columns }};"
 >
   <span id="collections" class="rr-featured__anchor" aria-hidden="true"></span>
   <div class="rr-featured__inner">
@@ -33,7 +42,7 @@
           <a href="{{ collection_url }}">
             <div class="rr-featured-card__image">
               {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 33vw, (min-width: 650px) 50vw, 100vw', alt: block.settings.image_alt }}
+                {{ block.settings.image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: collection_image_sizes, alt: block.settings.image_alt }}
               {%- else -%}
                 <img
                   src="{{ fallback_asset | asset_url }}"
@@ -67,7 +76,7 @@
   #RRFeatured-{{ section.id }} .rr-featured__header { margin-bottom:58px; max-width:980px; }
   #RRFeatured-{{ section.id }} .rr-featured__eyebrow { color:var(--rr-forest); font-size:11px; font-weight:500; letter-spacing:.3em; line-height:1.35; margin:0; text-transform:uppercase; }
   #RRFeatured-{{ section.id }} .rr-featured__header h2 { color:var(--rr-ink); font-family:Comfortaa,Jost,sans-serif; font-size:62px; font-weight:500; letter-spacing:0; line-height:1.08; margin:22px 0 0; }
-  #RRFeatured-{{ section.id }} .rr-featured__grid { display:grid; gap:30px; grid-template-columns:repeat(3,minmax(0,1fr)); }
+  #RRFeatured-{{ section.id }} .rr-featured__grid { display:grid; gap:30px; grid-template-columns:repeat(var(--rr-columns-desktop),minmax(0,1fr)); }
   #RRFeatured-{{ section.id }} .rr-featured-card a { color:inherit; display:block; text-decoration:none; }
   #RRFeatured-{{ section.id }} .rr-featured-card__image { background:var(--rr-image-background); height:var(--rr-image-height); overflow:hidden; }
   #RRFeatured-{{ section.id }} .rr-featured-card__image img { display:block; height:100%; object-fit:cover; transition:transform .65s cubic-bezier(.22,1,.36,1); width:100%; }
@@ -102,6 +111,7 @@
     { "type": "color", "id": "image_background", "label": "Image placeholder", "default": "#efeae0" },
     { "type": "color", "id": "muted_text", "label": "Description color", "default": "#8a8a82" },
     { "type": "checkbox", "id": "show_top_border", "label": "Show top border", "default": false },
+    { "type": "select", "id": "columns_desktop", "label": "Desktop collections per row", "options": [{ "value": "1", "label": "1" }, { "value": "2", "label": "2" }, { "value": "3", "label": "3" }], "default": "3" },
     { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 40, "max": 180, "step": 4, "unit": "px", "default": 104 },
     { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 40, "max": 180, "step": 4, "unit": "px", "default": 96 },
     { "type": "range", "id": "side_padding", "label": "Side spacing", "min": 16, "max": 100, "step": 2, "unit": "px", "default": 42 },
