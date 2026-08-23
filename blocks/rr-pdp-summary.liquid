@@ -1,14 +1,9 @@
 {%- liquid
   assign summary_product = closest.product | default: product
-  assign namespace = block.settings.metafield_namespace | strip
-  assign moq_key = block.settings.moq_key | strip
-  assign production_key = block.settings.production_key | strip
-  assign shipping_key = block.settings.shipping_key | strip
-  assign compliance_key = block.settings.compliance_key | strip
-  assign moq_value = summary_product.metafields[namespace][moq_key].value | default: block.settings.moq_fallback
-  assign production_value = summary_product.metafields[namespace][production_key].value | default: block.settings.production_fallback
-  assign shipping_value = summary_product.metafields[namespace][shipping_key].value | default: block.settings.shipping_fallback
-  assign compliance_value = summary_product.metafields[namespace][compliance_key].value | default: block.settings.compliance_fallback
+  assign moq_value = summary_product.metafields.custom.minimum_order.value | default: block.settings.moq_fallback
+  assign production_value = summary_product.metafields.custom.production.value | default: summary_product.metafields.custom.production_days.value | default: block.settings.production_fallback
+  assign shipping_value = summary_product.metafields.custom.shipping.value | default: summary_product.metafields.custom.shipping_days.value | default: block.settings.shipping_fallback
+  assign compliance_value = summary_product.metafields.custom.compliance.value | default: block.settings.compliance_fallback
   assign quote_base_url = block.settings.quote_link | default: '/pages/contact'
   assign query_separator = '?'
   if quote_base_url contains '?'
@@ -400,18 +395,14 @@
     { "type": "text", "id": "unit_cost", "label": "Indicative cost note", "default": "Pricing confirmed after briefing" },
     { "type": "header", "content": "Product facts" },
     { "type": "checkbox", "id": "show_facts", "label": "Show product facts", "default": true },
-    { "type": "text", "id": "metafield_namespace", "label": "Metafield namespace", "default": "custom" },
+    { "type": "paragraph", "content": "Minimum order, production, and shipping are automatically populated from the current product's custom metafields. Fallback text is used only when a product value is empty." },
     { "type": "text", "id": "moq_label", "label": "Minimum order label", "default": "Minimum order" },
-    { "type": "text", "id": "moq_key", "label": "Minimum order metafield key", "default": "minimum_order" },
     { "type": "text", "id": "moq_fallback", "label": "Minimum order fallback", "default": "500 units" },
     { "type": "text", "id": "production_label", "label": "Production label", "default": "Production" },
-    { "type": "text", "id": "production_key", "label": "Production metafield key", "default": "production" },
     { "type": "text", "id": "production_fallback", "label": "Production fallback", "default": "15–20 days" },
     { "type": "text", "id": "shipping_label", "label": "Shipping label", "default": "Shipping" },
-    { "type": "text", "id": "shipping_key", "label": "Shipping metafield key", "default": "shipping" },
     { "type": "text", "id": "shipping_fallback", "label": "Shipping fallback", "default": "7–12 days" },
     { "type": "text", "id": "compliance_label", "label": "Compliance label", "default": "Compliance" },
-    { "type": "text", "id": "compliance_key", "label": "Compliance metafield key", "default": "compliance" },
     { "type": "text", "id": "compliance_fallback", "label": "Compliance fallback", "default": "FSC-certified options" },
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "background", "label": "Page background", "default": "#fafaf8" },
