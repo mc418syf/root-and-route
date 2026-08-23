@@ -16,7 +16,7 @@
           "type": "text",
           "name": "t:names.title",
           "settings": {
-            "text": "<h1>{{ closest.collection.title }}</h1>",
+            "text": "<p><a href=\"/collections/advent-countdown-boxes\" title=\"Advent & Countdown Boxes\">Advent & Countdown Boxes</a></p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -42,7 +42,7 @@
           "type": "text",
           "name": "t:names.description",
           "settings": {
-            "text": "{{ closest.collection.description }}",
+            "text": "<p>Custom-engineered rigid advent boxes built to your exact product dimensions, branding, and structural specifications. Designed for high-impact holiday campaigns, limited-edition product drops, and luxury gift sets.</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -96,8 +96,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-start": 40,
+        "padding-block-end": 40
       }
     },
     "product_list_qB6a9F": {
@@ -140,6 +140,7 @@
             "product_list_text_LkhqFn": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>{{ closest.collection.title }}</h2>",
                 "width": "fit-content",
@@ -282,7 +283,7 @@
       "name": "t:names.products_carousel",
       "settings": {
         "collection": "advent-countdown-boxes",
-        "layout_type": "carousel",
+        "layout_type": "grid",
         "carousel_on_mobile": false,
         "max_products": 4,
         "columns": 4,
@@ -456,7 +457,7 @@
           "type": "text",
           "name": "t:names.title",
           "settings": {
-            "text": "<h1>{{ closest.collection.title }}</h1>",
+            "text": "<h1>Everyday Essentials</h1>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -482,7 +483,7 @@
           "type": "text",
           "name": "t:names.description",
           "settings": {
-            "text": "{{ closest.collection.description }}",
+            "text": "<p>Need packaging without long production timelines? Our ready-to-ship collection offers versatile stock boxes and everyday packaging solutions that are available quickly, with reliable quality for your ongoing business needs.</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -522,8 +523,8 @@
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
-        "background_media": "image",
-        "background_color": "{{ settings.color_palette.background }}",
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.color2 }}",
         "video_position": "cover",
         "background_image": "shopify://shop_images/motif-bg-cream.svg",
         "background_image_position": "cover",
@@ -536,8 +537,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 30,
-        "padding-block-end": 30
+        "padding-block-start": 40,
+        "padding-block-end": 40
       }
     },
     "product_list_YJDPdN": {
@@ -580,6 +581,7 @@
             "product_list_text_akACWG": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>{{ closest.collection.title }}</h2>",
                 "width": "fit-content",
@@ -609,7 +611,7 @@
               "settings": {
                 "label": "View all",
                 "open_in_new_tab": false,
-                "style_class": "button-unstyled",
+                "style_class": "button",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
                 "custom_button_text": "{{ settings.color_palette.background }}",
                 "custom_button_border": "{{ settings.color_palette.background }}",
@@ -722,7 +724,7 @@
       "name": "t:names.products_carousel",
       "settings": {
         "collection": "everyday-essentials",
-        "layout_type": "carousel",
+        "layout_type": "grid",
         "carousel_on_mobile": false,
         "max_products": 4,
         "columns": 4,
@@ -737,7 +739,7 @@
         "gap": 28,
         "background_color": "",
         "padding-block-start": 20,
-        "padding-block-end": 48
+        "padding-block-end": 20
       }
     },
     "section_MBUbPR": {
@@ -747,7 +749,7 @@
           "type": "text",
           "name": "t:names.title",
           "settings": {
-            "text": "<h1>{{ closest.collection.title }}</h1>",
+            "text": "<p><a href=\"https://admin.shopify.com/store/9zyhn2-dj/collections/471917330521\">Everyday Luxury Packaging</a></p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -773,7 +775,7 @@
           "type": "text",
           "name": "t:names.description",
           "settings": {
-            "text": "{{ closest.collection.description }}",
+            "text": "<p>Elegant, durable, and space-efficient, our collapsible magnetic boxes are fully customizable for cosmetics, gourmet food, fashion, jewelry, corporate gifting, pet products, and countless other applications.</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -827,8 +829,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 30,
-        "padding-block-end": 30
+        "padding-block-start": 40,
+        "padding-block-end": 40
       }
     },
     "product_list_aaejWa": {
@@ -837,86 +839,39 @@
         "static-header": {
           "type": "_product-list-content",
           "name": "t:names.header",
+          "disabled": true,
           "static": true,
           "settings": {
-            "content_direction": "row",
+            "content_direction": "column",
             "vertical_on_mobile": false,
             "horizontal_alignment": "space-between",
             "vertical_alignment": "flex-end",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
+            "gap": 20,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "background_media": "none",
-            "background_color": "",
+            "background_media": "image",
+            "background_color": "{{ settings.color_palette.color2 }}",
             "video_position": "cover",
+            "background_image": "shopify://shop_images/motif-bg-cream.svg",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
             "border_color": "",
             "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-block-start": 20,
+            "padding-block-end": 20,
+            "padding-inline-start": 20,
+            "padding-inline-end": 20
           },
-          "blocks": {
-            "product_list_text_ejVjVT": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h2>{{ closest.collection.title }}</h2>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h3",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_P6CPPK": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "button-unstyled",
-                "custom_button_background": "{{ settings.color_palette.foreground }}",
-                "custom_button_text": "{{ settings.color_palette.background }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
-                "link_text_color": "",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_ejVjVT",
-            "product_list_button_P6CPPK"
-          ]
+          "blocks": {}
         },
         "static-product-card": {
           "type": "_product-card",
@@ -1013,7 +968,7 @@
       "name": "t:names.products_carousel",
       "settings": {
         "collection": "everyday-luxury-packaging",
-        "layout_type": "carousel",
+        "layout_type": "grid",
         "carousel_on_mobile": false,
         "max_products": 6,
         "columns": 4,
