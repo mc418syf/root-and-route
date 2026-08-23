@@ -160,18 +160,6 @@
             "show_arrow": true
           }
         },
-        "featured_retail": {
-          "type": "collection",
-          "settings": {
-            "image_alt": "Collapsible magnetic packaging",
-            "fallback": "retail",
-            "eyebrow": "Retail Innovation",
-            "title": "Collapsible Magnetic Boxes",
-            "text": "<p>Premium rigid packaging built with space-saving technology to ship completely flat, drastically reducing your storage and logistics costs.</p>",
-            "link": "",
-            "show_arrow": true
-          }
-        },
         "featured_bundles": {
           "type": "collection",
           "settings": {
@@ -188,7 +176,6 @@
       "block_order": [
         "featured_heading",
         "featured_seasonal",
-        "featured_retail",
         "featured_bundles"
       ],
       "name": "RR featured collections",
