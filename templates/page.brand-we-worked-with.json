@@ -290,9 +290,9 @@
         "image_height_mobile": 360,
         "image_fit": "cover",
         "eyebrow": "",
-        "heading": "Hudson's Bay",
-        "subheading": "Architectural Advent Calendar Packaging",
-        "text": "<p><strong>Structure:</strong> Gatefold double-door rigid box with custom-fitted internal compartments.</p><p><strong>Craftsmanship:</strong> Custom facade featuring deep debossing, foil stamping, and reinforced chipboard.</p>",
+        "heading": "Helena Rubinstein ",
+        "subheading": "Luxury Countdown Vault & Beauty Keepsake",
+        "text": "<p><strong>Structure:</strong> Custom 3D ship silhouette featuring dual-opening side doors and a central hero product pedestal. </p><p><strong>Craftsmanship:</strong> Reusable rigid construction, custom-fit product inserts, and high-contrast interior lining. </p>",
         "content_alignment": "left",
         "link_label": "",
         "link": "",
@@ -344,9 +344,63 @@
         "image_height_mobile": 360,
         "image_fit": "cover",
         "eyebrow": "",
-        "heading": "Maybelline New York",
-        "subheading": "<em>Brooklyn Beats Interactive Diorama & Drawer Packaging</em>",
-        "text": "<p><strong>Structure: </strong>Multi-layered counter display with a clear acrylic window and a smooth pull-out bottom drawer.</p><p><strong>Craftsmanship: </strong>High-precision die-cutting for the interior diorama combined with structural board engineering for retail durability. </p>",
+        "heading": "Lancôme ",
+        "subheading": "Premium Holiday Gift Set Architecture",
+        "text": "<p><strong>Structure: </strong>Heavy-duty rigid frame featuring multi-tiered interior dividers to keep glass bottles secure in transit. </p><p><strong>Craftsmanship:</strong> Precision die-cutting, custom gold foil accents, and protective compartment inserts. </p>",
+        "content_alignment": "left",
+        "link_label": "",
+        "link": "",
+        "show_arrow": true,
+        "background": "{{ settings.color_palette.background }}",
+        "image_background": "#efeae0",
+        "muted_text": "{{ settings.color_palette.foreground }}",
+        "padding_top": 40,
+        "padding_bottom": 20,
+        "side_padding": 20
+      }
+    },
+    "rr_editorial_gallery_kcTdKx": {
+      "type": "rr-editorial-gallery",
+      "blocks": {
+        "image_NfGWgi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/269.jpg",
+            "alt": "",
+            "caption": ""
+          }
+        },
+        "image_zUcQJe": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_y0npt5y0npt5y0np.png",
+            "alt": "",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_NfGWgi",
+        "image_zUcQJe"
+      ],
+      "name": "RR editorial gallery",
+      "settings": {
+        "image_position": "left",
+        "text_width": "one-third",
+        "desktop_carousel": false,
+        "mobile_carousel": true,
+        "carousel_show_dots": true,
+        "carousel_show_arrows": true,
+        "carousel_arrow_style": "arrow",
+        "image_gap": 10,
+        "image_aspect_ratio": "square",
+        "image_height": 400,
+        "image_height_mobile": 360,
+        "image_fit": "cover",
+        "eyebrow": "",
+        "heading": "Glo Skin Beauty",
+        "subheading": "Minimalist Eco-Luxury Rigid Presentation Box",
+        "text": "<p><strong>Structure: </strong>Sharp-edge magnetic closure box engineered with a precise tactile click. </p><p><strong>Craftsmanship:</strong> Premium soft-touch lamination paired with high-contrast back-panel typography for clear product messaging. </p>",
         "content_alignment": "left",
         "link_label": "",
         "link": "",
@@ -367,6 +421,7 @@
     "rr_editorial_gallery_BbzRNp",
     "rr_editorial_gallery_WeFNti",
     "rr_editorial_gallery_tPwPKk",
-    "rr_editorial_gallery_EtFkLQ"
+    "rr_editorial_gallery_EtFkLQ",
+    "rr_editorial_gallery_kcTdKx"
   ]
 }
