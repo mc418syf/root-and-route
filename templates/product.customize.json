@@ -328,7 +328,7 @@
                 "production_label": "Production",
                 "production_fallback": "15-20 days",
                 "shipping_label": "Shipping",
-                "shipping_fallback": "7-12 days",
+                "shipping_fallback": "-",
                 "compliance_label": "Compliance",
                 "compliance_fallback": "FSC-certified options",
                 "background": "#fafaf8",
