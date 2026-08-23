@@ -69,6 +69,7 @@
         "text_tqQTNE",
         "text_twGGkJ"
       ],
+      "disabled": true,
       "name": "t:names.heading",
       "settings": {
         "content_direction": "column",
@@ -247,10 +248,62 @@
         "padding-block-start": 40,
         "padding-block-end": 40
       }
+    },
+    "rr_home_ready_to_ship_hPRhaT": {
+      "type": "rr-home-ready-to-ship",
+      "blocks": {
+        "heading_RCk3bF": {
+          "type": "heading",
+          "settings": {
+            "eyebrow": "The Fast-Track Suite",
+            "heading": "Ready to ship"
+          }
+        },
+        "feature_AwdEhK": {
+          "type": "feature",
+          "settings": {
+            "icon": "wait",
+            "title": "No factory wait",
+            "text": "<p>Skip the production queue with pre-made, ready-to-ship blanks.</p>"
+          }
+        },
+        "feature_BwQt8e": {
+          "type": "feature",
+          "settings": {
+            "icon": "minimum",
+            "title": "Low minimum order quantity",
+            "text": "<p>Order exactly what you need - perfect for limited product launches and small businesses.</p>"
+          }
+        },
+        "feature_EtdyT4": {
+          "type": "feature",
+          "settings": {
+            "icon": "rapid",
+            "title": "Rapid turnaround",
+            "text": "<p>Add your brand logo and ship in days.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_RCk3bF",
+        "feature_AwdEhK",
+        "feature_BwQt8e",
+        "feature_EtdyT4"
+      ],
+      "name": "RR ready to ship",
+      "settings": {
+        "background": "#f4ecd8",
+        "muted_text": "#66645f",
+        "show_icons": true,
+        "padding_top": 72,
+        "padding_bottom": 84,
+        "side_padding": 42
+      }
     }
   },
   "order": [
     "section",
+    "rr_home_ready_to_ship_hPRhaT",
     "main"
   ]
 }
