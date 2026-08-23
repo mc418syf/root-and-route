@@ -80,7 +80,7 @@
         "ai_gen_block_97ccb89_UYRMgy": {
           "type": "ai_gen_block_97ccb89",
           "settings": {
-            "heading": "Brands we've worked with",
+            "heading": "<a href=\"/pages/brands-we-worked-with\" title=\"Brands We Worked With\">Brands we've worked with</a>",
             "heading_size": 30,
             "heading_spacing": 24,
             "desktop_width_percent": 100,
@@ -150,25 +150,26 @@
         "featured_seasonal": {
           "type": "collection",
           "settings": {
-            "image": "shopify://shop_images/TeddyBear1.jpg",
-            "image_alt": "Advent and countdown packaging",
+            "image": "shopify://shop_images/ChristmasTreeCombo.jpg",
+            "image_alt": "",
             "fallback": "seasonal",
-            "eyebrow": "Seasonal",
-            "title": "Advent & Countdown Boxes",
+            "eyebrow": "Customize",
+            "title": "Customized",
             "text": "<p>Multi-drawer interactive structures engineered to anchor holiday campaigns and high-engagement product launches.</p>",
-            "link": "",
+            "link": "shopify://collections/everyday-luxury-packaging",
             "show_arrow": true
           }
         },
         "featured_bundles": {
           "type": "collection",
           "settings": {
+            "image": "shopify://shop_images/ChatGPTImageAug7_2026_06_03_18PM.png",
             "image_alt": "Coordinated gift packaging suite",
             "fallback": "bundles",
-            "eyebrow": "Bundles",
+            "eyebrow": "Ready To Ship",
             "title": "Coordinated Gift Suites",
-            "text": "<p>Fully matched packaging ensembles combining custom rigid boxes, textured retail bags, and branded accessories for a seamless retail presence.</p>",
-            "link": "",
+            "text": "",
+            "link": "shopify://collections/everyday-essentials",
             "show_arrow": true
           }
         }
@@ -184,62 +185,12 @@
         "image_background": "#efeae0",
         "muted_text": "#8a8a82",
         "show_top_border": false,
+        "columns_desktop": "2",
         "padding_top": 104,
         "padding_bottom": 96,
         "side_padding": 42,
         "image_height": 370,
         "image_height_mobile": 330
-      }
-    },
-    "rr_ready_to_ship": {
-      "type": "rr-home-ready-to-ship",
-      "blocks": {
-        "ready_heading": {
-          "type": "heading",
-          "settings": {
-            "eyebrow": "The Fast-Track Suite",
-            "heading": "Ready to ship"
-          }
-        },
-        "ready_wait": {
-          "type": "feature",
-          "settings": {
-            "icon": "wait",
-            "title": "No factory wait",
-            "text": "<p>Skip the production queue with pre-made, ready-to-ship blanks.</p>"
-          }
-        },
-        "ready_minimum": {
-          "type": "feature",
-          "settings": {
-            "icon": "minimum",
-            "title": "Low minimum order quantity",
-            "text": "<p>Order exactly what you need - perfect for limited product launches and small businesses.</p>"
-          }
-        },
-        "ready_rapid": {
-          "type": "feature",
-          "settings": {
-            "icon": "rapid",
-            "title": "Rapid turnaround",
-            "text": "<p>Add your brand logo and ship in days.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "ready_heading",
-        "ready_wait",
-        "ready_minimum",
-        "ready_rapid"
-      ],
-      "name": "RR ready to ship",
-      "settings": {
-        "background": "#f4ecd8",
-        "muted_text": "#66645f",
-        "show_icons": true,
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "side_padding": 40
       }
     },
     "rr_process": {
@@ -304,7 +255,7 @@
       ],
       "name": "RR process",
       "settings": {
-        "background": "#ffffff",
+        "background": "{{ settings.color_palette.color3 }}",
         "muted_text": "#8a8a82",
         "show_top_border": false,
         "padding_top": 40,
@@ -317,7 +268,6 @@
     "rr_home_hero_3rtz7y",
     "1786824935273dc36e",
     "rr_featured_collections",
-    "rr_ready_to_ship",
     "rr_process"
   ]
 }
