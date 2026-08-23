@@ -44,7 +44,7 @@
         --rr-caption-green-inverse: {{ settings.rr_leaf | default: '#9fcb6e' }};
       }
     {% endstyle %}
-    {%- if request.page_type == 'product' -%}
+    {%- if request.page_type == 'product' or request.page_type == 'index' -%}
       {{ 'rr-pdp-components.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
     {%- render 'card-hover-effect-styles' -%}
