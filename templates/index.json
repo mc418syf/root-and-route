@@ -36,8 +36,8 @@
         "button_primary": {
           "type": "button",
           "settings": {
-            "label": "START AN INQUIRY",
-            "link": "",
+            "label": "Explore More Products",
+            "link": "shopify://collections",
             "style": "round",
             "show_arrow": false
           }
@@ -184,7 +184,6 @@
         "image_background": "#efeae0",
         "muted_text": "#8a8a82",
         "show_top_border": false,
-        "columns_desktop": "2",
         "padding_top": 104,
         "padding_bottom": 96,
         "side_padding": 42,
