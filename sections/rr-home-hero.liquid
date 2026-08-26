@@ -65,7 +65,7 @@
     <div class="rr-hero__media"{% if image_block != blank %} style="--image-height:{{ image_block.settings.height }}px;--image-height-mobile:{{ image_block.settings.height_mobile }}px;"{% endif %}>
       {{ image_content }}
       <div class="rr-hero__scrim" aria-hidden="true"></div>
-      <div class="rr-hero__text rr-hero__text--{{ section.settings.overlay_alignment }}">
+      <div class="rr-hero__text rr-hero__text--{{ section.settings.overlay_alignment }} rr-hero__text--vertical-{{ section.settings.overlay_vertical_position | default: 'center' }}">
         {{ hero_text_content }}
       </div>
     </div>
@@ -98,9 +98,14 @@
   .rr-hero__media { min-height:var(--image-height,680px); position:relative; }
   .rr-hero__media .rr-hero__image { inset:0; position:absolute; }
   .rr-hero__scrim { background:linear-gradient(90deg,rgba(var(--overlay-color),var(--overlay-opacity)) 0%,rgba(var(--overlay-color),calc(var(--overlay-opacity) * .72)) 46%,rgba(var(--overlay-color),0) 82%); inset:0; pointer-events:none; position:absolute; z-index:2; }
-  .rr-hero--overlay .rr-hero__text { align-items:center; color:var(--overlay-text); display:flex; inset:0; padding-bottom:clamp(40px,7vw,100px); padding-top:clamp(40px,7vw,100px); position:absolute; z-index:3; }
+  .rr-hero--overlay .rr-hero__text { color:var(--overlay-text); display:flex; inset:0; padding-bottom:clamp(40px,7vw,100px); padding-top:clamp(40px,7vw,100px); position:absolute; z-index:3; }
+  .rr-hero--overlay .rr-hero__text--vertical-top { align-items:flex-start; }
+  .rr-hero--overlay .rr-hero__text--vertical-center { align-items:center; }
+  .rr-hero--overlay .rr-hero__text--vertical-bottom { align-items:flex-end; }
   .rr-hero--overlay .rr-hero__text--center { justify-content:center; text-align:center; }
-  .rr-hero--overlay .rr-hero__text--right { justify-content:flex-end; }
+  .rr-hero--overlay .rr-hero__text--center .rr-hero__description { margin-left:auto; margin-right:auto; }
+  .rr-hero--overlay .rr-hero__text--right { justify-content:flex-end; text-align:right; }
+  .rr-hero--overlay .rr-hero__text--right .rr-hero__description { margin-left:auto; }
   .rr-hero--overlay .rr-hero__eyebrow,.rr-hero--overlay .rr-hero__description,.rr-hero--overlay .rr-hero__description em,.rr-hero--overlay .rr-hero-button--text { color:var(--overlay-text); }
   .rr-hero__buttons { align-items:center; display:flex; flex-wrap:nowrap; gap:20px; margin-top:24px; width:100%; }
   .rr-hero__buttons--left { justify-content:flex-start; }
@@ -113,7 +118,7 @@
   .rr-hero-button--round:hover { background:var(--dark); border-color:var(--dark); color:var(--butter); transform:translateY(-1px); }
   .rr-hero-button--text { background:transparent; border:0; color:var(--ink); padding:12px 0; }
   .rr-hero-button--text:hover { color:var(--forest); }
-  @media(max-width:700px){.rr-hero{--section-side:20px!important;--section-top:72px!important}.rr-hero__heading{font-size:clamp(38px,12vw,54px)}.rr-hero__buttons{flex-wrap:wrap}.rr-hero__image,.rr-hero__media{height:var(--image-height-mobile);min-height:var(--image-height-mobile)}.rr-hero--above .rr-hero__text{margin-bottom:32px}.rr-hero--below .rr-hero__text{margin-top:32px}.rr-hero--overlay .rr-hero__text{align-items:flex-end}.rr-hero__scrim{background:linear-gradient(0deg,rgba(var(--overlay-color),var(--overlay-opacity)) 0%,rgba(var(--overlay-color),calc(var(--overlay-opacity) * .45)) 68%,rgba(var(--overlay-color),0) 100%)}}
+  @media(max-width:700px){.rr-hero{--section-side:20px!important;--section-top:72px!important}.rr-hero__heading{font-size:clamp(38px,12vw,54px)}.rr-hero__buttons{flex-wrap:wrap}.rr-hero__image,.rr-hero__media{height:var(--image-height-mobile);min-height:var(--image-height-mobile)}.rr-hero--above .rr-hero__text{margin-bottom:32px}.rr-hero--below .rr-hero__text{margin-top:32px}.rr-hero__scrim{background:linear-gradient(0deg,rgba(var(--overlay-color),var(--overlay-opacity)) 0%,rgba(var(--overlay-color),calc(var(--overlay-opacity) * .45)) 68%,rgba(var(--overlay-color),0) 100%)}}
 </style>
 
 {% schema %}
@@ -123,7 +128,8 @@
   "settings": [
     { "type": "select", "id": "text_position", "label": "Text position", "options": [{ "value": "above", "label": "Above image" }, { "value": "overlay", "label": "Overlay image" }, { "value": "below", "label": "Below image" }], "default": "above" },
     { "type": "select", "id": "button_alignment", "label": "Button alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "left" },
-    { "type": "select", "id": "overlay_alignment", "label": "Overlay alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "left", "visible_if": "{{ section.settings.text_position == 'overlay' }}" },
+    { "type": "select", "id": "overlay_alignment", "label": "Overlay horizontal position", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "left", "visible_if": "{{ section.settings.text_position == 'overlay' }}" },
+    { "type": "select", "id": "overlay_vertical_position", "label": "Overlay vertical position", "options": [{ "value": "top", "label": "Top" }, { "value": "center", "label": "Center" }, { "value": "bottom", "label": "Bottom" }], "default": "center", "visible_if": "{{ section.settings.text_position == 'overlay' }}" },
     { "type": "color", "id": "overlay_text", "label": "Overlay text color", "default": "#f4ecd8", "visible_if": "{{ section.settings.text_position == 'overlay' }}" },
     { "type": "color", "id": "overlay_color", "label": "Overlay scrim color", "default": "#141414", "visible_if": "{{ section.settings.text_position == 'overlay' }}" },
     { "type": "range", "id": "overlay_opacity", "label": "Overlay scrim strength", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 55, "visible_if": "{{ section.settings.text_position == 'overlay' }}" },
