@@ -158,7 +158,7 @@
         "featured_seasonal": {
           "type": "collection",
           "settings": {
-            "image": "shopify://shop_images/ChristmasTreeCombo.jpg",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_25_2026_07_48_00_PM.png",
             "image_alt": "",
             "fallback": "seasonal",
             "eyebrow": "Customize",
