@@ -353,9 +353,6 @@
       --cart-bubble-background: {{ cart_bubble_background }};
       --cart-bubble-text: {{ cart_bubble_text }};
     {% endif %}
-    {% if section.settings.show_background_cover %}
-      --header-background-cover: rgba({{ section.settings.background_cover_color.rgb | default: '244, 236, 216' }}, {{ section.settings.background_cover_opacity | divided_by: 100.0 }});
-    {% endif %}
     {% if section.settings.actions_display_style == 'text' %}
       --header-actions-font-size: {{ section.settings.actions_font_size | default: '1rem' }};
       --header-actions-font-family: var(--font-{{ section.settings.actions_font | default: 'heading' }}--family);
@@ -364,9 +361,6 @@
     {% endif %}
   "
 >
-  {%- if section.settings.show_background_cover -%}
-    <div class="header__background-cover" aria-hidden="true"></div>
-  {%- endif -%}
   <div class="header__underlay header__underlay-closed"></div>
   <div
     class="header__underlay header__underlay-open"
@@ -664,19 +658,6 @@
   .header__underlay {
     position: absolute;
     inset: 0;
-  }
-
-  .header__background-cover {
-    position: absolute;
-    inset: 0;
-    z-index: var(--layer-lowest);
-    height: var(--header-height, 100%);
-    background: var(--header-background-cover, transparent);
-    pointer-events: none;
-  }
-
-  .header:not([transparent]) .header__background-cover {
-    display: none;
   }
 
   .header__underlay-closed {
@@ -1828,31 +1809,6 @@
       "label": "t:settings.text_color_transparent",
       "placeholder": "t:settings.default",
       "visible_if": "{{ section.settings.enable_transparent_header_home }}"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_background_cover",
-      "label": "Show background cover",
-      "info": "Adds a translucent color layer behind transparent headers.",
-      "default": false
-    },
-    {
-      "type": "color",
-      "id": "background_cover_color",
-      "label": "Background cover color",
-      "default": "#f4ecd8",
-      "visible_if": "{{ section.settings.show_background_cover }}"
-    },
-    {
-      "type": "range",
-      "id": "background_cover_opacity",
-      "label": "Background cover opacity",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 35,
-      "visible_if": "{{ section.settings.show_background_cover }}"
     },
     {
       "type": "header",
