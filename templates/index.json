@@ -12,6 +12,15 @@
     "rr_home_hero_3rtz7y": {
       "type": "rr-home-hero",
       "blocks": {
+        "image_main": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_25_2026_07_40_34_PM.png",
+            "alt": "Root & Route packaging",
+            "height": 680,
+            "height_mobile": 480
+          }
+        },
         "heading_main": {
           "type": "heading",
           "settings": {
@@ -23,14 +32,6 @@
           "type": "description",
           "settings": {
             "text": "<p>We uncover the <em>root</em> of your brand, then design the <em>route</em> — holiday countdown boxes, blind boxes, and custom gift packaging that begins your customer's first impression.</p>"
-          }
-        },
-        "image_main": {
-          "type": "image",
-          "settings": {
-            "alt": "Root & Route packaging",
-            "height": 680,
-            "height_mobile": 480
           }
         },
         "button_primary": {
@@ -53,21 +54,21 @@
         }
       },
       "block_order": [
+        "image_main",
         "heading_main",
         "description_main",
-        "image_main",
         "button_primary",
         "button_dfH4wt"
       ],
       "name": "RR hero",
       "settings": {
-        "text_position": "above",
+        "text_position": "overlay",
         "button_alignment": "left",
         "overlay_alignment": "left",
-        "overlay_text": "#f4ecd8",
-        "overlay_color": "#141414",
-        "overlay_opacity": 55,
-        "background": "#fafaf8",
+        "overlay_text": "{{ settings.color_palette.foreground }}",
+        "overlay_color": "{{ settings.color_palette.color3 }}",
+        "overlay_opacity": 35,
+        "background": "{{ settings.color_palette.background }}",
         "image_background": "#efeae0",
         "padding_top": 104,
         "padding_bottom": 0,
