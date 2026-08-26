@@ -11,6 +11,7 @@
   "sections": {
     "rr_pdp_breadcrumb": {
       "type": "rr-pdp-breadcrumb",
+      "disabled": true,
       "settings": {
         "home_label": "Home",
         "collection_label": "",
