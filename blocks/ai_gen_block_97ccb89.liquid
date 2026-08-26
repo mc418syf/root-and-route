@@ -34,6 +34,7 @@
   .ai-brand-ticker__track-{{ ai_gen_id }} {
     display: flex;
     gap: {{ block.settings.logo_spacing }}px;
+    width: max-content;
   }
 
   .ai-brand-ticker__track-{{ ai_gen_id }}.animate {
@@ -110,7 +111,7 @@
       transform: translateX(0);
     }
     100% {
-      transform: translateX(calc(-50% - {{ block.settings.logo_spacing | divided_by: 2.0 }}px));
+      transform: translate3d(var(--ticker-distance), 0, 0);
     }
   }
 
@@ -169,38 +170,72 @@
 <script>
   (function() {
     class BrandTicker{{ ai_gen_id }} extends HTMLElement {
-      constructor() {
-        super();
-      }
-
       connectedCallback() {
         this.track = this.querySelector('.ai-brand-ticker__track-{{ ai_gen_id }}');
-        if (this.track && this.track.children.length > 0) {
-          this.setupTicker();
-        }
+        this.container = this.track?.parentElement;
+
+        if (!this.track || !this.container || this.track.children.length === 0) return;
+
+        this.queueSetup();
+        this.resizeObserver = new ResizeObserver(() => this.queueSetup());
+        this.resizeObserver.observe(this.container);
+      }
+
+      disconnectedCallback() {
+        cancelAnimationFrame(this.setupFrame);
+        this.resizeObserver?.disconnect();
+      }
+
+      queueSetup() {
+        cancelAnimationFrame(this.setupFrame);
+        this.setupFrame = requestAnimationFrame(() => this.setupTicker());
       }
 
       setupTicker() {
-        const container = this.track.parentElement;
-        const containerWidth = container.offsetWidth;
-        const trackWidth = this.track.scrollWidth;
+        this.track.classList.remove('animate');
+        this.track.querySelectorAll('[data-ticker-clone]').forEach((clone) => clone.remove());
 
-        if (trackWidth > containerWidth) {
-          this.duplicateLogos();
-          this.track.classList.add('animate');
+        const items = Array.from(this.track.children);
+        const containerWidth = this.container.clientWidth;
+
+        if (items.length === 0 || containerWidth === 0) return;
+
+        const gap = parseFloat(getComputedStyle(this.track).columnGap) || 0;
+        const itemsWidth = items.reduce((width, item) => width + item.getBoundingClientRect().width, 0);
+        const sequenceWidth = itemsWidth + gap * Math.max(items.length - 1, 0);
+        const tickerDistance = sequenceWidth + gap;
+
+        if (tickerDistance <= 0) return;
+
+        const sequenceCount = Math.max(
+          2,
+          Math.ceil((containerWidth + tickerDistance + gap) / tickerDistance)
+        );
+
+        for (let copyIndex = 1; copyIndex < sequenceCount; copyIndex += 1) {
+          this.duplicateLogos(items);
         }
+
+        this.track.style.setProperty('--ticker-distance', `-${tickerDistance}px`);
+        this.track.classList.add('animate');
       }
 
-      duplicateLogos() {
-        const items = Array.from(this.track.children);
-        items.forEach(item => {
+      duplicateLogos(items) {
+        items.forEach((item) => {
           const clone = item.cloneNode(true);
+          clone.setAttribute('aria-hidden', 'true');
+          clone.setAttribute('data-ticker-clone', '');
+          clone.querySelectorAll('img').forEach((image) => {
+            image.loading = 'eager';
+          });
           this.track.appendChild(clone);
         });
       }
     }
 
-    customElements.define('brand-ticker-{{ ai_gen_id }}', BrandTicker{{ ai_gen_id }});
+    if (!customElements.get('brand-ticker-{{ ai_gen_id }}')) {
+      customElements.define('brand-ticker-{{ ai_gen_id }}', BrandTicker{{ ai_gen_id }});
+    }
   })();
 </script>
 
