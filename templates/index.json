@@ -96,7 +96,7 @@
             "logo_width": 140,
             "logo_height": 60,
             "logo_spacing": 60,
-            "animation_speed": 20,
+            "animation_speed": 15,
             "pause_on_hover": true,
             "grayscale": true,
             "logo_opacity": 60,
