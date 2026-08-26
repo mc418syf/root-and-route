@@ -17,7 +17,7 @@
           "settings": {
             "image": "shopify://shop_images/hero_right.jpg",
             "alt": "Root & Route packaging",
-            "height": 680,
+            "height": 720,
             "height_mobile": 480
           }
         },
@@ -61,7 +61,7 @@
         "button_dfH4wt"
       ],
       "custom_css": [
-        ".rr-hero__description{font-weight: 400}"
+        ".rr-hero__description {font-weight: 400;}"
       ],
       "name": "RR hero",
       "settings": {
