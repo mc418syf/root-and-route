@@ -161,8 +161,8 @@
             "image": "shopify://shop_images/ChatGPT_Image_Aug_25_2026_07_48_00_PM.png",
             "image_alt": "",
             "fallback": "seasonal",
-            "eyebrow": "Customize",
-            "title": "Customized",
+            "eyebrow": "Design Service",
+            "title": "Custom Made",
             "text": "<p>Multi-drawer interactive structures engineered to anchor holiday campaigns and high-engagement product launches.</p>",
             "link": "shopify://collections/everyday-luxury-packaging",
             "show_arrow": true
@@ -174,8 +174,8 @@
             "image": "shopify://shop_images/ChatGPTImageAug7_2026_06_03_18PM.png",
             "image_alt": "Everyday Essentials",
             "fallback": "bundles",
-            "eyebrow": "Ready To Ship",
-            "title": "Coordinated Gift Suites",
+            "eyebrow": "Curated Collection",
+            "title": "Ready to Ship",
             "text": "",
             "link": "shopify://collections/everyday-essentials",
             "show_arrow": true
