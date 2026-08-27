@@ -37,7 +37,7 @@
         "button_primary": {
           "type": "button",
           "settings": {
-            "label": "Explore More Products",
+            "label": "Explore Products",
             "link": "shopify://collections",
             "style": "round",
             "show_arrow": false
