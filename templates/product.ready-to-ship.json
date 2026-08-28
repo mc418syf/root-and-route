@@ -316,7 +316,7 @@
                 "purchase_label": "ADD TO CART",
                 "quote_label": "Request a quote",
                 "quote_link": "shopify://pages/contact",
-                "sample_label": "Order a sample kit",
+                "sample_label": "",
                 "sample_link": "shopify://pages/contact",
                 "show_quantity": true,
                 "quantity_label": "Order quantity",
