@@ -11,6 +11,64 @@
   "type": "footer",
   "name": "t:names.footer",
   "sections": {
+    "rr_faq_cEyaxG": {
+      "type": "rr-faq",
+      "blocks": {
+        "question_GHcTjb": {
+          "type": "question",
+          "settings": {
+            "question": "Can you design packaging around my product?",
+            "answer": "<p>Yes. We can develop the box structure and insert around your product dimensions, packed weight, and presentation requirements.</p><p></p>"
+          }
+        },
+        "question_d47N8D": {
+          "type": "question",
+          "settings": {
+            "question": "What information do you need to start a project?",
+            "answer": "<p>To get started, send us your <strong>product dimensions, target quantity, packaging reference or artwork, preferred materials, and delivery destination</strong>. The more details you provide, the faster we can recommend the right structure and prepare a quotation.</p>"
+          }
+        },
+        "question_GXhajR": {
+          "type": "question",
+          "settings": {
+            "question": "How long does custom packaging production take?",
+            "answer": "<p>Standard production normally takes 20–25 days after the sample, artwork and order details are approved.</p>"
+          }
+        },
+        "question_KdHxbP": {
+          "type": "question",
+          "settings": {
+            "question": "How long does shipping usually take?",
+            "answer": "<p>Sea transit is typically around <strong>25–30 days to the United States</strong> and approximately <strong>50 days to Europe or the Middle East</strong>. Final delivery times depend on the destination, route, customs clearance, and shipping method.</p>"
+          }
+        },
+        "question_3rCJHn": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer samples before production?",
+            "answer": "<p>Yes. <strong>Ready-to-ship samples are free</strong>, with shipping paid by the customer. For custom packaging, a <strong>US$100–200 sample fee</strong> typically applies, depending on the project. Custom samples are usually ready within <strong>5–7 business days</strong> after confirmation.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_GHcTjb",
+        "question_d47N8D",
+        "question_GXhajR",
+        "question_KdHxbP",
+        "question_3rCJHn"
+      ],
+      "name": "RR Q&A accordion",
+      "settings": {
+        "background": "{{ settings.color_palette.color2 }}",
+        "padding": 60,
+        "eyebrow": "FAQ",
+        "heading": "Before We Begin",
+        "text": "<p>A clear guide to custom packaging, from sampling to production.</p>",
+        "open_first": false,
+        "cta_label": "",
+        "cta_link": ""
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -234,6 +292,7 @@
     }
   },
   "order": [
+    "rr_faq_cEyaxG",
     "footer",
     "utilities"
   ]
