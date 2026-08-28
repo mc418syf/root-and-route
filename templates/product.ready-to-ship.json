@@ -1,0 +1,742 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rr_pdp_breadcrumb": {
+      "type": "rr-pdp-breadcrumb",
+      "disabled": true,
+      "settings": {
+        "home_label": "Home",
+        "collection_label": "",
+        "collection_link": "",
+        "background": "#fafaf8",
+        "text_color": "#141414",
+        "muted_color": "#8a8a82"
+      }
+    },
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "disclosures": {
+          "type": "disclosures",
+          "settings": {
+            "heading": "Disclosures",
+            "heading_preset": "h4",
+            "open_by_default": false,
+            "icon": "caret",
+            "disclosure_heading_preset": "h5",
+            "text_color": "",
+            "dividers": true,
+            "divider_color": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": true,
+            "icons_style": "arrow",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 72,
+            "thumbnail_radius": 3,
+            "aspect_ratio": "adapt",
+            "constrain_to_viewport": true,
+            "media_fit": "contain",
+            "media_radius": 3,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 0,
+            "sticky_details_desktop": true,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_icgrde": {
+              "type": "group",
+              "name": "t:names.header",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "rr_pdp_eyebrow": {
+                  "type": "rr-pdp-eyebrow",
+                  "settings": {
+                    "text": "",
+                    "color": "#2f5e3a"
+                  },
+                  "blocks": {}
+                },
+                "text_xpVMaM": {
+                  "type": "text",
+                  "name": "t:names.title",
+                  "settings": {
+                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h2",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 20,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "price_tVjtKg": {
+                  "type": "price",
+                  "disabled": true,
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": true,
+                    "show_tax_info": true,
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "text_color": "",
+                    "padding-block-start": 4,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "rr_pdp_eyebrow",
+                "text_xpVMaM",
+                "price_tVjtKg"
+              ]
+            },
+            "variant_picker_R3rGDr": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "option_label_text_color": "{{ settings.color_palette.foreground }}",
+                "variant_style_class": "default",
+                "custom_variant_background": "",
+                "custom_variant_text": "",
+                "custom_variant_border": "",
+                "selected_variant_style_class": "default",
+                "custom_selected_variant_background": "{{ settings.color_palette.foreground }}",
+                "custom_selected_variant_text": "{{ settings.color_palette.background }}",
+                "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
+                "alignment": "left",
+                "fit_buttons_to_text": true,
+                "button_padding": 15,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "text_color": "",
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "recipient_button_style": "default",
+                "recipient_button_background": "{{ settings.color_palette.background }}",
+                "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_style": "default",
+                "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "input_style": "default",
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.foreground }}",
+                "input_border_color": "{{ settings.color_palette.foreground }}",
+                "border_width": 1,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0
+                  },
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "button_JyMeUj": {
+              "type": "button",
+              "name": "t:names.button",
+              "disabled": true,
+              "settings": {
+                "label": "GET A QUOTE",
+                "link": "",
+                "open_in_new_tab": false,
+                "style_class": "button-custom",
+                "custom_button_background": "{{ settings.color_palette.color1 }}",
+                "custom_button_text": "{{ settings.color_palette.color2 }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
+                "corner_radius": 100,
+                "width": "custom",
+                "custom_width": 100,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            },
+            "rr_pdp_summary": {
+              "type": "rr-pdp-summary",
+              "settings": {
+                "quote_label": "Request a quote",
+                "quote_link": "shopify://pages/contact",
+                "sample_label": "Order a sample kit",
+                "sample_link": "shopify://pages/contact",
+                "show_quantity": true,
+                "quantity_label": "Indicative order quantity",
+                "quantity_note": "Final pricing follows your approved specification.",
+                "quantity_default": 50,
+                "quantity_step": 50,
+                "unit_cost": "Pricing confirmed after briefing",
+                "show_facts": true,
+                "moq_label": "Minimum order",
+                "moq_fallback": "500 units",
+                "production_label": "Production",
+                "production_fallback": "15-20 days",
+                "shipping_label": "Shipping",
+                "shipping_fallback": "-",
+                "compliance_label": "Compliance",
+                "compliance_fallback": "FSC-certified options",
+                "background": "#fafaf8",
+                "text_color": "#141414",
+                "muted_color": "#6b6b63",
+                "border_color": "#ecebe6",
+                "fact_background": "#f4ecd8",
+                "accent": "#2f5e3a",
+                "accent_hover": "#24482d"
+              },
+              "blocks": {}
+            },
+            "text_aEtTtq": {
+              "type": "text",
+              "name": "t:names.product_description",
+              "settings": {
+                "text": "<p>{{ closest.product.description }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "",
+                "line_height": "loose",
+                "letter_spacing": "loose",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "",
+                "corner_radius": 0,
+                "padding-block-start": 20,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "group_icgrde",
+            "variant_picker_R3rGDr",
+            "buy_buttons_eYQEYi",
+            "button_JyMeUj",
+            "rr_pdp_summary",
+            "text_aEtTtq"
+          ]
+        }
+      },
+      "block_order": [
+        "disclosures"
+      ],
+      "settings": {
+        "content_width": "content-full-width",
+        "desktop_media_position": "left",
+        "equal_columns": false,
+        "limit_details_width": false,
+        "gap": 0,
+        "enable_sticky_add_to_cart": false,
+        "background_color": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "rr_pdp_features": {
+      "type": "rr-pdp-features",
+      "blocks": {
+        "feature_structure": {
+          "type": "feature",
+          "settings": {
+            "heading": "Structural concept",
+            "text": "<p>A format engineered around your product dimensions, weight, and unboxing sequence.</p>"
+          }
+        },
+        "feature_material": {
+          "type": "feature",
+          "settings": {
+            "heading": "Material curation",
+            "text": "<p>Specialty papers, responsible substrates, and finishes selected for tactile impact.</p>"
+          }
+        },
+        "feature_sample": {
+          "type": "feature",
+          "settings": {
+            "heading": "Production sampling",
+            "text": "<p>A production-grade prototype to test the structural fit, finish, and opening experience.</p>"
+          }
+        },
+        "feature_delivery": {
+          "type": "feature",
+          "settings": {
+            "heading": "Global delivery",
+            "text": "<p>Production oversight, quality control, freight, and customs aligned for final delivery.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_structure",
+        "feature_material",
+        "feature_sample",
+        "feature_delivery"
+      ],
+      "disabled": true,
+      "settings": {
+        "eyebrow": "Built into every project",
+        "heading": "What you get",
+        "text": "<p>Every project is engineered around your product, audience, and route to market.</p>",
+        "show_numbers": true,
+        "sticky_heading": true,
+        "heading_size": 52,
+        "subheading_size": 24,
+        "body_size": 15,
+        "max_width": 1360,
+        "column_gap": 72,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "background": "#fafaf8",
+        "text_color": "#141414",
+        "muted_color": "#6b6b63",
+        "accent": "#2f5e3a",
+        "border_color": "#ecebe6"
+      }
+    },
+    "rr_pdp_specifications": {
+      "type": "rr-pdp-specifications",
+      "blocks": {
+        "spec_materials": {
+          "type": "row",
+          "settings": {
+            "label": "Materials",
+            "metafield_source": "materials",
+            "value": ""
+          }
+        },
+        "spec_printing": {
+          "type": "row",
+          "settings": {
+            "label": "Printing",
+            "metafield_source": "printing",
+            "value": ""
+          }
+        },
+        "spec_finishes": {
+          "type": "row",
+          "settings": {
+            "label": "Finishes",
+            "metafield_source": "finishes",
+            "value": ""
+          }
+        },
+        "spec_inserts": {
+          "type": "row",
+          "settings": {
+            "label": "Customization",
+            "metafield_source": "customization",
+            "value": ""
+          }
+        },
+        "spec_artwork": {
+          "type": "row",
+          "settings": {
+            "label": "Artwork",
+            "metafield_source": "manual",
+            "value": ""
+          }
+        }
+      },
+      "block_order": [
+        "spec_materials",
+        "spec_printing",
+        "spec_finishes",
+        "spec_inserts",
+        "spec_artwork"
+      ],
+      "settings": {
+        "eyebrow": "Material and finish",
+        "heading": "Specification",
+        "text": "<p>Final construction and finish are confirmed through sampling before production.</p>",
+        "metafield_namespace": "custom",
+        "heading_size": 52,
+        "body_size": 15,
+        "max_width": 1360,
+        "column_gap": 72,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "background": "#fafaf8",
+        "text_color": "#141414",
+        "muted_color": "#6b6b63",
+        "accent": "#2f5e3a",
+        "border_color": "#ecebe6"
+      }
+    },
+    "rr_pdp_audiences": {
+      "type": "rr-pdp-audiences",
+      "blocks": {
+        "audience_beauty": {
+          "type": "audience",
+          "settings": {
+            "heading": "Beauty and fragrance",
+            "text": "<p>High-touch launches, discovery sets, and gifting moments that need a memorable reveal.</p>"
+          }
+        },
+        "audience_holiday": {
+          "type": "audience",
+          "settings": {
+            "heading": "Holiday and gifting",
+            "text": "<p>Seasonal campaigns, advent formats, and premium gifting programs built to hold attention.</p>"
+          }
+        },
+        "audience_retail": {
+          "type": "audience",
+          "settings": {
+            "heading": "Retail launches",
+            "text": "<p>Distinctive structures that translate a product story into a strong shelf presence.</p>"
+          }
+        },
+        "audience_lifestyle": {
+          "type": "audience",
+          "settings": {
+            "heading": "Lifestyle collections",
+            "text": "<p>Coordinated packaging suites for products designed to live beautifully in the home.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "audience_beauty",
+        "audience_holiday",
+        "audience_retail",
+        "audience_lifestyle"
+      ],
+      "settings": {
+        "eyebrow": "Designed for impact",
+        "heading": "Perfect for",
+        "content_source": "auto",
+        "metafield_namespace": "custom",
+        "metafield_key": "perfect_for",
+        "metafield_limit": 4,
+        "heading_size": 52,
+        "subheading_size": 24,
+        "body_size": 15,
+        "desktop_layout": "heading-left",
+        "max_width": 1360,
+        "column_gap": 64,
+        "card_min_height": 150,
+        "card_padding": 28,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "background": "#24482d",
+        "text_color": "#fafaf8",
+        "muted_color": "#c1c9be",
+        "eyebrow_color": "#f4ecd8",
+        "border_color": "#55705c"
+      }
+    },
+    "rr_pdp_cta": {
+      "type": "rr-pdp-cta",
+      "settings": {
+        "eyebrow": "Start a conversation",
+        "heading": "Have a project in mind?",
+        "text": "<p>Share your product, target volume, and timeline. We will shape the right route to production.</p>",
+        "alignment": "center",
+        "button_label": "Request a quote",
+        "button_link": "shopify://pages/contact",
+        "show_arrow": true,
+        "button_radius": 2,
+        "heading_size": 52,
+        "body_size": 17,
+        "max_width": 1360,
+        "content_width": 760,
+        "padding_top": 104,
+        "padding_bottom": 104,
+        "background": "#f4ecd8",
+        "text_color": "#141414",
+        "muted_color": "#6b6b63",
+        "accent": "#2f5e3a",
+        "button_background": "#2f5e3a",
+        "button_text": "#fafaf8"
+      }
+    },
+    "17872726377a43df85": {
+      "type": "_blocks",
+      "blocks": {
+        "forms_inline_ADbYpH": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "1121481",
+            "text_color": "#202020",
+            "button_background_color": "{{ settings.color_palette.color1 }}",
+            "button_label_color": "#ffffff",
+            "links_color": "#1878b9",
+            "errors_color": "#e02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 40,
+            "padding_bottom": 40,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        }
+      },
+      "block_order": [
+        "forms_inline_ADbYpH"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "small",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.color2 }}",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "{{ settings.color_palette.color2 }}",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "rr_contact_quote_WtYLhX": {
+      "type": "rr-contact-quote",
+      "blocks": {
+        "quantity_option_z3nnem": {
+          "type": "quantity_option",
+          "settings": {
+            "label": "50-100"
+          }
+        },
+        "quantity_option_zMnUxi": {
+          "type": "quantity_option",
+          "settings": {
+            "label": "100-500"
+          }
+        },
+        "quantity_option_iGDRNR": {
+          "type": "quantity_option",
+          "settings": {
+            "label": "500-1,000"
+          }
+        },
+        "quantity_option_c4Ba4z": {
+          "type": "quantity_option",
+          "settings": {
+            "label": "1,000+"
+          }
+        }
+      },
+      "block_order": [
+        "quantity_option_z3nnem",
+        "quantity_option_zMnUxi",
+        "quantity_option_iGDRNR",
+        "quantity_option_c4Ba4z"
+      ],
+      "disabled": true,
+      "name": "RR quote form",
+      "settings": {
+        "eyebrow": "GET IN TOUCH",
+        "heading": "Request a Quote",
+        "description": "<p>Tell us about your project and we'll follow up with pricing and lead times tailored to your run.</p>",
+        "name_label": "Name",
+        "name_placeholder": "Jane Smith",
+        "email_label": "Email",
+        "email_placeholder": "jane@company.com",
+        "company_label": "Company",
+        "company_placeholder": "Company name",
+        "quantity_label": "Desired Quantity Range",
+        "message_label": "Message",
+        "message_placeholder": "Tell us about your project, target volumes, and timelines",
+        "button_label": "SUBMIT REQUEST",
+        "success_message": "Thank you. We'll be in touch shortly.",
+        "background": "#f4ecd8",
+        "text_color": "#141414",
+        "muted_text": "#66645f",
+        "accent_color": "#2f5e3a",
+        "input_background": "#ffffff",
+        "input_border": "#d2d0ca",
+        "placeholder_color": "#999999",
+        "button_background": "#2f5e3a",
+        "button_text_color": "#f4ecd8",
+        "content_width": 600,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "rr_pdp_breadcrumb",
+    "main",
+    "rr_pdp_features",
+    "rr_pdp_specifications",
+    "rr_pdp_audiences",
+    "rr_pdp_cta",
+    "17872726377a43df85",
+    "rr_contact_quote_WtYLhX"
+  ]
+}
