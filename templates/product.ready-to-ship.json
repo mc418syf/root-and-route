@@ -174,7 +174,6 @@
                 },
                 "price_tVjtKg": {
                   "type": "price",
-                  "disabled": true,
                   "settings": {
                     "show_sale_price_first": true,
                     "show_installments": true,
@@ -255,7 +254,6 @@
               "blocks": {
                 "quantity": {
                   "type": "quantity",
-                  "disabled": true,
                   "static": true,
                   "settings": {
                     "input_style": "default",
@@ -269,7 +267,6 @@
                 },
                 "add-to-cart": {
                   "type": "add-to-cart",
-                  "disabled": true,
                   "static": true,
                   "settings": {
                     "style_class": "button",
@@ -312,6 +309,7 @@
             },
             "rr_pdp_summary": {
               "type": "rr-pdp-summary",
+              "disabled": true,
               "settings": {
                 "quote_label": "Request a quote",
                 "quote_link": "shopify://pages/contact",
