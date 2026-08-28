@@ -142,7 +142,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "View All→",
-                "link": "shopify://collections/all",
+                "link": "shopify://collections/everyday-essentials",
                 "open_in_new_tab": false,
                 "style_class": "button-unstyled",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -463,7 +463,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "View All→",
-                "link": "shopify://collections/all",
+                "link": "shopify://collections/advent-countdown-boxes",
                 "open_in_new_tab": false,
                 "style_class": "button-unstyled",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -880,7 +880,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "View All→",
-                "link": "shopify://collections/all",
+                "link": "shopify://collections/everyday-luxury-packaging",
                 "open_in_new_tab": false,
                 "style_class": "button-unstyled",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
