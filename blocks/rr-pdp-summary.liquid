@@ -1,9 +1,36 @@
 {%- liquid
   assign summary_product = closest.product | default: product
+  assign summary_variant = summary_product.selected_or_first_available_variant
+  assign is_b2b_purchase = false
+  if block.settings.mode == 'b2b'
+    assign is_b2b_purchase = true
+  endif
+
   assign moq_value = summary_product.metafields.custom.minimum_order.value | default: block.settings.moq_fallback
   assign production_value = summary_product.metafields.custom.production.value | default: summary_product.metafields.custom.production_days.value | default: block.settings.production_fallback
   assign shipping_value = summary_product.metafields.custom.shipping.value | default: summary_product.metafields.custom.shipping_days.value | default: block.settings.shipping_fallback
   assign compliance_value = summary_product.metafields.custom.compliance.value | default: block.settings.compliance_fallback
+
+  assign minimum_value = summary_variant.quantity_rule.min | default: 1
+  assign increment_value = summary_variant.quantity_rule.increment | default: 1
+  if is_b2b_purchase
+    assign moq_value = minimum_value
+  endif
+
+  assign can_add_to_cart = false
+  assign purchase_button_label = 'products.product.unavailable' | t
+  assign quantity_rule_soldout = false
+  if summary_variant.quantity_rule.min > summary_variant.inventory_quantity and summary_variant.inventory_management == 'shopify' and summary_variant.inventory_policy == 'deny'
+    assign quantity_rule_soldout = true
+  endif
+
+  if summary_variant.available and quantity_rule_soldout == false
+    assign can_add_to_cart = true
+    assign purchase_button_label = block.settings.purchase_label
+  elsif quantity_rule_soldout or summary_variant.inventory_management == 'shopify' and summary_variant.inventory_quantity <= 0 and summary_variant.inventory_policy == 'deny'
+    assign purchase_button_label = 'products.product.sold_out' | t
+  endif
+
   assign quote_base_url = block.settings.quote_link | default: '/pages/contact'
   assign query_separator = '?'
   if quote_base_url contains '?'
@@ -19,8 +46,13 @@
   endcapture
 -%}
 
+{%- if is_b2b_purchase -%}
+  {% render 'add-to-cart-button-styles' %}
+  {% render 'fly-to-cart-styles' %}
+{%- endif -%}
+
 <rr-pdp-summary
-  class="rr-pdp-summary"
+  class="rr-pdp-summary{% if is_b2b_purchase %} rr-pdp-summary--b2b{% endif %}"
   style="
     --rr-pdp-forest: {{ block.settings.accent }};
     --rr-pdp-forest-dark: {{ block.settings.accent_hover }};
@@ -32,47 +64,167 @@
   "
   {{ block.shopify_attributes }}
 >
-  {%- if block.settings.show_quantity -%}
-    <div class="rr-pdp-summary__quantity">
-      <div>
-        <p>{{ block.settings.quantity_label | escape }}</p>
-        {%- if block.settings.quantity_note != blank -%}<span>{{ block.settings.quantity_note | escape }}</span>{%- endif -%}
-      </div>
-      <div class="rr-pdp-summary__quantity-controls">
-        <div class="rr-pdp-summary__stepper">
-          <button type="button" data-quantity-action="decrease" aria-label="Decrease quantity">−</button>
-          <input
-            type="number"
-            min="{{ block.settings.quantity_step }}"
-            step="{{ block.settings.quantity_step }}"
-            value="{{ block.settings.quantity_default }}"
-            aria-label="{{ block.settings.quantity_label | escape }}"
-            data-quote-quantity
-          >
-          <button type="button" data-quantity-action="increase" aria-label="Increase quantity">+</button>
+  {%- if is_b2b_purchase -%}
+    {%- assign product_form_id = 'RR-B2B-ProductForm-' | append: section.id | append: '-' | append: block.id -%}
+    {%- assign purchase_button_id = 'RR-B2B-ProductSubmitButton-' | append: block.id -%}
+    <product-form-component
+      data-section-id="{{ section.id }}"
+      data-product-id="{{ summary_product.id }}"
+      data-product-url="{{ summary_product.url }}"
+      data-quantity-default="{{ minimum_value }}"
+      data-quantity-error-max="{{ 'products.product.quantity_error_max' | t }}"
+      on:submit="/handleSubmit"
+    >
+      <div class="visually-hidden" aria-live="assertive" role="status" aria-atomic="true" ref="liveRegion"></div>
+      {%- form 'product', summary_product, id: product_form_id, data-type: 'add-to-cart-form' -%}
+        <input type="hidden" name="id" ref="variantId" value="{{ summary_variant.id }}">
+        <div class="rr-pdp-summary__purchase" ref="productFormButtons">
+          {%- if block.settings.show_quantity -%}
+            <div class="rr-pdp-summary__quantity">
+              <div class="rr-pdp-summary__quantity-copy">
+                <p>{{ block.settings.quantity_label | escape }}</p>
+                {%- if block.settings.quantity_note != blank -%}<span>{{ block.settings.quantity_note | escape }}</span>{%- endif -%}
+                <div class="rr-pdp-summary__rules" ref="quantityRules">
+                  <span>{{ block.settings.moq_label | escape }} {{ minimum_value }}</span>
+                  <span>{{ block.settings.increment_label | escape }} {{ increment_value }}</span>
+                  {%- if summary_variant.quantity_rule.max != null -%}
+                    <span>{{ 'products.product.quantity_maximum' | t: maximum: summary_variant.quantity_rule.max }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+              <div class="rr-pdp-summary__quantity-controls">
+                {% render 'quantity-selector', product: summary_product %}
+                {%- unless summary_product.quantity_price_breaks_configured? and summary_variant.quantity_price_breaks.size > 0 -%}
+                  <span class="rr-pdp-summary__cost">
+                    {%- if settings.currency_code_enabled_product_pages -%}
+                      {{- summary_variant.price | money_with_currency -}}
+                    {%- else -%}
+                      {{- summary_variant.price | money -}}
+                    {%- endif -%}
+                    / {{ block.settings.unit_label | escape }}
+                  </span>
+                {%- endunless -%}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if summary_product.quantity_price_breaks_configured? and summary_variant.quantity_price_breaks.size > 0 -%}
+            <volume-pricing class="rr-pdp-summary__volume volume-pricing" data-section-id="{{ section.id }}" ref="volumePricing">
+              <p class="rr-pdp-summary__volume-title">{{ block.settings.volume_heading | escape }}</p>
+              <div class="rr-pdp-summary__table-wrap">
+                <table class="rr-pdp-summary__table">
+                  <caption class="visually-hidden">{{ block.settings.volume_heading | escape }}</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">{{ block.settings.quantity_column | escape }}</th>
+                      <th scope="col">{{ block.settings.savings_column | escape }}</th>
+                      <th scope="col">{{ block.settings.total_column | escape }}</th>
+                      <th scope="col">{{ block.settings.price_column | escape }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%- assign base_total = summary_variant.price | times: minimum_value -%}
+                    <tr>
+                      <td>{{ minimum_value | default: 1 }}</td>
+                      <td></td>
+                      <td>
+                        {%- if settings.currency_code_enabled_product_pages -%}{{ base_total | money_with_currency }}{%- else -%}{{ base_total | money }}{%- endif -%}
+                      </td>
+                      <td>
+                        {%- if settings.currency_code_enabled_product_pages -%}{{ summary_variant.price | money_with_currency }}{%- else -%}{{ summary_variant.price | money }}{%- endif -%}
+                        / {{ block.settings.unit_label | escape }}
+                      </td>
+                    </tr>
+                    {%- for price_break in summary_variant.quantity_price_breaks -%}
+                      {%- liquid
+                        assign tier_total = price_break.price | times: price_break.minimum_quantity
+                        assign savings_percent = 0
+                        if summary_variant.price > 0
+                          assign savings_percent = summary_variant.price | minus: price_break.price | times: 100.0 | divided_by: summary_variant.price | round
+                        endif
+                      -%}
+                      <tr>
+                        <td>{{ price_break.minimum_quantity }}</td>
+                        <td><span class="rr-pdp-summary__saving">-{{ savings_percent }}%</span></td>
+                        <td>
+                          {%- if settings.currency_code_enabled_product_pages -%}{{ tier_total | money_with_currency }}{%- else -%}{{ tier_total | money }}{%- endif -%}
+                        </td>
+                        <td>
+                          {%- if settings.currency_code_enabled_product_pages -%}{{ price_break.price | money_with_currency }}{%- else -%}{{ price_break.price | money }}{%- endif -%}
+                          / {{ block.settings.unit_label | escape }}
+                        </td>
+                      </tr>
+                    {%- endfor -%}
+                  </tbody>
+                </table>
+              </div>
+            </volume-pricing>
+          {%- endif -%}
+
+          <span class="product-form-text__error hidden" ref="addToCartTextError"></span>
+          <div class="rr-pdp-summary__actions">
+            {% render 'add-to-cart-button',
+              id: purchase_button_id,
+              class: 'rr-pdp-summary__button rr-pdp-summary__button--primary',
+              can_add_to_cart: can_add_to_cart,
+              show_icon: false,
+              product: summary_product,
+              add_to_cart_text: purchase_button_label,
+              data_testid: 'rr-b2b-add-to-cart'
+            %}
+            {%- if block.settings.sample_label != blank -%}
+              <a class="rr-pdp-summary__button rr-pdp-summary__button--secondary" href="{{ block.settings.sample_link | default: '/pages/contact' }}">
+                {{ block.settings.sample_label | escape }}
+              </a>
+            {%- endif -%}
+          </div>
         </div>
-        {%- if block.settings.unit_cost != blank -%}
-          <span class="rr-pdp-summary__cost">{{ block.settings.unit_cost | escape }}</span>
-        {%- endif -%}
+      {%- endform -%}
+    </product-form-component>
+  {%- else -%}
+    {%- if block.settings.show_quantity -%}
+      <div class="rr-pdp-summary__quantity">
+        <div>
+          <p>{{ block.settings.quantity_label | escape }}</p>
+          {%- if block.settings.quantity_note != blank -%}<span>{{ block.settings.quantity_note | escape }}</span>{%- endif -%}
+        </div>
+        <div class="rr-pdp-summary__quantity-controls">
+          <div class="rr-pdp-summary__stepper">
+            <button type="button" data-quantity-action="decrease" aria-label="Decrease quantity">-</button>
+            <input
+              type="number"
+              min="{{ block.settings.quantity_step }}"
+              step="{{ block.settings.quantity_step }}"
+              value="{{ block.settings.quantity_default }}"
+              aria-label="{{ block.settings.quantity_label | escape }}"
+              data-quote-quantity
+            >
+            <button type="button" data-quantity-action="increase" aria-label="Increase quantity">+</button>
+          </div>
+          {%- if block.settings.unit_cost != blank -%}
+            <span class="rr-pdp-summary__cost">{{ block.settings.unit_cost | escape }}</span>
+          {%- endif -%}
+        </div>
       </div>
+    {%- endif -%}
+
+    <div class="rr-pdp-summary__actions">
+      <a class="rr-pdp-summary__button rr-pdp-summary__button--primary" href="{{ quote_url | strip | escape }}" data-quote-link>
+        {{ block.settings.quote_label | escape }}
+        <span aria-hidden="true">→</span>
+      </a>
+      {%- if block.settings.sample_label != blank -%}
+        <a class="rr-pdp-summary__button rr-pdp-summary__button--secondary" href="{{ block.settings.sample_link | default: '/pages/contact' }}">
+          {{ block.settings.sample_label | escape }}
+        </a>
+      {%- endif -%}
     </div>
   {%- endif -%}
-
-  <div class="rr-pdp-summary__actions">
-    <a class="rr-pdp-summary__button rr-pdp-summary__button--primary" href="{{ quote_url | strip | escape }}" data-quote-link>
-      {{ block.settings.quote_label | escape }}
-      <span aria-hidden="true">→</span>
-    </a>
-    {%- if block.settings.sample_label != blank -%}
-      <a class="rr-pdp-summary__button rr-pdp-summary__button--secondary" href="{{ block.settings.sample_link | default: '/pages/contact' }}">
-        {{ block.settings.sample_label | escape }}
-      </a>
-    {%- endif -%}
-  </div>
 
   {%- if block.settings.show_facts -%}
     <dl class="rr-pdp-summary__facts">
       <div><dt>{{ block.settings.moq_label | escape }}</dt><dd>{{ moq_value | escape }}</dd></div>
+      {%- if is_b2b_purchase -%}<div><dt>{{ block.settings.increment_label | escape }}</dt><dd>{{ increment_value }}</dd></div>{%- endif -%}
       <div><dt>{{ block.settings.production_label | escape }}</dt><dd>{{ production_value | escape }}</dd></div>
       <div><dt>{{ block.settings.shipping_label | escape }}</dt><dd>{{ shipping_value | escape }}</dd></div>
       <div><dt>{{ block.settings.compliance_label | escape }}</dt><dd>{{ compliance_value | escape }}</dd></div>
@@ -161,6 +313,71 @@
     gap: 18px;
   }
 
+  .rr-pdp-summary__rules {
+    color: var(--rr-pdp-muted);
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 11px;
+    gap: 4px 14px;
+    margin-top: 8px;
+  }
+
+  .rr-pdp-summary__rules span {
+    display: inline;
+    margin: 0;
+  }
+
+  .rr-pdp-summary--b2b product-form-component,
+  .rr-pdp-summary--b2b .rr-pdp-summary__purchase {
+    display: block;
+    width: 100%;
+  }
+
+  .rr-pdp-summary--b2b .quantity-selector-wrapper {
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 18px;
+  }
+
+  .rr-pdp-summary--b2b .quantity-selector {
+    align-items: stretch;
+    border: 1px solid var(--rr-pdp-line);
+    display: grid;
+    grid-template-columns: 36px 58px 36px;
+    height: 42px;
+  }
+
+  .rr-pdp-summary--b2b .quantity-selector .button,
+  .rr-pdp-summary--b2b .quantity-selector input {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    color: var(--rr-pdp-ink);
+    height: 40px;
+    margin: 0;
+    min-height: 40px;
+    min-width: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .rr-pdp-summary--b2b .quantity-selector input {
+    border-inline: 1px solid var(--rr-pdp-line);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .rr-pdp-summary--b2b .quantity-selector .svg-wrapper {
+    height: 14px;
+    width: 14px;
+  }
+
+  .rr-pdp-summary--b2b .price-per-item {
+    color: var(--rr-pdp-muted);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
   .rr-pdp-summary__stepper {
     align-items: center;
     border: 1px solid var(--rr-pdp-line);
@@ -205,6 +422,11 @@
     margin-top: 22px;
   }
 
+  .rr-pdp-summary__actions add-to-cart-component {
+    display: block;
+    width: 100%;
+  }
+
   .rr-pdp-summary__button {
     align-items: center;
     border: 1px solid var(--rr-pdp-forest);
@@ -219,6 +441,7 @@
     text-decoration: none;
     text-transform: uppercase;
     transition: background-color 180ms ease, color 180ms ease;
+    width: 100%;
   }
 
   .rr-pdp-summary__button--primary {
@@ -239,6 +462,67 @@
 
   .rr-pdp-summary__button--secondary:hover {
     background: var(--rr-pdp-cream);
+  }
+
+  .rr-pdp-summary__volume {
+    display: block;
+    margin-top: 18px;
+    width: 100%;
+  }
+
+  .rr-pdp-summary__volume-title {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+
+  .rr-pdp-summary__table-wrap {
+    border: 1px solid var(--rr-pdp-line);
+    overflow-x: auto;
+  }
+
+  .rr-pdp-summary__table {
+    border-collapse: collapse;
+    font-size: 12px;
+    min-width: 520px;
+    width: 100%;
+  }
+
+  .rr-pdp-summary__table th,
+  .rr-pdp-summary__table td {
+    border-bottom: 1px solid var(--rr-pdp-line);
+    padding: 11px 14px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .rr-pdp-summary__table th {
+    font-weight: 600;
+  }
+
+  .rr-pdp-summary__table td:nth-child(3),
+  .rr-pdp-summary__table th:nth-child(3),
+  .rr-pdp-summary__table td:nth-child(4),
+  .rr-pdp-summary__table th:nth-child(4) {
+    text-align: right;
+  }
+
+  .rr-pdp-summary__table td:nth-child(2),
+  .rr-pdp-summary__table th:nth-child(2) {
+    text-align: center;
+  }
+
+  .rr-pdp-summary__table tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .rr-pdp-summary__saving {
+    background: var(--rr-pdp-cream);
+    border-radius: 99px;
+    color: var(--rr-pdp-forest);
+    display: inline-block;
+    font-weight: 600;
+    padding: 3px 8px;
   }
 
   .rr-pdp-summary__facts {
@@ -367,6 +651,17 @@
       gap: 4px;
     }
 
+    .rr-pdp-summary--b2b .quantity-selector-wrapper {
+      align-items: flex-end;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .rr-pdp-summary__table {
+      font-size: 11px;
+      min-width: 470px;
+    }
+
     .rr-pdp-summary__button {
       font-size: 10px;
     }
@@ -389,10 +684,21 @@
 
 {% schema %}
 {
-  "name": "RR PDP quote summary",
+  "name": "RR PDP summary",
   "tag": null,
   "settings": [
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "Mode",
+      "options": [
+        { "value": "quote", "label": "Custom product quote" },
+        { "value": "b2b", "label": "Ready-to-ship B2B purchase" }
+      ],
+      "default": "quote"
+    },
     { "type": "header", "content": "Actions" },
+    { "type": "text", "id": "purchase_label", "label": "Add to cart button", "default": "Add to cart", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
     { "type": "text", "id": "quote_label", "label": "Quote button", "default": "Request a quote" },
     { "type": "url", "id": "quote_link", "label": "Quote page", "info": "Defaults to /pages/contact and includes the product and quantity." },
     { "type": "text", "id": "sample_label", "label": "Secondary button", "default": "Order a sample kit" },
@@ -404,6 +710,14 @@
     { "type": "range", "id": "quantity_default", "label": "Default quantity", "min": 50, "max": 5000, "step": 50, "default": 500 },
     { "type": "range", "id": "quantity_step", "label": "Quantity step", "min": 10, "max": 500, "step": 10, "default": 50 },
     { "type": "text", "id": "unit_cost", "label": "Indicative cost note", "default": "Pricing confirmed after briefing" },
+    { "type": "text", "id": "increment_label", "label": "Increment label", "default": "Order increment" },
+    { "type": "text", "id": "unit_label", "label": "Unit label", "default": "unit", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
+    { "type": "header", "content": "Volume pricing", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
+    { "type": "text", "id": "volume_heading", "label": "Heading", "default": "Volume pricing", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
+    { "type": "text", "id": "quantity_column", "label": "Quantity column", "default": "Qty", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
+    { "type": "text", "id": "savings_column", "label": "Savings column", "default": "Save", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
+    { "type": "text", "id": "total_column", "label": "Total column", "default": "Total", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
+    { "type": "text", "id": "price_column", "label": "Price column", "default": "Price", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
     { "type": "header", "content": "Product facts" },
     { "type": "checkbox", "id": "show_facts", "label": "Show product facts", "default": true },
     { "type": "paragraph", "content": "Minimum order, production, and shipping are automatically populated from the current product's custom metafields. Fallback text is used only when a product value is empty." },
@@ -425,7 +739,7 @@
     { "type": "color", "id": "accent_hover", "label": "Accent hover", "default": "#24482d" }
   ],
   "presets": [
-    { "name": "RR PDP quote summary", "category": "Product" }
+    { "name": "RR PDP summary", "category": "Product" }
   ]
 }
 {% endschema %}
