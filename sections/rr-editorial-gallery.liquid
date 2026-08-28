@@ -134,19 +134,7 @@
           {{ grid_images }}
         </div>
 
-        {% render 'slideshow',
-          slides: carousel_slides,
-          slide_count: image_blocks.size,
-          controls: carousel_controls,
-          class: carousel_class,
-          ref: 'rrEditorialGallery',
-          show_arrows: carousel_show_arrows,
-          icon_style: section.settings.carousel_arrow_style | default: 'arrow',
-          icon_shape: 'none',
-          arrows_position: 'center',
-          infinite: false,
-          auto_hide_controls: true
-        %}
+        {% render 'slideshow', slides: carousel_slides, slide_count: image_blocks.size, controls: carousel_controls, class: carousel_class, ref: 'rrEditorialGallery', show_arrows: carousel_show_arrows, icon_style: section.settings.carousel_arrow_style, default: 'arrow', icon_shape: 'none', arrows_position: 'center', infinite: false, auto_hide_controls: true %}
       {%- else -%}
         <div class="rr-editorial__grid rr-editorial__grid--empty">
           <figure class="rr-editorial__figure">
@@ -743,3 +731,30 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'slideshow',
+              slides: carousel_slides,
+              slide_count: image_blocks.size,
+              controls: carousel_controls,
+              class: carousel_class,
+              ref: 'rrEditorialGallery',
+              show_arrows: carousel_show_arrows,
+              icon_style: section.settings.carousel_arrow_style | default: 'arrow',
+              icon_shape: 'none',
+              arrows_position: 'center',
+              infinite: false,
+              auto_hide_controls: true
+            %}
+  to: "{% render 'slideshow', slides: carousel_slides, slide_count: image_blocks.size,
+    controls: carousel_controls, class: carousel_class, ref: 'rrEditorialGallery',
+    show_arrows: carousel_show_arrows, icon_style: section.settings.carousel_arrow_style,
+    default: 'arrow', icon_shape: 'none', arrows_position: 'center', infinite: false,
+    auto_hide_controls: true %}"
+  position: 5410..5764
+{% endcomment %}
