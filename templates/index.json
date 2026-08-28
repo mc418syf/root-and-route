@@ -42,23 +42,13 @@
             "style": "round",
             "show_arrow": false
           }
-        },
-        "button_dfH4wt": {
-          "type": "button",
-          "settings": {
-            "label": "START AN INQUIRY",
-            "link": "",
-            "style": "text",
-            "show_arrow": true
-          }
         }
       },
       "block_order": [
         "image_main",
         "heading_main",
         "description_main",
-        "button_primary",
-        "button_dfH4wt"
+        "button_primary"
       ],
       "custom_css": [
         ".rr-hero__description {font-weight: 400;}"
