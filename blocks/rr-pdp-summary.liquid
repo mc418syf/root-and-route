@@ -13,6 +13,14 @@
 
   assign minimum_value = summary_variant.quantity_rule.min | default: 1
   assign increment_value = summary_variant.quantity_rule.increment | default: 1
+  assign initial_price_quantity = cart | item_count_for_variant: summary_variant.id | plus: minimum_value
+  assign initial_unit_price = summary_variant.price
+  for price_break in summary_variant.quantity_price_breaks reversed
+    if initial_price_quantity >= price_break.minimum_quantity
+      assign initial_unit_price = price_break.price
+      break
+    endif
+  endfor
   if is_b2b_purchase
     assign moq_value = minimum_value
   endif
@@ -51,6 +59,10 @@
   {% render 'fly-to-cart-styles' %}
 {%- endif -%}
 
+{%- capture rr_price_breaks_json -%}
+  [{%- for price_break in summary_variant.quantity_price_breaks -%}{%- unless forloop.first -%},{%- endunless -%}{%- if settings.currency_code_enabled_product_pages -%}{"quantity":{{ price_break.minimum_quantity }},"price":{{ price_break.price | money_with_currency | json }}}{%- else -%}{"quantity":{{ price_break.minimum_quantity }},"price":{{ price_break.price | money | json }}}{%- endif -%}{%- endfor -%}]
+{%- endcapture -%}
+
 <rr-pdp-summary
   class="rr-pdp-summary{% if is_b2b_purchase %} rr-pdp-summary--b2b{% endif %}"
   style="
@@ -82,7 +94,8 @@
           {%- if block.settings.show_quantity -%}
             <div class="rr-pdp-summary__quantity">
               <div class="rr-pdp-summary__quantity-copy">
-                <p>{{ block.settings.quantity_label | escape }}</p>
+                <p class="rr-pdp-summary__quantity-heading">{{ block.settings.quantity_label | escape }}</p>
+                {% render 'quantity-selector', product: summary_product, show_price_per_item: false %}
                 {%- if block.settings.quantity_note != blank -%}<span>{{ block.settings.quantity_note | escape }}</span>{%- endif -%}
                 <div class="rr-pdp-summary__rules" ref="quantityRules">
                   <span>{{ block.settings.moq_label | escape }} {{ minimum_value }}</span>
@@ -92,18 +105,30 @@
                   {%- endif -%}
                 </div>
               </div>
-              <div class="rr-pdp-summary__quantity-controls">
-                {% render 'quantity-selector', product: summary_product %}
-                {%- unless summary_product.quantity_price_breaks_configured? and summary_variant.quantity_price_breaks.size > 0 -%}
-                  <span class="rr-pdp-summary__cost">
+              <div class="rr-pdp-summary__unit-cost">
+                <p class="rr-pdp-summary__quantity-heading">{{ block.settings.unit_cost_label | escape }}</p>
+                <price-per-item
+                  class="rr-pdp-summary__unit-price"
+                  data-variant-id="{{ summary_variant.id }}"
+                  data-variant-price="{%- if settings.currency_code_enabled_product_pages -%}{{ summary_variant.price | money_with_currency | escape }}{%- else -%}{{ summary_variant.price | money | escape }}{%- endif -%}"
+                  data-min-quantity="{{ minimum_value }}"
+                  data-price-breaks="{{ rr_price_breaks_json | strip | escape }}"
+                  data-at-text="{{ 'content.price_at' | t | escape }}"
+                  data-each-text="{{ 'content.each_abbreviation' | t | escape }}"
+                >
+                  <span class="rr-pdp-summary__unit-cost-value" ref="pricePerItemValue">
                     {%- if settings.currency_code_enabled_product_pages -%}
-                      {{- summary_variant.price | money_with_currency -}}
+                      {{- initial_unit_price | money_with_currency -}}
                     {%- else -%}
-                      {{- summary_variant.price | money -}}
+                      {{- initial_unit_price | money -}}
                     {%- endif -%}
-                    / {{ block.settings.unit_label | escape }}
                   </span>
-                {%- endunless -%}
+                  <span class="rr-pdp-summary__unit-cost-note">
+                    Per {{ block.settings.unit_label | escape }} at
+                    <span ref="pricePerItemQuantity">{{ initial_price_quantity }}</span>
+                    units{%- if block.settings.unit_cost_note != blank -%}, {{ block.settings.unit_cost_note | escape }}{%- endif -%}
+                  </span>
+                </price-per-item>
               </div>
             </div>
           {%- endif -%}
@@ -333,18 +358,37 @@
     width: 100%;
   }
 
+  .rr-pdp-summary--b2b .rr-pdp-summary__quantity {
+    align-items: start;
+    display: grid;
+    gap: 32px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rr-pdp-summary--b2b .rr-pdp-summary__quantity-heading {
+    color: var(--rr-pdp-muted);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+
   .rr-pdp-summary--b2b .quantity-selector-wrapper {
-    align-items: center;
+    align-items: stretch;
     flex-wrap: nowrap;
-    gap: 18px;
+    gap: 0;
+    max-width: 360px;
+    width: 100%;
   }
 
   .rr-pdp-summary--b2b .quantity-selector {
     align-items: stretch;
     border: 1px solid var(--rr-pdp-line);
     display: grid;
-    grid-template-columns: 36px 58px 36px;
+    grid-template-columns: 48px minmax(90px, 1fr) 48px;
     height: 42px;
+    width: 100%;
   }
 
   .rr-pdp-summary--b2b .quantity-selector .button,
@@ -372,10 +416,37 @@
     width: 14px;
   }
 
-  .rr-pdp-summary--b2b .price-per-item {
+  .rr-pdp-summary--b2b .rr-pdp-summary__quantity-copy > span {
+    color: var(--rr-pdp-muted);
+    display: block;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  .rr-pdp-summary__unit-price,
+  .rr-pdp-summary__unit-cost-value,
+  .rr-pdp-summary__unit-cost-note {
+    display: block;
+  }
+
+  .rr-pdp-summary__unit-cost-value {
+    color: var(--rr-pdp-ink);
+    font-family: var(--font-heading--family);
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .rr-pdp-summary__unit-cost-note {
     color: var(--rr-pdp-muted);
     font-size: 12px;
-    white-space: nowrap;
+    line-height: 1.5;
+    margin-top: 10px;
+    max-width: 280px;
+  }
+
+  .rr-pdp-summary__unit-cost-note [ref='pricePerItemQuantity'] {
+    display: inline;
   }
 
   .rr-pdp-summary__stepper {
@@ -648,10 +719,15 @@
       gap: 4px;
     }
 
+    .rr-pdp-summary--b2b .rr-pdp-summary__quantity {
+      gap: 24px;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
     .rr-pdp-summary--b2b .quantity-selector-wrapper {
-      align-items: flex-end;
-      flex-direction: column;
-      gap: 4px;
+      align-items: stretch;
+      flex-direction: row;
+      gap: 0;
     }
 
     .rr-pdp-summary__table {
@@ -709,6 +785,8 @@
     { "type": "text", "id": "unit_cost", "label": "Indicative cost note", "default": "Pricing confirmed after briefing" },
     { "type": "text", "id": "increment_label", "label": "Increment label", "default": "Order increment" },
     { "type": "text", "id": "unit_label", "label": "Unit label", "default": "unit", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
+    { "type": "text", "id": "unit_cost_label", "label": "Unit cost heading", "default": "Indicative unit cost", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
+    { "type": "text", "id": "unit_cost_note", "label": "Unit cost note", "default": "before print setup", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
     { "type": "header", "content": "Volume pricing", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
     { "type": "text", "id": "volume_heading", "label": "Heading", "default": "Volume pricing", "visible_if": "{{ block.settings.mode == 'b2b' }}" },
     { "type": "text", "id": "quantity_column", "label": "Quantity column", "default": "Qty", "visible_if": "{{ block.settings.mode == 'b2b' }}" },

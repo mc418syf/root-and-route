@@ -326,6 +326,8 @@
                 "unit_cost": "Pricing confirmed after briefing",
                 "increment_label": "Order increment",
                 "unit_label": "unit",
+                "unit_cost_label": "Indicative unit cost",
+                "unit_cost_note": "before print setup",
                 "volume_heading": "Volume pricing",
                 "quantity_column": "Qty",
                 "savings_column": "Save",

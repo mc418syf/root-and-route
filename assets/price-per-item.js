@@ -12,6 +12,8 @@ import { StandardEvents } from '@shopify/events';
  *
  * @typedef {Object} PricePerItemRefs
  * @property {HTMLElement} [pricePerItemText] - The text element displaying the price
+ * @property {HTMLElement} [pricePerItemValue] - A custom-layout element displaying only the formatted price
+ * @property {HTMLElement} [pricePerItemQuantity] - A custom-layout element displaying the active quantity
  *
  * @extends {Component<PricePerItemRefs>}
  */
@@ -115,7 +117,8 @@ class PricePerItemComponent extends Component {
    * Updates the price display based on current quantity
    */
   updatePriceDisplay() {
-    if (!this.#priceBreaks.length || !this.refs.pricePerItemText) return;
+    const { pricePerItemText, pricePerItemValue, pricePerItemQuantity } = this.refs;
+    if (!this.#priceBreaks.length || (!pricePerItemText && !pricePerItemValue)) return;
 
     const quantity = this.#getCurrentQuantity();
 
@@ -124,7 +127,14 @@ class PricePerItemComponent extends Component {
       this.#priceBreaks.find((pb) => quantity >= pb.quantity) ?? this.#priceBreaks[this.#priceBreaks.length - 1];
 
     if (priceBreak) {
-      this.refs.pricePerItemText.innerHTML = `${this.dataset.atText} ${priceBreak.price}/${this.dataset.eachText}`;
+      if (pricePerItemValue) {
+        pricePerItemValue.textContent = priceBreak.price;
+        if (pricePerItemQuantity) {
+          pricePerItemQuantity.textContent = new Intl.NumberFormat(document.documentElement.lang).format(quantity);
+        }
+      } else if (pricePerItemText) {
+        pricePerItemText.innerHTML = `${this.dataset.atText} ${priceBreak.price}/${this.dataset.eachText}`;
+      }
     }
   }
 

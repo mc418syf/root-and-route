@@ -11,6 +11,7 @@
   @param {number} [min] - override the minimum quantity (e.g., 0 for quick order list)
   @param {block} [block] - The block object, used for Shopify editor attributes.
   @param {string} [wrapper_class] - Extra class for the wrapper, used to scope block-level CSS variable overrides so surface-level styles (e.g. quick-add modal) can override them.
+  @param {boolean} [show_price_per_item] - Whether to show the built-in volume price beside the selector. Defaults to true.
 {%- enddoc -%}
 
 {% liquid
@@ -109,7 +110,7 @@
       endif
     -%}
 
-    {%- if has_volume_pricing -%}
+    {%- if has_volume_pricing and show_price_per_item != false -%}
       {%- # Case: Volume pricing exists - show "at price / ea" -%}
       {%- liquid
         # Determine if currency code should be shown on product pages
