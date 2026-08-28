@@ -164,7 +164,7 @@
             "eyebrow": "Design Service",
             "title": "Custom Made",
             "text": "",
-            "link": "shopify://collections/everyday-luxury-packaging",
+            "link": "shopify://collections/advent-countdown-boxes",
             "show_arrow": true
           }
         },
@@ -194,8 +194,8 @@
         "muted_text": "#8a8a82",
         "show_top_border": false,
         "columns_desktop": "2",
-        "padding_top": 40,
-        "padding_bottom": 60,
+        "padding_top": 104,
+        "padding_bottom": 96,
         "side_padding": 42,
         "image_height": 370,
         "image_height_mobile": 330
