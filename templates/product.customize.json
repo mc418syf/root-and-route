@@ -313,6 +313,8 @@
             "rr_pdp_summary": {
               "type": "rr-pdp-summary",
               "settings": {
+                "mode": "quote",
+                "purchase_label": "Add to cart",
                 "quote_label": "Request a quote",
                 "quote_link": "shopify://pages/contact",
                 "sample_label": "Order a sample kit",
@@ -323,6 +325,15 @@
                 "quantity_default": 50,
                 "quantity_step": 50,
                 "unit_cost": "Pricing confirmed after briefing",
+                "increment_label": "Order increment",
+                "unit_label": "unit",
+                "unit_cost_label": "Indicative unit cost",
+                "unit_cost_note": "before print setup",
+                "volume_heading": "Volume pricing",
+                "quantity_column": "Qty",
+                "savings_column": "Save",
+                "total_column": "Total",
+                "price_column": "Price",
                 "show_facts": true,
                 "moq_label": "Minimum order",
                 "moq_fallback": "500 units",
@@ -727,6 +738,64 @@
         "padding_top": 40,
         "padding_bottom": 40
       }
+    },
+    "rr_faq_EeXmGW": {
+      "type": "rr-faq",
+      "blocks": {
+        "question_yAXYMN": {
+          "type": "question",
+          "settings": {
+            "question": "Can you design packaging around my product?",
+            "answer": "<p>Yes. We can develop the box structure and insert around your product dimensions, packed weight, and presentation requirements.</p>"
+          }
+        },
+        "question_hwayD7": {
+          "type": "question",
+          "settings": {
+            "question": "What information do you need to start a project?",
+            "answer": "<p>To get started, send us your <strong>product dimensions, target quantity, packaging reference or artwork, preferred materials, and delivery destination</strong>. The more details you provide, the faster we can recommend the right structure and prepare a quotation.</p>"
+          }
+        },
+        "question_KfgEe6": {
+          "type": "question",
+          "settings": {
+            "question": "How long does custom packaging production take?",
+            "answer": "<p>Standard production normally takes 20–25 days after the sample, artwork and order details are approved.</p>"
+          }
+        },
+        "question_DBxHAa": {
+          "type": "question",
+          "settings": {
+            "question": "How long does shipping usually take?",
+            "answer": "<p>Sea transit is typically around <strong>25–30 days to the United States</strong> and approximately <strong>50 days to Europe or the Middle East</strong>. Final delivery times depend on the destination, route, customs clearance, and shipping method.</p>"
+          }
+        },
+        "question_7tV3Kc": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer samples before production?",
+            "answer": "<p>Yes. <strong>Ready-to-ship samples are free</strong>, with shipping paid by the customer. For custom packaging, a <strong>US$100–200 sample fee</strong> typically applies, depending on the project. Custom samples are usually ready within <strong>5–7 business days</strong> after confirmation.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_yAXYMN",
+        "question_hwayD7",
+        "question_KfgEe6",
+        "question_DBxHAa",
+        "question_7tV3Kc"
+      ],
+      "name": "RR Q&A accordion",
+      "settings": {
+        "background": "#fafaf8",
+        "padding": 120,
+        "eyebrow": "FAQ",
+        "heading": "Before We Begin",
+        "text": "<p>A clear guide to custom packaging, from sampling to production.</p>",
+        "open_first": true,
+        "cta_label": "ASK A DIFFERENT QUESTION →",
+        "cta_link": ""
+      }
     }
   },
   "order": [
@@ -737,6 +806,7 @@
     "rr_pdp_audiences",
     "rr_pdp_cta",
     "17872726377a43df85",
-    "rr_contact_quote_WtYLhX"
+    "rr_contact_quote_WtYLhX",
+    "rr_faq_EeXmGW"
   ]
 }
