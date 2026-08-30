@@ -29,7 +29,10 @@
           }
         }
       },
-      "block_order": ["button_steps", "button_sample"],
+      "block_order": [
+        "button_steps",
+        "button_sample"
+      ],
       "settings": {
         "eyebrow": "Custom Packaging",
         "heading": "Our production process",
@@ -138,9 +141,18 @@
           }
         }
       },
-      "block_order": ["stage_01", "stage_02", "stage_03", "stage_04", "stage_05", "stage_06", "stage_07", "stage_08"],
+      "block_order": [
+        "stage_01",
+        "stage_02",
+        "stage_03",
+        "stage_04",
+        "stage_05",
+        "stage_06",
+        "stage_07",
+        "stage_08"
+      ],
       "settings": {
-        "show_treatment_control": true,
+        "show_treatment_control": false,
         "treatment_label": "Image treatment",
         "ink_label": "Ink drawings",
         "photo_label": "Your photos",
@@ -188,7 +200,10 @@
           }
         }
       },
-      "block_order": ["printing_cmyk", "printing_pantone"],
+      "block_order": [
+        "printing_cmyk",
+        "printing_pantone"
+      ],
       "settings": {
         "max_width": 1360,
         "padding_top": 48,
@@ -205,16 +220,73 @@
     "process_materials": {
       "type": "rr-process-materials",
       "blocks": {
-        "paper_01": { "type": "paper", "settings": { "image_alt": "Coated paper", "label": "Coated paper" } },
-        "paper_02": { "type": "paper", "settings": { "image_alt": "Corrugated paper", "label": "Corrugated paper" } },
-        "paper_03": { "type": "paper", "settings": { "image_alt": "Imported white card", "label": "Imported white card" } },
-        "paper_04": { "type": "paper", "settings": { "image_alt": "Black card", "label": "Black card" } },
-        "paper_05": { "type": "paper", "settings": { "image_alt": "Pearlescent paper", "label": "Pearlescent paper" } },
-        "paper_06": { "type": "paper", "settings": { "image_alt": "Kraft paper", "label": "Kraft paper" } },
-        "paper_07": { "type": "paper", "settings": { "image_alt": "Gold and silver cardstock", "label": "Gold / silver cardstock" } },
-        "paper_08": { "type": "paper", "settings": { "image_alt": "Specialty paper", "label": "Specialty paper" } }
+        "paper_01": {
+          "type": "paper",
+          "settings": {
+            "image_alt": "Coated paper",
+            "label": "Coated paper"
+          }
+        },
+        "paper_02": {
+          "type": "paper",
+          "settings": {
+            "image_alt": "Corrugated paper",
+            "label": "Corrugated paper"
+          }
+        },
+        "paper_03": {
+          "type": "paper",
+          "settings": {
+            "image_alt": "Imported white card",
+            "label": "Imported white card"
+          }
+        },
+        "paper_04": {
+          "type": "paper",
+          "settings": {
+            "image_alt": "Black card",
+            "label": "Black card"
+          }
+        },
+        "paper_05": {
+          "type": "paper",
+          "settings": {
+            "image_alt": "Pearlescent paper",
+            "label": "Pearlescent paper"
+          }
+        },
+        "paper_06": {
+          "type": "paper",
+          "settings": {
+            "image_alt": "Kraft paper",
+            "label": "Kraft paper"
+          }
+        },
+        "paper_07": {
+          "type": "paper",
+          "settings": {
+            "image_alt": "Gold and silver cardstock",
+            "label": "Gold / silver cardstock"
+          }
+        },
+        "paper_08": {
+          "type": "paper",
+          "settings": {
+            "image_alt": "Specialty paper",
+            "label": "Specialty paper"
+          }
+        }
       },
-      "block_order": ["paper_01", "paper_02", "paper_03", "paper_04", "paper_05", "paper_06", "paper_07", "paper_08"],
+      "block_order": [
+        "paper_01",
+        "paper_02",
+        "paper_03",
+        "paper_04",
+        "paper_05",
+        "paper_06",
+        "paper_07",
+        "paper_08"
+      ],
       "settings": {
         "eyebrow": "Materials",
         "heading": "Paper type",
@@ -234,14 +306,63 @@
     "process_finishes": {
       "type": "rr-process-finishes",
       "blocks": {
-        "finish_01": { "type": "finish", "settings": { "image_alt": "4C printing", "label": "4C printing", "note": "Full-colour artwork, edge to edge" } },
-        "finish_02": { "type": "finish", "settings": { "image_alt": "Gold stamping", "label": "Gold stamping", "note": "Warm metallic foil" } },
-        "finish_03": { "type": "finish", "settings": { "image_alt": "Silver stamping", "label": "Silver stamping", "note": "Cool metallic foil" } },
-        "finish_04": { "type": "finish", "settings": { "image_alt": "Spot UV", "label": "Spot UV", "note": "Selective high gloss" } },
-        "finish_05": { "type": "finish", "settings": { "image_alt": "Embossing", "label": "Embossing", "note": "Raised, tactile detail" } },
-        "finish_06": { "type": "finish", "settings": { "image_alt": "Debossing", "label": "Debossing", "note": "Recessed, quiet detail" } }
+        "finish_01": {
+          "type": "finish",
+          "settings": {
+            "image_alt": "4C printing",
+            "label": "4C printing",
+            "note": "Full-colour artwork, edge to edge"
+          }
+        },
+        "finish_02": {
+          "type": "finish",
+          "settings": {
+            "image_alt": "Gold stamping",
+            "label": "Gold stamping",
+            "note": "Warm metallic foil"
+          }
+        },
+        "finish_03": {
+          "type": "finish",
+          "settings": {
+            "image_alt": "Silver stamping",
+            "label": "Silver stamping",
+            "note": "Cool metallic foil"
+          }
+        },
+        "finish_04": {
+          "type": "finish",
+          "settings": {
+            "image_alt": "Spot UV",
+            "label": "Spot UV",
+            "note": "Selective high gloss"
+          }
+        },
+        "finish_05": {
+          "type": "finish",
+          "settings": {
+            "image_alt": "Embossing",
+            "label": "Embossing",
+            "note": "Raised, tactile detail"
+          }
+        },
+        "finish_06": {
+          "type": "finish",
+          "settings": {
+            "image_alt": "Debossing",
+            "label": "Debossing",
+            "note": "Recessed, quiet detail"
+          }
+        }
       },
-      "block_order": ["finish_01", "finish_02", "finish_03", "finish_04", "finish_05", "finish_06"],
+      "block_order": [
+        "finish_01",
+        "finish_02",
+        "finish_03",
+        "finish_04",
+        "finish_05",
+        "finish_06"
+      ],
       "settings": {
         "eyebrow": "Finishing",
         "heading": "Recommended craftwork",
