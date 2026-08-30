@@ -1,5 +1,500 @@
-<section class="rr-faq" id="questions" style="background:{{ section.settings.background }};padding:{{ section.settings.padding }}px 40px"><div class="rr-wrap rr-faq__layout"><div class="rr-reveal"><div class="rr-eyebrow">{{ section.settings.eyebrow }}</div><h2 class="rr-heading">{{ section.settings.heading }}</h2><div class="rr-body">{{ section.settings.text }}</div>{%- if section.settings.cta_label != blank -%}<a class="rr-link" href="{{ section.settings.cta_link }}" style="display:inline-block;margin-top:30px">{{ section.settings.cta_label }}</a>{%- endif -%}</div><div class="rr-faq__items rr-reveal">{%- for block in section.blocks -%}<details class="rr-faq__item"{% if forloop.first and section.settings.open_first %} open{% endif %} {{ block.shopify_attributes }}><summary><span>{{ block.settings.question }}</span><span class="rr-faq__icon" aria-hidden="true"></span></summary><div class="rr-faq__answer">{{ block.settings.answer }}</div></details>{%- endfor -%}</div></div></section>
-<style>.rr-faq{border-top:1px solid var(--line)}.rr-faq__layout{display:grid;gap:clamp(60px,8vw,120px);grid-template-columns:.75fr 1.25fr}.rr-faq__items{border-top:1px solid var(--line)}.rr-faq__item{border-bottom:1px solid var(--line)}.rr-faq__item summary{align-items:center;color:var(--ink);cursor:pointer;display:flex;font:500 20px/1.4 Comfortaa,sans-serif;gap:24px;justify-content:space-between;list-style:none;padding:28px 0}.rr-faq__item summary::-webkit-details-marker{display:none}.rr-faq__icon{height:18px;position:relative;flex:0 0 18px}.rr-faq__icon:before,.rr-faq__icon:after{background:var(--forest);content:"";height:1.5px;left:0;position:absolute;top:8px;width:18px}.rr-faq__icon:after{transform:rotate(90deg);transition:transform .25s ease}.rr-faq__item[open] .rr-faq__icon:after{transform:rotate(0)}.rr-faq__answer{color:var(--muted);font:300 16px/1.7 Jost,sans-serif;max-width:720px;padding:0 48px 30px 0}.rr-faq__answer p{margin:0 0 14px}@media(max-width:800px){.rr-faq{padding-left:28px!important;padding-right:28px!important}.rr-faq__layout{grid-template-columns:1fr}}@media(max-width:600px){.rr-faq{padding:72px 20px!important}.rr-faq__item summary{font-size:17px;padding:22px 0}}</style>
+<section
+  id="quote"
+  class="rr-faq-quote{% if section.settings.show_quote_card %} rr-faq-quote--with-card{% endif %}"
+  style="
+    --rr-faq-background: {{ section.settings.background }};
+    --rr-faq-line: {{ section.settings.line_color }};
+    --rr-faq-ink: {{ section.settings.text_color }};
+    --rr-faq-muted: {{ section.settings.muted_color }};
+    --rr-faq-accent: {{ section.settings.accent_color }};
+    --rr-faq-card: {{ section.settings.quote_background }};
+    --rr-faq-card-text: {{ section.settings.quote_text_color }};
+    --rr-faq-card-muted: {{ section.settings.quote_muted_color }};
+    --rr-faq-card-accent: {{ section.settings.quote_accent_color }};
+    --rr-faq-button: {{ section.settings.quote_button_background }};
+    --rr-faq-button-text: {{ section.settings.quote_button_text }};
+    --rr-faq-max-width: {{ section.settings.max_width }}px;
+    --rr-faq-top: {{ section.settings.padding }}px;
+    --rr-faq-bottom: {{ section.settings.padding_bottom }}px;
+    --rr-faq-side: {{ section.settings.side_padding }}px;
+  "
+  aria-labelledby="RRFAQHeading-{{ section.id }}"
+>
+  <div class="rr-faq-quote__inner">
+    <div class="rr-faq-quote__questions">
+      {%- if section.settings.show_intro and section.settings.eyebrow != blank -%}
+        <p class="rr-faq-quote__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+
+      <h2 id="RRFAQHeading-{{ section.id }}" class="rr-faq-quote__title">
+        {{ section.settings.heading | escape }}
+      </h2>
+
+      {%- if section.settings.show_intro and section.settings.text != blank -%}
+        <div class="rr-faq-quote__intro">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      <div class="rr-faq-quote__list">
+        {%- for block in section.blocks -%}
+          <details
+            class="rr-faq-quote__item"
+            name="rr-faq-{{ section.id }}"
+            {% if forloop.first and section.settings.open_first %}open{% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <summary>
+              <span>{{ block.settings.question | escape }}</span>
+              <span class="rr-faq-quote__sign" aria-hidden="true"></span>
+            </summary>
+            <div class="rr-faq-quote__answer">{{ block.settings.answer }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.cta_label != blank -%}
+        <a class="rr-faq-quote__more" href="{{ section.settings.cta_link | default: '/pages/contact' }}">
+          {{ section.settings.cta_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_quote_card -%}
+      <aside class="rr-faq-quote__card" aria-labelledby="RRFAQQuoteHeading-{{ section.id }}">
+        {%- if section.settings.quote_eyebrow != blank -%}
+          <p class="rr-faq-quote__card-eyebrow">{{ section.settings.quote_eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 id="RRFAQQuoteHeading-{{ section.id }}" class="rr-faq-quote__card-title">
+          {{ section.settings.quote_heading | escape }}
+        </h2>
+        {%- if section.settings.quote_body != blank -%}
+          <div class="rr-faq-quote__card-body">{{ section.settings.quote_body }}</div>
+        {%- endif -%}
+
+        <div class="rr-faq-quote__actions">
+          {%- if section.settings.quote_primary_label != blank -%}
+            <a class="rr-faq-quote__button" href="{{ section.settings.quote_primary_link | default: '/pages/contact' }}">
+              {{ section.settings.quote_primary_label | escape }}
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.quote_secondary_label != blank -%}
+            <a class="rr-faq-quote__quiet-link" href="{{ section.settings.quote_secondary_link | default: '/pages/contact' }}">
+              {{ section.settings.quote_secondary_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.fact_1_label != blank or section.settings.fact_2_label != blank -%}
+          <dl class="rr-faq-quote__facts">
+            {%- if section.settings.fact_1_label != blank -%}
+              <div>
+                <dt>{{ section.settings.fact_1_label | escape }}</dt>
+                <dd>{{ section.settings.fact_1_value | escape }}</dd>
+              </div>
+            {%- endif -%}
+            {%- if section.settings.fact_2_label != blank -%}
+              <div>
+                <dt>{{ section.settings.fact_2_label | escape }}</dt>
+                <dd>{{ section.settings.fact_2_value | escape }}</dd>
+              </div>
+            {%- endif -%}
+          </dl>
+        {%- endif -%}
+      </aside>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .rr-faq-quote {
+    background: var(--rr-faq-background);
+    border-top: 1px solid var(--rr-faq-line);
+    color: var(--rr-faq-ink);
+    font-family: var(--font-body--family, Jost, sans-serif);
+  }
+
+  .rr-faq-quote * {
+    box-sizing: border-box;
+  }
+
+  .rr-faq-quote__inner {
+    display: grid;
+    gap: 64px;
+    grid-template-columns: minmax(0, 1fr);
+    margin: 0 auto;
+    max-width: var(--rr-faq-max-width);
+    padding: var(--rr-faq-top) var(--rr-faq-side) var(--rr-faq-bottom);
+  }
+
+  .rr-faq-quote--with-card .rr-faq-quote__inner {
+    grid-template-columns: minmax(420px, 1.4fr) minmax(320px, 1fr);
+  }
+
+  .rr-faq-quote__eyebrow {
+    color: var(--rr-faq-accent);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.3;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+
+  .rr-faq-quote__title {
+    color: var(--rr-faq-accent);
+    font-family: var(--font-heading--family, Comfortaa, sans-serif);
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .rr-faq-quote__intro {
+    color: var(--rr-faq-muted);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-top: 14px;
+    max-width: 62ch;
+  }
+
+  .rr-faq-quote__intro p,
+  .rr-faq-quote__answer p,
+  .rr-faq-quote__card-body p {
+    margin: 0;
+  }
+
+  .rr-faq-quote__intro p + p,
+  .rr-faq-quote__answer p + p,
+  .rr-faq-quote__card-body p + p {
+    margin-top: 12px;
+  }
+
+  .rr-faq-quote__list {
+    border-top: 1px solid var(--rr-faq-line);
+    margin-top: 22px;
+  }
+
+  .rr-faq-quote__item {
+    border-bottom: 1px solid var(--rr-faq-line);
+  }
+
+  .rr-faq-quote__item > summary {
+    align-items: center;
+    color: var(--rr-faq-ink);
+    cursor: pointer;
+    display: flex;
+    font-family: var(--font-heading--family, Comfortaa, sans-serif);
+    font-size: 18px;
+    font-weight: 400;
+    gap: 20px;
+    justify-content: space-between;
+    letter-spacing: 0;
+    line-height: 1.35;
+    list-style: none;
+    padding: 15px 0;
+    transition: color 180ms ease;
+  }
+
+  .rr-faq-quote__item > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .rr-faq-quote__item > summary:hover {
+    color: var(--rr-faq-accent);
+  }
+
+  .rr-faq-quote__item > summary:focus-visible,
+  .rr-faq-quote__button:focus-visible,
+  .rr-faq-quote__more:focus-visible,
+  .rr-faq-quote__quiet-link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  .rr-faq-quote__sign {
+    color: var(--rr-faq-accent);
+    flex: 0 0 15px;
+    height: 15px;
+    position: relative;
+    width: 15px;
+  }
+
+  .rr-faq-quote__sign::before,
+  .rr-faq-quote__sign::after {
+    background: currentColor;
+    content: '';
+    position: absolute;
+  }
+
+  .rr-faq-quote__sign::before {
+    height: 1.5px;
+    left: 0;
+    top: 7px;
+    width: 15px;
+  }
+
+  .rr-faq-quote__sign::after {
+    height: 15px;
+    left: 7px;
+    top: 0;
+    transition: transform 180ms ease;
+    width: 1.5px;
+  }
+
+  .rr-faq-quote__item[open] .rr-faq-quote__sign::after {
+    transform: scaleY(0);
+  }
+
+  .rr-faq-quote__answer {
+    color: var(--rr-faq-muted);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 62ch;
+    padding: 0 44px 18px 0;
+  }
+
+  .rr-faq-quote__more {
+    color: var(--rr-faq-accent);
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin-top: 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .rr-faq-quote__more:hover {
+    color: #24482d;
+  }
+
+  .rr-faq-quote__card {
+    align-self: start;
+    background: var(--rr-faq-card);
+    border-radius: 3px;
+    color: var(--rr-faq-card-text);
+    padding: 38px 36px 34px;
+  }
+
+  .rr-faq-quote__card-eyebrow {
+    color: var(--rr-faq-card-accent);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .rr-faq-quote__card-title {
+    color: var(--rr-faq-card-text);
+    font-family: var(--font-heading--family, Comfortaa, sans-serif);
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.14;
+    margin: 14px 0 0;
+    max-width: 20ch;
+  }
+
+  .rr-faq-quote__card-body {
+    color: var(--rr-faq-card-muted);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-top: 12px;
+    max-width: 40ch;
+  }
+
+  .rr-faq-quote__actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 26px;
+  }
+
+  .rr-faq-quote__button {
+    align-items: center;
+    background: var(--rr-faq-button);
+    border: 1px solid var(--rr-faq-button);
+    border-radius: 2px;
+    color: var(--rr-faq-button-text);
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 500;
+    gap: 12px;
+    justify-content: center;
+    letter-spacing: 0;
+    line-height: 1.2;
+    min-height: 48px;
+    padding: 15px 24px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 180ms ease, border-color 180ms ease;
+  }
+
+  .rr-faq-quote__button:hover {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: var(--rr-faq-button-text);
+  }
+
+  .rr-faq-quote__quiet-link {
+    color: var(--rr-faq-card-muted);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.2;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .rr-faq-quote__quiet-link:hover {
+    color: var(--rr-faq-card-text);
+  }
+
+  .rr-faq-quote__facts {
+    border-top: 1px solid color-mix(in srgb, var(--rr-faq-card-text) 20%, transparent);
+    color: var(--rr-faq-card-muted);
+    display: grid;
+    font-size: 14px;
+    font-weight: 300;
+    gap: 16px 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    line-height: 1.5;
+    margin: 28px 0 0;
+    padding-top: 20px;
+  }
+
+  .rr-faq-quote__facts dt {
+    color: var(--rr-faq-card-accent);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .rr-faq-quote__facts dd {
+    margin: 7px 0 0;
+  }
+
+  @media screen and (max-width: 900px) {
+    .rr-faq-quote__inner,
+    .rr-faq-quote--with-card .rr-faq-quote__inner {
+      gap: 44px;
+      grid-template-columns: minmax(0, 1fr);
+      padding: 48px 24px 56px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .rr-faq-quote__inner,
+    .rr-faq-quote--with-card .rr-faq-quote__inner {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .rr-faq-quote__title {
+      font-size: 26px;
+    }
+
+    .rr-faq-quote__item > summary {
+      font-size: 16px;
+    }
+
+    .rr-faq-quote__answer,
+    .rr-faq-quote__intro,
+    .rr-faq-quote__card-body {
+      font-size: 14px;
+    }
+
+    .rr-faq-quote__card {
+      padding: 32px 24px 28px;
+    }
+
+    .rr-faq-quote__card-title {
+      font-size: 28px;
+    }
+
+    .rr-faq-quote__facts {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
-{"name":"RR Q&A accordion","settings":[{"type":"color","id":"background","label":"Background","default":"#fafaf8"},{"type":"range","id":"padding","label":"Section spacing","min":20,"max":180,"step":4,"unit":"px","default":120},{"type":"text","id":"eyebrow","label":"Eyebrow","default":"Questions & Answers"},{"type":"text","id":"heading","label":"Heading","default":"What brands ask before we begin"},{"type":"richtext","id":"text","label":"Introduction","default":"<p>Clear answers about custom structures, quantities, timing, materials, and production.</p>"},{"type":"checkbox","id":"open_first","label":"Open first question","default":true},{"type":"text","id":"cta_label","label":"Contact link label","default":"ASK A DIFFERENT QUESTION →"},{"type":"url","id":"cta_link","label":"Contact link"}],"blocks":[{"type":"question","name":"Question","settings":[{"type":"text","id":"question","label":"Question","default":"What is the minimum order quantity?"},{"type":"richtext","id":"answer","label":"Answer","default":"<p>Minimums depend on structure, materials, finishing, and production method. Share your target quantity and we will recommend the most practical route.</p>"}]}],"presets":[{"name":"RR Q&A accordion","blocks":[{"type":"question"},{"type":"question","settings":{"question":"How long does a custom packaging project take?","answer":"<p>Most projects move through briefing, structural development, sampling, approval, production, and freight. Timing depends on complexity and destination, and we establish the schedule before work begins.</p>"}},{"type":"question","settings":{"question":"Can you work from an existing dieline or design?","answer":"<p>Yes. We can produce from approved artwork and dielines, refine an existing structure, or develop the packaging system with you from the beginning.</p>"}},{"type":"question","settings":{"question":"Do you offer sustainable materials?","answer":"<p>Yes. We source FSC-certified paperboards, specialty papers, and lower-impact material options based on the structural and visual requirements of the project.</p>"}}]}]}
+{
+  "name": "RR FAQ + quote",
+  "settings": [
+    { "type": "header", "content": "FAQ" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "FAQ" },
+    { "type": "checkbox", "id": "show_intro", "label": "Show eyebrow and introduction", "default": false },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Questions & Answers", "visible_if": "{{ section.settings.show_intro }}" },
+    { "type": "richtext", "id": "text", "label": "Introduction", "default": "<p>Clear answers about custom structures, quantities, timing, materials, and production.</p>", "visible_if": "{{ section.settings.show_intro }}" },
+    { "type": "checkbox", "id": "open_first", "label": "Open first question", "default": true },
+    { "type": "text", "id": "cta_label", "label": "Contact link label", "default": "Ask a different question →" },
+    { "type": "url", "id": "cta_link", "label": "Contact link" },
+
+    { "type": "header", "content": "Quote card" },
+    { "type": "checkbox", "id": "show_quote_card", "label": "Show quote card", "default": true },
+    { "type": "text", "id": "quote_eyebrow", "label": "Eyebrow", "default": "Get a quote", "visible_if": "{{ section.settings.show_quote_card }}" },
+    { "type": "text", "id": "quote_heading", "label": "Heading", "default": "Tell us what you're packing.", "visible_if": "{{ section.settings.show_quote_card }}" },
+    { "type": "richtext", "id": "quote_body", "label": "Description", "default": "<p>Send the product dimensions and your run size. We come back with a structure recommendation, a dieline and a quote.</p>", "visible_if": "{{ section.settings.show_quote_card }}" },
+    { "type": "text", "id": "quote_primary_label", "label": "Primary button label", "default": "Start a project", "visible_if": "{{ section.settings.show_quote_card }}" },
+    { "type": "url", "id": "quote_primary_link", "label": "Primary button link", "visible_if": "{{ section.settings.show_quote_card }}" },
+    { "type": "text", "id": "quote_secondary_label", "label": "Secondary link label", "default": "Request samples", "visible_if": "{{ section.settings.show_quote_card }}" },
+    { "type": "url", "id": "quote_secondary_link", "label": "Secondary link", "visible_if": "{{ section.settings.show_quote_card }}" },
+    { "type": "text", "id": "fact_1_label", "label": "First fact label", "default": "Reply time", "visible_if": "{{ section.settings.show_quote_card }}" },
+    { "type": "text", "id": "fact_1_value", "label": "First fact value", "default": "Within one business day", "visible_if": "{{ section.settings.show_quote_card }}" },
+    { "type": "text", "id": "fact_2_label", "label": "Second fact label", "default": "Minimum run", "visible_if": "{{ section.settings.show_quote_card }}" },
+    { "type": "text", "id": "fact_2_value", "label": "Second fact value", "default": "250 units", "visible_if": "{{ section.settings.show_quote_card }}" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "max_width", "label": "Content width", "min": 960, "max": 1600, "step": 20, "unit": "px", "default": 1360 },
+    { "type": "range", "id": "padding", "label": "Top spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "side_padding", "label": "Desktop side spacing", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#fafaf8" },
+    { "type": "color", "id": "line_color", "label": "Lines", "default": "#ecebe6" },
+    { "type": "color", "id": "text_color", "label": "FAQ text", "default": "#141414" },
+    { "type": "color", "id": "muted_color", "label": "FAQ answers", "default": "#6b6b63" },
+    { "type": "color", "id": "accent_color", "label": "FAQ accent", "default": "#2f5e3a" },
+    { "type": "color", "id": "quote_background", "label": "Quote card background", "default": "#2f5e3a" },
+    { "type": "color", "id": "quote_text_color", "label": "Quote card text", "default": "#f4ecd8" },
+    { "type": "color", "id": "quote_muted_color", "label": "Quote card body", "default": "#d8d0ba" },
+    { "type": "color", "id": "quote_accent_color", "label": "Quote card accent", "default": "#9fcb6e" },
+    { "type": "color", "id": "quote_button_background", "label": "Quote button background", "default": "#f4ecd8" },
+    { "type": "color", "id": "quote_button_text", "label": "Quote button text", "default": "#24482d" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Can you design packaging around my product?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Yes. We develop the box structure and insert around your product dimensions, packed weight and presentation requirements.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR FAQ + quote",
+      "blocks": [
+        { "type": "question" },
+        { "type": "question", "settings": { "question": "What information do you need to start a project?", "answer": "<p>Product dimensions, run size, target launch date, and any brand files you already have. A photo of the current packaging helps.</p>" } },
+        { "type": "question", "settings": { "question": "How long does custom packaging production take?", "answer": "<p>Sampling takes 7-10 days. Production runs 15-25 days after sample approval, depending on finishing.</p>" } },
+        { "type": "question", "settings": { "question": "How long does shipping usually take?", "answer": "<p>Sea freight typically takes 25-35 days and air freight 7-10 days to North America. We quote both options for your project.</p>" } },
+        { "type": "question", "settings": { "question": "Do you offer samples before production?", "answer": "<p>Always. A blank structural sample comes first, followed by a printed pre-production sample once artwork is approved.</p>" } }
+      ]
+    }
+  ]
+}
 {% endschema %}

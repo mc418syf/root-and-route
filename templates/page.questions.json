@@ -9,7 +9,7 @@
       "q4": { "type": "question", "settings": { "question": "Can I receive a physical prototype before production?", "answer": "<p>Yes. Physical samples allow you to test fit, opening experience, materials, color, and finishing before approving mass production.</p>" } },
       "q5": { "type": "question", "settings": { "question": "What sustainable material options are available?", "answer": "<p>We source FSC-certified paperboards, specialty papers, and lower-impact material options according to the structure, finish, and durability required by the project.</p>" } },
       "q6": { "type": "question", "settings": { "question": "Do you handle freight and delivery to North America?", "answer": "<p>Yes. We align production, quality control, freight, and delivery requirements, with communication managed through the Root & Route team in Canada.</p>" } }
-    }, "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"], "settings": { "heading": "What brands ask before production", "cta_link": "mailto:hello@rootandroute.ca" } },
+    }, "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"], "settings": { "heading": "FAQ", "padding": 64, "cta_link": "mailto:hello@rootandroute.ca" } },
     "cta": { "type": "rr-page-cta", "blocks": { "one": { "type": "button", "settings": { "label": "ASK YOUR QUESTION →", "link": "mailto:hello@rootandroute.ca" } } }, "block_order": ["one"], "settings": { "eyebrow": "Still Curious", "heading": "Tell us what you are planning." } },
     "footer": { "type": "rr-home-footer", "settings": { "cta_link": "mailto:hello@rootandroute.ca" } }
   },

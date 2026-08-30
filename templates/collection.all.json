@@ -1059,12 +1059,12 @@
         "question_QHKKpD",
         "question_pLmEhd"
       ],
-      "name": "RR Q&A accordion",
+      "name": "RR FAQ + quote",
       "settings": {
         "background": "#fafaf8",
-        "padding": 120,
+        "padding": 64,
         "eyebrow": "Questions & Answers",
-        "heading": "What brands ask before we begin",
+        "heading": "FAQ",
         "text": "<p>Clear answers about custom structures, quantities, timing, materials, and production.</p>",
         "open_first": true,
         "cta_label": "ASK A DIFFERENT QUESTION →",

@@ -785,12 +785,12 @@
         "question_DBxHAa",
         "question_7tV3Kc"
       ],
-      "name": "RR Q&A accordion",
+      "name": "RR FAQ + quote",
       "settings": {
         "background": "#fafaf8",
-        "padding": 120,
+        "padding": 64,
         "eyebrow": "FAQ",
-        "heading": "Before We Begin",
+        "heading": "FAQ",
         "text": "<p>A clear guide to custom packaging, from sampling to production.</p>",
         "open_first": true,
         "cta_label": "ASK A DIFFERENT QUESTION →",
