@@ -1,0 +1,367 @@
+<rr-process-stages
+  id="RRProcessStages"
+  class="rr-process-stages"
+  data-mode="{{ section.settings.default_treatment }}"
+  style="
+    --rr-process-bg: {{ section.settings.background }};
+    --rr-process-card: {{ section.settings.illustration_background }};
+    --rr-process-photo: {{ section.settings.photo_background }};
+    --rr-process-ink: {{ section.settings.text_color }};
+    --rr-process-muted: {{ section.settings.muted_color }};
+    --rr-process-soft: {{ section.settings.number_color }};
+    --rr-process-line: {{ section.settings.border_color }};
+    --rr-process-accent: {{ section.settings.accent }};
+    --rr-process-button-text: {{ section.settings.button_text }};
+    --rr-process-columns: {{ section.settings.columns }};
+    --rr-process-max: {{ section.settings.max_width }}px;
+    --rr-process-top: {{ section.settings.padding_top }}px;
+    --rr-process-bottom: {{ section.settings.padding_bottom }}px;
+    --rr-process-side: {{ section.settings.side_padding }}px;
+    --rr-process-media-height: {{ section.settings.media_height }}px;
+  "
+>
+  <div class="rr-process-stages__inner">
+    {%- if section.settings.show_treatment_control -%}
+      <div class="rr-process-stages__toolbar">
+        <span>{{ section.settings.treatment_label | escape }}</span>
+        <div class="rr-process-stages__modes" role="group" aria-label="{{ section.settings.treatment_label | escape }}">
+          <button type="button" data-process-mode="ink" aria-pressed="{% if section.settings.default_treatment == 'ink' %}true{% else %}false{% endif %}">
+            {{ section.settings.ink_label | escape }}
+          </button>
+          <button type="button" data-process-mode="photo" aria-pressed="{% if section.settings.default_treatment == 'photo' %}true{% else %}false{% endif %}">
+            {{ section.settings.photo_label | escape }}
+          </button>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="rr-process-stages__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          case block.settings.illustration
+            when '02'
+              assign illustration_asset = 'rr-process-02-print.svg'
+            when '03'
+              assign illustration_asset = 'rr-process-03-lamination.svg'
+            when '04'
+              assign illustration_asset = 'rr-process-04-spot-uv.svg'
+            when '05'
+              assign illustration_asset = 'rr-process-05-gold-stamping.svg'
+            when '06'
+              assign illustration_asset = 'rr-process-06-die-cutting.svg'
+            when '07'
+              assign illustration_asset = 'rr-process-07-handwork.svg'
+            when '08'
+              assign illustration_asset = 'rr-process-08-packaging.svg'
+            else
+              assign illustration_asset = 'rr-process-01-structural-design.svg'
+          endcase
+        -%}
+        <article class="rr-process-stage" {{ block.shopify_attributes }}>
+          <div class="rr-process-stage__media">
+            <div data-process-media="ink">
+              {%- if block.settings.ink_image != blank -%}
+                {{ block.settings.ink_image | image_url: width: 900 | image_tag: widths: '320, 480, 640, 900', sizes: '(min-width: 1100px) 22vw, (min-width: 750px) 45vw, 100vw', loading: 'lazy', alt: block.settings.title }}
+              {%- else -%}
+                <img src="{{ illustration_asset | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+              {%- endif -%}
+            </div>
+            <div data-process-media="photo">
+              {%- if block.settings.photo != blank -%}
+                {{ block.settings.photo | image_url: width: 900 | image_tag: widths: '320, 480, 640, 900', sizes: '(min-width: 1100px) 22vw, (min-width: 750px) 45vw, 100vw', loading: 'lazy', alt: block.settings.photo_alt }}
+              {%- else -%}
+                <span class="rr-process-stage__placeholder">{{ block.settings.photo_placeholder | default: block.settings.title | escape }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+          <p class="rr-process-stage__number">{{ block.settings.number | escape }}</p>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <div class="rr-process-stage__text">{{ block.settings.text }}</div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</rr-process-stages>
+
+<script>
+  if (!customElements.get('rr-process-stages')) {
+    customElements.define('rr-process-stages', class extends HTMLElement {
+      connectedCallback() {
+        this.querySelectorAll('[data-process-mode]').forEach((button) => {
+          button.addEventListener('click', () => this.setMode(button.dataset.processMode));
+        });
+      }
+
+      setMode(mode) {
+        this.dataset.mode = mode;
+        this.querySelectorAll('[data-process-mode]').forEach((button) => {
+          button.setAttribute('aria-pressed', button.dataset.processMode === mode ? 'true' : 'false');
+        });
+      }
+    });
+  }
+</script>
+
+{% stylesheet %}
+  .rr-process-stages {
+    background: var(--rr-process-bg);
+    color: var(--rr-process-ink);
+    display: block;
+    font-family: var(--font-body--family);
+    padding: var(--rr-process-top) var(--rr-process-side) var(--rr-process-bottom);
+    scroll-margin-top: 100px;
+  }
+
+  .rr-process-stages * {
+    box-sizing: border-box;
+  }
+
+  .rr-process-stages__inner {
+    margin: 0 auto;
+    max-width: var(--rr-process-max);
+  }
+
+  .rr-process-stages__toolbar {
+    align-items: center;
+    display: flex;
+    gap: 14px;
+    justify-content: flex-end;
+    padding-bottom: 22px;
+  }
+
+  .rr-process-stages__toolbar > span {
+    color: var(--rr-process-muted);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .rr-process-stages__modes {
+    background: #ffffff;
+    border: 1px solid var(--rr-process-line);
+    border-radius: 2px;
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .rr-process-stages__modes button {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    border-radius: 1px;
+    color: var(--rr-process-muted);
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+    letter-spacing: 0;
+    min-height: 34px;
+    padding: 8px 15px;
+    text-transform: uppercase;
+  }
+
+  .rr-process-stages__modes button[aria-pressed='true'] {
+    background: var(--rr-process-accent);
+    color: var(--rr-process-button-text);
+  }
+
+  .rr-process-stages__grid {
+    display: grid;
+    gap: 44px 32px;
+    grid-template-columns: repeat(var(--rr-process-columns), minmax(0, 1fr));
+  }
+
+  .rr-process-stage__media {
+    background: var(--rr-process-card);
+    border: 1px solid var(--rr-process-line);
+    border-radius: 3px;
+    height: var(--rr-process-media-height);
+    overflow: hidden;
+  }
+
+  .rr-process-stage__media > div,
+  .rr-process-stage__media img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .rr-process-stage__media img {
+    display: block;
+    object-fit: cover;
+  }
+
+  .rr-process-stages[data-mode='ink'] [data-process-media='photo'],
+  .rr-process-stages[data-mode='photo'] [data-process-media='ink'] {
+    display: none;
+  }
+
+  [data-process-media='photo'] {
+    align-items: center;
+    background: var(--rr-process-photo);
+    display: flex;
+    justify-content: center;
+  }
+
+  .rr-process-stage__placeholder {
+    color: var(--rr-process-muted);
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 20ch;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .rr-process-stage__number {
+    color: var(--rr-process-soft);
+    font-family: var(--font-heading--family);
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1;
+    margin: 18px 0 0;
+  }
+
+  .rr-process-stage h3 {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.25;
+    margin: 10px 0 0;
+    text-transform: uppercase;
+  }
+
+  .rr-process-stage__text {
+    color: var(--rr-process-muted);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  .rr-process-stage__text p {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 1099px) {
+    .rr-process-stages__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-process-stages {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .rr-process-stages__toolbar {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .rr-process-stages__modes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      width: 100%;
+    }
+
+    .rr-process-stages__grid {
+      gap: 40px 16px;
+    }
+
+    .rr-process-stage__media {
+      height: auto;
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  @media screen and (max-width: 519px) {
+    .rr-process-stages__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RR process stages",
+  "settings": [
+    { "type": "checkbox", "id": "show_treatment_control", "label": "Show image treatment control", "default": true },
+    { "type": "text", "id": "treatment_label", "label": "Control label", "default": "Image treatment" },
+    { "type": "text", "id": "ink_label", "label": "Illustration label", "default": "Ink drawings" },
+    { "type": "text", "id": "photo_label", "label": "Photography label", "default": "Your photos" },
+    {
+      "type": "select",
+      "id": "default_treatment",
+      "label": "Default image treatment",
+      "options": [
+        { "value": "ink", "label": "Ink drawings" },
+        { "value": "photo", "label": "Uploaded photos" }
+      ],
+      "default": "ink"
+    },
+    { "type": "range", "id": "columns", "label": "Desktop columns", "min": 2, "max": 4, "step": 1, "default": 4 },
+    { "type": "range", "id": "media_height", "label": "Desktop image height", "min": 180, "max": 420, "step": 10, "unit": "px", "default": 250 },
+    { "type": "range", "id": "max_width", "label": "Content width", "min": 960, "max": 1600, "step": 20, "unit": "px", "default": 1360 },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "side_padding", "label": "Desktop side spacing", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 40 },
+    { "type": "color", "id": "background", "label": "Background", "default": "#fafaf8" },
+    { "type": "color", "id": "illustration_background", "label": "Illustration background", "default": "#f4ecd8" },
+    { "type": "color", "id": "photo_background", "label": "Photo placeholder", "default": "#efeae0" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#141414" },
+    { "type": "color", "id": "muted_color", "label": "Body text", "default": "#6b6b63" },
+    { "type": "color", "id": "number_color", "label": "Numbers", "default": "#c3bdae" },
+    { "type": "color", "id": "border_color", "label": "Lines", "default": "#ecebe6" },
+    { "type": "color", "id": "accent", "label": "Active control", "default": "#2f5e3a" },
+    { "type": "color", "id": "button_text", "label": "Active control text", "default": "#f4ecd8" }
+  ],
+  "blocks": [
+    {
+      "type": "stage",
+      "name": "Process stage",
+      "limit": 8,
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Structural design" },
+        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>Our structural engineers create precise dielines and 3D mockups to bring your idea into physical form.</p>" },
+        {
+          "type": "select",
+          "id": "illustration",
+          "label": "Default ink drawing",
+          "options": [
+            { "value": "01", "label": "01 - Structural design" },
+            { "value": "02", "label": "02 - Print" },
+            { "value": "03", "label": "03 - Lamination" },
+            { "value": "04", "label": "04 - Spot UV" },
+            { "value": "05", "label": "05 - Gold stamping" },
+            { "value": "06", "label": "06 - Die cutting" },
+            { "value": "07", "label": "07 - Handwork" },
+            { "value": "08", "label": "08 - Packaging" }
+          ],
+          "default": "01"
+        },
+        { "type": "image_picker", "id": "ink_image", "label": "Custom ink image" },
+        { "type": "image_picker", "id": "photo", "label": "Photo" },
+        { "type": "text", "id": "photo_alt", "label": "Photo alt text" },
+        { "type": "text", "id": "photo_placeholder", "label": "Photo placeholder", "default": "Designer at CAD workstation" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR process stages",
+      "blocks": [
+        { "type": "stage" },
+        { "type": "stage", "settings": { "number": "02", "title": "Print", "illustration": "02", "photo_placeholder": "Offset press in operation", "text": "<p>High-resolution printing brings your branding to life with exceptional clarity and colour accuracy.</p>" } },
+        { "type": "stage", "settings": { "number": "03", "title": "Lamination", "illustration": "03", "photo_placeholder": "Lamination roller", "text": "<p>Matte or gloss film is applied to enhance durability and achieve the exact hand-feel you want.</p>" } },
+        { "type": "stage", "settings": { "number": "04", "title": "Spot UV", "illustration": "04", "photo_placeholder": "Spot UV detail on dark board", "text": "<p>Selective gloss adds shine and contrast, highlighting key details with a premium touch.</p>" } },
+        { "type": "stage", "settings": { "number": "05", "title": "Gold stamping", "illustration": "05", "photo_placeholder": "Foil stamping press", "text": "<p>Metallic foil stamping delivers a refined, eye-catching finish that elevates the whole box.</p>" } },
+        { "type": "stage", "settings": { "number": "06", "title": "Die cutting", "illustration": "06", "photo_placeholder": "Die cutting bed", "text": "<p>Precision die cutting ensures clean edges and perfect shapes for every structure.</p>" } },
+        { "type": "stage", "settings": { "number": "07", "title": "Handwork", "illustration": "07", "photo_placeholder": "Hands assembling a rigid box", "text": "<p>Skilled hands assemble, inspect and perfect every detail with care and expertise.</p>" } },
+        { "type": "stage", "settings": { "number": "08", "title": "Packaging", "illustration": "08", "photo_placeholder": "Finished boxes packed for shipping", "text": "<p>Each box is carefully packed and palletised so it arrives in the condition it left the floor.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

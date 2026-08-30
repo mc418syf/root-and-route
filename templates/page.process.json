@@ -1,0 +1,289 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "process_hero": {
+      "type": "rr-process-hero",
+      "blocks": {
+        "button_steps": {
+          "type": "button",
+          "settings": {
+            "label": "See the eight stages",
+            "link": "#RRProcessStages",
+            "secondary": false
+          }
+        },
+        "button_sample": {
+          "type": "button",
+          "settings": {
+            "label": "Order a sample kit",
+            "link": "shopify://pages/contact",
+            "secondary": true
+          }
+        }
+      },
+      "block_order": ["button_steps", "button_sample"],
+      "settings": {
+        "eyebrow": "Custom Packaging",
+        "heading": "Our production process",
+        "text": "<p>Precision in every step. Excellence in every detail - eight stages between your dieline and a box in your customer's hands.</p>",
+        "heading_size": 72,
+        "max_width": 1360,
+        "padding_top": 96,
+        "padding_bottom": 72,
+        "side_padding": 40,
+        "background": "#fafaf8",
+        "text_color": "#141414",
+        "muted_color": "#6b6b63",
+        "accent": "#2f5e3a",
+        "button_text": "#f4ecd8"
+      }
+    },
+    "process_stages": {
+      "type": "rr-process-stages",
+      "blocks": {
+        "stage_01": {
+          "type": "stage",
+          "settings": {
+            "number": "01",
+            "title": "Structural design",
+            "text": "<p>Our structural engineers create precise dielines and 3D mockups to bring your idea into physical form.</p>",
+            "illustration": "01",
+            "photo_alt": "Designer at a CAD workstation",
+            "photo_placeholder": "Designer at CAD workstation"
+          }
+        },
+        "stage_02": {
+          "type": "stage",
+          "settings": {
+            "number": "02",
+            "title": "Print",
+            "text": "<p>High-resolution printing brings your branding to life with exceptional clarity and colour accuracy.</p>",
+            "illustration": "02",
+            "photo_alt": "Offset press in operation",
+            "photo_placeholder": "Offset press in operation"
+          }
+        },
+        "stage_03": {
+          "type": "stage",
+          "settings": {
+            "number": "03",
+            "title": "Lamination",
+            "text": "<p>Matte or gloss film is applied to enhance durability and achieve the exact hand-feel you want.</p>",
+            "illustration": "03",
+            "photo_alt": "Lamination roller",
+            "photo_placeholder": "Lamination roller"
+          }
+        },
+        "stage_04": {
+          "type": "stage",
+          "settings": {
+            "number": "04",
+            "title": "Spot UV",
+            "text": "<p>Selective gloss adds shine and contrast, highlighting key details with a premium touch.</p>",
+            "illustration": "04",
+            "photo_alt": "Spot UV detail on dark board",
+            "photo_placeholder": "Spot UV detail on dark board"
+          }
+        },
+        "stage_05": {
+          "type": "stage",
+          "settings": {
+            "number": "05",
+            "title": "Gold stamping",
+            "text": "<p>Metallic foil stamping delivers a refined, eye-catching finish that elevates the whole box.</p>",
+            "illustration": "05",
+            "photo_alt": "Foil stamping press",
+            "photo_placeholder": "Foil stamping press"
+          }
+        },
+        "stage_06": {
+          "type": "stage",
+          "settings": {
+            "number": "06",
+            "title": "Die cutting",
+            "text": "<p>Precision die cutting ensures clean edges and perfect shapes for every structure.</p>",
+            "illustration": "06",
+            "photo_alt": "Die cutting bed",
+            "photo_placeholder": "Die cutting bed"
+          }
+        },
+        "stage_07": {
+          "type": "stage",
+          "settings": {
+            "number": "07",
+            "title": "Handwork",
+            "text": "<p>Skilled hands assemble, inspect and perfect every detail with care and expertise.</p>",
+            "illustration": "07",
+            "photo_alt": "Hands assembling a rigid box",
+            "photo_placeholder": "Hands assembling a rigid box"
+          }
+        },
+        "stage_08": {
+          "type": "stage",
+          "settings": {
+            "number": "08",
+            "title": "Packaging",
+            "text": "<p>Each box is carefully packed and palletised so it arrives in the condition it left the floor.</p>",
+            "illustration": "08",
+            "photo_alt": "Finished boxes packed for shipping",
+            "photo_placeholder": "Finished boxes packed for shipping"
+          }
+        }
+      },
+      "block_order": ["stage_01", "stage_02", "stage_03", "stage_04", "stage_05", "stage_06", "stage_07", "stage_08"],
+      "settings": {
+        "show_treatment_control": true,
+        "treatment_label": "Image treatment",
+        "ink_label": "Ink drawings",
+        "photo_label": "Your photos",
+        "default_treatment": "ink",
+        "columns": 4,
+        "media_height": 250,
+        "max_width": 1360,
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "side_padding": 40,
+        "background": "#fafaf8",
+        "illustration_background": "#f4ecd8",
+        "photo_background": "#efeae0",
+        "text_color": "#141414",
+        "muted_color": "#6b6b63",
+        "number_color": "#c3bdae",
+        "border_color": "#ecebe6",
+        "accent": "#2f5e3a",
+        "button_text": "#f4ecd8"
+      }
+    },
+    "process_printing": {
+      "type": "rr-process-printing",
+      "blocks": {
+        "printing_cmyk": {
+          "type": "feature",
+          "settings": {
+            "heading": "Printing colour",
+            "text": "<p>Four-colour CMYK process for vibrant, consistent and repeatable results across every run.</p>",
+            "visual": "cmyk",
+            "image_alt": "",
+            "placeholder": "CMYK printing colours",
+            "image_side": "left"
+          }
+        },
+        "printing_pantone": {
+          "type": "feature",
+          "settings": {
+            "heading": "Pantone colour matching",
+            "text": "<p>Send your brand codes and we match them on press - so the green on the box is the green in your guidelines.</p>",
+            "visual": "image",
+            "image_alt": "Pantone fan deck",
+            "placeholder": "Pantone fan deck",
+            "image_side": "right"
+          }
+        }
+      },
+      "block_order": ["printing_cmyk", "printing_pantone"],
+      "settings": {
+        "max_width": 1360,
+        "padding_top": 48,
+        "padding_bottom": 0,
+        "side_padding": 40,
+        "background": "#fafaf8",
+        "card_background": "#ffffff",
+        "placeholder_background": "#efeae0",
+        "text_color": "#141414",
+        "muted_color": "#6b6b63",
+        "border_color": "#ecebe6"
+      }
+    },
+    "process_materials": {
+      "type": "rr-process-materials",
+      "blocks": {
+        "paper_01": { "type": "paper", "settings": { "image_alt": "Coated paper", "label": "Coated paper" } },
+        "paper_02": { "type": "paper", "settings": { "image_alt": "Corrugated paper", "label": "Corrugated paper" } },
+        "paper_03": { "type": "paper", "settings": { "image_alt": "Imported white card", "label": "Imported white card" } },
+        "paper_04": { "type": "paper", "settings": { "image_alt": "Black card", "label": "Black card" } },
+        "paper_05": { "type": "paper", "settings": { "image_alt": "Pearlescent paper", "label": "Pearlescent paper" } },
+        "paper_06": { "type": "paper", "settings": { "image_alt": "Kraft paper", "label": "Kraft paper" } },
+        "paper_07": { "type": "paper", "settings": { "image_alt": "Gold and silver cardstock", "label": "Gold / silver cardstock" } },
+        "paper_08": { "type": "paper", "settings": { "image_alt": "Specialty paper", "label": "Specialty paper" } }
+      },
+      "block_order": ["paper_01", "paper_02", "paper_03", "paper_04", "paper_05", "paper_06", "paper_07", "paper_08"],
+      "settings": {
+        "eyebrow": "Materials",
+        "heading": "Paper type",
+        "text": "<p>A wide range of premium stocks to suit your product, your budget and your shelf.</p>",
+        "columns": 4,
+        "max_width": 1360,
+        "padding_top": 96,
+        "padding_bottom": 0,
+        "side_padding": 40,
+        "background": "#fafaf8",
+        "placeholder_background": "#efeae0",
+        "text_color": "#141414",
+        "muted_color": "#6b6b63",
+        "accent": "#2f5e3a"
+      }
+    },
+    "process_finishes": {
+      "type": "rr-process-finishes",
+      "blocks": {
+        "finish_01": { "type": "finish", "settings": { "image_alt": "4C printing", "label": "4C printing", "note": "Full-colour artwork, edge to edge" } },
+        "finish_02": { "type": "finish", "settings": { "image_alt": "Gold stamping", "label": "Gold stamping", "note": "Warm metallic foil" } },
+        "finish_03": { "type": "finish", "settings": { "image_alt": "Silver stamping", "label": "Silver stamping", "note": "Cool metallic foil" } },
+        "finish_04": { "type": "finish", "settings": { "image_alt": "Spot UV", "label": "Spot UV", "note": "Selective high gloss" } },
+        "finish_05": { "type": "finish", "settings": { "image_alt": "Embossing", "label": "Embossing", "note": "Raised, tactile detail" } },
+        "finish_06": { "type": "finish", "settings": { "image_alt": "Debossing", "label": "Debossing", "note": "Recessed, quiet detail" } }
+      },
+      "block_order": ["finish_01", "finish_02", "finish_03", "finish_04", "finish_05", "finish_06"],
+      "settings": {
+        "eyebrow": "Finishing",
+        "heading": "Recommended craftwork",
+        "text": "<p>Elevate the box with refined craftsmanship and premium finishing options. Any of these can be combined.</p>",
+        "columns": 3,
+        "max_width": 1360,
+        "padding_top": 96,
+        "padding_bottom": 0,
+        "side_padding": 40,
+        "outer_background": "#fafaf8",
+        "background": "#2f5e3a",
+        "placeholder_background": "#496f51",
+        "text_color": "#f4ecd8",
+        "muted_color": "#d8d0ba",
+        "accent": "#9fcb6e"
+      }
+    },
+    "process_closing": {
+      "type": "rr-process-closing-cta",
+      "settings": {
+        "heading": "Ready to put it into production?",
+        "text": "<p>Send your artwork and run size. We come back with a dieline, a finishing recommendation and a quote - usually within two working days.</p>",
+        "button_label": "Start an inquiry",
+        "button_link": "shopify://pages/contact",
+        "max_width": 1360,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "side_padding": 40,
+        "background": "#fafaf8",
+        "text_color": "#141414",
+        "muted_color": "#3a3a3a",
+        "accent": "#2f5e3a",
+        "button_text": "#f4ecd8"
+      }
+    }
+  },
+  "order": [
+    "process_hero",
+    "process_stages",
+    "process_printing",
+    "process_materials",
+    "process_finishes",
+    "process_closing"
+  ]
+}

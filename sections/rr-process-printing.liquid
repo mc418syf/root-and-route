@@ -1,0 +1,241 @@
+<section
+  id="RRProcessPrinting-{{ section.id }}"
+  class="rr-process-printing"
+  style="
+    --rr-print-bg: {{ section.settings.background }};
+    --rr-print-card: {{ section.settings.card_background }};
+    --rr-print-placeholder: {{ section.settings.placeholder_background }};
+    --rr-print-ink: {{ section.settings.text_color }};
+    --rr-print-muted: {{ section.settings.muted_color }};
+    --rr-print-line: {{ section.settings.border_color }};
+    --rr-print-max: {{ section.settings.max_width }}px;
+    --rr-print-top: {{ section.settings.padding_top }}px;
+    --rr-print-bottom: {{ section.settings.padding_bottom }}px;
+    --rr-print-side: {{ section.settings.side_padding }}px;
+  "
+>
+  <div class="rr-process-printing__inner">
+    {%- for block in section.blocks -%}
+      <article class="rr-process-printing__feature rr-process-printing__feature--{{ block.settings.image_side }}" {{ block.shopify_attributes }}>
+        <div class="rr-process-printing__visual">
+          {%- if block.settings.visual == 'cmyk' -%}
+            <div class="rr-process-printing__cmyk" aria-label="CMYK printing colours">
+              <span>C</span><span>M</span><span>Y</span><span>K</span>
+            </div>
+          {%- elsif block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 700 | image_tag: widths: '240, 360, 520, 700', sizes: '(min-width: 990px) 16vw, 42vw', loading: 'lazy', alt: block.settings.image_alt }}
+          {%- else -%}
+            <span class="rr-process-printing__placeholder">{{ block.settings.placeholder | escape }}</span>
+          {%- endif -%}
+        </div>
+        <div class="rr-process-printing__copy">
+          <h2>{{ block.settings.heading | escape }}</h2>
+          <div>{{ block.settings.text }}</div>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .rr-process-printing {
+    background: var(--rr-print-bg);
+    color: var(--rr-print-ink);
+    font-family: var(--font-body--family);
+    padding: var(--rr-print-top) var(--rr-print-side) var(--rr-print-bottom);
+  }
+
+  .rr-process-printing * {
+    box-sizing: border-box;
+  }
+
+  .rr-process-printing__inner {
+    background: var(--rr-print-card);
+    border: 1px solid var(--rr-print-line);
+    border-radius: 4px;
+    display: grid;
+    gap: 48px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0 auto;
+    max-width: var(--rr-print-max);
+    padding: 48px;
+  }
+
+  .rr-process-printing__feature {
+    align-items: center;
+    display: flex;
+    gap: 28px;
+    min-width: 0;
+  }
+
+  .rr-process-printing__feature--right .rr-process-printing__visual {
+    order: 2;
+  }
+
+  .rr-process-printing__visual {
+    align-items: center;
+    aspect-ratio: 1;
+    background: var(--rr-print-placeholder);
+    border-radius: 3px;
+    display: flex;
+    flex: 0 0 min(16vw, 220px);
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .rr-process-printing__visual > img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .rr-process-printing__cmyk {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    height: 100%;
+    width: 100%;
+  }
+
+  .rr-process-printing__cmyk span {
+    align-items: center;
+    color: #ffffff;
+    display: flex;
+    font-family: var(--font-heading--family);
+    font-size: 48px;
+    font-weight: 300;
+    justify-content: center;
+  }
+
+  .rr-process-printing__cmyk span:nth-child(1) { background: #29abe2; }
+  .rr-process-printing__cmyk span:nth-child(2) { background: #ec008c; }
+  .rr-process-printing__cmyk span:nth-child(3) { background: #fff200; }
+  .rr-process-printing__cmyk span:nth-child(4) { background: #1a1a1a; }
+
+  .rr-process-printing__placeholder {
+    color: var(--rr-print-muted);
+    font-size: 13px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .rr-process-printing__copy {
+    flex: 1 1 200px;
+    min-width: 180px;
+  }
+
+  .rr-process-printing h2 {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.3;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .rr-process-printing__copy > div {
+    color: var(--rr-print-muted);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.62;
+    margin-top: 12px;
+  }
+
+  .rr-process-printing__copy p {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 1099px) {
+    .rr-process-printing__inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-process-printing {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .rr-process-printing__inner {
+      gap: 40px;
+      padding: 24px;
+    }
+
+    .rr-process-printing__feature,
+    .rr-process-printing__feature--right {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .rr-process-printing__feature--right .rr-process-printing__visual {
+      order: 0;
+    }
+
+    .rr-process-printing__visual {
+      flex-basis: auto;
+      width: min(100%, 280px);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RR process printing",
+  "settings": [
+    { "type": "range", "id": "max_width", "label": "Content width", "min": 960, "max": 1600, "step": 20, "unit": "px", "default": 1360 },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "side_padding", "label": "Desktop side spacing", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 40 },
+    { "type": "color", "id": "background", "label": "Background", "default": "#fafaf8" },
+    { "type": "color", "id": "card_background", "label": "Card background", "default": "#ffffff" },
+    { "type": "color", "id": "placeholder_background", "label": "Image placeholder", "default": "#efeae0" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#141414" },
+    { "type": "color", "id": "muted_color", "label": "Body text", "default": "#6b6b63" },
+    { "type": "color", "id": "border_color", "label": "Border", "default": "#ecebe6" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Printing feature",
+      "limit": 2,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Printing colour" },
+        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>Four-colour CMYK process for vibrant, consistent and repeatable results across every run.</p>" },
+        {
+          "type": "select",
+          "id": "visual",
+          "label": "Visual",
+          "options": [
+            { "value": "cmyk", "label": "CMYK graphic" },
+            { "value": "image", "label": "Uploaded image" }
+          ],
+          "default": "cmyk"
+        },
+        { "type": "image_picker", "id": "image", "label": "Image", "visible_if": "{{ block.settings.visual == 'image' }}" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text", "visible_if": "{{ block.settings.visual == 'image' }}" },
+        { "type": "text", "id": "placeholder", "label": "Image placeholder", "default": "Pantone fan deck", "visible_if": "{{ block.settings.visual == 'image' }}" },
+        {
+          "type": "select",
+          "id": "image_side",
+          "label": "Image position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR process printing",
+      "blocks": [
+        { "type": "feature" },
+        { "type": "feature", "settings": { "heading": "Pantone colour matching", "text": "<p>Send your brand codes and we match them on press - so the green on the box is the green in your guidelines.</p>", "visual": "image", "image_side": "right" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

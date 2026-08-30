@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <filter id="ink" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.026" numOctaves="2" seed="21" result="n"></feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+    </filter>
+  </defs>
+  <rect width="400" height="300" fill="#F4ECD8"></rect>
+  <circle cx="200" cy="184" r="44" fill="#9FCB6E" opacity="0.3"></circle><circle cx="200" cy="160" r="100" fill="#9FCB6E" opacity="0.2"></circle>
+  <g filter="url(#ink)" fill="none" stroke="#24482D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M132 48 H268 A11 11 0 0 1 268 70 H132 A11 11 0 0 1 132 48 Z"></path>
+    <path d="M200 30 V48"></path>
+    <path d="M156 78 V100 M186 78 V100 M214 78 V100 M244 78 V100"></path>
+    <path d="M100 112 H300 V254 H100 Z"></path>
+    <circle cx="200" cy="184" r="44"></circle>
+    <path d="M200 122 V138 M200 230 V246 M138 184 H154 M246 184 H262"></path>
+    <path d="M158 142 L168 152 M242 142 L232 152 M158 226 L168 216 M242 226 L232 216"></path>
+  </g>
+</svg>

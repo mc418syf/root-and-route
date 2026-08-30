@@ -1,0 +1,231 @@
+<section
+  id="RRProcessFinishes-{{ section.id }}"
+  class="rr-process-finishes"
+  style="
+    --rr-finishes-outer: {{ section.settings.outer_background }};
+    --rr-finishes-bg: {{ section.settings.background }};
+    --rr-finishes-ink: {{ section.settings.text_color }};
+    --rr-finishes-muted: {{ section.settings.muted_color }};
+    --rr-finishes-accent: {{ section.settings.accent }};
+    --rr-finishes-placeholder: {{ section.settings.placeholder_background }};
+    --rr-finishes-columns: {{ section.settings.columns }};
+    --rr-finishes-max: {{ section.settings.max_width }}px;
+    --rr-finishes-top: {{ section.settings.padding_top }}px;
+    --rr-finishes-bottom: {{ section.settings.padding_bottom }}px;
+    --rr-finishes-side: {{ section.settings.side_padding }}px;
+  "
+  aria-labelledby="RRProcessFinishesHeading-{{ section.id }}"
+>
+  <div class="rr-process-finishes__panel">
+    <header class="rr-process-finishes__intro">
+      {%- if section.settings.eyebrow != blank -%}<p>{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="RRProcessFinishesHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.text != blank -%}<div>{{ section.settings.text }}</div>{%- endif -%}
+    </header>
+    <div class="rr-process-finishes__grid">
+      {%- for block in section.blocks -%}
+        <article class="rr-process-finish" {{ block.shopify_attributes }}>
+          <div class="rr-process-finish__image">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 700 | image_tag: widths: '220, 360, 520, 700', sizes: '(min-width: 1100px) 20vw, (min-width: 750px) 30vw, 100vw', loading: 'lazy', alt: block.settings.image_alt }}
+            {%- else -%}
+              <span>{{ block.settings.label | escape }}</span>
+            {%- endif -%}
+          </div>
+          <h3>{{ block.settings.label | escape }}</h3>
+          {%- if block.settings.note != blank -%}<p>{{ block.settings.note | escape }}</p>{%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .rr-process-finishes {
+    background: var(--rr-finishes-outer);
+    color: var(--rr-finishes-ink);
+    font-family: var(--font-body--family);
+    padding: var(--rr-finishes-top) var(--rr-finishes-side) var(--rr-finishes-bottom);
+  }
+
+  .rr-process-finishes * {
+    box-sizing: border-box;
+  }
+
+  .rr-process-finishes__panel {
+    align-items: start;
+    background: var(--rr-finishes-bg);
+    border-radius: 4px;
+    display: grid;
+    gap: 56px;
+    grid-template-columns: 300px minmax(0, 1fr);
+    margin: 0 auto;
+    max-width: var(--rr-finishes-max);
+    padding: 56px;
+  }
+
+  .rr-process-finishes__intro > p {
+    color: var(--rr-finishes-accent);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .rr-process-finishes h2 {
+    color: var(--rr-finishes-ink);
+    font-family: var(--font-heading--family);
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.14;
+    margin: 16px 0 0;
+  }
+
+  .rr-process-finishes__intro > div {
+    color: var(--rr-finishes-muted);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.62;
+    margin-top: 16px;
+  }
+
+  .rr-process-finishes__intro > div p {
+    margin: 0;
+  }
+
+  .rr-process-finishes__grid {
+    display: grid;
+    gap: 28px;
+    grid-template-columns: repeat(var(--rr-finishes-columns), minmax(0, 1fr));
+  }
+
+  .rr-process-finish {
+    min-width: 0;
+  }
+
+  .rr-process-finish__image {
+    align-items: center;
+    aspect-ratio: 1;
+    background: var(--rr-finishes-placeholder);
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .rr-process-finish__image img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .rr-process-finish__image span {
+    color: var(--rr-finishes-muted);
+    font-size: 13px;
+    line-height: 1.4;
+    max-width: 14ch;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .rr-process-finish h3 {
+    color: var(--rr-finishes-ink);
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.4;
+    margin: 12px 0 0;
+  }
+
+  .rr-process-finish > p {
+    color: var(--rr-finishes-muted);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin: 4px 0 0;
+  }
+
+  @media screen and (max-width: 1099px) {
+    .rr-process-finishes__panel {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-process-finishes {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .rr-process-finishes__panel {
+      gap: 40px;
+      padding: 32px 24px;
+    }
+
+    .rr-process-finishes__grid {
+      gap: 28px 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .rr-process-finishes h2 {
+      font-size: 28px;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .rr-process-finishes__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RR process finishes",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Finishing" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Recommended craftwork" },
+    { "type": "richtext", "id": "text", "label": "Introduction", "default": "<p>Elevate the box with refined craftsmanship and premium finishing options. Any of these can be combined.</p>" },
+    { "type": "range", "id": "columns", "label": "Desktop columns", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "range", "id": "max_width", "label": "Content width", "min": 960, "max": 1600, "step": 20, "unit": "px", "default": 1360 },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "side_padding", "label": "Desktop side spacing", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 40 },
+    { "type": "color", "id": "outer_background", "label": "Page background", "default": "#fafaf8" },
+    { "type": "color", "id": "background", "label": "Panel background", "default": "#2f5e3a" },
+    { "type": "color", "id": "placeholder_background", "label": "Image placeholder", "default": "#496f51" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#f4ecd8" },
+    { "type": "color", "id": "muted_color", "label": "Body text", "default": "#d8d0ba" },
+    { "type": "color", "id": "accent", "label": "Eyebrow", "default": "#9fcb6e" }
+  ],
+  "blocks": [
+    {
+      "type": "finish",
+      "name": "Finishing option",
+      "limit": 6,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" },
+        { "type": "text", "id": "label", "label": "Label", "default": "4C printing" },
+        { "type": "text", "id": "note", "label": "Note", "default": "Full-colour artwork, edge to edge" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR process finishes",
+      "blocks": [
+        { "type": "finish" },
+        { "type": "finish", "settings": { "label": "Gold stamping", "note": "Warm metallic foil" } },
+        { "type": "finish", "settings": { "label": "Silver stamping", "note": "Cool metallic foil" } },
+        { "type": "finish", "settings": { "label": "Spot UV", "note": "Selective high gloss" } },
+        { "type": "finish", "settings": { "label": "Embossing", "note": "Raised, tactile detail" } },
+        { "type": "finish", "settings": { "label": "Debossing", "note": "Recessed, quiet detail" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

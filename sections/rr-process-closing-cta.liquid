@@ -1,0 +1,146 @@
+<section
+  id="quote"
+  class="rr-process-closing"
+  style="
+    --rr-closing-bg: {{ section.settings.background }};
+    --rr-closing-ink: {{ section.settings.text_color }};
+    --rr-closing-muted: {{ section.settings.muted_color }};
+    --rr-closing-accent: {{ section.settings.accent }};
+    --rr-closing-button-text: {{ section.settings.button_text }};
+    --rr-closing-max: {{ section.settings.max_width }}px;
+    --rr-closing-top: {{ section.settings.padding_top }}px;
+    --rr-closing-bottom: {{ section.settings.padding_bottom }}px;
+    --rr-closing-side: {{ section.settings.side_padding }}px;
+  "
+  aria-labelledby="RRProcessClosingHeading-{{ section.id }}"
+>
+  <div class="rr-process-closing__inner">
+    <div>
+      <h2 id="RRProcessClosingHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.text != blank -%}<div>{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+    {%- if section.settings.button_label != blank -%}
+      <a class="rr-process-closing__button" href="{{ section.settings.button_link | default: '/pages/contact' }}">
+        {{ section.settings.button_label | escape }} <span aria-hidden="true">→</span>
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .rr-process-closing {
+    background: var(--rr-closing-bg);
+    color: var(--rr-closing-ink);
+    font-family: var(--font-body--family);
+    padding: var(--rr-closing-top) var(--rr-closing-side) var(--rr-closing-bottom);
+  }
+
+  .rr-process-closing * {
+    box-sizing: border-box;
+  }
+
+  .rr-process-closing__inner {
+    align-items: center;
+    display: flex;
+    gap: 32px;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: var(--rr-closing-max);
+  }
+
+  .rr-process-closing h2 {
+    font-family: var(--font-heading--family);
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.1;
+    margin: 0;
+    max-width: 24ch;
+  }
+
+  .rr-process-closing__inner > div > div {
+    color: var(--rr-closing-muted);
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.62;
+    margin-top: 16px;
+    max-width: 52ch;
+  }
+
+  .rr-process-closing__inner > div > div p {
+    margin: 0;
+  }
+
+  .rr-process-closing__button {
+    align-items: center;
+    background: var(--rr-closing-accent);
+    border: 1px solid var(--rr-closing-accent);
+    border-radius: 2px;
+    color: var(--rr-closing-button-text);
+    display: inline-flex;
+    flex: 0 0 auto;
+    font-size: 12px;
+    font-weight: 500;
+    gap: 12px;
+    justify-content: center;
+    letter-spacing: 0;
+    min-height: 52px;
+    padding: 16px 26px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 180ms ease;
+  }
+
+  .rr-process-closing__button:hover {
+    background: #24482d;
+    color: var(--rr-closing-button-text);
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-process-closing {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .rr-process-closing__inner {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .rr-process-closing h2 {
+      font-size: 34px;
+    }
+
+    .rr-process-closing__inner > div > div {
+      font-size: 16px;
+    }
+
+    .rr-process-closing__button {
+      width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RR process closing CTA",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready to put it into production?" },
+    { "type": "richtext", "id": "text", "label": "Description", "default": "<p>Send your artwork and run size. We come back with a dieline, a finishing recommendation and a quote - usually within two working days.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Start an inquiry" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "range", "id": "max_width", "label": "Content width", "min": 960, "max": 1600, "step": 20, "unit": "px", "default": 1360 },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "side_padding", "label": "Desktop side spacing", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 40 },
+    { "type": "color", "id": "background", "label": "Background", "default": "#fafaf8" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#141414" },
+    { "type": "color", "id": "muted_color", "label": "Body text", "default": "#3a3a3a" },
+    { "type": "color", "id": "accent", "label": "Button", "default": "#2f5e3a" },
+    { "type": "color", "id": "button_text", "label": "Button text", "default": "#f4ecd8" }
+  ],
+  "presets": [
+    { "name": "RR process closing CTA" }
+  ]
+}
+{% endschema %}

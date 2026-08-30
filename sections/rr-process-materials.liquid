@@ -1,0 +1,217 @@
+<section
+  id="RRProcessMaterials-{{ section.id }}"
+  class="rr-process-materials"
+  style="
+    --rr-materials-bg: {{ section.settings.background }};
+    --rr-materials-placeholder: {{ section.settings.placeholder_background }};
+    --rr-materials-ink: {{ section.settings.text_color }};
+    --rr-materials-muted: {{ section.settings.muted_color }};
+    --rr-materials-accent: {{ section.settings.accent }};
+    --rr-materials-columns: {{ section.settings.columns }};
+    --rr-materials-max: {{ section.settings.max_width }}px;
+    --rr-materials-top: {{ section.settings.padding_top }}px;
+    --rr-materials-bottom: {{ section.settings.padding_bottom }}px;
+    --rr-materials-side: {{ section.settings.side_padding }}px;
+  "
+  aria-labelledby="RRProcessMaterialsHeading-{{ section.id }}"
+>
+  <div class="rr-process-materials__inner">
+    <header class="rr-process-materials__intro">
+      {%- if section.settings.eyebrow != blank -%}<p>{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="RRProcessMaterialsHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.text != blank -%}<div>{{ section.settings.text }}</div>{%- endif -%}
+    </header>
+    <div class="rr-process-materials__grid">
+      {%- for block in section.blocks -%}
+        <article class="rr-process-material" {{ block.shopify_attributes }}>
+          <div class="rr-process-material__image">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 600 | image_tag: widths: '180, 280, 400, 600', sizes: '(min-width: 1100px) 16vw, (min-width: 750px) 22vw, 44vw', loading: 'lazy', alt: block.settings.image_alt }}
+            {%- else -%}
+              <span>{{ block.settings.label | escape }}</span>
+            {%- endif -%}
+          </div>
+          <h3>{{ block.settings.label | escape }}</h3>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .rr-process-materials {
+    background: var(--rr-materials-bg);
+    color: var(--rr-materials-ink);
+    font-family: var(--font-body--family);
+    padding: var(--rr-materials-top) var(--rr-materials-side) var(--rr-materials-bottom);
+  }
+
+  .rr-process-materials * {
+    box-sizing: border-box;
+  }
+
+  .rr-process-materials__inner {
+    align-items: start;
+    display: grid;
+    gap: 72px;
+    grid-template-columns: 300px minmax(0, 1fr);
+    margin: 0 auto;
+    max-width: var(--rr-materials-max);
+  }
+
+  .rr-process-materials__intro {
+    position: sticky;
+    top: 116px;
+  }
+
+  .rr-process-materials__intro > p {
+    color: var(--rr-materials-accent);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .rr-process-materials h2 {
+    font-family: var(--font-heading--family);
+    font-size: 34px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.12;
+    margin: 16px 0 0;
+  }
+
+  .rr-process-materials__intro > div {
+    color: var(--rr-materials-muted);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.62;
+    margin-top: 16px;
+  }
+
+  .rr-process-materials__intro > div p {
+    margin: 0;
+  }
+
+  .rr-process-materials__grid {
+    display: grid;
+    gap: 40px 28px;
+    grid-template-columns: repeat(var(--rr-materials-columns), minmax(0, 1fr));
+  }
+
+  .rr-process-material {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .rr-process-material__image {
+    align-items: center;
+    aspect-ratio: 1;
+    background: var(--rr-materials-placeholder);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .rr-process-material__image img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .rr-process-material__image span {
+    color: var(--rr-materials-muted);
+    font-size: 12px;
+    line-height: 1.4;
+    max-width: 12ch;
+    padding: 16px;
+  }
+
+  .rr-process-material h3 {
+    color: var(--rr-materials-muted);
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.4;
+    margin: 14px 0 0;
+  }
+
+  @media screen and (max-width: 1099px) {
+    .rr-process-materials__inner {
+      gap: 48px;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .rr-process-materials__intro {
+      max-width: 620px;
+      position: static;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .rr-process-materials {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .rr-process-materials__grid {
+      gap: 32px 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .rr-process-materials h2 {
+      font-size: 30px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RR process materials",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Materials" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Paper type" },
+    { "type": "richtext", "id": "text", "label": "Introduction", "default": "<p>A wide range of premium stocks to suit your product, your budget and your shelf.</p>" },
+    { "type": "range", "id": "columns", "label": "Desktop columns", "min": 2, "max": 4, "step": 1, "default": 4 },
+    { "type": "range", "id": "max_width", "label": "Content width", "min": 960, "max": 1600, "step": 20, "unit": "px", "default": 1360 },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "side_padding", "label": "Desktop side spacing", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 40 },
+    { "type": "color", "id": "background", "label": "Background", "default": "#fafaf8" },
+    { "type": "color", "id": "placeholder_background", "label": "Image placeholder", "default": "#efeae0" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#141414" },
+    { "type": "color", "id": "muted_color", "label": "Body text", "default": "#6b6b63" },
+    { "type": "color", "id": "accent", "label": "Eyebrow", "default": "#2f5e3a" }
+  ],
+  "blocks": [
+    {
+      "type": "paper",
+      "name": "Paper type",
+      "limit": 8,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Coated paper" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RR process materials",
+      "blocks": [
+        { "type": "paper" },
+        { "type": "paper", "settings": { "label": "Corrugated paper" } },
+        { "type": "paper", "settings": { "label": "Imported white card" } },
+        { "type": "paper", "settings": { "label": "Black card" } },
+        { "type": "paper", "settings": { "label": "Pearlescent paper" } },
+        { "type": "paper", "settings": { "label": "Kraft paper" } },
+        { "type": "paper", "settings": { "label": "Gold / silver cardstock" } },
+        { "type": "paper", "settings": { "label": "Specialty paper" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
