@@ -15,7 +15,7 @@
         "image_main": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Aug_31_2026_10_48_39_AM.png",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_31_2026_11_06_59_AM.png",
             "alt": "Root & Route packaging",
             "height": 800,
             "height_mobile": 480
@@ -61,7 +61,7 @@
         "overlay_vertical_position": "bottom",
         "overlay_text": "{{ settings.color_palette.foreground }}",
         "overlay_color": "{{ settings.color_palette.color3 }}",
-        "overlay_opacity": 25,
+        "overlay_opacity": 20,
         "show_background_cover": true,
         "background_cover_color": "{{ settings.color_palette.color2 }}",
         "background_cover_opacity": 50,
