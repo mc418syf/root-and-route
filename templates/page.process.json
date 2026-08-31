@@ -194,8 +194,9 @@
             "heading": "Pantone colour matching",
             "text": "<p>Send your brand codes and we match them on press - so the green on the box is the green in your guidelines.</p>",
             "visual": "image",
-            "image_alt": "Pantone fan deck",
-            "placeholder": "Pantone fan deck",
+            "image": "shopify://shop_images/Pantone.png",
+            "image_alt": "",
+            "placeholder": "",
             "image_side": "right"
           }
         }
@@ -223,57 +224,65 @@
         "paper_01": {
           "type": "paper",
           "settings": {
+            "image": "shopify://shop_images/Coated_paper.png",
             "image_alt": "Coated paper",
-            "label": "Coated paper"
+            "label": ""
           }
         },
         "paper_02": {
           "type": "paper",
           "settings": {
+            "image": "shopify://shop_images/Corrugated_paper.png",
             "image_alt": "Corrugated paper",
-            "label": "Corrugated paper"
+            "label": ""
           }
         },
         "paper_03": {
           "type": "paper",
           "settings": {
+            "image": "shopify://shop_images/Imported_white_card.png",
             "image_alt": "Imported white card",
-            "label": "Imported white card"
+            "label": ""
           }
         },
         "paper_04": {
           "type": "paper",
           "settings": {
+            "image": "shopify://shop_images/Black_card.png",
             "image_alt": "Black card",
-            "label": "Black card"
+            "label": ""
           }
         },
         "paper_05": {
           "type": "paper",
           "settings": {
+            "image": "shopify://shop_images/Pearlescent_paper.png",
             "image_alt": "Pearlescent paper",
-            "label": "Pearlescent paper"
+            "label": ""
           }
         },
         "paper_06": {
           "type": "paper",
           "settings": {
+            "image": "shopify://shop_images/Kraft_paper.png",
             "image_alt": "Kraft paper",
-            "label": "Kraft paper"
+            "label": ""
           }
         },
         "paper_07": {
           "type": "paper",
           "settings": {
+            "image": "shopify://shop_images/Gold_silver_cardstock.png",
             "image_alt": "Gold and silver cardstock",
-            "label": "Gold / silver cardstock"
+            "label": ""
           }
         },
         "paper_08": {
           "type": "paper",
           "settings": {
+            "image": "shopify://shop_images/Specialty_paper.png",
             "image_alt": "Specialty paper",
-            "label": "Specialty paper"
+            "label": ""
           }
         }
       },
