@@ -318,6 +318,7 @@
         "finish_01": {
           "type": "finish",
           "settings": {
+            "image": "shopify://shop_images/RR_4C_printing_photo.png",
             "image_alt": "4C printing",
             "label": "4C printing",
             "note": "Full-colour artwork, edge to edge"
@@ -326,6 +327,7 @@
         "finish_02": {
           "type": "finish",
           "settings": {
+            "image": "shopify://shop_images/RR_Gold_stamping_photo.png",
             "image_alt": "Gold stamping",
             "label": "Gold stamping",
             "note": "Warm metallic foil"
@@ -334,6 +336,7 @@
         "finish_03": {
           "type": "finish",
           "settings": {
+            "image": "shopify://shop_images/RR_Silver_stamping_photo.png",
             "image_alt": "Silver stamping",
             "label": "Silver stamping",
             "note": "Cool metallic foil"
@@ -342,6 +345,7 @@
         "finish_04": {
           "type": "finish",
           "settings": {
+            "image": "shopify://shop_images/RR_Spot_UV_photo.png",
             "image_alt": "Spot UV",
             "label": "Spot UV",
             "note": "Selective high gloss"
@@ -350,6 +354,7 @@
         "finish_05": {
           "type": "finish",
           "settings": {
+            "image": "shopify://shop_images/RR_Embossing_photo.png",
             "image_alt": "Embossing",
             "label": "Embossing",
             "note": "Raised, tactile detail"
@@ -358,6 +363,7 @@
         "finish_06": {
           "type": "finish",
           "settings": {
+            "image": "shopify://shop_images/RR_Debossing_photo.png",
             "image_alt": "Debossing",
             "label": "Debossing",
             "note": "Recessed, quiet detail"
