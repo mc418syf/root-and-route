@@ -226,7 +226,7 @@
           "settings": {
             "image": "shopify://shop_images/Coated_paper.png",
             "image_alt": "Coated paper",
-            "label": ""
+            "label": "Coated paper"
           }
         },
         "paper_02": {
@@ -234,7 +234,7 @@
           "settings": {
             "image": "shopify://shop_images/Corrugated_paper.png",
             "image_alt": "Corrugated paper",
-            "label": ""
+            "label": "Corrugated paper"
           }
         },
         "paper_03": {
@@ -242,7 +242,7 @@
           "settings": {
             "image": "shopify://shop_images/Imported_white_card.png",
             "image_alt": "Imported white card",
-            "label": ""
+            "label": "Imported white card"
           }
         },
         "paper_04": {
@@ -250,7 +250,7 @@
           "settings": {
             "image": "shopify://shop_images/Black_card.png",
             "image_alt": "Black card",
-            "label": ""
+            "label": "Black card"
           }
         },
         "paper_05": {
@@ -258,7 +258,7 @@
           "settings": {
             "image": "shopify://shop_images/Pearlescent_paper.png",
             "image_alt": "Pearlescent paper",
-            "label": ""
+            "label": "Pearlescent paper"
           }
         },
         "paper_06": {
@@ -266,7 +266,7 @@
           "settings": {
             "image": "shopify://shop_images/Kraft_paper.png",
             "image_alt": "Kraft paper",
-            "label": ""
+            "label": "Kraft paper"
           }
         },
         "paper_07": {
@@ -274,7 +274,7 @@
           "settings": {
             "image": "shopify://shop_images/Gold_silver_cardstock.png",
             "image_alt": "Gold and silver cardstock",
-            "label": ""
+            "label": "Gold and silver cardstock"
           }
         },
         "paper_08": {
@@ -282,7 +282,7 @@
           "settings": {
             "image": "shopify://shop_images/Specialty_paper.png",
             "image_alt": "Specialty paper",
-            "label": ""
+            "label": "Specialty paper"
           }
         }
       },
