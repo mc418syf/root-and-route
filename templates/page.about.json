@@ -129,6 +129,7 @@
         "image_KwBKcf": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/Shinelee.png",
             "alt": "",
             "aspect_ratio": "portrait",
             "image_fit": "cover",
