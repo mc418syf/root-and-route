@@ -206,7 +206,7 @@
           "type": "button",
           "settings": {
             "label": "Begin Step 01",
-            "link": "",
+            "link": "shopify://pages/process",
             "show_arrow": false
           }
         },
