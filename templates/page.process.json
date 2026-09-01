@@ -327,7 +327,7 @@
         "finish_02": {
           "type": "finish",
           "settings": {
-            "image": "shopify://shop_images/RR_Gold_stamping_photo.png",
+            "image": "shopify://shop_images/Gold_Foil.png",
             "image_alt": "Gold stamping",
             "label": "Gold stamping",
             "note": "Warm metallic foil"
