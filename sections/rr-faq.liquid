@@ -1,18 +1,16 @@
+{%- liquid
+  assign quote_block = section.blocks | where: 'type', 'quote_card' | first
+-%}
+
 <section
   id="quote"
-  class="rr-faq-quote{% if section.settings.show_quote_card %} rr-faq-quote--with-card{% endif %}"
+  class="rr-faq-quote{% if quote_block != blank %} rr-faq-quote--with-card{% endif %}"
   style="
     --rr-faq-background: {{ section.settings.background }};
     --rr-faq-line: {{ section.settings.line_color }};
     --rr-faq-ink: {{ section.settings.text_color }};
     --rr-faq-muted: {{ section.settings.muted_color }};
     --rr-faq-accent: {{ section.settings.accent_color }};
-    --rr-faq-card: {{ section.settings.quote_background }};
-    --rr-faq-card-text: {{ section.settings.quote_text_color }};
-    --rr-faq-card-muted: {{ section.settings.quote_muted_color }};
-    --rr-faq-card-accent: {{ section.settings.quote_accent_color }};
-    --rr-faq-button: {{ section.settings.quote_button_background }};
-    --rr-faq-button-text: {{ section.settings.quote_button_text }};
     --rr-faq-max-width: {{ section.settings.max_width }}px;
     --rr-faq-top: {{ section.settings.padding }}px;
     --rr-faq-bottom: {{ section.settings.padding_bottom }}px;
@@ -35,19 +33,23 @@
       {%- endif -%}
 
       <div class="rr-faq-quote__list">
+        {%- assign question_index = 0 -%}
         {%- for block in section.blocks -%}
-          <details
-            class="rr-faq-quote__item"
-            name="rr-faq-{{ section.id }}"
-            {% if forloop.first and section.settings.open_first %}open{% endif %}
-            {{ block.shopify_attributes }}
-          >
-            <summary>
-              <span>{{ block.settings.question | escape }}</span>
-              <span class="rr-faq-quote__sign" aria-hidden="true"></span>
-            </summary>
-            <div class="rr-faq-quote__answer">{{ block.settings.answer }}</div>
-          </details>
+          {%- if block.type == 'question' -%}
+            {%- assign question_index = question_index | plus: 1 -%}
+            <details
+              class="rr-faq-quote__item"
+              name="rr-faq-{{ section.id }}"
+              {% if question_index == 1 and section.settings.open_first %}open{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              <summary>
+                <span>{{ block.settings.question | escape }}</span>
+                <span class="rr-faq-quote__sign" aria-hidden="true"></span>
+              </summary>
+              <div class="rr-faq-quote__answer">{{ block.settings.answer }}</div>
+            </details>
+          {%- endif -%}
         {%- endfor -%}
       </div>
 
@@ -58,44 +60,56 @@
       {%- endif -%}
     </div>
 
-    {%- if section.settings.show_quote_card -%}
-      <aside class="rr-faq-quote__card" aria-labelledby="RRFAQQuoteHeading-{{ section.id }}">
-        {%- if section.settings.quote_eyebrow != blank -%}
-          <p class="rr-faq-quote__card-eyebrow">{{ section.settings.quote_eyebrow | escape }}</p>
+    {%- if quote_block != blank -%}
+      <aside
+        class="rr-faq-quote__card"
+        style="
+          --rr-faq-card: {{ quote_block.settings.background }};
+          --rr-faq-card-text: {{ quote_block.settings.text_color }};
+          --rr-faq-card-muted: {{ quote_block.settings.muted_color }};
+          --rr-faq-card-accent: {{ quote_block.settings.accent_color }};
+          --rr-faq-button: {{ quote_block.settings.button_background }};
+          --rr-faq-button-text: {{ quote_block.settings.button_text }};
+        "
+        aria-labelledby="RRFAQQuoteHeading-{{ quote_block.id }}"
+        {{ quote_block.shopify_attributes }}
+      >
+        {%- if quote_block.settings.eyebrow != blank -%}
+          <p class="rr-faq-quote__card-eyebrow">{{ quote_block.settings.eyebrow | escape }}</p>
         {%- endif -%}
-        <h2 id="RRFAQQuoteHeading-{{ section.id }}" class="rr-faq-quote__card-title">
-          {{ section.settings.quote_heading | escape }}
+        <h2 id="RRFAQQuoteHeading-{{ quote_block.id }}" class="rr-faq-quote__card-title">
+          {{ quote_block.settings.heading | escape }}
         </h2>
-        {%- if section.settings.quote_body != blank -%}
-          <div class="rr-faq-quote__card-body">{{ section.settings.quote_body }}</div>
+        {%- if quote_block.settings.body != blank -%}
+          <div class="rr-faq-quote__card-body">{{ quote_block.settings.body }}</div>
         {%- endif -%}
 
         <div class="rr-faq-quote__actions">
-          {%- if section.settings.quote_primary_label != blank -%}
-            <a class="rr-faq-quote__button" href="{{ section.settings.quote_primary_link | default: '/pages/contact' }}">
-              {{ section.settings.quote_primary_label | escape }}
+          {%- if quote_block.settings.primary_label != blank -%}
+            <a class="rr-faq-quote__button" href="{{ quote_block.settings.primary_link | default: '/pages/contact' }}">
+              {{ quote_block.settings.primary_label | escape }}
               <span aria-hidden="true">&rarr;</span>
             </a>
           {%- endif -%}
-          {%- if section.settings.quote_secondary_label != blank -%}
-            <a class="rr-faq-quote__quiet-link" href="{{ section.settings.quote_secondary_link | default: '/pages/contact' }}">
-              {{ section.settings.quote_secondary_label | escape }}
+          {%- if quote_block.settings.secondary_label != blank -%}
+            <a class="rr-faq-quote__quiet-link" href="{{ quote_block.settings.secondary_link | default: '/pages/contact' }}">
+              {{ quote_block.settings.secondary_label | escape }}
             </a>
           {%- endif -%}
         </div>
 
-        {%- if section.settings.fact_1_label != blank or section.settings.fact_2_label != blank -%}
+        {%- if quote_block.settings.fact_1_label != blank or quote_block.settings.fact_2_label != blank -%}
           <dl class="rr-faq-quote__facts">
-            {%- if section.settings.fact_1_label != blank -%}
+            {%- if quote_block.settings.fact_1_label != blank -%}
               <div>
-                <dt>{{ section.settings.fact_1_label | escape }}</dt>
-                <dd>{{ section.settings.fact_1_value | escape }}</dd>
+                <dt>{{ quote_block.settings.fact_1_label | escape }}</dt>
+                <dd>{{ quote_block.settings.fact_1_value | escape }}</dd>
               </div>
             {%- endif -%}
-            {%- if section.settings.fact_2_label != blank -%}
+            {%- if quote_block.settings.fact_2_label != blank -%}
               <div>
-                <dt>{{ section.settings.fact_2_label | escape }}</dt>
-                <dd>{{ section.settings.fact_2_value | escape }}</dd>
+                <dt>{{ quote_block.settings.fact_2_label | escape }}</dt>
+                <dd>{{ quote_block.settings.fact_2_value | escape }}</dd>
               </div>
             {%- endif -%}
           </dl>
@@ -441,20 +455,6 @@
     { "type": "text", "id": "cta_label", "label": "Contact link label", "default": "Ask a different question →" },
     { "type": "url", "id": "cta_link", "label": "Contact link" },
 
-    { "type": "header", "content": "Quote card" },
-    { "type": "checkbox", "id": "show_quote_card", "label": "Show quote card", "default": true },
-    { "type": "text", "id": "quote_eyebrow", "label": "Eyebrow", "default": "Get a quote", "visible_if": "{{ section.settings.show_quote_card }}" },
-    { "type": "text", "id": "quote_heading", "label": "Heading", "default": "Tell us what you're packing.", "visible_if": "{{ section.settings.show_quote_card }}" },
-    { "type": "richtext", "id": "quote_body", "label": "Description", "default": "<p>Send the product dimensions and your run size. We come back with a structure recommendation, a dieline and a quote.</p>", "visible_if": "{{ section.settings.show_quote_card }}" },
-    { "type": "text", "id": "quote_primary_label", "label": "Primary button label", "default": "Start a project", "visible_if": "{{ section.settings.show_quote_card }}" },
-    { "type": "url", "id": "quote_primary_link", "label": "Primary button link", "visible_if": "{{ section.settings.show_quote_card }}" },
-    { "type": "text", "id": "quote_secondary_label", "label": "Secondary link label", "default": "Request samples", "visible_if": "{{ section.settings.show_quote_card }}" },
-    { "type": "url", "id": "quote_secondary_link", "label": "Secondary link", "visible_if": "{{ section.settings.show_quote_card }}" },
-    { "type": "text", "id": "fact_1_label", "label": "First fact label", "default": "Reply time", "visible_if": "{{ section.settings.show_quote_card }}" },
-    { "type": "text", "id": "fact_1_value", "label": "First fact value", "default": "Within one business day", "visible_if": "{{ section.settings.show_quote_card }}" },
-    { "type": "text", "id": "fact_2_label", "label": "Second fact label", "default": "Minimum run", "visible_if": "{{ section.settings.show_quote_card }}" },
-    { "type": "text", "id": "fact_2_value", "label": "Second fact value", "default": "250 units", "visible_if": "{{ section.settings.show_quote_card }}" },
-
     { "type": "header", "content": "Layout" },
     { "type": "range", "id": "max_width", "label": "Content width", "min": 960, "max": 1600, "step": 20, "unit": "px", "default": 1360 },
     { "type": "range", "id": "padding", "label": "Top spacing", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 64 },
@@ -466,13 +466,7 @@
     { "type": "color", "id": "line_color", "label": "Lines", "default": "#ecebe6" },
     { "type": "color", "id": "text_color", "label": "FAQ text", "default": "#141414" },
     { "type": "color", "id": "muted_color", "label": "FAQ answers", "default": "#6b6b63" },
-    { "type": "color", "id": "accent_color", "label": "FAQ accent", "default": "#2f5e3a" },
-    { "type": "color", "id": "quote_background", "label": "Quote card background", "default": "#2f5e3a" },
-    { "type": "color", "id": "quote_text_color", "label": "Quote card text", "default": "#f4ecd8" },
-    { "type": "color", "id": "quote_muted_color", "label": "Quote card body", "default": "#d8d0ba" },
-    { "type": "color", "id": "quote_accent_color", "label": "Quote card accent", "default": "#9fcb6e" },
-    { "type": "color", "id": "quote_button_background", "label": "Quote button background", "default": "#f4ecd8" },
-    { "type": "color", "id": "quote_button_text", "label": "Quote button text", "default": "#24482d" }
+    { "type": "color", "id": "accent_color", "label": "FAQ accent", "default": "#2f5e3a" }
   ],
   "blocks": [
     {
@@ -481,6 +475,31 @@
       "settings": [
         { "type": "text", "id": "question", "label": "Question", "default": "Can you design packaging around my product?" },
         { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Yes. We develop the box structure and insert around your product dimensions, packed weight and presentation requirements.</p>" }
+      ]
+    },
+    {
+      "type": "quote_card",
+      "name": "Quote card",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Get a quote" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Tell us what you're packing." },
+        { "type": "richtext", "id": "body", "label": "Description", "default": "<p>Send the product dimensions and your run size. We come back with a structure recommendation, a dieline and a quote.</p>" },
+        { "type": "text", "id": "primary_label", "label": "Primary button label", "default": "Start a project" },
+        { "type": "url", "id": "primary_link", "label": "Primary button link" },
+        { "type": "text", "id": "secondary_label", "label": "Secondary link label", "default": "Request samples" },
+        { "type": "url", "id": "secondary_link", "label": "Secondary link" },
+        { "type": "text", "id": "fact_1_label", "label": "First fact label", "default": "Reply time" },
+        { "type": "text", "id": "fact_1_value", "label": "First fact value", "default": "Within one business day" },
+        { "type": "text", "id": "fact_2_label", "label": "Second fact label", "default": "Minimum run" },
+        { "type": "text", "id": "fact_2_value", "label": "Second fact value", "default": "250 units" },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "background", "label": "Background", "default": "#2f5e3a" },
+        { "type": "color", "id": "text_color", "label": "Text", "default": "#f4ecd8" },
+        { "type": "color", "id": "muted_color", "label": "Body text", "default": "#d8d0ba" },
+        { "type": "color", "id": "accent_color", "label": "Accent", "default": "#9fcb6e" },
+        { "type": "color", "id": "button_background", "label": "Button background", "default": "#f4ecd8" },
+        { "type": "color", "id": "button_text", "label": "Button text", "default": "#24482d" }
       ]
     }
   ],
@@ -492,7 +511,8 @@
         { "type": "question", "settings": { "question": "What information do you need to start a project?", "answer": "<p>Product dimensions, run size, target launch date, and any brand files you already have. A photo of the current packaging helps.</p>" } },
         { "type": "question", "settings": { "question": "How long does custom packaging production take?", "answer": "<p>Sampling takes 7-10 days. Production runs 15-25 days after sample approval, depending on finishing.</p>" } },
         { "type": "question", "settings": { "question": "How long does shipping usually take?", "answer": "<p>Sea freight typically takes 25-35 days and air freight 7-10 days to North America. We quote both options for your project.</p>" } },
-        { "type": "question", "settings": { "question": "Do you offer samples before production?", "answer": "<p>Always. A blank structural sample comes first, followed by a printed pre-production sample once artwork is approved.</p>" } }
+        { "type": "question", "settings": { "question": "Do you offer samples before production?", "answer": "<p>Always. A blank structural sample comes first, followed by a printed pre-production sample once artwork is approved.</p>" } },
+        { "type": "quote_card" }
       ]
     }
   ]

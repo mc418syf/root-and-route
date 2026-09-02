@@ -776,6 +776,28 @@
             "question": "Do you offer samples before production?",
             "answer": "<p>Yes. <strong>Ready-to-ship samples are free</strong>, with shipping paid by the customer. For custom packaging, a <strong>US$100–200 sample fee</strong> typically applies, depending on the project. Custom samples are usually ready within <strong>5–7 business days</strong> after confirmation.</p>"
           }
+        },
+        "quote_card": {
+          "type": "quote_card",
+          "settings": {
+            "eyebrow": "Get a quote",
+            "heading": "Tell us what you're packing.",
+            "body": "<p>Send the product dimensions and your run size. We come back with a structure recommendation, a dieline and a quote.</p>",
+            "primary_label": "Start a project",
+            "primary_link": "shopify://pages/contact",
+            "secondary_label": "Request samples",
+            "secondary_link": "shopify://pages/contact",
+            "fact_1_label": "Reply time",
+            "fact_1_value": "Within one business day",
+            "fact_2_label": "Minimum run",
+            "fact_2_value": "250 units",
+            "background": "#2f5e3a",
+            "text_color": "#f4ecd8",
+            "muted_color": "#d8d0ba",
+            "accent_color": "#9fcb6e",
+            "button_background": "#f4ecd8",
+            "button_text": "#24482d"
+          }
         }
       },
       "block_order": [
@@ -783,7 +805,8 @@
         "question_hwayD7",
         "question_KfgEe6",
         "question_DBxHAa",
-        "question_7tV3Kc"
+        "question_7tV3Kc",
+        "quote_card"
       ],
       "name": "RR FAQ + quote",
       "settings": {
