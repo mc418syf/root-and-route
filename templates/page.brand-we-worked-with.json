@@ -134,7 +134,7 @@
         "background_image": "shopify://shop_images/motif-bg-dark.svg",
         "background_image_position": "cover",
         "toggle_overlay": true,
-        "overlay_color": "#00000026",
+        "overlay_color": "#00000033",
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "border": "none",
