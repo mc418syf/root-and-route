@@ -89,7 +89,7 @@
         "text_3ifjWQ": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>Through our partnership with Guangzhou Shinelee Paper Product Co., Ltd., an established packaging manufacturer with 18+ years of industry experience, Root & Route brings proven structural packaging expertise to brands across North America.</strong></p><p><strong>The projects below showcase packaging manufactured by our partner for leading global brands — from luxury beauty and retail to seasonal and specialty packaging.</strong></p>",
+            "text": "<p>Through our partnership with<strong> Guangzhou Shinelee Paper Product Co., Ltd.</strong>, an established packaging manufacturer with 18+ years of industry experience, Root & Route brings proven structural packaging expertise to brands across North America.</p><p>The projects below showcase packaging manufactured by our partner for leading global brands — from luxury beauty and retail to seasonal and specialty packaging.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -124,7 +124,7 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 16,
+        "gap": 12,
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
@@ -142,8 +142,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 64,
-        "padding-block-end": 64
+        "padding-block-start": 28,
+        "padding-block-end": 28
       }
     },
     "rr_editorial_gallery_BbzRNp": {
