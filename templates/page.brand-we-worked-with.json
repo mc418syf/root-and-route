@@ -20,69 +20,6 @@
         "padding-block-end": 40
       }
     },
-    "section_cB8DUg": {
-      "type": "section",
-      "blocks": {
-        "text_3ifjWQ": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Copy needed</p>",
-            "width": "100%",
-            "max_width": "narrow",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.color2 }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_3ifjWQ"
-      ],
-      "name": "t:names.pull_quote",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 16,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "image",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image": "shopify://shop_images/motif-bg-dark.svg",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 64,
-        "padding-block-end": 64
-      }
-    },
     "blocks_JgY7GW": {
       "type": "_blocks",
       "blocks": {
@@ -144,6 +81,69 @@
         "border_radius": 0,
         "padding-block-start": 0,
         "padding-block-end": 0
+      }
+    },
+    "section_cB8DUg": {
+      "type": "section",
+      "blocks": {
+        "text_3ifjWQ": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Through our partnership with Guangzhou Shinelee Paper Product Co., Ltd., an established packaging manufacturer with 18+ years of industry experience, Root & Route brings proven structural packaging expertise to brands across North America.</strong></p><p><strong>The projects below showcase packaging manufactured by our partner for leading global brands — from luxury beauty and retail to seasonal and specialty packaging.</strong></p>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "left",
+            "type_preset": "h5",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.color2 }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_3ifjWQ"
+      ],
+      "name": "t:names.pull_quote",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "image",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image": "shopify://shop_images/motif-bg-dark.svg",
+        "background_image_position": "cover",
+        "toggle_overlay": true,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 64,
+        "padding-block-end": 64
       }
     },
     "rr_editorial_gallery_BbzRNp": {
@@ -416,8 +416,8 @@
   },
   "order": [
     "main",
-    "section_cB8DUg",
     "blocks_JgY7GW",
+    "section_cB8DUg",
     "rr_editorial_gallery_BbzRNp",
     "rr_editorial_gallery_WeFNti",
     "rr_editorial_gallery_tPwPKk",
