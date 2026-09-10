@@ -26,7 +26,7 @@
         "ai_gen_block_97ccb89_hY8d4n": {
           "type": "ai_gen_block_97ccb89",
           "settings": {
-            "heading": "<strong>Brands we've worked with</strong>",
+            "heading": "<em>Brands we've worked with</em>",
             "heading_size": 30,
             "heading_spacing": 24,
             "desktop_width_percent": 100,
