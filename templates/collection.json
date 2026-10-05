@@ -16,7 +16,7 @@
           "type": "text",
           "name": "t:names.title",
           "settings": {
-            "text": "<h1>{{ closest.collection.title }}</h1>",
+            "text": "<h1>Ready to Ship</h1>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -88,7 +88,7 @@
         "background_image": "shopify://shop_images/motif-bg-cream.svg",
         "background_image_position": "cover",
         "toggle_overlay": true,
-        "overlay_color": "#EFEAE0BF",
+        "overlay_color": "#efeae0bf",
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "border": "none",
