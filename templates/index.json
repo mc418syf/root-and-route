@@ -38,7 +38,7 @@
           "type": "button",
           "settings": {
             "label": "Explore Products",
-            "link": "shopify://collections",
+            "link": "shopify://collections/all",
             "style": "round",
             "show_arrow": false
           }
