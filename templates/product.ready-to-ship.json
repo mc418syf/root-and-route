@@ -327,7 +327,7 @@
                 "increment_label": "",
                 "unit_label": "unit",
                 "unit_cost_label": "Indicative unit cost",
-                "unit_cost_note": "before print setup",
+                "unit_cost_note": "",
                 "volume_heading": "Volume pricing",
                 "quantity_column": "Qty",
                 "savings_column": "Save",
