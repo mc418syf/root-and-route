@@ -98,8 +98,6 @@
                 {% render 'quantity-selector', product: summary_product, show_price_per_item: false %}
                 {%- if block.settings.quantity_note != blank -%}<span>{{ block.settings.quantity_note | escape }}</span>{%- endif -%}
                 <div class="rr-pdp-summary__rules" ref="quantityRules">
-                  <span>{{ block.settings.moq_label | escape }} {{ minimum_value }}</span>
-                  <span>{{ block.settings.increment_label | escape }} {{ increment_value }}</span>
                   {%- if summary_variant.quantity_rule.max != null -%}
                     <span>{{ 'products.product.quantity_maximum' | t: maximum: summary_variant.quantity_rule.max }}</span>
                   {%- endif -%}
