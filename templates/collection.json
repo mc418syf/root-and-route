@@ -16,7 +16,7 @@
           "type": "text",
           "name": "t:names.title",
           "settings": {
-            "text": "<h1>Custom Made</h1>",
+            "text": "<h1>Ready To Ship</h1>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
