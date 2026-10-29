@@ -246,8 +246,6 @@
 
   {%- if block.settings.show_facts -%}
     <dl class="rr-pdp-summary__facts">
-      <div><dt>{{ block.settings.moq_label | escape }}</dt><dd>{{ moq_value | escape }}</dd></div>
-      {%- if is_b2b_purchase -%}<div><dt>{{ block.settings.increment_label | escape }}</dt><dd>{{ increment_value }}</dd></div>{%- endif -%}
       <div><dt>{{ block.settings.production_label | escape }}</dt><dd>{{ production_value | escape }}</dd></div>
       <div><dt>{{ block.settings.shipping_label | escape }}</dt><dd>{{ shipping_value | escape }}</dd></div>
       <div><dt>{{ block.settings.compliance_label | escape }}</dt><dd>{{ compliance_value | escape }}</dd></div>
